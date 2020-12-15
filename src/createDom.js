@@ -21,7 +21,7 @@ export default function createDom(obj) {
     dataBase.DeckNames[item].colorPlay = colors[index % 5];
     dataBase.DeckNames[item].deckPauseActive = false;
     
-
+//
 
 
     let nameOfNewDeck = createElement("div", item, {
