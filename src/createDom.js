@@ -22,7 +22,7 @@ export default function createDom(obj) {
     dataBase.DeckNames[item].deckPauseActive = false;
     
 //
-
+777
 
     let nameOfNewDeck = createElement("div", item, {
       position: 'absolute', left: '77px'
