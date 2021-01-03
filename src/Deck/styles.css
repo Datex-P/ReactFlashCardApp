@@ -1,0 +1,151 @@
+.newDeckContainer {
+  height: 220px;
+  width: 307px;
+  padding: 10px 0px 0px 0px;
+  margin: 10px 0 0 20px;
+  background-color: #dcc9b6;
+  position: absolute;
+  transform-origin: 0px 215px;
+}
+
+.divStyling {
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid black;
+  background-color: white;
+  width: 140px;
+  padding: 5px;
+}
+
+.addNewCardsButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+  position: absolute;
+  left: -12px;
+  top: 180px;
+  z-index: 3;
+  border: none;
+  outline: none;
+}
+
+.menuIcon {
+  font-weight: bold;
+  border: 2px black solid;
+  width: 48%;
+  margin-bottom: 3px;
+  border-radius: 12px;
+  position: absolute;
+  transition: 1s all;
+  background-color: black;
+}
+
+.menuContainer {
+  width: 100%;
+  margin-top: 1px;
+  position: relative;
+  height: 20px;
+}
+
+.flexColumnAlignCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexColumnSpaceAround {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+
+.menu {
+  width: fit-content;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.transPlus {
+  transform: rotate(135deg);  
+}
+
+.rotateLittleModal {
+  transform: rotate(90deg) !important;
+}
+ 
+.transMinus {
+  transform: rotate(-135deg); 
+} 
+
+.menuStyling {
+  display: flex; 
+  position:absolute;
+  top: 10px;
+  left: 30px;
+  cursor: pointer; 
+  background-color: #dcc9b6;
+  border: 2px black solid;
+  border-radius: 5px;
+}
+
+
+.link:visited, .link:active, .link:hover{
+  color: black;
+  cursor: pointer;
+}
+
+.inputGro {
+  display: flex; 
+  flex-direction: column; 
+  height: 150px; 
+  width: 400px;
+}
+
+.form {
+  width: 70% !important;
+  height: 300px;
+  resize: none;
+}
+
+
+.showAnswer {
+width: 30%; 
+background-color: 'grey'; 
+outline: 'none';
+
+}
+
+
+
+.mod {
+  background-color: rgba(200, 168, 115, 0.95) !important;
+  border-radius: 20px !important;
+  height: 500px; 
+}
+
+.questionAnswerStyling {
+  font-weight: bold; 
+  margin-left: 12px; 
+  margin-bottom: 10px;
+}
+
+.redCross {
+  border-radius: 5px;
+  color: red;
+  font-size: 23px;
+  font-weight: bold;
+  background-color: rgba(200, 168, 115, 0.95);
+  border: none;
+}
+

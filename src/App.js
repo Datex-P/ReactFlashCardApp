@@ -1,40 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
-import React from 'react';
-import {ImageChanger} from './ImageChanger.jsx'
+import React from 'react'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import NavBar from './NavBar'
+import DeckContainer from './Deck/DeckContainer.js'
+import Settings from './Deck/Settings/Settings'
+import Stats from './Deck/Stats/Stats'
 
+export default function App () {
 
+  return (
+  
+  <Router>
 
-export class App extends React.Component {
+  <NavBar />
+
+<Switch>
+
+  <Route path='/stats'>
+
+  <Stats/>
  
-   
-  render() {
-    return (
-      <ImageChanger/>
-    )
-  }
+  </Route>
+
+  <Route path='/settings'>
+ 
+ <Settings/>
+
+
+</Route>
+
+
+
+
+  <Route path='/' exact>
+    <DeckContainer />
+  </Route>
+
+  <Route path='/logout'>
+  </Route>
+
+</Switch>
+
+</Router>
+
+  )
 }
 
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-export default App;
