@@ -2,6 +2,8 @@ import React, { useState} from 'react'
 import { Card, Button, Modal, FormControl,OverlayTrigger,Popover, ButtonGroup} from 'react-bootstrap'
 import './styles.css'
 import trash from '../icons/trash.svg'
+import pause from '../icons/pause.svg'
+import edit from '../icons/edit.svg'
 
 
 
@@ -108,10 +110,10 @@ function ThreeDotsBtn(){
       <OverlayTrigger trigger="hover"  placement="right" overlay={
         <Popover id='popover-basic' >
           <Popover.Content  className='p-1'>
-            <ButtonGroup vertical>
-              <Button>Card<img src={trash} alt='trash' /></Button>
-              <Button>Card</Button>
-              <Button>Card</Button>
+            <ButtonGroup vertical  >
+              <Button style={{marginTop:'20px', backgroundColor: 'white', border: '1px solid black', color: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img src={edit} alt='edit' style={{marginRight: '3px'}}/>Card</Button>
+              <Button className='buttonStyling flexAlignCenter'><img src={pause} alt='pause' style={{marginRight: '3px'}}/>Card</Button>
+              <Button className='buttonStyling flexAlignCenter'><img src={trash} alt='trash' style={{marginRight: '3px'}} />Card</Button>
             </ButtonGroup>
           </Popover.Content>
         </Popover>
