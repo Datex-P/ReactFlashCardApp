@@ -179,9 +179,7 @@ function Hexagons({idx}) {
   // const [filledHex, setFilledHex] = useState(0);
   const { dataBase, setDataBase } = useContext(Context)
 
-  // function handleFilledHex (e) {
-    
-  // }
+
 
   
   function setIndex () {
