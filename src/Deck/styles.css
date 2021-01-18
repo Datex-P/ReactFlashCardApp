@@ -1,5 +1,12 @@
+/* *{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+} */
+input:disabled{
+  color:turquoise
+}
+
 .newDeckContainer {
-  height: 220px;
+  height: 230px;
   width: 307px;
   padding: 10px 0px 0px 0px;
   margin: 10px 0 0 20px;
@@ -15,6 +22,7 @@
   background-color: white;
   width: 140px;
   padding: 5px;
+  margin-bottom: 10px
 }
 
 .addNewCardsButton {
@@ -25,12 +33,13 @@
   align-items: center;
   background-color: grey;
   position: absolute;
-  left: -12px;
-  top: 180px;
+  left: -20px;
+  top: 192px;
   z-index: 3;
-  border: none;
-  outline: none;
+  border: none !important;
+  
 }
+
 
 .menuIcon {
   font-weight: bold;
@@ -88,25 +97,65 @@
 
 .rotateLittleModal {
   transform: rotate(90deg) !important;
+  font-weight: bold !important;
+  font-size: 20px !important;
+  cursor:pointer;
+  margin-right: -10px;
 }
+
+.modNew {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 2rem !important;
+  /* margin-left: -10px;
+  width: 100px; */
+  
+}
+.customDialog{
+  left:100px;
+}
+
+.inputStyling {
+  width: 49px; 
+  border: none;
+  outline: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+
+input[type=number]  {
+  -moz-appearance:textfield; 
+  text-align: center;
+  cursor: pointer;
+}
+ 
+ input::-webkit-outer-spin-button,
+ input::-webkit-inner-spin-button {
+-webkit-appearance: auto;
+opacity: 1;
+cursor: pointer;
+}
+
+
  
 .transMinus {
   transform: rotate(-135deg); 
 } 
 
 .menuStyling {
-  display: flex; 
-  position:absolute;
-  top: 10px;
-  left: 30px;
+  display: flex;
   cursor: pointer; 
   background-color: #dcc9b6;
   border: 2px black solid;
   border-radius: 5px;
+  margin-left: 26px;
+  margin-top: -12px;
 }
 
 
-.link:visited, .link:active, .link:hover{
+.link, .link:visited, .link:active, .link:hover{
   color: black;
   cursor: pointer;
 }
@@ -127,17 +176,43 @@
 
 .showAnswer {
 width: 30%; 
-background-color: 'grey'; 
-outline: 'none';
+background-color: grey; 
+outline: none;
 
 }
 
+.openDeck {
+   margin-top: -20px !important; 
+  outline: none;
+}
+
+.cardBod {
+  border: 2px solid grey !important;
+}
+
+.buttonGr {
+  display: flex !important;
+  justify-content: space-around !important;
+}
 
 
 .mod {
   background-color: rgba(200, 168, 115, 0.95) !important;
   border-radius: 20px !important;
   height: 500px; 
+  width: 400px !important;
+  margin-top: 90px !important;
+  margin: auto;
+  /* overflow: hidden scroll; */
+}
+
+.weeklyTarget {
+  width: 190px;
+  margin-top: 5px;
+  height: 20px;
+  font-size: 14px; 
+  font-weight: normal;
+  margin: auto;
 }
 
 .questionAnswerStyling {
@@ -147,18 +222,301 @@ outline: 'none';
 }
 
 .redCross {
-  border-radius: 5px;
-  color: red;
-  font-size: 23px;
-  font-weight: bold;
+  border-radius: 8px;
+  color: red !important;
+  font-size: 23px !important;
+  font-weight: bold !important;
   background-color: rgba(200, 168, 115, 0.95);
-  border: none;
+  border: none !important;
+  outline: none !important;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  padding:5px
+}
+
+.redCross:active {
+  background: #b07d62;
+  border-radius: 50%;
+
 }
 
 .buttonStyling {
   background-color: white !important;
-  border: 1px solid black !important; 
+  border: none; 
   color: black !important;
+  
+}
 
+.buttonStyling:hover {
+  background-color: #a39171 !important;
+}
+
+.deleteContainerNoAndYes:hover {
+  background-color: grey;
+  color: white;
+}
+
+.saveAndDiscardContainer {
+  width: 166px;
+  height: 71px;
+  top: 314px;
+  position: absolute;
+  border: 1px grey solid;
+  border-radius: 5px;
+}
+
+
+.generalButtonStyling {
+  /* width: 63px;
+  height: 24px; */
+  background-color: grey;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none !important;
+  border: none;
+}
+
+.deleteContainerFr {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  position: absolute;
+  top: 0;
+  border-radius: 18px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 3;
+  top: -82px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.deleteContainerInner {
+  position: absolute;
+  top: 188px;
+  height: 206px;
+  width: 252px;
+  height: 160px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.deleteYesAndNoContainer {
+  width: 245px;
+  z-index: 2; 
+  height: 50px; 
+  position: absolute; 
+  top: 115px;
+}
+
+.deleteContainerNoAndYes {
+  border: 2px solid grey; 
+  color: grey;
+  width: 60px;
+  height: 35px;
+  border-radius: 12px;
+}
+
+
+.outline-none:focus{
+  outline:none !important;
+}
+
+.createNewDeck {
+  height: 160px;
+  width: 280px;
+  background-color: rgba(200, 168, 115,0.95);
+  top: 166px;
+  position: absolute;
+  border-radius: 5px
+}
+
+.changeRepetitionContainer {
+width: 290px;
+height: 75px;
+border: 1px black solid;
+margin-top: 15px;
+border-radius: 5px;
+position: relative;
+margin-top: 10px
+}
+
+.contUpperLower {
+  position: relative;
+  width: 100%;
+  height: 50%;
+}
+
+.changeRepetitionIntervalContainerInner {
+ width: 260px;
+height: 68px;
+/*border: 1px black solid;*/
+margin-top: 3px;
+border-radius: 5px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /*background: #f1f1f1;*/
+  background: rgba(184, 156, 110, 0.95);
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.themeRadiosContainer {
+  border: 1px solid black;
+  width: 215px;
+  border-radius: 5px;
+  margin-top: 10px; 
+  padding: 2px;
+}
+
+.pos {
+  position: absolute;
+  height: 800px;
+  top: 0px;
+  left: 0px;
+}
+
+
+.blackArrow {
+  width: 2px;
+  height: 5px; 
+  transform: rotate(-90deg);
+  background-color: black;
+  font-size: 16px;
+  font-weight: bold;
+  position: absolute; 
+  top: 11px;
+  left: 24px;
+}
+
+.number {
+  width: 100px;
+  position: absolute; 
+  top: 5px;
+  left: -16px;
+  font-weight: normal; 
+  font-size: 14px;
+}
+
+.calendarButtons {
+  width: 20px !important;
+  height: 20px;
+  background-color: grey;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+
+.selected svg{
+  fill: green;
+}
+
+.theWordCalendar {
+  margin-top: 10px;
+  margin-bottom: 3px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.yearBoxContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 270px;
+  height: 210px;
+}
+
+.diagramHourlyBreakdownContainer {
+  width: 280px; 
+  border: 1px solid black; 
+  height: 190px; 
+  position: relative ;
+  margin: auto;
+  padding: 4px;
+}
+
+.progressBar {
+  background-color: black; 
+  padding: 3px; 
+  height: 16px; 
+  width: 146px; 
+  margin-left: 37px; 
+}
+
+.time {
+  margin-left: 10px ;
+  border: 1px solid black;
+  width: 65px;
+  padding: 1px;
+}
+
+.yearBoxContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 270px;
+  height: 210px;
+}
+
+.day {
+  width: 10px;
+  height: 10px;
+  border: 1px black solid;
+  box-sizing: border-box;
+  margin: 1px;
+  position: relative;
+}
+.day > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 120px;
+  background-color: white;
+  border-radius: 5px;
+  z-index: 2;
+  padding: 5px;
+}
+
+#deleteWindow .modal-header {
+  background-color: rgba(200, 168, 115, 0.95) !important;
+  
+  width: 300px !important; 
+  height: 45px;
+  font-weight: bold; 
+  border-top-left-radius: 5px; 
+  border-top-right-radius: 5px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.modal-dialog {
+  margin: auto;
+}
+
+.modal-title {
+  /* background-color: pink; */
+  height: 50px;
 }
 

@@ -12,11 +12,23 @@ export default function Menu() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '80px' }}>
-      <div className='menu flexColumnAlignCenter'>Menu
+    <div style={{
+      // display: 'flex', alignItems: 'center', marginBottom: '80px'
+
+      backgroundColor: '#5aaa95', zIndex: '100',
+      borderTopLeftRadius: '5px', borderTopRightRadius: '5px', width: '504px',
+      // marginTop: '20px'
+    }}
+      className=' mx-auto'
+
+    >
+      <div className='menu flexColumnAlignCenter p-3'
+      // style={{marginTop: '20px'}}
+      >
+        <div>Menu</div>
         <div className='menuContainer flexColumnAlignCenter' onClick={() => setShow(!show)}>
           <div className={'menuIcon ' + (show ? 'transPlus' : ' ')} style={{ top: show ? '8px' : '0px' }}></div>
           {!show && <div className={'menuIcon'} style={{ top: '8px' }}></div>}
@@ -24,39 +36,21 @@ export default function Menu() {
         </div>
       </div>
 
-      {/* show
-          &&
-          <div style={{position: 'relative'}}>
-            <div className='menuStyling'>
-              <Icons icons={[
-                {src:settingsIcon, alt:'settingsIcon', href: 'settings', style: {padding: '3px'}},
-                {src:statsIcon, alt:'statsIcon', href:'stats',style:{borderLeft:'2px solid black',padding: '3px', borderRight:'2px solid black'}},
-                {src:logoutIcon, alt:'logoutIcon', href:'logout', style: {padding: '3px'}}
-              ]} 
-              /> */}
       {
         show &&
         <>
 
-          <Modal show={show} onHide={handleClose}>
-
-        
-
-              <div style={{ position: 'relative', marginLeft: '20px' }}>
-                <div className='menuStyling'>
-                  <Icons icons={[
-                    { src: settingsIcon, alt: 'settingsIcon', href: 'settings', style: { padding: '3px' } },
-                    { src: statsIcon, alt: 'statsIcon', href: 'stats', style: { borderLeft: '2px solid black', padding: '3px', borderRight: '2px solid black' } },
-                    { src: logoutIcon, alt: 'logoutIcon', href: 'logout', style: { padding: '3px' } }
-                  ]}
-                  />
-                </div>
+          <Modal show={show} onHide={handleClose} contentClassName={'modNew'} dialogClassName='align-items-start  pl-3' centered>
+            <Modal.Body>
+              <div className='menuStyling'>
+                <Icons icons={[
+                  { src: statsIcon, alt: 'statsIcon', href: 'stats', style: {  width: '33%',  padding: '3px' } },
+                  { src: settingsIcon, alt: 'settingsIcon', href: 'settings', style: {  width: '33%', padding: '3px', borderLeft: '2px solid black', borderRight: '2px solid black' } },
+                  { src: logoutIcon, alt: 'logoutIcon', href: 'logout', style: { width: '33%', padding: '3px' } }
+                ]}
+                />
               </div>
-
-
-         
-
-
+            </Modal.Body>
           </Modal>
         </>
       }
@@ -64,22 +58,6 @@ export default function Menu() {
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-{/* </div>
-          </div>
-      }
-    </div> */}
 
 
 

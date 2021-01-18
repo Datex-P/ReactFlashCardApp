@@ -12,7 +12,7 @@ export default function Icon({ src, alt, href, style = null }) {
       className='iconContainer'>
 
       <img src={src} alt={alt} style={{ width: '20px' }} />
-      <Nav.Link href={`/${href}`} className={'link'}> {href} </Nav.Link>
+      <Nav.Link href={`/${href}`} className={'link px-3'}> {href} </Nav.Link>
 
 
     </div>
