@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import StyledModal from '../deck/StyledModal'
 import { withRouter } from 'react-router-dom'
 import style from './style.module.css'
@@ -95,7 +95,7 @@ function Settings({ history }) {
       <div className='d-flex border border-dark justify-content-between align-items-center'
         style={{
           borderRadius: '5px', position: 'relative', paddingLeft: '6px', margin: 'auto',
-          paddingRight: '11px', paddingBottom: '3px', width: '211px', height: '59px'
+          paddingRight: '14px', paddingBottom: '3px', width: '211px', height: '59px'
         }}>
         {
 
@@ -271,7 +271,7 @@ function Hexagons({ idx, editHex, setEditHex }) {
             fontSize: '14px', paddingLeft: '14px', position: 'absolute', right: '-40px'
           }}>
             <div className='blackArrow'></div>
-            <span style={{ fontWeight: 'bold' }}>{idx <= dataBase.userPreferences.days ? `${idx + 1}` : `${idx - 1}`}</span> days
+            <span style={{ fontWeight: 'bold' }}>{idx <= dataBase.userPreferences.days ? `${idx + 1}` : `${idx - 1}`}</span> {idx === 0? 'day': 'days'}
           </div>
       }
     </div>

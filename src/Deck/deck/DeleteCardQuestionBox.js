@@ -4,19 +4,14 @@ import { Modal } from 'react-bootstrap'
 import '../styles.css'
 import questionMark from '../../icons/questionmark.svg'
 
-export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, onHide}) 
+export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, deleteCurrentCard, onHide, checked, setChecked}) 
   
 {
 
 
-    // checkbox.onchange = function (e) {
-    //   dataBase.showDeleteFrame = !e.target.checked;
-    //   console.log('still alive and well')
-    // }
-
 
   const [show, setShow] = useState(true);
-  const [checked, setChecked] = useState(false)
+ 
 
   const handleClose = () => {
     setShow(false) 
@@ -30,7 +25,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, o
  
     checked?
     
-   ()=>{ deleteFrame() }
+    ()=>{deleteCurrentCard() }
     :
     <>
     

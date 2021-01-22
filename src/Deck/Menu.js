@@ -25,7 +25,6 @@ export default function Menu() {
       borderTopLeftRadius: '5px', borderTopRightRadius: '5px', width: '504px',
     }}
       className=' mx-auto'
-
     >
       <div className='menu flexColumnAlignCenter p-3'
       >
@@ -46,7 +45,8 @@ export default function Menu() {
               <div className='menuStyling' onClick={()=>{setShow(false)}}>
                 <Icons icons={[
                   { src: statsIcon, alt: 'statsIcon', href: 'stats', style: {  width: 'calc(100% / 3)',  padding: '3px' } },
-                  { src: settingsIcon, alt: 'settingsIcon', href: 'settings', style: {  width: 'calc(100% / 3)', padding: '3px', borderLeft: '2px solid black', borderRight: '2px solid black' } },
+                  { src: settingsIcon, alt: 'settingsIcon', href: 'settings', style: {  width: 'calc(100% / 3)', padding: '3px', 
+                  borderLeft: '2px solid black', borderRight: '2px solid black' } },
                   { src: logoutIcon, alt: 'logoutIcon', href: 'logout', style: { width: 'calc(100% / 3)', padding: '3px' 
                   } }
                 ]}

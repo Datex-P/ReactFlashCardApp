@@ -4,17 +4,16 @@ import React, {
   useContext
 } from 'react';
 import Deck from './deck/';
-import { Container, Row, Spinner, Modal } from 'react-bootstrap'
+import { Container, Row, Spinner } from 'react-bootstrap'
 // import EffectTest from '../EffectTest.js';
 import { Context } from '../Context'//step 4.1 import context instance
+import CreateNewDeck from './deck/CreateNewDeck'
+import NavBar from '../NavBar'
 
 export default function DeckContainer() {
   //const { dataBase,styles } = useContext(Context);// step 4.2 destructure context value
   const { dataBase, setDataBase, styles } = useContext(Context)
   const [show, setShow] = useState(false);
-
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
 
 
 
@@ -41,7 +40,9 @@ export default function DeckContainer() {
     //   ?
     !loadSpinner && dataBase ?
       <>
-        <Container className='align-items-center' style={{ backgroundColor: styles.backgroundColor[dataBase.userPreferences.backgroundColor], borderBottomLeftRadius: '5px', borderBottomRightRadius: '5px', height: '650px', width: '504px' }} >
+        <NavBar />
+        <Container className='align-items-center' style={{ backgroundColor: styles.backgroundColor[dataBase.userPreferences.backgroundColor], 
+        borderBottomLeftRadius: '5px', borderBottomRightRadius: '5px', height: '650px', width: '504px' }} >
 
 
           <Row
@@ -51,8 +52,6 @@ export default function DeckContainer() {
 
                 <div >
                   {
-
-
                     Object.keys(dataBase.DeckNames).map((deck, index, array) =>
                       <Deck
                         deck={dataBase.DeckNames[deck]}
@@ -110,137 +109,6 @@ export default function DeckContainer() {
       <div className='d-flex align-items-center justify-content-center' style={{ height: '50vh' }}>
         <Spinner animation="grow" />
       </div>
-
    )
       }
 
-
-export function CreateNewDeck({ createNewDeckDisplay, close, style }) {
-  const { dataBase, setDataBase } = useContext(Context)
-  const [inputField, setInputField] = useState('')
-
-  function addNewDeckName() {
-
-    let newDataBase = { ...dataBase }
-
-
-    if (inputField in newDataBase.DeckNames) {
-
-      alert('Name of Deck already exists')
-      setInputField('')
-
-
-    } else if (!inputField) {
-      alert('Input needed')
-    } else {
-      newDataBase.DeckNames[inputField] = {
-        data: [],
-        toStudyGoal: 20,
-        cardsToday: 0
-      }
-      setDataBase(newDataBase)
-      close()
-    }
-  }
-
-
-
-  return (
-
-         <Modal
-
-        show={createNewDeckDisplay}
-        //  onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-        <Modal.Title>Name for new deck</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-     
-        <input style={{
-            width: '70%', marginTop: '10px', borderRadius: '5px', border: '1px solid black',
-            marginBottom: '10px', height: '30px', outline: 'none'
-          }}
-            onChange={event => setInputField(event.target.value)}
-
-          ></input>
-
-          <select style={{ width: '70%', outline: 'none' }}>
-            <option>option 1</option>
-            <option>option 2</option>
-            <option>option 3</option>
-            <option>option 4</option>
-            <option>option 5</option>
-          </select>
-        </Modal.Body>
-        <Modal.Footer>
-      
-        <div className='d-flex justify-content-between' style={{ width: '47%' }}>
-            {['Cancel', 'Ok'].map((el) =>
-              <button
-                className='generalButtonStyling'
-                style={{ cursor: 'pointer', marginTop: '10px', width: '63px', height: '26px', borderRadius: '5px' }}
-                onClick={() => {
-                  el === 'Cancel' ?
-                    close()
-                    :
-                    addNewDeckName()
-
-                }
-                }
-              >
-                {el}
-              </button>
-            )
-            }
-          </div>
-
-        </Modal.Footer>
-      </Modal> 
-  )
-}
-
-
-{/* 
-        <div className='createNewDeck d-flex flex-column justify-content-center align-items-center ' style={style}>
-
-          <div style={{ fontWeight: 'bold' }}>Name for new deck</div>
-
-          <input style={{
-            width: '70%', marginTop: '10px', borderRadius: '5px', border: '1px solid black',
-            marginBottom: '10px', height: '30px', outline: 'none'
-          }}
-            onChange={event => setInputField(event.target.value)}
-
-          ></input>
-
-          <select style={{ width: '70%', outline: 'none' }}>
-            <option>option 1</option>
-            <option>option 2</option>
-            <option>option 3</option>
-            <option>option 4</option>
-            <option>option 5</option>
-          </select>
-
-          <div className='d-flex justify-content-between' style={{ width: '47%' }}>
-            {['Cancel', 'Ok'].map((el) =>
-              <button
-                className='generalButtonStyling'
-                style={{ cursor: 'pointer', marginTop: '10px', width: '63px', height: '26px', borderRadius: '5px' }}
-                onClick={() => {
-                  el === 'Cancel' ?
-                    close()
-                    :
-                    addNewDeckName()
-
-                }
-                }
-              >
-                {el}
-              </button>
-            )
-            }
-          </div>
-        </div> */}

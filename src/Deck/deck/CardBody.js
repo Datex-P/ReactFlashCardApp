@@ -17,6 +17,7 @@ export default function CardBody({ name, data, closePopup }) {
   const { dataBase, setDataBase } = useContext(Context);
   const [timer, setTimer] = useState(null)
   const [openDeck, setOpenDeck] = useState(true)
+  const [checked, setChecked] = useState(false)
 
 
   function generateRandom() {
@@ -120,23 +121,25 @@ export default function CardBody({ name, data, closePopup }) {
         <StyledModal
           show={show}
           setShow={setShow}
+          setShowAnswer = {setShowAnswer}
+          setEdit={setEdit}
           title={`Deck: ${name}`}
           menu={<ThreeDotsBtn
             text={'card'}
             editEvent={() => {
               setShowAnswer(true)
-              setEdit(true)
-            
+              setEdit(true)       
             }}
            
             trashEvent={() => {
 
               setTrash(true)
-              setShowDeleteFrame(true)
+           
+              checked? deleteCurrentCard():    setShowDeleteFrame(true)
 
             }}
             style={{
-              position: 'absolute', top: '-14px', left: '53px', zIndex: '2000', backgroundColor: 'white',
+              position: 'absolute', top: '-14px', left: '53px', height: '98px', zIndex: '2000', backgroundColor: 'white',
               border: '1px solid black', overflow: 'hidden'
             }}
           
@@ -215,15 +218,19 @@ export default function CardBody({ name, data, closePopup }) {
                 edit
                 && <div className='d-flex justify-content-center'>
                   <SaveAndDiscard editEvent={() => {
+
                     setShowAnswer(false)
                     setEdit(false)
                   }} />
                 </div>
               }
               {
-                trash && showDeleteFrame &&
+                trash && 
+                showDeleteFrame &&
                 <DeleteCardQuestionBox
                   card='card'
+                  checked = {checked}
+                  setChecked = {setChecked}
                    show={show}
                   deleteFrame={() => setShowDeleteFrame(false)}
                   trashEvent={deleteCurrentCard}

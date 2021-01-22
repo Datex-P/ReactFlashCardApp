@@ -14,6 +14,7 @@ export default function Deck({ deck: { data }, name, active, title,...style }) {
   const {dataBase, setDataBase} = useContext(Context);
   const [trash, setTrash] = useState(false);
   const [showDeleteFrame, setShowDeleteFrame] = useState(true)
+  const [editName, setEditName] = useState(true)
   
 
   function deleteDeck(){
@@ -30,13 +31,27 @@ export default function Deck({ deck: { data }, name, active, title,...style }) {
 
         <Card.Title className='d-flex align-items-center justify-content-between position-relative'
                     style={{width:'140px'}}>
-   
-         <CardHeader bg={style.backgroundColor}>{name}</CardHeader>
+
+        {editName?
+         <CardHeader bg={style.backgroundColor}>
+         {name}
+         
+         </CardHeader>
+         :
+         <input value={name} />
+         }
          
           <ThreeDotsBtn
             text={'deck'}
             showFromParent={show}
             setShowFromParent={setShow}
+
+            // editEvent={() => {
+            //   setShowAnswer(true)
+            //   setEdit(true)       
+            // }}
+
+
             trashEvent={() => {
 
             setTrash(true)
