@@ -11,8 +11,8 @@ export default function CardBody({ name, data, closePopup }) {
   const [edit, setEdit] = useState(false);
   const [random, setRandom] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [trash, setTrash] = useState(false);
   const [showRepeat, setShowRepeat] = useState(false);
+  const [trash, setTrash] = useState(false);
   const [showDeleteFrame, setShowDeleteFrame] = useState(true)
   const { dataBase, setDataBase } = useContext(Context);
   const [timer, setTimer] = useState(null)
@@ -42,9 +42,6 @@ export default function CardBody({ name, data, closePopup }) {
       alert('add questions to deck')
       setOpenDeck(false)
     }
-
-
-
 
   }
 
@@ -92,8 +89,7 @@ export default function CardBody({ name, data, closePopup }) {
 
   function deleteCurrentCard() {
     let newDataBase = { ...dataBase }
-    //console.log(newDataBase.DeckNames.data[random])
-
+ 
     newDataBase.DeckNames[name].data.splice(random, 1)
     setDataBase(newDataBase)
     generateRandom()
@@ -111,12 +107,12 @@ export default function CardBody({ name, data, closePopup }) {
   return (
     <>
 
-
       <Button
         variant='secondary'
         className='openDeck'
         size='sm'
         onClick={generateRandom}
+      
       >Open Deck</Button>
 
 
@@ -125,29 +121,25 @@ export default function CardBody({ name, data, closePopup }) {
           show={show}
           setShow={setShow}
           title={`Deck: ${name}`}
-          // contentClassName={'positioning'}
           menu={<ThreeDotsBtn
             text={'card'}
             editEvent={() => {
               setShowAnswer(true)
               setEdit(true)
-              // setShowRepeat(false)
-
+            
             }}
-            // onHide={setShowRepeat(true)}
+           
             trashEvent={() => {
-              // setShowAnswer(true)
-              setTrash(true)
-              // setShowRepeat(false)
-              setShowDeleteFrame(true)
 
+              setTrash(true)
+              setShowDeleteFrame(true)
 
             }}
             style={{
               position: 'absolute', top: '-14px', left: '53px', zIndex: '2000', backgroundColor: 'white',
               border: '1px solid black', overflow: 'hidden'
             }}
-            //database.DeckNames[name]
+          
             edit pause trash
 
           />}
@@ -240,14 +232,7 @@ export default function CardBody({ name, data, closePopup }) {
                     setShowRepeat(false)
                   }}
                     
-              //         setShowAnswer(true)
-              // // setTrash(true)
-              // // setShowRepeat(false)
-              // //  setShowDeleteFrame(false)
-                    
-              //       }}
-                  // onHide={()=>setShowAnswer(true)}
-
+          
                 />
 
               }
@@ -293,10 +278,8 @@ function SaveAndDiscard({ editEvent }) {
           </div>
         )
       }
-
     </div>
   )
-
 }
 
 

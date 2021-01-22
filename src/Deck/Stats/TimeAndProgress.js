@@ -21,21 +21,21 @@ export default function TimeAndProgess() {
         previousWidthVar += widthVar
 
         if (i === 21) {
-          arr.push(<Row time={<div>{'21 - 24'}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
+          arr.push(<Row time={<div style={{paddingLeft: '3px', height: '21px'}}>{'21 - 24'}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
         } else if (i === 25) {
-          arr.push(<Row time={<div>{'24 - 5'}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
+          arr.push(<Row time={<div style={{paddingLeft: '3px', height: '21px'}}>{'24 - 5'}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
         } else if (i <= 9) {
 
           if (i <= 9 && i + 4 > 9) {
-            arr.push(<Row time={<div>{'0' + i} - {(i + 4)}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
+            arr.push(<Row time={<div style={{paddingLeft: '3px', height: '21px'}}>{'0' + i} - {(i + 4)}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
           } else {
-            arr.push(<Row time={<div>
+            arr.push(<Row time={<div style={{paddingLeft: '3px', height: '21px'}}>
             {'0' + i} - {'0' + (i + 4)}
             </div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
           }
         }
         else {
-          arr.push(<Row time={<div>{i} - {i + 4}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
+          arr.push(<Row time={<div style={{paddingLeft: '3px'}}>{i} - {i + 4}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
 
         }
 
@@ -52,7 +52,7 @@ export default function TimeAndProgess() {
        <div
         className='d-flex'
       > 
-        <div style={{ marginLeft: '10px', border: '1px solid black', width: '82px' }}>Study Goal</div>
+        <div style={{ marginLeft: '10px', border: '1px solid black', width: '81px', paddingLeft: '3px', height: '24px'}}>Study Goal</div>
         <div className='progressBar' style={{ marginLeft: '21px' }}>
           <div
             style={{
@@ -65,7 +65,7 @@ export default function TimeAndProgess() {
           </div>
         </div>
         <div style={{
-          position: 'absolute', top: '-2px', left: `${widthAdjusted}px`, fontSize: '13px'
+          position: 'absolute', top: '1px', left: `${widthAdjusted}px`, fontSize: '13px'
         }}>
           {currentProgress.toFixed(0)}%
        </div>

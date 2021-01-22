@@ -8,7 +8,7 @@ import useOutsideAlerter from '../../LittleComponents/useOutsideAlerter'
 
 
 export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
-  editEvent = () => { }, trashEvent = () => { }, style,edit=false,trash=false,pause=false,reset=false}) {
+  editEvent = () => { }, trashEvent = () => { }, style,edit=false,trash=false,pause=false,reset=false, className}) {
   
     const [show, setShow] = useState(showFromParent);
 
@@ -32,10 +32,7 @@ export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent =
 
   return (
     <div style={{ right: reset? '-65px' : '', position:'relative'   }}>
-      <div onClick={handleClick} className='rotateLittleModal' >...</div>
-
-
-      {/* cursor: el ===year? 'default':'pointer', margin: el===year? '5px': '', wi */}
+      <div onClick={handleClick} className='rotateLittleModal' style={{height: '24px'}}>...</div>
 
 
       {show
@@ -43,17 +40,24 @@ export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent =
 
         <div ref={ref} style={style}
 
-          className='ml-2 rounded mt-2'>
+          className={`ml-2 rounded mt-2 ${className}`}>
           {edit&&<button onClick={handleTrash}
 
-            className='buttonStyling flexAlignCenter outline-none p-1 '><img src={editimg} alt='edit' style={{ marginRight: '3px' }} />{text}</button>}
+            className='buttonStyling flexAlignCenter outline-none p-1 '>
+            <img src={editimg} alt='edit' style={{ marginRight: '3px' }} />{text}</button>}
           
-          {pause&&<button className='buttonStyling flexAlignCenter outline-none p-1 '
-            style={{ borderTop: '1px solid black', borderBottom: '1px solid black' }}>
+          {
+            pause&&
+            <button className='buttonStyling flexAlignCenter outline-none p-1 '
+            style={{ borderTop: '1px solid black', borderBottom: '1px solid black' }
+            }>
 
             <img src={pauseimg} alt='pause' style={{ marginRight: '3px' }} />{text}
-          </button>}
-          {trash &&<button 
+          </button>
+          }
+          {
+            trash &&<button 
+
             onClick={() => {
               trashEvent()
               setShow(false)
@@ -61,15 +65,20 @@ export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent =
             className='buttonStyling flexAlignCenter outline-none p-1 '>
 
             <img src={trashimg} alt='trash' style={{ marginRight: '3px' }} />{text}
-          </button>}
-          {reset &&<button 
+          </button>
+          }
+          {
+            reset &&<button 
+
             onClick={() => {
              
-            }}
+            }
+            }
             className='buttonStyling flexAlignCenter outline-none p-1 '>
 
             <img src={resetimg} alt='reset' style={{ marginRight: '3px', width: '23px', height: '23px'}} />{text}
-          </button>}
+          </button>
+          }
         </div>
       }
     </div>

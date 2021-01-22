@@ -7,13 +7,16 @@ import ContextProvider from './Context';
 // import Example from './class/'
 
 //import LearnUseRef from './LearnUseRef'
-// import Testfile from './Testfile'
+import Testfile from './Testfile'
 
 
 ReactDOM.render(
   <ContextProvider>{/* step 3 cover required parent component with context state */}
-    <React.StrictMode>   
-    <App/>     
+    <React.StrictMode>
+    
+  
+     <App/>
+      
     </React.StrictMode>
 
   </ContextProvider>,

@@ -38,12 +38,12 @@ export default function ContextProvider({ children }) {
         {
           name: 'again',
           amount: 3,
-          unit: 'min'
+          unit: 'm'
         },
         {
           name: 'good',
           amount: 5,
-          unit: 'hrs'
+          unit: 'h'
         },
         {
           name: 'easy',
@@ -53,7 +53,9 @@ export default function ContextProvider({ children }) {
       ],
       userPreferences: {
         days: 0,
-        backgroundColor: 'default'
+        backgroundColor: 'default',
+        weeksInRow: 0,
+        toReview: 0
       },
       studyTime: 0,
       calendarReset: false,

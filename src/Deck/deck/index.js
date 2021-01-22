@@ -6,11 +6,14 @@ import AddNewDeck from './AddNewDeck'
 import CardBody from './CardBody'
 import {Context} from '../../Context'
 import CardHeader from  './CardHeader'
+import DeleteCardQuestionBox from  './DeleteCardQuestionBox';
 
 
-export default function Deck({ deck: { data }, name, active, ...style }) {
+export default function Deck({ deck: { data }, name, active, title,...style }) {
   const [show, setShow] = useState(false);
   const {dataBase, setDataBase} = useContext(Context);
+  const [trash, setTrash] = useState(false);
+  const [showDeleteFrame, setShowDeleteFrame] = useState(true)
   
 
   function deleteDeck(){
@@ -20,10 +23,7 @@ export default function Deck({ deck: { data }, name, active, ...style }) {
   }
 
  
-  
   return (
-
-
 
     <Card style={style} className='newDeckContainer flexColumn position-absolute'>
       <Card.Body className='justify-content-center align-items-center flex-column d-flex'>
@@ -37,21 +37,34 @@ export default function Deck({ deck: { data }, name, active, ...style }) {
             text={'deck'}
             showFromParent={show}
             setShowFromParent={setShow}
-            trashEvent={deleteDeck}
+            trashEvent={() => {
+
+            setTrash(true)
+            setShowDeleteFrame(true)
+            }}
         
-            style= {{position:'absolute', top:'-14px', left:'6px', zIndex: '2000', backgroundColor: 'white', 
-        border:'1px solid black', overflow:'hidden'}}
+            className='threeDotsBtnIndex'
+           
             edit pause trash
+
           />
+            {
+                trash && showDeleteFrame &&
+                <DeleteCardQuestionBox
+                  card='deck'
+                   show={show}
+                  deleteFrame={() => setShowDeleteFrame(false)}
+                  trashEvent={deleteDeck}
+
+                />
+            }
         </Card.Title>
         <Card.Text>
 
           <div className='divStyling'>To study: <input type='number' className='inputStyling'></input></div>
-          <div className='divStyling'>To review:</div>
-          <div className='divStyling'>Decksize:<div>
+          <div className='divStyling'>{'To review:'.padEnd(10, '⠀')}  {dataBase.userPreferences.toReview}</div>
+          {name && <div className='divStyling'>{'Decksize:'.padEnd(10, '⠀')}{dataBase.DeckNames[name].data.length}</div>}
       
-          {/* `${dataBase.DeckNames[name].data.length}` */}
-          </div></div>
 
         </Card.Text>
         <CardBody name={name} data={data} closePopup={() => setShow(false)} />
@@ -61,7 +74,6 @@ export default function Deck({ deck: { data }, name, active, ...style }) {
     </Card>
 
   
-
   )
 
 }

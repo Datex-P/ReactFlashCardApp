@@ -1,9 +1,10 @@
 import React from 'react';
 import { Nav } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
 
 
 
-export default function Icon({ src, alt, href, style = null }) {
+ function Icon({ src, alt, href, style = null,history }) {
 
 
   return (
@@ -12,9 +13,10 @@ export default function Icon({ src, alt, href, style = null }) {
       className='iconContainer'>
 
       <img src={src} alt={alt} style={{ width: '20px' }} />
-      <Nav.Link href={`/${href}`} className={'link px-3'}> {href} </Nav.Link>
+      <Nav.Link onClick={()=>{history.push('/'+href)}} className={'link px-3'}> {href} </Nav.Link>
 
 
     </div>
   )
 }
+export default withRouter(Icon)

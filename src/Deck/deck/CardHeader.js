@@ -16,12 +16,9 @@ export default function CardHeader({ bg,children }) {
 
   return (
 
-
-
     <div onMouseEnter={()=>{setHovered(true)}}
          onMouseLeave = {()=>{setHovered(false)}
-         }
-         
+         }     
     >
 
       {

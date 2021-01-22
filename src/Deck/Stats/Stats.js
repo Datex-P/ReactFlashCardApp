@@ -1,21 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import StyledModal from '../deck/StyledModal'
 import ThreeDotsBtn from '../deck/ThreeDotsBtn'
 import { withRouter } from 'react-router-dom'
 import ChartComp from './ChartComp';
 import { Context } from '../../Context'
 import TimeAndProgess from './TimeAndProgress.js'
+import HourlyBreakdown from './HourlyBreakdown.js'
+// import { findByLabelText } from '@testing-library/react';
 
 
 
 
-function Stats({ history,
-  // setShowDeleteFrame
-}) {
+function Stats({ history}) {
 
   const [showDeleteFrame, setShowDeleteFrame] = useState(false)
-
-
 
   function setShow() {
     history.push('/')
@@ -34,8 +32,6 @@ function Stats({ history,
             text={'stats'}
             trashEvent={() => {
               setShowDeleteFrame(showDeleteFrame)
-
-
             }}
 
             style={{
@@ -74,19 +70,13 @@ function Stats({ history,
 
         </div>
 
-        <div style={{
-          width: '200px'
-          // , 
-          // height: '500px',
-          //   display: 'flex', justifyContent: 'center' 
-          // display: 'flex', justifyContent: 'center'
-        }}>
+        <div style={{width: '200px'}}>
 
 
         </div>
 
         <TimeAndProgess 
-        // time={time}
+  
 
         />
 
@@ -114,14 +104,14 @@ function ButtonLeftAndRight() {
     setYear(year - 1);
   };
 
-
-
   return (
-    <>
+    <div style={{display: 'flex', flexDirection: 'column'}}>
+      <div className='d-flex justify-content-center align-items-center' style={{marginTop: '-10px'}}>
       {
+        
         ['<', year, '>'].map(el =>
 
-          <div style={{ cursor: el === year ? 'default' : 'pointer', margin: el === year ? '5px' : '', width: '40px' }}
+          <div style={{ cursor: el === year ? 'default' : 'pointer', margin: el === year ? '5px' : '', width: '33px' }}
 
             className={el !== year ? 'd-flex justify-content-center align-items-center calendarButtons' : ' align-items-center flex justify-content-center'}
 
@@ -133,218 +123,72 @@ function ButtonLeftAndRight() {
           </div>
         )
       }
-    </>
-  )
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-function HourlyBreakdown() {
-
-  const { dataBase, setDataBase } = useContext(Context)
-
-
-  function handleMonths(e) {
-    let newDataBase = { ...dataBase }
-    newDataBase[e.target] = e.target.value
-    setDataBase(newDataBase)
-  }
-
-
-  return (
-    <div className='d-flex align-items-center flex-column'>
-      <div style={{ marginTop: '20px', fontSize: 'bold', fontWeight: 'bold' }}>Hourly Breakdown</div>
-
-      <div style={{ width: '270px', borderRadius: '5px',  border: '1px solid black', padding: '1px 5px', marginTop: '10px', marginBottom: '20px' }}>
-        {
-          ['1 month', '3 month', '12 month'].map(comp =>
-            <>
-              <input style={{ cursor: 'pointer', marginTop: '10px', marginBottom: '20px' }}
-                name='breakdownIntervals'
-                type='radio'
-                // title = `Change background color of main menu to ${comp}.`
-                value={comp}
-                onChange={handleMonths}
-              />
-              <label style={{ margin: '5px' }}>{comp}</label>
-            </>
-          )
-        }
       </div>
+        <RenderDays />
     </div>
   )
 }
 
-// function YearBoxContainer () {
+function RenderDays () {
 
-//   let cardsStudiedCounter = 0;
-//   let thisYear = new Date(`January 1, ${+year}`);
+ const [year, setNewYear] = useState(new Date().getFullYear())
+ const [days, setDays] = useState([])
 
+  useEffect(()=> {
 
-//   function days(year) {
-//     yearBoxContainer.innerHTML = "";
+    let date = [];
+    let thisYear = new Date(`January 1, ${+year}`);
+    
+    while (
+        thisYear.getMonth() !== 0 ||
+        thisYear.getDate() !== 1 ||
+        thisYear.getFullYear() === +year
+      ) {
+        date.push(thisYear.toDateString())
+        thisYear.setDate(thisYear.getDate() + 1);
+      }
+    setDays(date)
+  
+}, [year])
 
-//     while (
-//       thisYear.getMonth() != 0 ||
-//       thisYear.getDate() != 1 ||
-//       thisYear.getFullYear() == +year
-//     ) {
-//       // let day = document.createElement("div");
-//       <div className='d'> </div>
-//       day.classList.add("day");
-//       let date = thisYear.toDateString();
-//     }
-//   }
 
-// }
+return (
 
+<div className= 'yearBoxContainer'>
+  {
+    days.map(day=>
+      <div className='day'></div>
+    )
+  }
+</div>
+)
 
+}
 
 
 
 
-//   return(
 
-//       <div className='yearBoxContainer'>
 
-//       {days()}
 
 
-//       </div>
 
 
 
 
 
 
-//   )
 
- 
 
 
 
 
-  // function renderDays(year) {
-  //   yearBoxContainer.innerHTML = "";
-  //   let thisYear = new Date(`January 1, ${+year}`);
 
-  //   while (
-  //     thisYear.getMonth() != 0 ||
-  //     thisYear.getDate() != 1 ||
-  //     thisYear.getFullYear() == +year
-  //   ) {
-  //     let day = document.createElement("div");
-  //     day.classList.add("day");
-  //     let date = thisYear.toDateString();
 
-  //     for (let deck in dataBase.DeckNames) {
 
 
-  //       //if  (dataBase.DeckNames.calendarReset !== false) {
 
-  //       //let date = dataBase.DeckNames.calendarReset.value()
-  //       //don t use dates before this date
-  //       //}
 
 
 
-  //       dataBase.DeckNames[deck].data.forEach((card) => {
-  //         card.openHistory &&
-  //           card.openHistory.forEach((openTime) => {
-  //             if (date === openTime.toDateString()) {
-  //               cardsStudiedCounter++;
-  //             }
-  //           });
-  //       });
-  //     }
 
-  //     for (let deck in dataBase.DeckNames) {
-  //       if (
-  //         dataBase.DeckNames[deck].data.find(
-  //           (item) => new Date(item.openHistory).toDateString() == date
-  //         )
-  //       ) {
-  //         day.style.backgroundColor = "red";
-  //         day.style.cursor = "pointer";
-  //         day.title = 'Click to see the study stats of this date'
-
-  //         day.onclick = function (event) {
-  //           event.stopPropagation();
-  //           yearBoxContainer
-  //             .querySelectorAll(".day")
-  //             .forEach((day) => (day.innerHTML = ""));
-  //           let dayInner = createElement('div', '', {lineHeight: '22px', width: '120px'})
-  //           // let time = Math.round(
-  //           //   Object.values(dataBase.studyTime).reduce(
-  //           //     (acc, cur) => acc + cur, 0
-  //           //   ) / 60
-  //           // );
-
-
-  //           let time = Math.floor(dataBase.studyTime/60)
-  //           console.log(cardsStudiedCounter)
-            
-       
-  //           dayInner.innerText = `${date} Time: ${time
-  //             .toString()
-  //             .padStart(3, "⠀")} min \n  Review${cardsStudiedCounter !== 1 ? 's' : ''}: ${cardsStudiedCounter} card${cardsStudiedCounter !== 1 ? 's' : ''}`; 
-  //           console.log(cardsStudiedCounter);
-  //           day.append(dayInner);
-  //         };
-  //       }
-  //     }
-
-   
-
-  //     thisYear.setDate(thisYear.getDate() + 1);
-
-  //     yearBoxContainer.appendChild(day);
-  //     yearBoxContainer.onclick = function () {
-  //       alert("you do not have training in this day");
-  //     };
-  //   }
-  // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // function handleMonths(e){
-  //   let newDataBase = {...dataBase}
-  //   newDataBase.userPreferences[e.target.name] = e.target.value
-  //   setDataBase(newDataBase)
-  // }

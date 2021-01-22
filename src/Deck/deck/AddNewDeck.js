@@ -73,7 +73,7 @@ export default function AddNewDeck({ closePopup, name }) {
           </div>
 
 
-          <div className='mt-2'>
+          <div className='mt-5'>
             <p className='questionAnswerStyling'>Answer</p>
             <FormControl
               as="textarea"
@@ -87,7 +87,7 @@ export default function AddNewDeck({ closePopup, name }) {
 
           <button onClick={addToDeck}
                   className='generalButtonStyling'
-                  style={{width: '110px', marginTop: '20px', padding: '5px', boxSizing: 'border-box'}}>
+                  style={{width: '110px', marginTop: '20px', padding: '5px', boxSizing: 'border-box', marginLeft: '8px'}}>
             Add to Deck
           </button>
 
