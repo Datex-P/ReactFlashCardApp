@@ -1,7 +1,7 @@
 import { Modal } from 'react-bootstrap'
 import redCross from '../../icons/redCross.svg'
 
-export default function StyledModal({children, show, setShow,title,menu, setEdit, setShowAnswer}){
+export default function StyledModal({children, show, setShow,title,menu, setEdit, setShowAnswer, setShowRepeat, showAnswer, showRepeat}){
   return(
     <Modal
         show={show}
@@ -16,10 +16,11 @@ export default function StyledModal({children, show, setShow,title,menu, setEdit
             {title}
           </Modal.Title>
             {menu}
-          <button className='redCross' 
+          <button className='redCross'
           onClick={() => {setShow(false)
-           setShowAnswer(true)
+           setShowAnswer(false)
            setEdit(false)
+           setShowRepeat(false)
           }
           } >
           <img src={redCross} alt='redCross' />

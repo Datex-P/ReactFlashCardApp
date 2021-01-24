@@ -189,8 +189,9 @@ outline: none;
 
 .openDeck {
    margin-top: -20px !important; 
-  outline: none;
+  outline: none !important;
   width: 90px;
+
 }
 
 .cardBod {
@@ -284,6 +285,12 @@ outline: none;
 
 .form-control {
   resize:none;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
 
 
@@ -577,6 +584,8 @@ height: 33px;
   height: 160px;
   background-color: rgba(200, 168, 115, 0.95) !important; 
   align-items: center;
+  margin: auto;
+  top: -170px;
 }
 
 

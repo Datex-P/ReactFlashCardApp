@@ -10,6 +10,7 @@ import { Context } from '../Context'//step 4.1 import context instance
 import CreateNewDeck from './deck/CreateNewDeck'
 import NavBar from '../NavBar'
 
+
 export default function DeckContainer() {
   //const { dataBase,styles } = useContext(Context);// step 4.2 destructure context value
   const { dataBase, setDataBase, styles } = useContext(Context)
@@ -97,7 +98,18 @@ export default function DeckContainer() {
               Create Deck
           </button>
 
-            <CreateNewDeck close={() => { setCreateNewDeckDisplay(false); setShowDeck(true) }} createNewDeckDisplay={createNewDeckDisplay} style={{ position: 'absolute', zIndex: '40' }} />
+            <CreateNewDeck 
+            // close={() => { setCreateNewDeckDisplay(false);     }} 
+            createNewDeckDisplay={createNewDeckDisplay} 
+          
+            setShowDeck={setShowDeck}
+            setCreateNewDeckDisplay={setCreateNewDeckDisplay}
+
+
+// <CreateNewDeck close={() => { setCreateNewDeckDisplay(false); setShowDeck(true) }} createNewDeckDisplay={createNewDeckDisplay}
+            
+
+            style={{ position: 'absolute', zIndex: '40' }} />
 
           </Row>
 

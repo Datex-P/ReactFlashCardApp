@@ -17,6 +17,9 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
   const [editName, setEditName] = useState(true)
   const [pauseName, setPauseName] = useState(true)
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name)
+  const [hoveredTitle, setHoveredTitle] = useState(true
+    );
+
   
 
   function deleteDeck(){
@@ -44,7 +47,11 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
                     style={{width:'140px'}}>
 
         {editName?
-         <CardHeader bg={style.backgroundColor} style={{width: '40px', border: '1px solid black'}}>
+         <CardHeader bg={style.backgroundColor} 
+         style={{width: '40px', border: '1px solid black'}}
+         hoveredTitle={hoveredTitle}
+         setHoveredTitle={setHoveredTitle}
+         >
          {name}
          
          </CardHeader>
@@ -55,14 +62,14 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
          onChange={handleDeckname}
          />
          }
-         
+         {
+         hoveredTitle &&
           <ThreeDotsBtn
             text={'deck'}
             showFromParent={show}
             editName={editName}
             pauseName={pauseName}
             setPauseName={setPauseName}
-
             setShowFromParent={setShow}
 
             editEvent={() => {
@@ -84,6 +91,7 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
             edit pause trash
 
           />
+          }
             {
                 trash && showDeleteFrame &&
                 <DeleteCardQuestionBox

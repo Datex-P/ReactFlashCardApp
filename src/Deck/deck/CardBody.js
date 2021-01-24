@@ -117,10 +117,11 @@ export default function CardBody({name, data, closePopup }) {
       
       >Open Deck</Button>
 
-
       {openDeck &&
         <StyledModal
           show={show}
+          showRepeat={showRepeat}
+          setShowRepeat={setShowRepeat}
           setShow={setShow}
           setShowAnswer = {setShowAnswer}
           setEdit={setEdit}

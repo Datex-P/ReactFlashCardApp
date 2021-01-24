@@ -13,7 +13,7 @@ export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent =
   editEvent = () => { }, trashEvent = () => { }, style,edit=false,trash=false,pause=false,reset=false, className, 
   editName, pauseName, setPauseName = () => {}, pauseEvent = () => {}
 }) {
-  
+  const [startAnimation, setStartAnimation] = useState(false)
     const [show, setShow] = useState(showFromParent);
 
   useEffect(() => {
@@ -27,8 +27,20 @@ export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent =
   };
 
   const ref = useRef(null)
+
+
+
+ 
   
-  useOutsideAlerter(ref, () => { setShow(false) })
+  useOutsideAlerter(ref, editName, ()=>{setShow(false)},()=>{
+    setStartAnimation(true)
+    setTimeout(()=>{setStartAnimation(false)},2000)
+  } )
+    
+    
+
+  
+  
 
   function handleEdit() {
     editEvent() 
@@ -59,16 +71,15 @@ export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent =
         &&
 
 
-        <div ref={editName? ref: ()=>{document.getElementById('editAndSaveImg').classList.add('blinkingIcon')
-        
-        }
-        } style={style}
+        <div 
+          ref={ref}
+         style={style}
 
           className={`ml-2 rounded mt-2 ${className}`}>
           {edit&&<button onClick={handleEdit}
 
             className='buttonStyling flexAlignCenter outline-none p-1 '>
-            <img id='editAndSaveImg' src={editName? editimg: saveimg} alt='edit' style={{ marginRight: '3px' }} />{text}</button>}
+            <img className={startAnimation && 'blinkingIcon'} src={editName? editimg: saveimg} alt='edit' style={{ marginRight: '3px' }} />{text}</button>}
           
           {
             pause&&
