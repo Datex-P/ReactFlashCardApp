@@ -3,12 +3,16 @@ import trashimg from '../../icons/trash.svg'
 import pauseimg from '../../icons/pause.svg'
 import editimg from '../../icons/edit.svg'
 import resetimg from '../../icons/reset.svg'
+import saveimg from '../../icons/save.svg'
+import playimg from '../../icons/play.svg'
 import useOutsideAlerter from '../../LittleComponents/useOutsideAlerter'
 
 
 
 export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
-  editEvent = () => { }, trashEvent = () => { }, style,edit=false,trash=false,pause=false,reset=false, className}) {
+  editEvent = () => { }, trashEvent = () => { }, style,edit=false,trash=false,pause=false,reset=false, className, 
+  editName, pauseName, setPauseName = () => {}, pauseEvent = () => {}
+}) {
   
     const [show, setShow] = useState(showFromParent);
 
@@ -23,38 +27,64 @@ export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent =
   };
 
   const ref = useRef(null)
+  
   useOutsideAlerter(ref, () => { setShow(false) })
 
-  function handleTrash() {
-    editEvent()
-    setShow(false)
+  function handleEdit() {
+    editEvent() 
+    if (!editName) {
+      setShow(false)
+    }
+
+    // !editName && setShow(false) 
+    // other way of writing it
+  }
+
+  function handlePause () {
+    setPauseName(!pauseName)
+
+    if (pauseName) {
+      console.log('hello')
+    }
   }
 
   return (
     <div style={{ right: reset? '-65px' : '', position:'relative'   }}>
-      <div onClick={handleClick} className='rotateLittleModal' style={{height: '24px'}}>...</div>
+      <div 
+       onClick={editName? handleClick: ()=>{} } 
+      className='rotateLittleModal' style={{height: '24px'}}>...</div>
 
 
       {show
         &&
 
-        <div ref={ref} style={style}
+
+        <div ref={editName? ref: ()=>{document.getElementById('editAndSaveImg').classList.add('blinkingIcon')
+        
+        }
+        } style={style}
 
           className={`ml-2 rounded mt-2 ${className}`}>
-          {edit&&<button onClick={handleTrash}
+          {edit&&<button onClick={handleEdit}
 
             className='buttonStyling flexAlignCenter outline-none p-1 '>
-            <img src={editimg} alt='edit' style={{ marginRight: '3px' }} />{text}</button>}
+            <img id='editAndSaveImg' src={editName? editimg: saveimg} alt='edit' style={{ marginRight: '3px' }} />{text}</button>}
           
           {
             pause&&
             <button className='buttonStyling flexAlignCenter outline-none p-1 '
             style={{ borderTop: '1px solid black', borderBottom: '1px solid black' }
-            }>
-
-            <img src={pauseimg} alt='pause' style={{ marginRight: '3px' }} />{text}
+            }
+            onClick={handlePause}
+            >
+    
+            <img src={pauseName? pauseimg: playimg} 
+                 alt='pause' 
+                 style={{ marginRight: '3px' }} />
+                 {text}
           </button>
           }
+
           {
             trash &&<button 
 

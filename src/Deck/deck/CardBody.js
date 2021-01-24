@@ -6,7 +6,8 @@ import StyledModal from './StyledModal'
 import DeleteCardQuestionBox from './DeleteCardQuestionBox'
 
 
-export default function CardBody({ name, data, closePopup }) {
+export default function CardBody({name, data, closePopup }) {
+  
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
   const [random, setRandom] = useState(null);
@@ -125,7 +126,9 @@ export default function CardBody({ name, data, closePopup }) {
           setEdit={setEdit}
           title={`Deck: ${name}`}
           menu={<ThreeDotsBtn
+            setShowAnswer
             text={'card'}
+            editName={true}
             editEvent={() => {
               setShowAnswer(true)
               setEdit(true)       
@@ -193,7 +196,6 @@ export default function CardBody({ name, data, closePopup }) {
                       label={'<' + col.amount + col.unit}
                     />
                   )}
-
 
                 </div>
               }

@@ -9,12 +9,14 @@ import CardHeader from  './CardHeader'
 import DeleteCardQuestionBox from  './DeleteCardQuestionBox';
 
 
-export default function Deck({ deck: { data }, name, active, title,...style }) {
+export default function Deck({ deck: { data }, name, active, title, ...style }) {
   const [show, setShow] = useState(false);
   const {dataBase, setDataBase} = useContext(Context);
   const [trash, setTrash] = useState(false);
   const [showDeleteFrame, setShowDeleteFrame] = useState(true)
   const [editName, setEditName] = useState(true)
+  const [pauseName, setPauseName] = useState(true)
+  const [nameOfTopDeck, setNameOfTopDeck] = useState(name)
   
 
   function deleteDeck(){
@@ -23,7 +25,16 @@ export default function Deck({ deck: { data }, name, active, title,...style }) {
     setDataBase(newDataBase)
   }
 
- 
+
+  function handleDeckname(e) {
+    setNameOfTopDeck(e.target.value)
+    let newDataBase = {...dataBase}
+    newDataBase.DeckNames[e.target.value]  = {...newDataBase.DeckNames[nameOfTopDeck]}
+    delete newDataBase.DeckNames[nameOfTopDeck]
+    setDataBase(newDataBase)
+  
+  }
+  
   return (
 
     <Card style={style} className='newDeckContainer flexColumn position-absolute'>
@@ -33,27 +44,37 @@ export default function Deck({ deck: { data }, name, active, title,...style }) {
                     style={{width:'140px'}}>
 
         {editName?
-         <CardHeader bg={style.backgroundColor}>
+         <CardHeader bg={style.backgroundColor} style={{width: '40px', border: '1px solid black'}}>
          {name}
          
          </CardHeader>
+         
          :
-         <input value={name} />
+         <input style={{width: '92%', borderRadius: '5px', paddingLeft: '5px', outline: 'none'}} 
+         value = {nameOfTopDeck}
+         onChange={handleDeckname}
+         />
          }
          
           <ThreeDotsBtn
             text={'deck'}
             showFromParent={show}
+            editName={editName}
+            pauseName={pauseName}
+            setPauseName={setPauseName}
+
             setShowFromParent={setShow}
 
-            // editEvent={() => {
-            //   setShowAnswer(true)
-            //   setEdit(true)       
-            // }}
+            editEvent={() => {
+              setShow(show)
+              setEditName(!editName)       
+            }}
 
+            pauseEvent = {()=>{
+              setPauseName(!pauseName)
+            }}
 
             trashEvent={() => {
-
             setTrash(true)
             setShowDeleteFrame(true)
             }}

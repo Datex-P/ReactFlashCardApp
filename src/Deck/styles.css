@@ -267,6 +267,11 @@ outline: none;
   cursor: pointer
 }
 
+.blinkingIcon {
+  animation: blinker 1.3s linear infinite;
+  animation-iteration-count: 2;
+}
+
 .saveAndDiscardContainer {
   width: 166px;
   height: 71px;

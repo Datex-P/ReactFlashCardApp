@@ -43,7 +43,7 @@ export default function CreateNewDeck({ createNewDeckDisplay, close, style }) {
         id = 'createDeck'
         // dialogClassName = 'stylesNewDeck'
         // contentClassName = 'stylesNewDeck'
-        // centered
+        centered
       >
         <Modal.Header closeButton>
         <Modal.Title>Name for new deck</Modal.Title>

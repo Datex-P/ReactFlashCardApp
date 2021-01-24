@@ -67,6 +67,7 @@ function Settings({ history }) {
         <div className='d-flex justify-content-around align-items-center' style={{ width: '325px' }}>
           {dataBase &&
 
+
             dataBase.userTimePreferences.map((col, k) =>
               <Col key={col.name} index={k} data={col} editable={editable} userTimePreferences={userTimePreferences} setUserTimePreferences={setUserTimePreferences} />
             )

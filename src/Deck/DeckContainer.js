@@ -15,7 +15,7 @@ export default function DeckContainer() {
   const { dataBase, setDataBase, styles } = useContext(Context)
   const [show, setShow] = useState(false);
 
-
+ 
 
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
 
@@ -31,7 +31,7 @@ export default function DeckContainer() {
 
   useEffect(() => {
 
-      setTimeout(()=>{setLoadSpinner(false)},3000)
+      setTimeout(()=>{setLoadSpinner(false)},2000)
     
   }, []);
 

@@ -49,6 +49,7 @@ export default function AddNewDeck({ closePopup, name }) {
         onHide={() => setShow(false)}
         contentClassName={'mod'}
         backdrop="static"
+        
       >
         <Modal.Header className='border-bottom-0'>
           <Modal.Title style={{ fontSize: '16px' }}>
