@@ -11,8 +11,11 @@ import useOutsideAlerter from '../../LittleComponents/useOutsideAlerter'
 
 export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
   editEvent = () => { }, trashEvent = () => { }, style,edit=false,trash=false,pause=false,reset=false, className, 
-  editName, pauseName, setPauseName = () => {}, pauseEvent = () => {}
+  editName,input
+  // , pauseName, setPauseName = () => {}, pauseEvent = () => {}
 }) {
+
+  
   const [startAnimation, setStartAnimation] = useState(false)
     const [show, setShow] = useState(showFromParent);
 
@@ -34,7 +37,8 @@ export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent =
   
   useOutsideAlerter(ref, editName, ()=>{setShow(false)},()=>{
     setStartAnimation(true)
-    setTimeout(()=>{setStartAnimation(false)},2000)
+    //input.current.focus()
+    //setTimeout(()=>{setStartAnimation(false)},2000)
   } )
     
     
@@ -52,13 +56,14 @@ export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent =
     // other way of writing it
   }
 
-  function handlePause () {
-    setPauseName(!pauseName)
+  // function handlePause () {
+  //   pauseEvent()
+  //   setPauseName(!pauseName)
 
-    if (pauseName) {
-      console.log('hello')
-    }
-  }
+  //   if (pauseName) {
+  //     console.log('hello')
+  //   }
+  // }
 
   return (
     <div style={{ right: reset? '-65px' : '', position:'relative'   }}>
@@ -78,19 +83,22 @@ export default function ThreeDotsBtn({ text, showFromParent, setShowFromParent =
           className={`ml-2 rounded mt-2 ${className}`}>
           {edit&&<button onClick={handleEdit}
 
+
+
             className='buttonStyling flexAlignCenter outline-none p-1 '>
-            <img className={startAnimation && 'blinkingIcon'} src={editName? editimg: saveimg} alt='edit' style={{ marginRight: '3px' }} />{text}</button>}
+            <img className={
+              startAnimation ? 'blinkingIcon':''} src={editName? editimg: saveimg} alt='edit' style={{ marginRight: '3px' }} />{text}</button>}
           
           {
+
             pause&&
             <button className='buttonStyling flexAlignCenter outline-none p-1 '
             style={{ borderTop: '1px solid black', borderBottom: '1px solid black' }
             }
-            onClick={handlePause}
+            // onClick={handlePause()}
             >
     
-            <img src={pauseName? pauseimg: playimg} 
-                 alt='pause' 
+            <img src={ playimg}  alt='pause' 
                  style={{ marginRight: '3px' }} />
                  {text}
           </button>

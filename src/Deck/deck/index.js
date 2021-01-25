@@ -1,4 +1,4 @@
-import React, {useState,useContext} from 'react'
+import React, {useState,useContext,useRef} from 'react'
 import { Card} from 'react-bootstrap'
 import '../styles.css'
 import ThreeDotsBtn from './ThreeDotsBtn'
@@ -28,6 +28,7 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
     setDataBase(newDataBase)
   }
 
+  let input  = useRef(null)
 
   function handleDeckname(e) {
     setNameOfTopDeck(e.target.value)
@@ -44,7 +45,7 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
       <Card.Body className='justify-content-center align-items-center flex-column d-flex'>
 
         <Card.Title className='d-flex align-items-center justify-content-between position-relative'
-                    style={{width:'140px'}}>
+                    style={{width:'136px'}}>
 
         {editName?
          <CardHeader bg={style.backgroundColor} 
@@ -57,7 +58,7 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
          </CardHeader>
          
          :
-         <input style={{width: '92%', borderRadius: '5px', paddingLeft: '5px', outline: 'none'}} 
+         <input ref = {input} style={{width: '92%', borderRadius: '5px', paddingLeft: '5px', outline: 'none'}} 
          value = {nameOfTopDeck}
          onChange={handleDeckname}
          />
@@ -68,18 +69,20 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
             text={'deck'}
             showFromParent={show}
             editName={editName}
-            pauseName={pauseName}
-            setPauseName={setPauseName}
+            // pauseName={pauseName}
+            // setPauseName={setPauseName}
             setShowFromParent={setShow}
 
             editEvent={() => {
-              setShow(show)
+              //setShow(show)
               setEditName(!editName)       
-            }}
 
-            pauseEvent = {()=>{
-              setPauseName(!pauseName)
             }}
+            input={input}
+
+            // pauseEvent = {()=>{
+            //   setPauseName(!pauseName)
+            // }}
 
             trashEvent={() => {
             setTrash(true)
