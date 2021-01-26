@@ -9,7 +9,7 @@ import CardHeader from  './CardHeader'
 import DeleteCardQuestionBox from  './DeleteCardQuestionBox';
 
 
-export default function Deck({ deck: { data }, name, active, title, ...style }) {
+export default function Deck({ deck: { data }, name, active, title, index, ...style }) {
   const [show, setShow] = useState(false);
   const {dataBase, setDataBase} = useContext(Context);
   const [trash, setTrash] = useState(false);
@@ -17,8 +17,7 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
   const [editName, setEditName] = useState(true)
   const [pauseName, setPauseName] = useState(true)
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name)
-  const [hoveredTitle, setHoveredTitle] = useState(true
-    );
+  const [hoveredTitle, setHoveredTitle] = useState(true);
 
   
 
@@ -29,15 +28,6 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
   }
 
   let input  = useRef(null)
-
-  function handleDeckname(e) {
-    setNameOfTopDeck(e.target.value)
-    let newDataBase = {...dataBase}
-    newDataBase.DeckNames[e.target.value]  = {...newDataBase.DeckNames[nameOfTopDeck]}
-    delete newDataBase.DeckNames[nameOfTopDeck]
-    setDataBase(newDataBase)
-  
-  }
   
   return (
 
@@ -45,11 +35,11 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
       <Card.Body className='justify-content-center align-items-center flex-column d-flex'>
 
         <Card.Title className='d-flex align-items-center justify-content-between position-relative'
-                    style={{width:'136px'}}>
+                    style={{width:'132px'}}>
 
         {editName?
          <CardHeader bg={style.backgroundColor} 
-         style={{width: '40px', border: '1px solid black'}}
+         style={{width: '132px', border: '1px solid black'}}
          hoveredTitle={hoveredTitle}
          setHoveredTitle={setHoveredTitle}
          >
@@ -60,29 +50,34 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
          :
          <input ref = {input} style={{width: '92%', borderRadius: '5px', paddingLeft: '5px', outline: 'none'}} 
          value = {nameOfTopDeck}
-         onChange={handleDeckname}
+          onChange={(e)=>{setNameOfTopDeck(e.target.value)}}
          />
          }
          {
-         hoveredTitle &&
+         true &&
           <ThreeDotsBtn
+            name={name}
             text={'deck'}
             showFromParent={show}
             editName={editName}
-            // pauseName={pauseName}
-            // setPauseName={setPauseName}
+            pauseName={pauseName}
+            setPauseName={setPauseName}
+        
+        
             setShowFromParent={setShow}
+            index={index}
+            nameOfTopDeck={nameOfTopDeck}
 
             editEvent={() => {
-              //setShow(show)
-              setEditName(!editName)       
+              setShow(show)
+              setEditName(!editName)
 
             }}
             input={input}
 
-            // pauseEvent = {()=>{
-            //   setPauseName(!pauseName)
-            // }}
+            pauseEvent={()=>{
+              setPauseName(!pauseName)
+            }}
 
             trashEvent={() => {
             setTrash(true)
@@ -94,6 +89,7 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
             edit pause trash
 
           />
+
           }
             {
                 trash && showDeleteFrame &&
@@ -110,11 +106,11 @@ export default function Deck({ deck: { data }, name, active, title, ...style }) 
 
           <div className='divStyling'>To study: <input type='number' className='inputStyling'></input></div>
           <div className='divStyling'>{'To review:'.padEnd(10, '⠀')}  {dataBase.userPreferences.toReview}</div>
-          {name && <div className='divStyling'>{'Decksize:'.padEnd(10, '⠀')}{dataBase.DeckNames[name].data.length}</div>}
+          {name && <div className='divStyling'>{'Decksize:'.padEnd(10, '⠀')}{data.length}</div>}
       
 
         </Card.Text>
-        <CardBody name={name} data={data} closePopup={() => setShow(false)} />
+        <CardBody name={name} index={index} data={data} closePopup={() => setShow(false)} />
         {active && <AddNewDeck name= {name} closePopup={() => setShow(false)} />}
       </Card.Body>
 

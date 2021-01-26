@@ -6,10 +6,11 @@ import StyledModal from './StyledModal'
 import DeleteCardQuestionBox from './DeleteCardQuestionBox'
 
 
-export default function CardBody({name, data, closePopup }) {
+export default function CardBody({name, data, closePopup,index }) {
   
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [pause, setPause] = useState(false)
   const [random, setRandom] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
   const [showRepeat, setShowRepeat] = useState(false);
@@ -19,12 +20,14 @@ export default function CardBody({name, data, closePopup }) {
   const [timer, setTimer] = useState(null)
   const [openDeck, setOpenDeck] = useState(true)
   const [checked, setChecked] = useState(false)
+  const [pauseName, setPauseName] = useState(false)
+
 
 
   function generateRandom() {
     let random = null
     if (dataBase.queue[0] && dataBase.queue[0].timeLeft === 0) {
-      //need to have algorithm to filter cards in queue related onlz for this deck
+      //need to have algorithm to filter s in queue related onlz for this deck
       //also not tot forget add decremental time algorith for all crads no matter waht deck
 
 
@@ -39,7 +42,10 @@ export default function CardBody({name, data, closePopup }) {
     console.log(data)
  
 
-    if (dataBase.DeckNames[name].data.length === 0) {
+     if (data.length === 0) {
+
+    //  if (dataBase.DeckNames[name].data.length === 0) {
+
 
       alert('add questions to deck')
       setOpenDeck(false)
@@ -91,8 +97,7 @@ export default function CardBody({name, data, closePopup }) {
 
   function deleteCurrentCard() {
     let newDataBase = { ...dataBase }
- 
-    newDataBase.DeckNames[name].data.splice(random, 1)
+    newDataBase.DeckNames[index].data.splice(random, 1)
     setDataBase(newDataBase)
     generateRandom()
     
@@ -134,13 +139,14 @@ export default function CardBody({name, data, closePopup }) {
               setShowAnswer(true)
               setEdit(true)       
             }}
-           
+            
+             pauseEvent={()=>{setPauseName(!pauseName)}
+             }
             trashEvent={() => {
 
               setTrash(true)
            
               checked? deleteCurrentCard():    setShowDeleteFrame(true)
-
             }}
             style={{
               position: 'absolute', top: '-14px', left: '53px', height: '98px', zIndex: '2000', backgroundColor: 'white',
@@ -216,7 +222,6 @@ export default function CardBody({name, data, closePopup }) {
                   />
                 </div>
               }
-
               {
                 edit
                 && <div className='d-flex justify-content-center'>
@@ -240,11 +245,8 @@ export default function CardBody({name, data, closePopup }) {
                   onHide={()=>{
                     setShowAnswer(false)
                     setShowRepeat(false)
-                  }}
-                    
-          
+                  }}      
                 />
-
               }
             </>
           }

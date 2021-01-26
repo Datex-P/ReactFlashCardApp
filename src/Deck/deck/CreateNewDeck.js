@@ -87,7 +87,7 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
                 style={{ cursor: 'pointer', width: '63px', height: '26px', borderRadius: '5px' }}
                 onClick={() => {
                   el === 'Cancel' ?
-                    close()
+                     close()
             
                     :
                     addNewDeckName()

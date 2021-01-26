@@ -26,7 +26,7 @@ export default function DeckContainer() {
   const [createNewDeckDisplay, setCreateNewDeckDisplay] = useState(false)
 
   useEffect(() => {
-    setActive(dataBase && (Object.keys(dataBase.DeckNames).length - 1))
+    setActive(dataBase && (dataBase.DeckNames.length - 1))
 
   }, [dataBase])
 
@@ -53,10 +53,11 @@ export default function DeckContainer() {
 
                 <div >
                   {
-                    Object.keys(dataBase.DeckNames).map((deck, index, array) =>
+                    dataBase.DeckNames.map((deck, index, array) =>
                       <Deck
-                        deck={dataBase.DeckNames[deck]}
-                        name={active === index ? deck : ''}
+                        index={index}
+                        deck={deck}
+                        name={active === index ? deck.name : ''}
                         backgroundColor={colors[index % 5]}
                         transform={active === index ? `rotate(0deg)` : `rotate(${(array.length - 1 - index) * -2}deg)`}
                         zIndex={active === index ? 2 : 0}
@@ -69,13 +70,13 @@ export default function DeckContainer() {
                   style={{ height: '220px', width: '375px', overflow: 'scroll', overflowX: 'hidden', position: 'absolute', top: '65px' }}
                   onScroll={(event) => {
 
-                    let step = (1000 - 220) / (Object.keys(dataBase.DeckNames).length - 1)
+                    let step = (1000 - 220) / ((dataBase.DeckNames).length - 1)
+                    // let step = (1000 - 220) / (dataBase.DeckNames).length - 1)
                     let index = Math.floor(event.target.scrollTop / step)
                     setActive(index)
                     console.log(index)
                   }}
                 >
-
                   <div
                     style={{ height: '1000px', position: 'absolute', top: '0px', width: '100%' }}
                   ></div>
@@ -99,15 +100,9 @@ export default function DeckContainer() {
           </button>
 
             <CreateNewDeck 
-            // close={() => { setCreateNewDeckDisplay(false);     }} 
-            createNewDeckDisplay={createNewDeckDisplay} 
-          
+            createNewDeckDisplay={createNewDeckDisplay}      
             setShowDeck={setShowDeck}
             setCreateNewDeckDisplay={setCreateNewDeckDisplay}
-
-
-// <CreateNewDeck close={() => { setCreateNewDeckDisplay(false); setShowDeck(true) }} createNewDeckDisplay={createNewDeckDisplay}
-            
 
             style={{ position: 'absolute', zIndex: '40' }} />
 

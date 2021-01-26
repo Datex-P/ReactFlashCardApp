@@ -100,15 +100,12 @@ function Settings({ history }) {
         }}>
         {
 
-
-
           Array(7).fill('').map((el, idx) =>
 
             <Hexagons idx={idx} editHex={editHex} setEditHex={setEditHex} saveOrEditGoal={saveOrEditGoal} />
 
           )
         }
-
       </div>
       <div style={{ position: 'absolute', top: '230px', right: '66px', cursor: 'pointer' }}>
         <img
@@ -138,7 +135,6 @@ function Settings({ history }) {
           padding: '5px',
           width: '215px', marginTop: '10px', margin: 'auto'
         }}>
-
 
         {
           ['light', 'dark', 'default'].map(comp =>

@@ -17,9 +17,7 @@ export default function ContextProvider({ children }) {
 
   useEffect(() => {
     let dB = {
-      DeckNames: {
-        /*deckname:[]*/
-      },
+      DeckNames: [],
       queue: [],
       showDeleteFrame: true,
       toStudyGoal: 20,
@@ -75,14 +73,16 @@ export default function ContextProvider({ children }) {
           answer: `answer${i}`
         })
       };
-      dB.DeckNames[`Literature${i}`] = {
-        data: arr,
-        toStudyGoal: 20,
-        cardsToday: 0
-      }
+      dB.DeckNames.push(
+        {
+          name:`Literature${i}`,
+          data: arr,
+          toStudyGoal: 20,
+          cardsToday: 0
+        }
 
-    };
-
+      );
+    }
 
     setDataBase(dB)
   }, []);
