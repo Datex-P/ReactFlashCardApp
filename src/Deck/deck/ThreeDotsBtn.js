@@ -13,7 +13,7 @@ import {withRouter} from 'react-router-dom'
 
 function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
   editEvent = () => { }, trashEvent = () => { }, style,edit=false,trash=false,pause=false,reset=false, className, 
-  editName, name,nameOfTopDeck,history,index,input
+  editName, name, nameOfTopDeck, history, index, input
 
   , pauseName, setPauseName = () => {}, pauseEvent = () => {}
 }) {
@@ -66,17 +66,18 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
   
 
   function handlePause () {
+    let newDataBase = {...dataBase}
     pauseEvent()
-    setPauseName(!pauseName)
-
-    if (pauseName) {
-      console.log('hello')
-    }
+    let newPauseName = !pauseName
+    setPauseName(newPauseName)
+    dataBase.DeckNames[index].paused =  !dataBase.DeckNames[index].paused
+    setDataBase(newDataBase)
+    
   }
 
 
   return (
-    <div style={{ right: reset? '-65px' : '', position:'relative'   }}>
+    <div style={{ right: reset? '-65px' : '', position:'relative', marginLeft: '7px', marginTop: '3px'    }}>
       <div 
        onClick={editName? handleClick: ()=>{} } 
       className='rotateLittleModal' style={{height: '24px'}}>...</div>
@@ -104,8 +105,7 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
             }
              onClick={handlePause}
              >
-    
-            <img src={ pauseName? playimg: pauseimg}  alt='pause' 
+            <img src={ pauseName? pauseimg: playimg}  alt='pause' 
                  style={{ marginRight: '3px' }} />
                  {text}
           </button>

@@ -26,9 +26,16 @@ export default function DeckContainer() {
   const [createNewDeckDisplay, setCreateNewDeckDisplay] = useState(false)
 
   useEffect(() => {
-    setActive(dataBase && (dataBase.DeckNames.length - 1))
+    setActive(dataBase && (dataBase.DeckNames.length-1))
 
-  }, [dataBase])
+  }, [dataBase?.active==null])
+
+  function handleActive(i){
+    setActive(i)
+    let newDataBase = {...dataBase}
+    newDataBase.active = i
+    setDataBase(newDataBase)
+  }
 
   useEffect(() => {
 
@@ -42,9 +49,12 @@ export default function DeckContainer() {
     !loadSpinner && dataBase ?
       <>
         <NavBar />
-        <Container className='align-items-center' style={{ backgroundColor: styles.backgroundColor[dataBase.userPreferences.backgroundColor], 
-        borderBottomLeftRadius: '5px', borderBottomRightRadius: '5px', height: '650px', width: '504px' }} >
-
+        <Container className='align-items-center' style={{ 
+          backgroundColor: styles.backgroundColor[dataBase.userPreferences.backgroundColor], 
+          borderBottomLeftRadius: '5px', 
+          borderBottomRightRadius: '5px', 
+          height: '650px', 
+          width: '504px' }} >
 
           <Row
           >
@@ -57,8 +67,11 @@ export default function DeckContainer() {
                       <Deck
                         index={index}
                         deck={deck}
-                        name={active === index ? deck.name : ''}
-                        backgroundColor={colors[index % 5]}
+                        name={deck.name}
+                        backgroundColor={deck.paused ? 'black' : colors[index % 5]}
+                        
+                        //backgroundColor= {dataBase.DeckNames[index].backgroundColor}
+                   
                         transform={active === index ? `rotate(0deg)` : `rotate(${(array.length - 1 - index) * -2}deg)`}
                         zIndex={active === index ? 2 : 0}
                         active={active === index}
@@ -73,7 +86,7 @@ export default function DeckContainer() {
                     let step = (1000 - 220) / ((dataBase.DeckNames).length - 1)
                     // let step = (1000 - 220) / (dataBase.DeckNames).length - 1)
                     let index = Math.floor(event.target.scrollTop / step)
-                    setActive(index)
+                    handleActive(index)
                     console.log(index)
                   }}
                 >
@@ -103,7 +116,9 @@ export default function DeckContainer() {
             createNewDeckDisplay={createNewDeckDisplay}      
             setShowDeck={setShowDeck}
             setCreateNewDeckDisplay={setCreateNewDeckDisplay}
-
+            close={()=>{setShowDeck(true)
+              setCreateNewDeckDisplay(false)
+              }}
             style={{ position: 'absolute', zIndex: '40' }} />
 
           </Row>

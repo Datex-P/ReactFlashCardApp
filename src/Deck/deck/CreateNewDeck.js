@@ -36,11 +36,11 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
 
          <Modal
 
-        show={createNewDeckDisplay}
-        
+        show={createNewDeckDisplay}       
         backdrop="static"
         keyboard={false}
         id = 'createDeck'
+        // onHide={close}
         centered
       >
         <Modal.Header >

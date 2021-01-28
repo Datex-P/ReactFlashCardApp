@@ -14,7 +14,7 @@ export default function AddNewDeck({ closePopup, name }) {
 
   function addToDeck(){
     let newDataBase = {...dataBase}
-    //  newDataBase.DeckNames[name].data.push(card)
+      newDataBase.DeckNames[name].data.push(card)
      newDataBase.DeckNames[name].push(card)
     setDataBase(newDataBase)
     setCard({question:'', answer:''})
@@ -28,11 +28,7 @@ export default function AddNewDeck({ closePopup, name }) {
     newCard[name]=value
     setCard(newCard)
     //setCard({...card,[name]:value})
-
   }
-
-  
-
 
   return (
     <div>

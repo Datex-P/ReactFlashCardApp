@@ -1,39 +1,12 @@
 import React, {useState} from 'react'
+import CutWord from './CutWord'
 
-export default function CardHeader({ bg,children, hoveredTitle, setHoveredTitle }) {
+export default function CardHeader({ bg,name}) {
 
-  const Hovered = {
-//   backgroundColor:bg, zIndex:'3000',
-//   height: 'fit-content',
-//  width: '140px'
-backgroundColor: 'yellow',
-top: '-10px',
-position:'absolute',
-zIndex:30000
-}
-
-const notHovered = {
-    backgroundColor:bg, zIndex:'3000',
-    height: 'fit-content',
-   width: '140px'
-  }
 
 
   const [hovered, setHovered] = useState(false)
-  const [cut, setCut] = useState(false)
-
-  function cutWord(word) {
-    if (word.length > 16) {
-      //  setCut(true)
-      return word.substr(0,13) + '...'
-    }
-    else {
  
-      // setCut(false)
-      return word.padEnd(16, '⠀')
-    }
-  }
-
   return (
 
     <div onMouseEnter={()=>{setHovered(true)}}
@@ -48,20 +21,18 @@ const notHovered = {
         ?
           <div 
           style={{
-          // cut? Hovered : notHovered
-          // }
-            // backgroundColor:bg,
-             zIndex:30000,
+         
+            zIndex:30000,
             height: 'fit-content',
-            width: '140px',
-            backgroundColor: 'yellow',
+            width: '149px',
+            top: name.length>16? '-10px': '0px',
+            backgroundColor: bg,
             position: 'relative'
            }}
-           onMouseEnter = {() => {setHoveredTitle(false)}}
-           onMouseLeave = {() => {setHoveredTitle(true)}}
-           >{children}</div>
+      
+           >{name}</div>
         :
-          cutWord(children)
+          <CutWord name = {name} number = {16} />
       }
     </div>
   )

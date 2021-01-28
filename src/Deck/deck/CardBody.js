@@ -21,6 +21,7 @@ export default function CardBody({name, data, closePopup,index }) {
   const [openDeck, setOpenDeck] = useState(true)
   const [checked, setChecked] = useState(false)
   const [pauseName, setPauseName] = useState(false)
+  const [cutTitle, setCutTitle] = useState(false)
 
 
 
@@ -46,11 +47,9 @@ export default function CardBody({name, data, closePopup,index }) {
 
     //  if (dataBase.DeckNames[name].data.length === 0) {
 
-
       alert('add questions to deck')
       setOpenDeck(false)
     }
-
   }
 
   function addToQueue(time) {
@@ -66,7 +65,6 @@ export default function CardBody({name, data, closePopup,index }) {
 
 
   useEffect(() => {
-
 
     if (show) {
       let timeLeft = setInterval(() => {
@@ -93,14 +91,11 @@ export default function CardBody({name, data, closePopup,index }) {
   }, [show])
 
 
-
-
   function deleteCurrentCard() {
     let newDataBase = { ...dataBase }
     newDataBase.DeckNames[index].data.splice(random, 1)
     setDataBase(newDataBase)
-    generateRandom()
-    
+    generateRandom()  
   }
 
   function changeHandler(e) {
@@ -130,7 +125,9 @@ export default function CardBody({name, data, closePopup,index }) {
           setShow={setShow}
           setShowAnswer = {setShowAnswer}
           setEdit={setEdit}
-          title={`Deck: ${name}`}
+          title={<CutWord word={name} />}
+          cutTitle= {cutTitle}
+          setCutTitle= {setCutTitle}
           menu={<ThreeDotsBtn
             setShowAnswer
             text={'card'}
@@ -149,7 +146,8 @@ export default function CardBody({name, data, closePopup,index }) {
               checked? deleteCurrentCard():    setShowDeleteFrame(true)
             }}
             style={{
-              position: 'absolute', top: '-14px', left: '53px', height: '98px', zIndex: '2000', backgroundColor: 'white',
+              position: 'absolute', top: '-14px', left: '24px', 
+              height: '98px', zIndex: '2000', backgroundColor: 'white',
               border: '1px solid black', overflow: 'hidden'
             }}
           
@@ -203,7 +201,6 @@ export default function CardBody({name, data, closePopup,index }) {
                       label={'<' + col.amount + col.unit}
                     />
                   )}
-
                 </div>
               }
               {
@@ -268,7 +265,6 @@ function RepeatBtn({ label, btn, onClick }) {
   )
 }
 
-
 function SaveAndDiscard({ editEvent }) {
 
   return (
@@ -293,5 +289,27 @@ function SaveAndDiscard({ editEvent }) {
     </div>
   )
 }
+
+
+function CutWord({word}) {
+  if (word.length > 25) {
+    // document.getElementById('title').classList.add('title1')
+    //  setCut(true)
+    return (
+    <div style={{position: 'relative', top: '100px'}}>
+      Deck:{ word.substr(0,23) + '...'}
+    </div>
+    )
+  }
+  else {
+    return (
+      <div style={{position: 'relative', backgroundColor: 'green'}}>
+      Deck: {word.padEnd(25, '⠀')}
+    </div>
+    )
+
+  }
+}
+
 
 

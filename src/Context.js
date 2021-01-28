@@ -4,7 +4,6 @@ export const Context = React.createContext(null)//step 1 createing context insta
 
 export default function ContextProvider({ children }) {
 
-
   const [dataBase, setDataBase] = useState(null);
   const [styles, setStyles] = useState({
     backgroundColor: {
@@ -18,6 +17,7 @@ export default function ContextProvider({ children }) {
   useEffect(() => {
     let dB = {
       DeckNames: [],
+      active:null,
       queue: [],
       showDeleteFrame: true,
       toStudyGoal: 20,
@@ -73,15 +73,21 @@ export default function ContextProvider({ children }) {
           answer: `answer${i}`
         })
       };
+
+  let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
+
       dB.DeckNames.push(
         {
           name:`Literature${i}`,
+          backgroundColor: colors[-100+i],
           data: arr,
           toStudyGoal: 20,
-          cardsToday: 0
+          cardsToday: 0,
+          paused:false
         }
 
       );
+      dB.active++
     }
 
     setDataBase(dB)

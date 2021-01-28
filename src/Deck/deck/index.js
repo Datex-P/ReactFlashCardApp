@@ -1,4 +1,4 @@
-import React, {useState,useContext,useRef} from 'react'
+import React, {useState,useContext,useRef,useEffect} from 'react'
 import { Card} from 'react-bootstrap'
 import '../styles.css'
 import ThreeDotsBtn from './ThreeDotsBtn'
@@ -17,9 +17,12 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
   const [editName, setEditName] = useState(true)
   const [pauseName, setPauseName] = useState(true)
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name)
-  const [hoveredTitle, setHoveredTitle] = useState(true);
-
   
+
+  useEffect(()=>{
+    setNameOfTopDeck(name)
+    console.log(name)
+  },[name])
 
   function deleteDeck(){
     let newDataBase = {...dataBase}
@@ -37,18 +40,17 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
         <Card.Title className='d-flex align-items-center justify-content-between position-relative'
                     style={{width:'132px'}}>
 
-        {editName?
+        {
+          editName?
+
          <CardHeader bg={style.backgroundColor} 
-         style={{width: '132px', border: '1px solid black'}}
-         hoveredTitle={hoveredTitle}
-         setHoveredTitle={setHoveredTitle}
-         >
-         {name}
-         
-         </CardHeader>
-         
+         style={{width: '132px', position: 'absolute', left:'-4px', border: '1px solid black'}}
+         show={show} name= {name}
+         />
+       
          :
-         <input ref = {input} style={{width: '92%', borderRadius: '5px', paddingLeft: '5px', outline: 'none'}} 
+         <input ref = {input} style={{ 
+           width: '132px', borderRadius: '5px', paddingLeft: '5px', position: 'relative', left: '-4px', outline: 'none'}} 
          value = {nameOfTopDeck}
           onChange={(e)=>{setNameOfTopDeck(e.target.value)}}
          />
@@ -61,12 +63,12 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
             showFromParent={show}
             editName={editName}
             pauseName={pauseName}
-            setPauseName={setPauseName}
-        
-        
+            setPauseName={setPauseName}       
             setShowFromParent={setShow}
             index={index}
             nameOfTopDeck={nameOfTopDeck}
+            className='threeDotsBtnIndex'
+            edit pause trash
 
             editEvent={() => {
               setShow(show)
@@ -83,11 +85,6 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
             setTrash(true)
             setShowDeleteFrame(true)
             }}
-        
-            className='threeDotsBtnIndex'
-           
-            edit pause trash
-
           />
 
           }
@@ -115,8 +112,6 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
       </Card.Body>
 
     </Card>
-
-  
   )
 
 }
