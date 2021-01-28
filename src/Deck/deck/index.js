@@ -50,7 +50,9 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
        
          :
          <input ref = {input} style={{ 
-           width: '132px', borderRadius: '5px', paddingLeft: '5px', position: 'relative', left: '-4px', outline: 'none'}} 
+           width: '132px', borderRadius: '5px', 
+           paddingLeft: '5px', position: 'relative', 
+           left: '-4px', outline: 'none'}} 
          value = {nameOfTopDeck}
           onChange={(e)=>{setNameOfTopDeck(e.target.value)}}
          />

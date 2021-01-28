@@ -13,7 +13,7 @@ import {withRouter} from 'react-router-dom'
 
 function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
   editEvent = () => { }, trashEvent = () => { }, style,edit=false,trash=false,pause=false,reset=false, className, 
-  editName, name, nameOfTopDeck, history, index, input
+  editName, name, nameOfTopDeck, history, index, input, threeDotsContainer
 
   , pauseName, setPauseName = () => {}, pauseEvent = () => {}
 }) {
@@ -76,8 +76,10 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
   }
 
 
+// <div style={{ right: reset? '-65px' : '50px', position:'fixed'}}></div>
+
   return (
-    <div style={{ right: reset? '-65px' : '', position:'relative', marginLeft: '7px', marginTop: '3px'    }}>
+    <div style={threeDotsContainer}>
       <div 
        onClick={editName? handleClick: ()=>{} } 
       className='rotateLittleModal' style={{height: '24px'}}>...</div>

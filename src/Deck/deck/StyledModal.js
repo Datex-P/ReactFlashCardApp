@@ -13,7 +13,7 @@ export default function StyledModal({children, show, setShow,title,menu, setEdit
       >
           <div style={{width: '98%', height: '95%', margin: 'auto', overflow: 'hidden auto'}}>
         <Modal.Header className='border-bottom-0'>
-          <Modal.Title style={{ fontSize: '16px', fontWeight: 'bold', marginLeft: '12px', height: '24px', width: '240px', backgroundColor: 'yellow' }}>
+          <Modal.Title style={{ fontSize: '16px', marginLeft: '12px', height: '24px', width: '240px', backgroundColor: 'yellow' }}>
         
             {title}
           

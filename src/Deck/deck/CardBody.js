@@ -4,13 +4,15 @@ import ThreeDotsBtn from './ThreeDotsBtn';
 import { Context } from '../../Context'
 import StyledModal from './StyledModal'
 import DeleteCardQuestionBox from './DeleteCardQuestionBox'
+import SaveAndDiscard from './CardBodyParts/SaveAndDiscard'
+import RepeatBtn from './CardBodyParts/RepeatBtn'
+import CutWord from './CutWord'
 
 
 export default function CardBody({name, data, closePopup,index }) {
   
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
-  const [pause, setPause] = useState(false)
   const [random, setRandom] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
   const [showRepeat, setShowRepeat] = useState(false);
@@ -21,7 +23,6 @@ export default function CardBody({name, data, closePopup,index }) {
   const [openDeck, setOpenDeck] = useState(true)
   const [checked, setChecked] = useState(false)
   const [pauseName, setPauseName] = useState(false)
-  const [cutTitle, setCutTitle] = useState(false)
 
 
 
@@ -125,9 +126,7 @@ export default function CardBody({name, data, closePopup,index }) {
           setShow={setShow}
           setShowAnswer = {setShowAnswer}
           setEdit={setEdit}
-          title={<CutWord word={name} />}
-          cutTitle= {cutTitle}
-          setCutTitle= {setCutTitle}
+          title={<CutWord name={name} number={24}/>}
           menu={<ThreeDotsBtn
             setShowAnswer
             text={'card'}
@@ -146,10 +145,11 @@ export default function CardBody({name, data, closePopup,index }) {
               checked? deleteCurrentCard():    setShowDeleteFrame(true)
             }}
             style={{
-              position: 'absolute', top: '-14px', left: '24px', 
+              position: 'absolute', top: '14px', right: '19px', 
               height: '98px', zIndex: '2000', backgroundColor: 'white',
               border: '1px solid black', overflow: 'hidden'
             }}
+            threeDotsContainer = {{position: 'default'}}
           
             edit pause trash
 
@@ -253,63 +253,6 @@ export default function CardBody({name, data, closePopup,index }) {
   )
 }
 
-
-function RepeatBtn({ label, btn, onClick }) {
-  return (
-    <div className='text-center'>
-      <div className='font-weight-bold'>{label}</div>
-      <Button variant="secondary"
-        onClick={onClick}
-      >{btn}</Button>
-    </div>
-  )
-}
-
-function SaveAndDiscard({ editEvent }) {
-
-  return (
-    <div className='saveAndDiscardContainer d-flex justify-content-around align-items-center'>
-
-      {
-        ['Discard', 'Save'].map(el =>
-          <div
-            style={{
-              fontSize: '14px',
-              width: '63px',
-              height: '24px',
-              backgroundColor: el === 'Save' ? '#2d6a4f' : '#772e25'
-            }}
-            className='generalButtonStyling d-flex justify-content-around align-items-center'
-            onClick={editEvent}
-          >
-            {el}
-          </div>
-        )
-      }
-    </div>
-  )
-}
-
-
-function CutWord({word}) {
-  if (word.length > 25) {
-    // document.getElementById('title').classList.add('title1')
-    //  setCut(true)
-    return (
-    <div style={{position: 'relative', top: '100px'}}>
-      Deck:{ word.substr(0,23) + '...'}
-    </div>
-    )
-  }
-  else {
-    return (
-      <div style={{position: 'relative', backgroundColor: 'green'}}>
-      Deck: {word.padEnd(25, '⠀')}
-    </div>
-    )
-
-  }
-}
 
 
 

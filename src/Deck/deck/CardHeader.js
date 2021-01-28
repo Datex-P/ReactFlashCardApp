@@ -9,7 +9,7 @@ export default function CardHeader({ bg,name}) {
  
   return (
 
-    <div onMouseEnter={()=>{setHovered(true)}}
+    <div onMouseEnter={()=>{if (name.length>15){return setHovered(true)}}}
          onMouseLeave = {()=>{setHovered(false)}
          } 
          style={{height: '30px', position: 'relative', top: '4px', cursor: 'pointer', 
@@ -23,16 +23,16 @@ export default function CardHeader({ bg,name}) {
           style={{
          
             zIndex:30000,
-            height: 'fit-content',
-            width: '149px',
-            top: name.length>16? '-10px': '0px',
+            width: '136px',
+            height: '33px',
+            top: name.length>15? '-13px': '0px',
             backgroundColor: bg,
             position: 'relative'
            }}
       
            >{name}</div>
         :
-          <CutWord name = {name} number = {16} />
+          <CutWord name = {name} number = {15} />
       }
     </div>
   )
