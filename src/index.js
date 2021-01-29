@@ -7,7 +7,7 @@ import ContextProvider from './Context';
 // import Example from './class/'
 
 //import LearnUseRef from './LearnUseRef'
-import Testfile from './Testfile'
+
 
 
 ReactDOM.render(

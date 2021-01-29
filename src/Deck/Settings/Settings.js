@@ -166,14 +166,14 @@ function Col({ data: { name, amount, unit }, editable, index, userTimePreference
 
   function handleTime(e) {
     setInputNumb(e.target.value)
-    let newUserTimePreferences = { ...userTimePreferences }
+    let newUserTimePreferences = [ ...userTimePreferences ]
     newUserTimePreferences[index].amount = e.target.value
     setUserTimePreferences(newUserTimePreferences)
   }
 
   function handleNames(e) {
     setInputText(e.target.value)
-    let newUserTimePreferences = { ...userTimePreferences }
+    let newUserTimePreferences = [ ...userTimePreferences ]
     newUserTimePreferences[index].name = e.target.value
     setUserTimePreferences(newUserTimePreferences)
   }

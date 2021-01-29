@@ -2,14 +2,13 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Button, FormControl } from 'react-bootstrap'
 import ThreeDotsBtn from './ThreeDotsBtn';
 import { Context } from '../../Context'
-import StyledModal from './StyledModal'
+import BasicOrangeWindow from './BasicOrangeWindow'
 import DeleteCardQuestionBox from './DeleteCardQuestionBox'
 import SaveAndDiscard from './CardBodyParts/SaveAndDiscard'
 import RepeatBtn from './CardBodyParts/RepeatBtn'
-import CutWord from './CutWord'
 
 
-export default function CardBody({name, data, closePopup,index }) {
+export default function QuestAnswerTrainOverv({name, data, closePopup,index }) {
   
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -126,9 +125,9 @@ export default function CardBody({name, data, closePopup,index }) {
           setShow={setShow}
           setShowAnswer = {setShowAnswer}
           setEdit={setEdit}
-          title={<CutWord name={name} number={24}/>}
+          title={`Deck: ${name}`}
           menu={<ThreeDotsBtn
-            setShowAnswer
+           
             text={'card'}
             editName={true}
             editEvent={() => {

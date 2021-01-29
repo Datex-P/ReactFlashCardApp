@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import CutWord from './CutWord'
 
-export default function CardHeader({ bg,name}) {
+export default function DeckOrCardname({ bg,name}) {
 
 
 
@@ -9,7 +9,7 @@ export default function CardHeader({ bg,name}) {
  
   return (
 
-    <div onMouseEnter={()=>{if (name.length>15){return setHovered(true)}}}
+    <div onMouseEnter={()=>{if (name.length>14){return setHovered(true)}}}
          onMouseLeave = {()=>{setHovered(false)}
          } 
          style={{height: '30px', position: 'relative', top: '4px', cursor: 'pointer', 
@@ -32,7 +32,7 @@ export default function CardHeader({ bg,name}) {
       
            >{name}</div>
         :
-          <CutWord name = {name} number = {15} />
+          <CutWord name = {name} number = {14} />
       }
     </div>
   )

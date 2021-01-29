@@ -14,9 +14,8 @@ import NavBar from '../NavBar'
 export default function DeckContainer() {
   //const { dataBase,styles } = useContext(Context);// step 4.2 destructure context value
   const { dataBase, setDataBase, styles } = useContext(Context)
-  const [show, setShow] = useState(false);
-
  
+
 
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
 
@@ -84,7 +83,6 @@ export default function DeckContainer() {
                   onScroll={(event) => {
 
                     let step = (1000 - 220) / ((dataBase.DeckNames).length - 1)
-                    // let step = (1000 - 220) / (dataBase.DeckNames).length - 1)
                     let index = Math.floor(event.target.scrollTop / step)
                     handleActive(index)
                     console.log(index)
@@ -107,7 +105,7 @@ export default function DeckContainer() {
                 setCreateNewDeckDisplay(true)
                 setShowDeck(false)
               }}
-              style={{ zIndex: '4', padding: '2px', marginTop: '400px', width: '210px' }} className='generalButtonStyling'
+              style={{ zIndex: '4', padding: '2px', position: 'fixed', top: '630px', width: '210px', outline: 'none !important' }} className='generalButtonStyling'
             >
               Create Deck
           </button>

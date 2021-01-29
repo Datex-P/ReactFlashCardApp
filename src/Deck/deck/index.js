@@ -2,10 +2,10 @@ import React, {useState,useContext,useRef,useEffect} from 'react'
 import { Card} from 'react-bootstrap'
 import '../styles.css'
 import ThreeDotsBtn from './ThreeDotsBtn'
-import AddNewDeck from './AddNewDeck'
-import CardBody from './CardBody'
+import AddQuestionsToDeck from './AddQuestionsToDeck'
+import QuestAnswerTrainOverv from './QuestAnswerTrainOverv'
 import {Context} from '../../Context'
-import CardHeader from  './CardHeader'
+import DeckOrCardname from  './DeckOrCardname'
 import DeleteCardQuestionBox from  './DeleteCardQuestionBox';
 
 
@@ -43,7 +43,7 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
         {
           editName?
 
-         <CardHeader bg={style.backgroundColor} 
+         <DeckOrCardname bg={style.backgroundColor} 
          style={{width: '132px', position: 'absolute', left:'-4px', border: '1px solid black'}}
          show={show} name= {name}
          />
@@ -54,7 +54,16 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
            paddingLeft: '5px', position: 'relative', 
            left: '-4px', outline: 'none'}} 
          value = {nameOfTopDeck}
-          onChange={(e)=>{setNameOfTopDeck(e.target.value)}}
+          onChange={(e)=>{
+            
+            if (e.target.value.length>25) {
+              alert('Deckname can not be longer than 25 characters')
+            }
+            else{
+            
+            setNameOfTopDeck(e.target.value)}
+            }
+          }
          />
          }
          {
@@ -69,6 +78,7 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
             setShowFromParent={setShow}
             index={index}
             nameOfTopDeck={nameOfTopDeck}
+            threeDotsContainer= {{position: 'fixed', right: '50px', top: '18px'}}
             className='threeDotsBtnIndex'
             edit pause trash
 
@@ -109,8 +119,8 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
       
 
         </Card.Text>
-        <CardBody name={name} index={index} data={data} closePopup={() => setShow(false)} />
-        {active && <AddNewDeck name= {name} closePopup={() => setShow(false)} />}
+        <QuestAnswerTrainOverv name={name} index={index} data={data} closePopup={() => setShow(false)} />
+        {active && <AddQuestionsToDeck name= {name} index= {index} closePopup={() => setShow(false)} />}
       </Card.Body>
 
     </Card>

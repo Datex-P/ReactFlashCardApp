@@ -4,7 +4,7 @@ import {Context} from '../../Context';
 import redCross from '../../icons/redCross.svg'
 import '../styles.css'
 
-export default function AddNewDeck({ closePopup, name }) {
+export default function AddQuestionsToDeck({ closePopup, index, name }) {
 
 
   const [show, setShow] = useState(false);
@@ -14,8 +14,8 @@ export default function AddNewDeck({ closePopup, name }) {
 
   function addToDeck(){
     let newDataBase = {...dataBase}
-      newDataBase.DeckNames[name].data.push(card)
-     newDataBase.DeckNames[name].push(card)
+      newDataBase.DeckNames[index].data.push(card)
+    //  newDataBase.DeckNames[index].push(card)
     setDataBase(newDataBase)
     setCard({question:'', answer:''})
     alert('card is added successfully')

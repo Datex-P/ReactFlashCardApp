@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import trashimg from '../../icons/trash.svg'
 import pauseimg from '../../icons/pause.svg'
 import editimg from '../../icons/edit.svg'

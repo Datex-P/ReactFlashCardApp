@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap'
 import { Context } from '../../Context'//step 4.1 import context instance
 import redCross from '../../icons/redCross.svg'
 
-export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDisplay, setShowDeck, close, style }) 
+export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDisplay, setShowDeck, close }) 
 
 {
   const { dataBase, setDataBase } = useContext(Context)
@@ -16,12 +16,29 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
 
     if (inputField in newDataBase.DeckNames) {
 
+      
       alert('Name of Deck already exists')
       setInputField('')
-
+      
     } else if (!inputField) {
+    
       alert('Input needed')
-    } else {
+    } else if (document.getElementById('inputField').value.length > 25) {
+    
+      alert('Deckname is too long')
+      document.getElementById('inputField').value= '';
+      document.getElementById('inputField').focus();
+    
+    } else if (document.getElementById('inputField').value.length < 3) {
+    
+      alert('Deckname is too short')
+      document.getElementById('inputField').value= '';
+      document.getElementById('inputField').focus();
+    }
+    
+    
+    else {
+      console.log('it works')
       newDataBase.DeckNames[inputField] = {
         data: [],
         toStudyGoal: 20,
@@ -61,12 +78,14 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
         </Modal.Header>
         <Modal.Body className='d-flex flex-column align-items-center'>
      
-        <input style={{
-            width: '90%', marginTop: '10px', borderRadius: '5px', border: '1px solid black',
+        <input 
+        id='inputField'
+        style={{
+            width: '90%', marginTop: '10px', minLength: 3, maxLength:25, borderRadius: '5px', border: '1px solid black',
             marginBottom: '10px', height: '30px', outline: 'none', paddingLeft: '5px'
           }}
             onChange={event => setInputField(event.target.value)}
-
+     
           ></input>
 
           <select style={{ width: '90%', outline: 'none' }}>

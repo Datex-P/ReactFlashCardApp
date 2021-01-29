@@ -8,7 +8,7 @@ import { Modal } from 'react-bootstrap'
 import { Context } from '../Context'
 
 
-export default function Menu() {
+export default function MenuContainer() {
 
   const [show, setShow] = useState(false);
    const { dataBase,setDataBase, styles } = useContext(Context)

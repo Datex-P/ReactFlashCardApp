@@ -619,7 +619,7 @@ border-bottom-left-radius: calc(.3rem - 1px);
 .threeDotsBtnIndex {
     position: absolute ;
     top: -5px;
-    left: 140px;
+    left: 10px;
     z-index: 2000;
     background-color: white; 
     border: 1px solid black;

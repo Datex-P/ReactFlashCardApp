@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 //  import NavBar from './NavBar'
-import DeckContainer from './Deck/DeckContainer.js'
+import LandingPage from './Deck/LandingPage.js'
 import Settings from './Deck/Settings/Settings'
 import Stats from './Deck/Stats/Stats'
 
@@ -10,8 +10,8 @@ export default function App() {
   return (
 
     <Router>
-      {/* <NavBar /> */}
-      <DeckContainer />
+    
+      <LandingPage />
 
       <Switch>
         <Route path='/stats'>

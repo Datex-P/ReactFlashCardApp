@@ -1,14 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import StyledModal from '../deck/StyledModal'
 import ThreeDotsBtn from '../deck/ThreeDotsBtn'
 import { withRouter } from 'react-router-dom'
-import ChartComp from './ChartComp';
-import { Context } from '../../Context'
+import PieDiagramm from './PieDiagramm';
 import TimeAndProgess from './TimeAndProgress.js'
 import HourlyBreakdown from './HourlyBreakdown.js'
-// import { findByLabelText } from '@testing-library/react';
-
-
 
 
 function Stats({ history}) {
@@ -29,6 +25,9 @@ function Stats({ history}) {
         title={'Stats'}
         menu={
           <ThreeDotsBtn
+       
+          editName
+    
             text={'stats'}
             trashEvent={() => {
               setShowDeleteFrame(showDeleteFrame)
@@ -36,10 +35,12 @@ function Stats({ history}) {
 
             style={{
               position: 'absolute',
-              top: '-14px', left: '27px',
-              // right: '-65px',
-              zIndex: '2000', backgroundColor: 'white',
-              border: '1px solid black', overflow: 'hidden'
+              top: '17px', 
+              right: '26px',
+              zIndex: '2000', 
+              backgroundColor: 'white',
+              border: '1px solid black', 
+              overflow: 'hidden'
             }}
             reset
           />
@@ -53,7 +54,7 @@ function Stats({ history}) {
           <div style={{ marginBottom: '10px', border: '1px solid black' }} className='d-flex flex-direction column align-items-center'>
 
 
-            <ChartComp />
+            <PieDiagramm />
 
 
 

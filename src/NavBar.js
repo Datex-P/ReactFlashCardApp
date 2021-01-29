@@ -1,6 +1,6 @@
 import React from 'react'
 import './LittleComponents/styles.css'
-import Menu from './Deck/Menu'
+import MenuContainer from './Deck/MenuContainer'
 
 export default function NavBar() {
   
@@ -8,7 +8,7 @@ export default function NavBar() {
   return (
     <>
     
-      <Menu    /> 
+      <MenuContainer    /> 
     </>
   )
 }
