@@ -1,14 +1,14 @@
 
-export default function CutWord({ name, number }) {
+export default function CutWord({ name}) {
 
   
-   if (name?.length > number && number >14) {
+   if (name?.length >14) {
 
-    return `${name.substr(0, (number - 3))} ...`
+    return `${name.substr(0, (15 - 3))} ...`
 
   } else {
 
-    return `${name.padEnd(number, '⠀')}`
+    return `${name.padEnd(15, '⠀')}`
   }
 
 }

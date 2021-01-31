@@ -19,6 +19,7 @@ export default function ContextProvider({ children }) {
       DeckNames: [],
       active:null,
       queue: [],
+      checkboxClicked: false,
       showDeleteFrame: true,
       toStudyGoal: 20,
       toReviewGoal: 0,
@@ -83,7 +84,8 @@ export default function ContextProvider({ children }) {
           data: arr,
           toStudyGoal: 20,
           cardsToday: 0,
-          paused:false
+          paused:false,
+
         }
 
       );

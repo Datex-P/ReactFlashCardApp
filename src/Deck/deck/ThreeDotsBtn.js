@@ -12,13 +12,14 @@ import {withRouter} from 'react-router-dom'
 
 
 function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
-  editEvent = () => { }, trashEvent = () => { }, style,edit=false,trash=false,pause=false,reset=false, className, 
-  editName, name, nameOfTopDeck, history, index, input, threeDotsContainer
-
-  , pauseName, setPauseName = () => {}, pauseEvent = () => {}
+  editEvent = () => { }, 
+  trashEvent = () => { }, 
+  style,edit=false,trash=false,pause=false,reset=false, className, 
+  editName, nameOfTopDeck, index, input, threeDotsContainer
 }) {
 
   const [startAnimation, setStartAnimation] = useState(false)
+  const [pauseIsActive, setPauseIsActive] = useState(true)
   
   const [show, setShow] = useState(showFromParent);
   const {dataBase, setDataBase} = useContext(Context);
@@ -67,16 +68,13 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
 
   function handlePause () {
     let newDataBase = {...dataBase}
-    pauseEvent()
-    let newPauseName = !pauseName
-    setPauseName(newPauseName)
-    dataBase.DeckNames[index].paused =  !dataBase.DeckNames[index].paused
+    let savePausedState = !pauseIsActive
+    setPauseIsActive(savePausedState)
+    dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
     setDataBase(newDataBase)
     
   }
 
-
-// <div style={{ right: reset? '-65px' : '50px', position:'fixed'}}></div>
 
   return (
     <div style={threeDotsContainer}>
@@ -87,7 +85,6 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
       {show
         &&
         
-
         <div 
           ref={ref}
          style={style}
@@ -107,7 +104,7 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
             }
              onClick={handlePause}
              >
-            <img src={ pauseName? pauseimg: playimg}  alt='pause' 
+            <img src={ pauseIsActive? pauseimg: playimg}  alt='pause' 
                  style={{ marginRight: '3px' }} />
                  {text}
           </button>
@@ -141,6 +138,5 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
     </div>
   );
 }
-
 
 export default  withRouter(ThreeDotsBtn)

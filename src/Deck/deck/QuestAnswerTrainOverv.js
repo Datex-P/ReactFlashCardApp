@@ -8,7 +8,7 @@ import SaveAndDiscard from './CardBodyParts/SaveAndDiscard'
 import RepeatBtn from './CardBodyParts/RepeatBtn'
 
 
-export default function QuestAnswerTrainOverv({name, data, closePopup,index }) {
+export default function QuestAnswerTrainOverv({name, data, closePopup,index,paused }) {
   
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -21,7 +21,6 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index }) {
   const [timer, setTimer] = useState(null)
   const [openDeck, setOpenDeck] = useState(true)
   const [checked, setChecked] = useState(false)
-  const [pauseName, setPauseName] = useState(false)
 
 
 
@@ -45,7 +44,6 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index }) {
 
      if (data.length === 0) {
 
-    //  if (dataBase.DeckNames[name].data.length === 0) {
 
       alert('add questions to deck')
       setOpenDeck(false)
@@ -113,12 +111,18 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index }) {
         variant='secondary'
         className='openDeck'
         size='sm'
-        onClick={generateRandom}
+        onClick={
+          paused
+          ?
+            ()=> {alert('Deck is paused')}
+          :
+            generateRandom
+        }
       
       >Open Deck</Button>
 
       {openDeck &&
-        <StyledModal
+        <BasicOrangeWindow 
           show={show}
           showRepeat={showRepeat}
           setShowRepeat={setShowRepeat}
@@ -135,8 +139,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index }) {
               setEdit(true)       
             }}
             
-             pauseEvent={()=>{setPauseName(!pauseName)}
-             }
+            
             trashEvent={() => {
 
               setTrash(true)
@@ -222,7 +225,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index }) {
                 edit
                 && <div className='d-flex justify-content-center'>
                   <SaveAndDiscard editEvent={() => {
-
+                    console.log('eh')
                     setShowAnswer(false)
                     setEdit(false)
                   }} />
@@ -235,7 +238,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index }) {
                   card='card'
                   checked = {checked}
                   setChecked = {setChecked}
-                   show={show}
+                  show={show}
                   deleteFrame={() => setShowDeleteFrame(false)}
                   trashEvent={deleteCurrentCard}
                   onHide={()=>{
@@ -246,7 +249,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index }) {
               }
             </>
           }
-        </StyledModal>
+        </BasicOrangeWindow>
       }
     </>
   )

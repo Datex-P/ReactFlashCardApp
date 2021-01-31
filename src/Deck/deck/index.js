@@ -9,13 +9,17 @@ import DeckOrCardname from  './DeckOrCardname'
 import DeleteCardQuestionBox from  './DeleteCardQuestionBox';
 
 
-export default function Deck({ deck: { data }, name, active, title, index, ...style }) {
+export default function Deck({ deck: { data,paused }, checked, setChecked,name, active, setActive, title, index, ...style }) {
+  
   const [show, setShow] = useState(false);
-  const {dataBase, setDataBase} = useContext(Context);
+
+  const { dataBase, setDataBase} = useContext(Context)
+
+
   const [trash, setTrash] = useState(false);
-  const [showDeleteFrame, setShowDeleteFrame] = useState(true)
-  const [editName, setEditName] = useState(true)
-  const [pauseName, setPauseName] = useState(true)
+  const [showDeleteFrame, setShowDeleteFrame] = useState(true);
+  const [editName, setEditName] = useState(true);
+  
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name)
   
 
@@ -26,15 +30,27 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
 
   function deleteDeck(){
     let newDataBase = {...dataBase}
-    delete newDataBase.DeckNames[name]
+    delete newDataBase.DeckNames[index]
+    console.log('hello')
     setDataBase(newDataBase)
   }
+
+ 
+
+
+  function handleActive(i){
+    setActive(i)
+    let newDataBase = {...dataBase}
+    newDataBase.active = i
+    setDataBase(newDataBase)
+  }
+
 
   let input  = useRef(null)
   
   return (
 
-    <Card style={style} className='newDeckContainer flexColumn position-absolute'>
+    <Card style={style} className='newDeckContainer flexColumn position-absolute '>
       <Card.Body className='justify-content-center align-items-center flex-column d-flex'>
 
         <Card.Title className='d-flex align-items-center justify-content-between position-relative'
@@ -43,7 +59,7 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
         {
           editName?
 
-         <DeckOrCardname bg={style.backgroundColor} 
+         <DeckOrCardname bg={style.background} 
          style={{width: '132px', position: 'absolute', left:'-4px', border: '1px solid black'}}
          show={show} name= {name}
          />
@@ -58,8 +74,8 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
             
             if (e.target.value.length>25) {
               alert('Deckname can not be longer than 25 characters')
-            }
-            else{
+            
+            } else {
             
             setNameOfTopDeck(e.target.value)}
             }
@@ -73,8 +89,6 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
             text={'deck'}
             showFromParent={show}
             editName={editName}
-            pauseName={pauseName}
-            setPauseName={setPauseName}       
             setShowFromParent={setShow}
             index={index}
             nameOfTopDeck={nameOfTopDeck}
@@ -89,25 +103,32 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
             }}
             input={input}
 
-            pauseEvent={()=>{
-              setPauseName(!pauseName)
-            }}
-
-            trashEvent={() => {
-            setTrash(true)
-            setShowDeleteFrame(true)
+            trashEvent={
+              dataBase.checkboxClicked
+            ?
+            () => {
+              deleteDeck()
+              handleActive(index-1)
+            }
+            :
+            () => {
+              setTrash(true)
+              setShowDeleteFrame(true)
             }}
           />
 
           }
             {
-                trash && showDeleteFrame &&
+                trash && showDeleteFrame && 
                 <DeleteCardQuestionBox
                   card='deck'
                    show={show}
                   deleteFrame={() => setShowDeleteFrame(false)}
-                  trashEvent={deleteDeck}
+                  trashEvent={()=>{
 
+                  deleteDeck()
+                  handleActive(index-1)}
+                  }
                 />
             }
         </Card.Title>
@@ -117,9 +138,9 @@ export default function Deck({ deck: { data }, name, active, title, index, ...st
           <div className='divStyling'>{'To review:'.padEnd(10, '⠀')}  {dataBase.userPreferences.toReview}</div>
           {name && <div className='divStyling'>{'Decksize:'.padEnd(10, '⠀')}{data.length}</div>}
       
-
         </Card.Text>
-        <QuestAnswerTrainOverv name={name} index={index} data={data} closePopup={() => setShow(false)} />
+
+        <QuestAnswerTrainOverv name={name} index={index} data={data} closePopup={() => setShow(false)} paused={paused} />
         {active && <AddQuestionsToDeck name= {name} index= {index} closePopup={() => setShow(false)} />}
       </Card.Body>
 

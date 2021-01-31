@@ -43,8 +43,7 @@ export default function DeckContainer() {
   }, []);
 
   return (
-    // false
-    //   ?
+
     !loadSpinner && dataBase ?
       <>
         <NavBar />
@@ -67,13 +66,12 @@ export default function DeckContainer() {
                         index={index}
                         deck={deck}
                         name={deck.name}
-                        backgroundColor={deck.paused ? 'black' : colors[index % 5]}
-                        
-                        //backgroundColor= {dataBase.DeckNames[index].backgroundColor}
-                   
+                        setActive = {setActive}
                         transform={active === index ? `rotate(0deg)` : `rotate(${(array.length - 1 - index) * -2}deg)`}
                         zIndex={active === index ? 2 : 0}
                         active={active === index}
+                        background = 
+                        {active === index && deck.paused ? `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) ${colors[index % 5]} repeat`:colors[index % 5]}
                       />
                     )
                   }

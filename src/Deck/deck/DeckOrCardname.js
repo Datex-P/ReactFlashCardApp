@@ -3,8 +3,6 @@ import CutWord from './CutWord'
 
 export default function DeckOrCardname({ bg,name}) {
 
-
-
   const [hovered, setHovered] = useState(false)
  
   return (
@@ -23,7 +21,8 @@ export default function DeckOrCardname({ bg,name}) {
           style={{
          
             zIndex:30000,
-            width: '136px',
+            width: '146px',
+            border: '1px solid black',
             height: '33px',
             top: name.length>15? '-13px': '0px',
             backgroundColor: bg,
@@ -32,7 +31,7 @@ export default function DeckOrCardname({ bg,name}) {
       
            >{name}</div>
         :
-          <CutWord name = {name} number = {14} />
+          <CutWord name = {name} />
       }
     </div>
   )

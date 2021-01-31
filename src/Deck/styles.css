@@ -109,14 +109,17 @@ input[type="checkbox"] {
 }
 
 .modNew {
-  background-color: transparent !important;
+  background-color: transparent !important; 
+  /* background-color: blue !important; */
   border: none !important;
-  padding: 2rem !important;
-  /* margin-left: -10px;
-  width: 100px; */
+  padding: 0px !important;
+  position: absolute;
+  top: -390px;
+  margin: auto;
   width:99% !important;
   
 }
+
 .customDialog{
   left:100px;
 }
@@ -129,6 +132,11 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+.myDiv{
+  background:url(
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC
+  ) repeat;
+}
 
 
 input[type=number]  {
@@ -156,8 +164,9 @@ cursor: pointer;
   background-color: #dcc9b6;
   border: 2px black solid;
   border-radius: 5px;
-  margin-left: 26px;
+  margin: auto;
   margin-top: -12px;
+  width: 83%
 }
 
 
@@ -190,8 +199,13 @@ outline: none;
 .openDeck {
    margin-top: -20px !important; 
   outline: none !important;
-  width: 90px;
+  width: 110px;
 
+}
+.openDeck:focus{
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .cardBod {
@@ -548,9 +562,11 @@ border-radius: 5px;
     border-bottom: 0px;
 }
 
+
 .close {
   outline: none !important;
 }
+
 
 
 
@@ -559,6 +575,10 @@ border-radius: 5px;
   flex-wrap: wrap;
   width: 270px;
   height: 210px;
+}
+
+.deleteWindow #modal {
+  background-color: rgba(0, 0, 0, 0.7)
 }
 
 .modal-title {
@@ -570,6 +590,17 @@ height: 33px;
 
 }
 
+.backgroundModal {
+  background-color: rgba(0, 0, 0, 0.3);
+  width:100% !important;
+  height:100vh;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.widthFitCOntetn{
+  width:fit-content !important;
+}
 #createDeck .modal-body {
   padding: 10px;
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import StyledModal from '../deck/StyledModal'
+import BasicOrangeWindow from '../deck/BasicOrangeWindow'
 import ThreeDotsBtn from '../deck/ThreeDotsBtn'
 import { withRouter } from 'react-router-dom'
 import PieDiagramm from './PieDiagramm';
@@ -19,10 +19,11 @@ function Stats({ history}) {
     <div style={{
     
     width: '70%', height: '50%'}}>
-      <StyledModal 
+      <BasicOrangeWindow
         show={true}
         setShow={setShow}
         title={'Stats'}
+
         menu={
           <ThreeDotsBtn
        
@@ -56,8 +57,6 @@ function Stats({ history}) {
 
             <PieDiagramm />
 
-
-
           </div>
           <div className='theWordCalendar' style={{ marginTop: '20px', marginBottom: '3px', textAlign: 'center' }}>Calendar</div>
 
@@ -81,7 +80,7 @@ function Stats({ history}) {
 
         />
 
-      </StyledModal>
+      </BasicOrangeWindow>
 
 
     </div>

@@ -1,51 +1,49 @@
 import flashcards from '../../icons/flashcards.svg'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Modal } from 'react-bootstrap'
 import '../styles.css'
 import questionMark from '../../icons/questionmark.svg'
+import {Context} from '../../Context'
 
-export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, deleteCurrentCard, onHide, checked, setChecked}) 
+export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, deleteCurrentCard=()=>{}}) 
   
 {
 
-
-
   const [show, setShow] = useState(true);
+  const { dataBase, setDataBase} = useContext(Context)
  
 
   const handleClose = () => {
+    console.log('hello')
     setShow(false) 
-    onHide()
-    alert('Some beer?')
-   
+  }
+
+  function handleCheckbox () {
+  
+    setDataBase({...dataBase,checkboxClicked: true})
   }
  
 
   return (
  
-    checked?
     
-    ()=>{deleteCurrentCard() }
-    :
-    <>
-    
-
       <Modal
         show={show}
-        onHide={handleClose}
+         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-       
         id='deleteWindow'
+        dialogClassName='backgroundModal'
+        contentClassName='widthFitCOntetn'
         className='d-flex justify-content-center align-items-center'
       >
         <div>
         <img src={questionMark} 
-               style={{ width: '40px', position: 'absolute', top: '-45px', right: '1px'}}
+               style={{ width: '40px', position: 'absolute', top: '-47px', right: '-10px'}}
             // className='d-flex justify-content-center align-items-center' 
             alt='questionMark' />
        <img src={questionMark} 
-               style={{ width: '40px', position: 'absolute', top: '-55px', right: '6px'}}
+               style={{ width: '40px', position: 'absolute', top: '-65px', right: '-30px'}}
             // className='d-flex justify-content-center align-items-center' 
             alt='questionMark' />
       </div>
@@ -60,14 +58,13 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
             className='d-flex justify-content-center align-items-center' 
             alt='flashcards' />
             </div>
-                              <div>  Delete {card} </div>
+                 <div>  Delete {card} </div>
               </div>
             </Modal.Title>
         </Modal.Header>
         <Modal.Body 
         className='d-flex align-items-center' 
         style={{width:'100%', display: 'flex', justifyContent: 'center'}}  
-        // contentClassName={'modalHeader'}
         >
           Do you want to delete this {card} ?
         </Modal.Body>
@@ -85,7 +82,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
                       deleteFrame()
                       if (el === 'Yes') {
                         trashEvent()
-                        onHide()
+                        deleteCurrentCard()
                       }
                     }
                   }
@@ -98,15 +95,14 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
         </Modal.Footer>
 
 
-
       <div style = {{width: '300px', position: 'absolute', top: '194px', border: '1px solid black'
       }} 
       className='d-flex justify-content-center'>
 
       <div style={{width: '40px'}}>
       <input style= {{width: '45px'}} type='checkbox' 
-      // checked={checked} 
-      onChange={()=> setChecked(!checked)}/>
+
+      onChange={handleCheckbox}/>
     
       </div>
         <div style={{ width: '200px',  zIndex: '2', 
@@ -115,7 +111,6 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
       </div>
 
       </Modal>
-    </>
   );
 }
 

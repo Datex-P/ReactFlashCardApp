@@ -1,7 +1,7 @@
 import { Modal } from 'react-bootstrap'
 import redCross from '../../icons/redCross.svg'
 
-export default function BasicOrangeWindow({children, show, setShow,title,menu, setEdit, setShowRepeat}) {
+export default function BasicOrangeWindow({children, show, setShow,title,menu, setEdit = () =>{} , setShowRepeat = () => {}}) {
   return(
     <Modal
         show={show}
@@ -12,7 +12,7 @@ export default function BasicOrangeWindow({children, show, setShow,title,menu, s
       >
           <div style={{width: '98%', height: '95%', margin: 'auto', overflow: 'hidden auto'}}>
         <Modal.Header className='border-bottom-0'>
-          <Modal.Title style={{ fontSize: '16px', marginLeft: '12px', height: '24px', width: '240px'}}>
+          <Modal.Title style={{ fontSize: '16px', marginLeft: '12px', height: '24px', width: '240px' }}>
         
             {title}
           
@@ -22,7 +22,7 @@ export default function BasicOrangeWindow({children, show, setShow,title,menu, s
           onClick={() => {
             
             setShow(false)
-           setEdit(false)
+             setEdit(false)
            setShowRepeat(false)
           }
           } >

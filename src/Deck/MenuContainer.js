@@ -11,12 +11,9 @@ import { Context } from '../Context'
 export default function MenuContainer() {
 
   const [show, setShow] = useState(false);
-   const { dataBase,setDataBase, styles } = useContext(Context)
-
+  const { dataBase,setDataBase, styles } = useContext(Context)
   const handleClose = () => setShow(false);
 
-
-  
   return (
     <div style={{
 
@@ -25,7 +22,7 @@ export default function MenuContainer() {
       zIndex: '100',
       borderTopLeftRadius: '5px', borderTopRightRadius: '5px', width: '504px',
     }}
-      className=' mx-auto'
+      className='mx-auto'
     >
       <div className='menu flexColumnAlignCenter p-3'
       >
@@ -42,7 +39,7 @@ export default function MenuContainer() {
         <>
 
           <Modal show={show} onHide={handleClose} contentClassName={'modNew'} dialogClassName='align-items-start  pl-3' centered>
-            <Modal.Body>
+            <Modal.Body className='p-0' style={{position: 'relative', top: '125px'}}>
               <div className='menuStyling' onClick={()=>{setShow(false)}}>
                 <Icons icons={[
                   { src: statsIcon, alt: 'statsIcon', href: 'stats', style: {  width: 'calc(100% / 3)',  padding: '3px' } },

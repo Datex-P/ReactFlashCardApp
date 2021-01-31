@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect} from 'react';
-import StyledModal from '../deck/StyledModal'
+import BasicOrangeWindow from '../deck/BasicOrangeWindow'
 import { withRouter } from 'react-router-dom'
 import style from './style.module.css'
 import '../styles.css'
@@ -44,7 +44,7 @@ function Settings({ history }) {
 
   return (
     dataBase &&
-    <StyledModal
+    <BasicOrangeWindow
       show={true}
       setShow={setShow}
       title={
@@ -152,7 +152,7 @@ function Settings({ history }) {
         }
       </div>
 
-    </StyledModal>
+    </BasicOrangeWindow>
   )
 }
 

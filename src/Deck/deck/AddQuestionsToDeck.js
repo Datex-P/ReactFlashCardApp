@@ -27,7 +27,7 @@ export default function AddQuestionsToDeck({ closePopup, index, name }) {
     let {name, value} = e.target;
     newCard[name]=value
     setCard(newCard)
-    //setCard({...card,[name]:value})
+    //setCard({...card,[name]:value}) would be another way of writing it
   }
 
   return (
@@ -36,7 +36,6 @@ export default function AddQuestionsToDeck({ closePopup, index, name }) {
         onClick={() => { closePopup(); setShow(true) }} >
         +
       </button>
-
 
       <Modal
         show={show}
