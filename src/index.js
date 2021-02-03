@@ -3,11 +3,6 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ContextProvider from './Context';
-//import Refvsdom from './Refvsdom';
-// import Example from './class/'
-
-//import LearnUseRef from './LearnUseRef'
-
 
 
 ReactDOM.render(

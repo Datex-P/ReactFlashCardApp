@@ -5,13 +5,28 @@ import { withRouter } from 'react-router-dom'
 import PieDiagramm from './PieDiagramm';
 import TimeAndProgess from './TimeAndProgress.js'
 import HourlyBreakdown from './HourlyBreakdown.js'
+import DeleteCardQuestionBox from '../deck/DeleteCardQuestionBox'
+
 
 
 function Stats({ history}) {
 
   const [showDeleteFrame, setShowDeleteFrame] = useState(false)
 
-  function setShow() {
+
+
+
+  const [checked, setChecked] = useState(false)
+  const [show, setShow] = useState(false);
+
+
+
+
+
+
+
+
+  function setShowFunc() {
     history.push('/')
   }
 
@@ -21,7 +36,7 @@ function Stats({ history}) {
     width: '70%', height: '50%'}}>
       <BasicOrangeWindow
         show={true}
-        setShow={setShow}
+        setShow={setShowFunc}
         title={'Stats'}
 
         menu={
@@ -31,7 +46,7 @@ function Stats({ history}) {
     
             text={'stats'}
             trashEvent={() => {
-              setShowDeleteFrame(showDeleteFrame)
+              setShowDeleteFrame(true)
             }}
 
             style={{
@@ -53,6 +68,21 @@ function Stats({ history}) {
           <div style={{ width: '216px', textAlign: 'center', margin: 'auto', fontWeight: 'bold', fontSize: '17px' }}>Today's study breakdown</div>
 
           <div style={{ marginBottom: '10px', border: '1px solid black' }} className='d-flex flex-direction column align-items-center'>
+
+        {
+          showDeleteFrame &&
+                <DeleteCardQuestionBox
+                  card='card'
+                  checked = {checked}
+                  setChecked = {setChecked}
+                  show={show}
+                  deleteFrame={() => setShowDeleteFrame(false)}
+                  // trashEvent={deleteCurrentCard}
+                  onHide={()=>{
+                 
+                  }}
+                  />
+                  }
 
 
             <PieDiagramm />

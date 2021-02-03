@@ -1,11 +1,18 @@
-.input{
+.input {
   width:45px;
   /* background-color: rgba(200, 168, 115, 0.95);  */
   border: none !important;
   outline: none !important;
-
+  
 }
-.input:disabled{
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input:disabled {
   /* background-color: rgba(200, 168, 115, 0.95) !important; */
   border: none !important;
   outline: none !important;

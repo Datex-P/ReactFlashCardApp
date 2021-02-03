@@ -71,7 +71,8 @@ export default function ContextProvider({ children }) {
       for (let i = 1; i < 10; i++) {
         arr.push({
           question: `question${i}`,
-          answer: `answer${i}`
+          answer: `answer${i}`,
+          paused: false
         })
       };
 

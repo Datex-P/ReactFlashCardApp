@@ -22,8 +22,8 @@ export default function BasicOrangeWindow({children, show, setShow,title,menu, s
           onClick={() => {
             
             setShow(false)
-             setEdit(false)
-           setShowRepeat(false)
+            setEdit(false)
+            setShowRepeat(false)
           }
           } >
           <img src={redCross} alt='redCross' />

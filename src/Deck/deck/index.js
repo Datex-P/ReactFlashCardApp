@@ -9,7 +9,7 @@ import DeckOrCardname from  './DeckOrCardname'
 import DeleteCardQuestionBox from  './DeleteCardQuestionBox';
 
 
-export default function Deck({ deck: { data,paused }, checked, setChecked,name, active, setActive, title, index, ...style }) {
+export default function Deck({ deck: { data,paused }, checked, setChecked,name, active, setActive, title, bg, index, ...style }) {
   
   const [show, setShow] = useState(false);
 
@@ -30,8 +30,7 @@ export default function Deck({ deck: { data,paused }, checked, setChecked,name, 
 
   function deleteDeck(){
     let newDataBase = {...dataBase}
-    delete newDataBase.DeckNames[index]
-    console.log('hello')
+    newDataBase.DeckNames.splice(index,1);
     setDataBase(newDataBase)
   }
 
@@ -134,13 +133,20 @@ export default function Deck({ deck: { data,paused }, checked, setChecked,name, 
         </Card.Title>
         <Card.Text>
 
-          <div className='divStyling'>To study: <input type='number' className='inputStyling'></input></div>
-          <div className='divStyling'>{'To review:'.padEnd(10, '⠀')}  {dataBase.userPreferences.toReview}</div>
-          {name && <div className='divStyling'>{'Decksize:'.padEnd(10, '⠀')}{data.length}</div>}
+          <div className='divStyling'>To study: <input type='number' 
+          // bg={style.background}  
+          className='inputStyling'></input></div>
+          <div className='divStyling' 
+          // bg={style.background} 
+          >{'To review:'.padEnd(10, '⠀')}  {dataBase.userPreferences.toReview}</div>
+          {name && 
+          <div className='divStyling' 
+          // bg={style.background} 
+           >{'Decksize:'.padEnd(10, '⠀')}{data.length}</div>}
       
         </Card.Text>
 
-        <QuestAnswerTrainOverv name={name} index={index} data={data} closePopup={() => setShow(false)} paused={paused} />
+        <QuestAnswerTrainOverv bg={style.background} name={name} index={index} data={data} closePopup={() => setShow(false)} paused={paused} />
         {active && <AddQuestionsToDeck name= {name} index= {index} closePopup={() => setShow(false)} />}
       </Card.Body>
 

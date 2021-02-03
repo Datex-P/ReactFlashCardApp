@@ -1,7 +1,7 @@
 import React, {
   useEffect,
   useState,
-  useContext
+  useContext,useRef
 } from 'react';
 import Deck from './deck/';
 import { Container, Row, Spinner } from 'react-bootstrap'
@@ -15,7 +15,7 @@ export default function DeckContainer() {
   //const { dataBase,styles } = useContext(Context);// step 4.2 destructure context value
   const { dataBase, setDataBase, styles } = useContext(Context)
  
-
+  const scroller = useRef();
 
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
 
@@ -35,12 +35,14 @@ export default function DeckContainer() {
     newDataBase.active = i
     setDataBase(newDataBase)
   }
+  
 
   useEffect(() => {
-
+    //scroller.current.scroll(0,800)
       setTimeout(()=>{setLoadSpinner(false)},2000)
     
   }, []);
+  
 
   return (
 
@@ -61,23 +63,30 @@ export default function DeckContainer() {
 
                 <div >
                   {
-                    dataBase.DeckNames.map((deck, index, array) =>
+                    dataBase.DeckNames.map((deck, index) =>
                       <Deck
+                        key={index}
                         index={index}
                         deck={deck}
                         name={deck.name}
                         setActive = {setActive}
-                        transform={active === index ? `rotate(0deg)` : `rotate(${(array.length - 1 - index) * -2}deg)`}
+                        transform={active === index ? `rotate(0deg)` : 
+                        `rotate(${((dataBase.DeckNames.length - 1 - index)||dataBase.DeckNames.length - 1) * -2}deg)`}
                         zIndex={active === index ? 2 : 0}
                         active={active === index}
                         background = 
-                        {active === index && deck.paused ? `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) ${colors[index % 5]} repeat`:colors[index % 5]}
+                        {active === index && deck.paused ? 
+                        `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) ${colors[index % 5]} repeat`
+                        :
+                        colors[index % 5]}
                       />
                     )
                   }
                 </div>
                 <div
-                  style={{ height: '220px', width: '375px', overflow: 'scroll', overflowX: 'hidden', position: 'absolute', top: '65px' }}
+                  ref={scroller}
+                  style={{ height: '220px', width: '375px', overflow: 'scroll', 
+                  overflowX: 'hidden', position: 'absolute', top: '65px' }}
                   onScroll={(event) => {
 
                     let step = (1000 - 220) / ((dataBase.DeckNames).length - 1)
@@ -103,7 +112,9 @@ export default function DeckContainer() {
                 setCreateNewDeckDisplay(true)
                 setShowDeck(false)
               }}
-              style={{ zIndex: '4', padding: '2px', position: 'fixed', top: '630px', width: '210px', outline: 'none !important' }} className='generalButtonStyling'
+              style={{ zIndex: '4', padding: '2px', position: 'fixed', 
+              top: '630px', width: '210px', outline: 'none !important' }} 
+              className='generalButtonStyling'
             >
               Create Deck
           </button>

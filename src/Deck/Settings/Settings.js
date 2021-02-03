@@ -164,39 +164,42 @@ function Col({ data: { name, amount, unit }, editable, index, userTimePreference
   const [inputNumb, setInputNumb] = useState(amount)
   const [inputText, setInputText] = useState(name)
 
-  function handleTime(e) {
+  function handleInputNumbers(e) {
+
     setInputNumb(e.target.value)
     let newUserTimePreferences = [ ...userTimePreferences ]
     newUserTimePreferences[index].amount = e.target.value
     setUserTimePreferences(newUserTimePreferences)
   }
 
-  function handleNames(e) {
+
+  function handleInputText(e) {
+
     setInputText(e.target.value)
     let newUserTimePreferences = [ ...userTimePreferences ]
     newUserTimePreferences[index].name = e.target.value
     setUserTimePreferences(newUserTimePreferences)
   }
 
+
   return (
     <div className=' p-2' style={{ flexDirection: 'column', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <p className=' border border-dark d-flex justify-content-center' style={{
         borderRadius: '5px', width: '85px',
-        // paddingLeft: '5px'
+   
       }}>
         <div style={{ marginRight: '4px' }}>{'<'}</div>
         <input className={style.input}
+          type='number'
           style={{
             backgroundColor: 'transparent',
             outline: 'none',
-            // width: editable ? '40px' : '23px', 
             width: '40px',
             height: '24px'
-          }}
-          // type={editable ? 'number' : 'text'}
+          }} 
           disabled={!editable}
           value={inputNumb}
-          onChange={handleTime}
+          onChange={handleInputNumbers}
         />{unit}</p>
 
 
@@ -215,7 +218,7 @@ function Col({ data: { name, amount, unit }, editable, index, userTimePreference
         type='text'
         key={name}
         disabled={!editable}
-        onChange={handleNames}
+        onChange={handleInputText}
       />
     </div>
   )

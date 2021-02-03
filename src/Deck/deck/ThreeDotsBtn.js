@@ -24,9 +24,7 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
   const [show, setShow] = useState(showFromParent);
   const {dataBase, setDataBase} = useContext(Context);
 
-  // useEffect(() => {
-  //   setShow(showFromParent)
-  // }, [showFromParent])
+
 
   const handleClick = () => {
     setShow(!show);
@@ -35,7 +33,7 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
   };
 
   const ref = useRef(null)
-  // const {ref, ref1} = useRef(null)
+
 
   function handleDeckname() {
     let newDataBase = {...dataBase}

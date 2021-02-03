@@ -34,7 +34,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
         keyboard={false}
         id='deleteWindow'
         dialogClassName='backgroundModal'
-        contentClassName='widthFitCOntetn'
+        contentClassName='widthFitContent'
         className='d-flex justify-content-center align-items-center'
       >
         <div>

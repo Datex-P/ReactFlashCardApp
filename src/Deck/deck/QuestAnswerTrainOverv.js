@@ -8,7 +8,7 @@ import SaveAndDiscard from './CardBodyParts/SaveAndDiscard'
 import RepeatBtn from './CardBodyParts/RepeatBtn'
 
 
-export default function QuestAnswerTrainOverv({name, data, closePopup,index,paused }) {
+export default function QuestAnswerTrainOverv({name, bg, data, closePopup,index,paused }) {
   
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -21,6 +21,19 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
   const [timer, setTimer] = useState(null)
   const [openDeck, setOpenDeck] = useState(true)
   const [checked, setChecked] = useState(false)
+
+
+  const [pauseIsActive, setPauseIsActive] = useState(true)
+
+
+  function handlePause () {
+    let newDataBase = {...dataBase}
+    let savePausedState = !pauseIsActive
+    setPauseIsActive(savePausedState)
+    dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
+    setDataBase(newDataBase)
+    
+  }
 
 
 
@@ -108,8 +121,9 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
     <>
 
       <Button
-        variant='secondary'
-        className='openDeck'
+        // variant='secondary'
+       className= {'openDeck generalButtonStyling'}
+       style= {{background: bg}}
         size='sm'
         onClick={
           paused
@@ -138,13 +152,20 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
               setShowAnswer(true)
               setEdit(true)       
             }}
+
+            pauseEvent={() => {
+                // handlePause()
+            }}
             
             
             trashEvent={() => {
 
               setTrash(true)
            
-              checked? deleteCurrentCard():    setShowDeleteFrame(true)
+              dataBase.checkboxClicked?
+
+              deleteCurrentCard() : setShowDeleteFrame(true)
+
             }}
             style={{
               position: 'absolute', top: '14px', right: '19px', 

@@ -313,16 +313,20 @@ outline: none;
   }
 }
 
+.urlBackground {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) repeat;
+}
+
 
 .generalButtonStyling {
   /* width: 63px;
   height: 24px; */
-  background-color: grey;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
+  background-color: grey !important;
+  color: white !important;
+  cursor: pointer !important;
+  border-radius: 5px !important;
   outline: none !important;
-  border: none;
+  border: none !important;
 }
 
 .deleteContainerFr {
@@ -587,7 +591,6 @@ border-radius: 5px;
 
 #createDeck .modal-header {
 height: 33px;
-
 }
 
 .backgroundModal {
@@ -598,9 +601,10 @@ height: 33px;
   align-items: center;
   justify-content: center;
 }
-.widthFitCOntetn{
+.widthFitContent{
   width:fit-content !important;
 }
+
 #createDeck .modal-body {
   padding: 10px;
 }

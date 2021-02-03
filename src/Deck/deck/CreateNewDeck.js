@@ -107,7 +107,6 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
                 onClick={() => {
                   el === 'Cancel' ?
                      close()
-            
                     :
                     addNewDeckName()
                 }

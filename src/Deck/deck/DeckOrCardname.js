@@ -11,7 +11,7 @@ export default function DeckOrCardname({ bg,name}) {
          onMouseLeave = {()=>{setHovered(false)}
          } 
          style={{height: '30px', position: 'relative', top: '4px', cursor: 'pointer', 
-         width: '132px',backgroundColor:bg
+         width: '132px',background:bg
          }}    
     >
       {
@@ -22,10 +22,9 @@ export default function DeckOrCardname({ bg,name}) {
          
             zIndex:30000,
             width: '146px',
-            border: '1px solid black',
             height: '33px',
             top: name.length>15? '-13px': '0px',
-            backgroundColor: bg,
+            background: bg,
             position: 'relative'
            }}
       
