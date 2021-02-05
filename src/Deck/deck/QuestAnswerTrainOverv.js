@@ -37,7 +37,7 @@ export default function QuestAnswerTrainOverv({name, bg, data, closePopup,index,
 
 
 
-  function generateRandom() {
+  function generateRandom() {                                                                                                                                                                                                                                                                                                                                                                         
     let random = null
     if (dataBase.queue[0] && dataBase.queue[0].timeLeft === 0) {
       //need to have algorithm to filter s in queue related onlz for this deck
@@ -120,8 +120,11 @@ export default function QuestAnswerTrainOverv({name, bg, data, closePopup,index,
   return (
     <>
 
+    {dataBase.DeckNames[index].paused?
+      null
+      :
       <Button
-        // variant='secondary'
+        variant='secondary'
        className= {'openDeck generalButtonStyling'}
        style= {{background: bg}}
         size='sm'
@@ -134,7 +137,7 @@ export default function QuestAnswerTrainOverv({name, bg, data, closePopup,index,
         }
       
       >Open Deck</Button>
-
+    }
       {openDeck &&
         <BasicOrangeWindow 
           show={show}

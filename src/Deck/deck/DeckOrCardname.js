@@ -10,7 +10,9 @@ export default function DeckOrCardname({ bg,name}) {
     <div onMouseEnter={()=>{if (name.length>14){return setHovered(true)}}}
          onMouseLeave = {()=>{setHovered(false)}
          } 
-         style={{height: '30px', position: 'relative', top: '4px', cursor: 'pointer', 
+         style={{height: '30px', 
+         position: 'relative', 
+         top: '4px', cursor: 'pointer', 
          width: '132px',background:bg
          }}    
     >
@@ -23,11 +25,11 @@ export default function DeckOrCardname({ bg,name}) {
             zIndex:30000,
             width: '146px',
             height: '33px',
-            top: name.length>15? '-13px': '0px',
+            top: name.length>16? '-13px': '0px',
             background: bg,
             position: 'relative'
            }}
-      
+
            >{name}</div>
         :
           <CutWord name = {name} />

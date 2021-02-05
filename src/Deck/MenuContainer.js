@@ -39,7 +39,7 @@ export default function MenuContainer() {
         <>
 
           <Modal show={show} onHide={handleClose} contentClassName={'modNew'} dialogClassName='align-items-start  pl-3' centered>
-            <Modal.Body className='p-0' style={{position: 'relative', top: '125px'}}>
+            <Modal.Body className='p-0' style={{position: 'relative', top: '140px'}}>
               <div className='menuStyling' onClick={()=>{setShow(false)}}>
                 <Icons icons={[
                   { src: statsIcon, alt: 'statsIcon', href: 'stats', style: {  width: 'calc(100% / 3)',  padding: '3px' } },

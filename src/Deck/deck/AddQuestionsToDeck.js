@@ -4,7 +4,7 @@ import {Context} from '../../Context';
 import redCross from '../../icons/redCross.svg'
 import '../styles.css'
 
-export default function AddQuestionsToDeck({ closePopup, index, name }) {
+export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
 
 
   const [show, setShow] = useState(false);
@@ -31,12 +31,17 @@ export default function AddQuestionsToDeck({ closePopup, index, name }) {
   }
 
   return (
+    
     <div>
       <button className={'addNewCardsButton outline-none'}
+      style= {{background: dataBase.DeckNames[index].paused? bg: null}}
         onClick={() => { closePopup(); setShow(true) }} >
         +
       </button>
-
+      {
+      dataBase.DeckNames[index].paused?
+      alert('Deck is paused')
+        :
       <Modal
         show={show}
         onHide={() => setShow(false)}
@@ -88,7 +93,7 @@ export default function AddQuestionsToDeck({ closePopup, index, name }) {
 
         </Modal.Body>
       </Modal>
-
+      }
     </div>
   )
 }

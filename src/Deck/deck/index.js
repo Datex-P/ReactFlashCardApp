@@ -9,13 +9,11 @@ import DeckOrCardname from  './DeckOrCardname'
 import DeleteCardQuestionBox from  './DeleteCardQuestionBox';
 
 
-export default function Deck({ deck: { data,paused }, checked, setChecked,name, active, setActive, title, bg, index, ...style }) {
+export default function Deck({ deck: { data,paused }, checked, setChecked,
+  name, active, setActive, title, bg, index, ...style }) {
   
   const [show, setShow] = useState(false);
-
   const { dataBase, setDataBase} = useContext(Context)
-
-
   const [trash, setTrash] = useState(false);
   const [showDeleteFrame, setShowDeleteFrame] = useState(true);
   const [editName, setEditName] = useState(true);
@@ -133,21 +131,19 @@ export default function Deck({ deck: { data,paused }, checked, setChecked,name, 
         </Card.Title>
         <Card.Text>
 
-          <div className='divStyling'>To study: <input type='number' 
-          // bg={style.background}  
-          className='inputStyling'></input></div>
-          <div className='divStyling' 
-          // bg={style.background} 
-          >{'To review:'.padEnd(10, '⠀')}  {dataBase.userPreferences.toReview}</div>
+          <div className='divStyling' style={{background: dataBase.DeckNames[index].paused? style.background: 'white'}} >To study: 
+          
+          <input type='number' className='inputStyling' style={{background: dataBase.DeckNames[index].paused? style.background: 'none'}}></input></div>
+          <div className='divStyling'  style={{background: dataBase.DeckNames[index].paused? style.background: 'white'}}>{'To review:'.padEnd(10, '⠀')}  {dataBase.userPreferences.toReview}</div>
           {name && 
-          <div className='divStyling' 
-          // bg={style.background} 
+          <div className='divStyling'  style={{background: dataBase.DeckNames[index].paused? style.background: 'white'}}
+       
            >{'Decksize:'.padEnd(10, '⠀')}{data.length}</div>}
       
         </Card.Text>
 
         <QuestAnswerTrainOverv bg={style.background} name={name} index={index} data={data} closePopup={() => setShow(false)} paused={paused} />
-        {active && <AddQuestionsToDeck name= {name} index= {index} closePopup={() => setShow(false)} />}
+        {active && <AddQuestionsToDeck bg={style.background} name= {name} index= {index} closePopup={() => setShow(false)} />}
       </Card.Body>
 
     </Card>
