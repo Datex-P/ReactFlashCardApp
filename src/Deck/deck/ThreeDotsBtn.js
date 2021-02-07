@@ -13,15 +13,17 @@ import {withRouter} from 'react-router-dom'
 
 function ThreeDotsBtn({  
   
-  text, showFromParent, style, 
-  className, editName, nameOfTopDeck, 
-  index, input, threeDotsContainer,
+  text, showFromParent, style, className, editName, nameOfTopDeck, 
+  index, input, threeDotsContainer, setEditName,
   
   setShowFromParent = () => { },
   editEvent = () => { }, 
   trashEvent = () => { },
+
   edit=false,trash=false,pause=false,reset=false,
-}) {
+}) 
+
+{
 
   const [startAnimation, setStartAnimation] = useState(false)
   const [pauseIsActive, setPauseIsActive] = useState(true)
@@ -74,6 +76,7 @@ function ThreeDotsBtn({
     setPauseIsActive(savePausedState)
     dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
     setDataBase(newDataBase)
+    setEditName(true)
     
   }
 
@@ -87,7 +90,6 @@ function ThreeDotsBtn({
     :
 
     <div style={threeDotsContainer}>
-
       <div 
 
         className='rotateLittleModal' style={{height: '24px'}}
@@ -101,8 +103,8 @@ function ThreeDotsBtn({
               ...
       </div>
 
-      {show
-        &&
+      {
+        show&&
         
         <div 
           ref={ref}
@@ -112,35 +114,37 @@ function ThreeDotsBtn({
             edit&&
 
             <button 
-                    onClick={handleEdit} 
-                    className='buttonStyling flexAlignCenter outline-none p-1 '>
+                className='buttonStyling flexAlignCenter outline-none p-1 '
+                onClick={handleEdit} 
+            >
                     
-                    <img className={startAnimation ? 'blinkingIcon':''} 
-                         src={editName? editimg: saveimg} 
-                         alt='edit' 
-                         style={{ marginRight: '3px' }}              
-                     />
-                      
-                      {text}
-            </button>}       
+                <img className={startAnimation ? 'blinkingIcon':''} 
+                     src={editName? editimg: saveimg} 
+                     alt='edit' 
+                     style={{ marginRight: '3px' }}              
+                />      
+               {text}
+            </button>
+          }       
           {
             pause&&
 
-            <button className='buttonStyling flexAlignCenter outline-none p-1 '
-                    style={{ borderTop: '1px solid black', borderBottom: '1px solid black' ,
-                            borderLeft: dataBase.DeckNames[index].paused? '1px solid black': null,
-                            borderRight: dataBase.DeckNames[index].paused? '1px solid black': null,
-                            borderRadius: dataBase.DeckNames[index].paused? '5px': null
-                          }}
-
-                    onClick={handlePause}
+            <button 
+                className='buttonStyling flexAlignCenter outline-none p-1 '
+                onClick={handlePause}
+                style={{ borderTop: '1px solid black', borderBottom: '1px solid black' ,
+                         borderLeft: dataBase.DeckNames[index].paused? '1px solid black': null,
+                         borderRight: dataBase.DeckNames[index].paused? '1px solid black': null,
+                         borderRadius: dataBase.DeckNames[index].paused? '5px': null
+                       }}
              >
-                <img src={ pauseIsActive? pauseimg: playimg}  
-                     alt='pause' 
-                     style={{ marginRight: '3px'}} 
+                <img 
+                    src={ pauseIsActive? pauseimg: playimg}  
+                    alt='pause' 
+                    style={{ marginRight: '3px'}} 
                 />
                 {text}
-             </button>
+            </button>
           }
           {
             trash && 
@@ -153,8 +157,8 @@ function ThreeDotsBtn({
                   setShow(false)
               }}
             >
-
-               <img src={trashimg} alt='trash' style={{ marginRight: '3px' }} 
+               <img src={trashimg} 
+                    alt='trash' style={{ marginRight: '3px' }} 
                />
                {text}
             </button>
@@ -165,8 +169,7 @@ function ThreeDotsBtn({
             <button 
 
               className='buttonStyling flexAlignCenter outline-none p-1 '
-              onClick={() => {}
-                }
+              onClick={() => {}}
             >
 
               <img src={resetimg} alt='reset' style={{ marginRight: '3px', width: '23px', height: '23px'}}  

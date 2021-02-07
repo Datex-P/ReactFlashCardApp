@@ -29,7 +29,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
     
       <Modal
         show={show}
-         onHide={handleClose}
+        onHide={handleClose}
         backdrop="static"
         keyboard={false}
         id='deleteWindow'
@@ -38,74 +38,98 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
         className='d-flex justify-content-center align-items-center'
       >
         <div>
-        <img src={questionMark} 
-               style={{ width: '40px', position: 'absolute', top: '-47px', right: '-10px'}}
-    
-            alt='questionMark' />
-       <img src={questionMark} 
+            <img 
+                src={questionMark} 
+                 style={{ width: '40px', position: 'absolute', top: '-47px', right: '-10px'}}
+                 alt='questionMark' 
+            />
+            <img 
+              src={questionMark} 
                style={{ width: '40px', position: 'absolute', top: '-65px', right: '-30px'}}
-            alt='questionMark' />
+               alt='questionMark'              
+            />
       </div>
-        <Modal.Header closeButton >
-          <Modal.Title>
-              <div className='d-flex justify-content-center align-items-center' style={{height:'100%', width: '100%'}}>
-
-          <div>
+        <Modal.Header 
+            closeButton 
+        >
+            <Modal.Title>
+                <div 
+                  className='d-flex justify-content-center align-items-center'           
+                  style={{height:'100%', width: '100%'}}
+                >
+                  <div>
              
-          <img src={flashcards} 
-               style={{ width: '26px', height: 'fit-content', marginRight: '20px' }}
-            className='d-flex justify-content-center align-items-center' 
-            alt='flashcards' />
-            </div>
-                 <div>  Delete {card} </div>
+                  <img src={flashcards} 
+                       style={{ width: '26px', height: 'fit-content', marginRight: '20px' }}
+                       className='d-flex justify-content-center align-items-center' 
+                       alt='flashcards'                         
+                  />
+                  </div>
+                  <div>  Delete {card} </div>
               </div>
             </Modal.Title>
         </Modal.Header>
         <Modal.Body 
-        className='d-flex align-items-center' 
-        style={{width:'100%', display: 'flex', justifyContent: 'center'}}  
+            className='d-flex align-items-center' 
+            style={{width:'100%', display: 'flex', justifyContent: 'center'}}  
         >
-          Do you want to delete this {card} ?
+            Do you want to delete this {card} ?
         </Modal.Body>
         <Modal.Footer>
 
+            <div 
+                className='d-flex justify-content-around align-items-center' 
+                style={{width: '100%'}}
+            >
+                <div 
+                    style={{ display: 'flex', justifyContent: 'space-around', width: '75%' }}
+                >
 
-          <div className='d-flex justify-content-around align-items-center' 
-          style={{width: '100%'}}>
-            <div style={{ display: 'flex', justifyContent: 'space-around', width: '75%' }}>
+                    {['No', 'Yes'].map(el =>
+                          <div 
+                              className='deleteContainerNoAndYes d-flex justify-content-center align-items-center'
+                              onClick={() => {
+                                deleteFrame()
+                                if (el === 'Yes') {
+                                  trashEvent()
+                                  deleteCurrentCard()
+                                }
+                              }}
+                            >
+                            {el}
+                          </div>
+                    )}
 
-              {['No', 'Yes'].map(el =>
-                <div className='deleteContainerNoAndYes d-flex justify-content-center align-items-center'
-                  onClick={
-                    () => {
-                      deleteFrame()
-                      if (el === 'Yes') {
-                        trashEvent()
-                        deleteCurrentCard()
-                      }
-                    }
-                  }
-                >{el}</div>
-              )}
-
+                </div>
             </div>
-          </div>
 
         </Modal.Footer>
 
 
-      <div style = {{width: '300px', position: 'absolute', top: '175px'}} 
-      className='d-flex justify-content-center'>
+      <div 
+          style = {{
+            width: '300px', position: 'absolute', top: '175px'
+          }} 
+          className='d-flex justify-content-center'
+      >
 
-      <div style={{width: '40px'}}>
-      <input style= {{width: '45px'}} type='checkbox' 
-
-      onChange={handleCheckbox}/>
+          <div style={{width: '40px'}}>
+              <input 
+                  style= {{width: '45px'}} 
+                  type='checkbox' 
+                  onChange={handleCheckbox}
+              />
     
-      </div>
-        <div style={{ width: '200px',  zIndex: '2', 
-        color: 'white' }}>Don't show message again</div>
-
+          </div>
+          <div 
+              style={{ 
+                  width: '200px',  
+                  zIndex: '2', 
+                  color: 'white' 
+              }}
+          >
+            Don't show message again
+          </div>
       </div>
 
       </Modal>

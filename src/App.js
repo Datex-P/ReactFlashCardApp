@@ -13,20 +13,19 @@ export default function App() {
       <LandingPage />
 
       <Switch>
-        <Route path='/stats'>
-          <Stats />
-        </Route>
+          <Route path='/stats'>
+              <Stats />
+          </Route>
 
-        <Route path='/settings'>
-          <Settings />
-        </Route>
+          <Route path='/settings'>
+              <Settings />
+          </Route>
 
-        <Route path='/' exact>
-        </Route>
+          <Route path='/' exact>            
+          </Route>
 
-        <Route path='/logout'>
-        </Route>
-
+          <Route path='/logout'>
+          </Route>
       </Switch>
 
     </Router>

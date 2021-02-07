@@ -6,9 +6,8 @@ export default function NavBar() {
   
   
   return (
-    <>
-    
-      <MenuContainer    /> 
+    <>   
+      <MenuContainer/> 
     </>
   )
 }

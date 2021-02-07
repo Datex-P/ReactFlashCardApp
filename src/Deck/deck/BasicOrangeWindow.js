@@ -1,8 +1,12 @@
 import { Modal } from 'react-bootstrap'
 import redCross from '../../icons/redCross.svg'
 
-export default function BasicOrangeWindow({children, show, setShow,title,menu, setEdit = () =>{} , 
-              setShowRepeat = () => {}, setShowAnswer}) {
+export default function BasicOrangeWindow({
+              children, show, setShow,title,menu, 
+              setShowAnswer,
+              setEdit = () =>{} , 
+              setShowRepeat = () => {}
+            }) {
   return(
     <Modal
         show={show}
@@ -11,33 +15,49 @@ export default function BasicOrangeWindow({children, show, setShow,title,menu, s
         backdrop="static"
         style= {{left: '-160px !important', right: '45px !important'}}
       >
-          <div style={{width: '98%', height: '95%', margin: 'auto', overflow: 'hidden auto'}}>
-        <Modal.Header className='border-bottom-0'>
-          <Modal.Title style={{ fontSize: '16px', marginLeft: '12px', height: '24px', width: '240px' }}>
-        
-            {title}
-          
-          </Modal.Title>
-            {menu}
-          <button className='redCross'
-          onClick={() => {
-            
-            setShow(false)
-            setEdit(false)
-            setShowRepeat(false)
-            setShowAnswer(false)
-          }
-          } >
-          <img src={redCross} alt='redCross' />
-          </button>
-        </Modal.Header>
-        <Modal.Body >
+          <div 
+              style={{
+                      width: '98%', height: '95%', margin: 'auto', overflow: 'hidden auto'
+                      }}
+          >
+              <Modal.Header 
+                  className='border-bottom-0'
+              >
+                  <Modal.Title 
+                      style={{ 
+                              fontSize: '16px', marginLeft: '12px', height: '24px', width: '240px'
+                              }}
+                  >
+                      {title}
+                
+                  </Modal.Title>
 
-          {children}
+                  {menu}
 
-        </Modal.Body>
-          </div>
-      </Modal>
+                <button 
+                    className='redCross'
+                    onClick={() => {
+                  
+                      setShow(false)
+                      setEdit(false)
+                      setShowRepeat(false)
+                      setShowAnswer(false)
+                    }
+                } 
+                >
+                    <img src={redCross} alt='redCross' />
+
+                </button>
+
+              </Modal.Header>
+              
+              <Modal.Body >
+
+                {children}
+
+              </Modal.Body>
+        </div>
+    </Modal>
    
   )
 }

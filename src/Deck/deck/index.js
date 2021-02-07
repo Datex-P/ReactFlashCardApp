@@ -78,7 +78,8 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
 
          <DeckOrCardname bg={style.background} 
            index={index}
-           style={{width: '159px', height: '73px', position: 'relative important',
+           style={{
+                   width: '159px', height: '73px', position: 'relative important',
                    display: 'flex !important', justifyContent: 'center !important', left: '6px'
                   }}
            show={show} name= {name}
@@ -109,6 +110,7 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
             setPauseIsActive={setPauseIsActive}
             showFromParent={show}
             editName={editName}
+            setEditName={setEditName}
             setShowFromParent={setShow}
             index={index}
             paused={paused}
@@ -117,15 +119,18 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
             threeDotsContainer= {{position: 'fixed', right: '50px', top: '18px'}}
             className='threeDotsBtnIndex'
             style= {{border: dataBase.DeckNames[index].paused? 'none': '1px solid black',
-                     backgroundColor: dataBase.DeckNames[index].paused? 'black': 'white'}}
-            edit={!paused} pause trash={!paused}
+                     backgroundColor: dataBase.DeckNames[index].paused? 'black': 'white'
+                    }}
+            edit={!paused} 
+            pause 
+            trash={!paused}
        
-
             editEvent={() => {
               setShow(show)
               setEditName(!editName)
 
             }}
+
             input={input}
 
             trashEvent={
@@ -139,7 +144,8 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
             () => {
               setTrash(true)
               setShowDeleteFrame(true)
-            }}
+            }
+            }
           />
 
           }
@@ -187,7 +193,8 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
                       className='playButton'
                     >
 
-                      <img src={playimg} alt='play' style={{margin: '6px', cursor: 'pointer'}} />
+                      <img src={playimg} alt='play' style={{margin: '6px', cursor: 'pointer'}}                         
+                      />
 
                     </button>
                     
@@ -213,20 +220,24 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
         </Card.Text>
 
         <QuestAnswerTrainOverv 
-          bg={style.background}
-          name={name} 
-          index={index} 
-          data={data} 
-          paused={paused} 
-          closePopup={() => setShow(false)} 
-          />
+            bg={style.background}
+            name={name} 
+            index={index} 
+            data={data} 
+            paused={paused} 
+            closePopup={() => setShow(false)} 
+        />
         
         {
           active && 
           
-          <AddQuestionsToDeck bg={style.background} name= {name} index= {index} closePopup={() => setShow(false)} />
-          
-          }
+          <AddQuestionsToDeck 
+              bg={style.background} 
+              name= {name} 
+              index= {index} 
+              closePopup={() => setShow(false)} 
+          />        
+        }
       </Card.Body>
 
     </Card>
