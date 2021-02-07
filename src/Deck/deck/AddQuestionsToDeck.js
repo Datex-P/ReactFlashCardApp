@@ -33,15 +33,21 @@ export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
   return (
     
     <div>
-      <button className={'addNewCardsButton outline-none'}
-      style= {{background: dataBase.DeckNames[index].paused? bg: null}}
-        onClick={() => { closePopup(); setShow(true) }} >
+      <button 
+        
+      onClick={dataBase.DeckNames[index].paused?
+      null:
+      () => { closePopup(); setShow(true) }} 
+      
+      className={'addNewCardsButton outline-none'}
+      style= {{background: dataBase.DeckNames[index].paused? bg: null,
+              cursor: dataBase.DeckNames[index].paused? 'default': 'pointer'}}
+      >
         +
       </button>
-      {
-      dataBase.DeckNames[index].paused?
-      alert('Deck is paused')
-        :
+      
+      
+        
       <Modal
         show={show}
         onHide={() => setShow(false)}
@@ -93,7 +99,7 @@ export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
 
         </Modal.Body>
       </Modal>
-      }
+      
     </div>
   )
 }

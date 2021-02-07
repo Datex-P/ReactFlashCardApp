@@ -23,6 +23,21 @@ export default function DeckContainer() {
   const [showDeck, setShowDeck] = useState(true)
   const [loadSpinner, setLoadSpinner] = useState(true)
   const [createNewDeckDisplay, setCreateNewDeckDisplay] = useState(false)
+  const [scrollPosition, setScrollPosition] = useState(0)
+
+
+  function scrollHandler (e) {
+    let position = e.target.scrollTop
+    
+    if (position < scrollPosition) {
+      console.log('you are scrolling up')
+    }
+    else {
+      console.log('you are scrolling down')
+    }
+    setScrollPosition(position)
+
+  }
 
   useEffect(() => {
     setActive(dataBase && (dataBase.DeckNames.length-1))
@@ -73,6 +88,7 @@ export default function DeckContainer() {
                         transform={active === index ? `rotate(0deg)` : 
                         `rotate(${
                           ( dataBase.DeckNames.length  - index) * -2}deg)`}
+
                         zIndex={active === index ? 2 : 0}
                         active={active === index}
                         background = 
@@ -96,6 +112,7 @@ export default function DeckContainer() {
                     let index = Math.floor(event.target.scrollTop / step)
                     handleActive(index)
                     console.log(index)
+                    scrollHandler(event)
                   }}
                 >
                   <div
@@ -123,8 +140,9 @@ export default function DeckContainer() {
           </button>
 
             <CreateNewDeck 
-            createNewDeckDisplay={createNewDeckDisplay}      
+                createNewDeckDisplay={createNewDeckDisplay}      
             setShowDeck={setShowDeck}
+            setActive={setActive}
             setCreateNewDeckDisplay={setCreateNewDeckDisplay}
             close={()=>{setShowDeck(true)
               setCreateNewDeckDisplay(false)
@@ -143,4 +161,5 @@ export default function DeckContainer() {
       </div>
    )
       }
+
 

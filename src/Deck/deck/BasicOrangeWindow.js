@@ -1,7 +1,8 @@
 import { Modal } from 'react-bootstrap'
 import redCross from '../../icons/redCross.svg'
 
-export default function BasicOrangeWindow({children, show, setShow,title,menu, setEdit = () =>{} , setShowRepeat = () => {}}) {
+export default function BasicOrangeWindow({children, show, setShow,title,menu, setEdit = () =>{} , 
+              setShowRepeat = () => {}, setShowAnswer}) {
   return(
     <Modal
         show={show}
@@ -24,6 +25,7 @@ export default function BasicOrangeWindow({children, show, setShow,title,menu, s
             setShow(false)
             setEdit(false)
             setShowRepeat(false)
+            setShowAnswer(false)
           }
           } >
           <img src={redCross} alt='redCross' />

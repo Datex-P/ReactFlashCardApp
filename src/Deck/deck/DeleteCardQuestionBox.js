@@ -40,11 +40,10 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
         <div>
         <img src={questionMark} 
                style={{ width: '40px', position: 'absolute', top: '-47px', right: '-10px'}}
-            // className='d-flex justify-content-center align-items-center' 
+    
             alt='questionMark' />
        <img src={questionMark} 
                style={{ width: '40px', position: 'absolute', top: '-65px', right: '-30px'}}
-            // className='d-flex justify-content-center align-items-center' 
             alt='questionMark' />
       </div>
         <Modal.Header closeButton >
@@ -72,7 +71,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
 
 
           <div className='d-flex justify-content-around align-items-center' 
-          style={{width: '100%', border: '1px solid black'}}>
+          style={{width: '100%'}}>
             <div style={{ display: 'flex', justifyContent: 'space-around', width: '75%' }}>
 
               {['No', 'Yes'].map(el =>
@@ -95,8 +94,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
         </Modal.Footer>
 
 
-      <div style = {{width: '300px', position: 'absolute', top: '194px', border: '1px solid black'
-      }} 
+      <div style = {{width: '300px', position: 'absolute', top: '175px'}} 
       className='d-flex justify-content-center'>
 
       <div style={{width: '40px'}}>

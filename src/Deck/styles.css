@@ -197,11 +197,16 @@ outline: none;
 }
 
 .openDeck {
-   margin-top: -20px !important; 
+  margin-top: -20px !important; 
   outline: none !important;
   width: 110px;
-
+  color: white !important;
+  border-radius: 5px !important;
+  outline: none !important;
+  border: none !important;
 }
+
+
 .openDeck:focus{
   outline: none !important;
   box-shadow: none !important;
@@ -282,11 +287,10 @@ outline: none;
   cursor: pointer
 }
 
-.title1{
+/* .title1{
   top: -10px;
   position: absolute;
-  background-color: yellow;
-}
+} */
 
 .blinkingIcon {
   animation: blinker 1.3s linear infinite;
@@ -316,6 +320,8 @@ outline: none;
 .urlBackground {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) repeat;
 }
+
+
 
 
 .generalButtonStyling {
@@ -404,7 +410,6 @@ margin-top: 10px
 .changeRepetitionIntervalContainerInner {
  width: 260px;
 height: 68px;
-/*border: 1px black solid;*/
 margin-top: 3px;
 border-radius: 5px;
 }
@@ -593,13 +598,33 @@ border-radius: 5px;
 height: 33px;
 }
 
+.playButton {
+  border: 1px solid black;
+  height: 26px;
+  width: 29px;
+  display: flex;
+  outline: none !important;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  padding-left: 8px;
+  margin-left: 8px;
+}
+
 .backgroundModal {
+
   background-color: rgba(0, 0, 0, 0.3);
-  width:100% !important;
-  height:100vh;
+  width: 682px !important;
+  padding: 163px;
+  top: -9px;
+  height: 1005px !important;
   display:flex;
   align-items: center;
   justify-content: center;
+  /* height: 95%;
+  top: 16px;
+  overflow: hidden;
+  padding-left: none; */
 }
 .widthFitContent{
   width:fit-content !important;
@@ -665,4 +690,39 @@ border-bottom-left-radius: calc(.3rem - 1px);
   margin: auto;
   /* position: absolute;
   left: 30px; */
+}
+
+
+.deckPausedContainer {
+  border: 1px solid black;
+  padding: 5px;
+  width: 152px; 
+  position: absolute; 
+  top: 64px;
+  height: 111px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 5px;
+  flex-direction: column
+}
+
+.addToDeckInput {
+  width: 132px; 
+  border-radius: 5px;
+  padding-left: 5px; 
+  position: relative;
+  left: -4px; 
+  outline: none;
+}
+
+.threeDotsInQuestionAnswerStyling {
+  position: absolute; 
+  top: 14px;
+  right: 19px;
+  height: 98px; 
+  z-index: 2000; 
+  background-color: white;
+  border: 1px solid black;
+  overflow: hidden;
 }

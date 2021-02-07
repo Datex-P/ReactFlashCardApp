@@ -8,23 +8,26 @@ import SaveAndDiscard from './CardBodyParts/SaveAndDiscard'
 import RepeatBtn from './CardBodyParts/RepeatBtn'
 
 
-export default function QuestAnswerTrainOverv({name, bg, data, closePopup,index,paused }) {
+export default function QuestAnswerTrainOverv({name, data, closePopup,index,paused }) {
   
-  const [show, setShow] = useState(false);
+  
+  const [checked, setChecked] = useState(false)
   const [edit, setEdit] = useState(false);
   const [random, setRandom] = useState(null);
+  
+  const [show, setShow] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [showRepeat, setShowRepeat] = useState(false);
-  const [trash, setTrash] = useState(false);
+  
   const [showDeleteFrame, setShowDeleteFrame] = useState(true)
-  const { dataBase, setDataBase } = useContext(Context);
-  const [timer, setTimer] = useState(null)
-  const [openDeck, setOpenDeck] = useState(true)
-  const [checked, setChecked] = useState(false)
-
-
   const [pauseIsActive, setPauseIsActive] = useState(true)
-
+  const [timer, setTimer] = useState(null)
+  
+  const [trash, setTrash] = useState(false);
+  const [openDeck, setOpenDeck] = useState(true)
+  
+  
+  const { dataBase, setDataBase } = useContext(Context);
 
   function handlePause () {
     let newDataBase = {...dataBase}
@@ -119,26 +122,29 @@ export default function QuestAnswerTrainOverv({name, bg, data, closePopup,index,
 
   return (
     <>
-
-    {dataBase.DeckNames[index].paused?
-      null
-      :
-      <Button
-        variant='secondary'
-       className= {'openDeck generalButtonStyling'}
-       style= {{background: bg}}
-        size='sm'
+    
+      <Button 
+       variant='secondary'
+       className= {'openDeck'}
+       size='sm'
+       style= {{
+                opacity: dataBase.DeckNames[index].paused? '0': '1',
+                cursor:  dataBase.DeckNames[index].paused? 'default': 'pointer'
+              }}
         onClick={
           paused
           ?
-            ()=> {alert('Deck is paused')}
+            null
           :
             generateRandom
-        }
-      
-      >Open Deck</Button>
-    }
-      {openDeck &&
+        }     
+      >
+      Open Deck
+      </Button>
+    
+      {
+        openDeck && !dataBase.DeckNames[index].paused &&
+
         <BasicOrangeWindow 
           show={show}
           showRepeat={showRepeat}
@@ -149,38 +155,32 @@ export default function QuestAnswerTrainOverv({name, bg, data, closePopup,index,
           title={`Deck: ${name}`}
           menu={<ThreeDotsBtn
            
-            text={'card'}
-            editName={true}
-            editEvent={() => {
-              setShowAnswer(true)
-              setEdit(true)       
-            }}
-
-            pauseEvent={() => {
-                // handlePause()
-            }}
-            
-            
-            trashEvent={() => {
-
-              setTrash(true)
-           
-              dataBase.checkboxClicked?
-
-              deleteCurrentCard() : setShowDeleteFrame(true)
-
-            }}
-            style={{
-              position: 'absolute', top: '14px', right: '19px', 
-              height: '98px', zIndex: '2000', backgroundColor: 'white',
-              border: '1px solid black', overflow: 'hidden'
-            }}
-            threeDotsContainer = {{position: 'default'}}
+                   text={'card'}
+                   editName={true}
+                   className='threeDotsInQuestionAnswerStyling'
+                   threeDotsContainer = {{position: 'default'}}
+                   index={index}
+                   edit pause trash
           
-            edit pause trash
+                   editEvent={() => {
+                      setShowAnswer(true)
+                      setEdit(true)       
+                    }}
 
-          />}
-        >
+                    pauseEvent={() => {
+                            // handlePause()
+                    }}   
+
+                    trashEvent={() => {
+
+                      setTrash(true)
+
+                    dataBase.checkboxClicked?
+                      deleteCurrentCard() : setShowDeleteFrame(true)
+
+                    }}
+                 />}
+          >
           {
             data[random]
             &&
@@ -246,18 +246,20 @@ export default function QuestAnswerTrainOverv({name, bg, data, closePopup,index,
                 </div>
               }
               {
-                edit
-                && <div className='d-flex justify-content-center'>
-                  <SaveAndDiscard editEvent={() => {
-                    console.log('eh')
-                    setShowAnswer(false)
-                    setEdit(false)
-                  }} />
+                edit && 
+
+                <div className='d-flex justify-content-center'>
+                    <SaveAndDiscard 
+                        editEvent={() => {
+                            setShowAnswer(false)
+                            setEdit(false)
+                        }}                       
+                    />
                 </div>
               }
               {
-                trash && 
-                showDeleteFrame &&
+                trash && showDeleteFrame &&
+
                 <DeleteCardQuestionBox
                   card='card'
                   checked = {checked}

@@ -39,13 +39,13 @@ export default function MenuContainer() {
         <>
 
           <Modal show={show} onHide={handleClose} contentClassName={'modNew'} dialogClassName='align-items-start  pl-3' centered>
-            <Modal.Body className='p-0' style={{position: 'relative', top: '140px'}}>
+            <Modal.Body className='p-0' style={{position: 'relative', top: '42px', left: '10px'}}>
               <div className='menuStyling' onClick={()=>{setShow(false)}}>
                 <Icons icons={[
-                  { src: statsIcon, alt: 'statsIcon', href: 'stats', style: {  width: 'calc(100% / 3)',  padding: '3px' } },
+                  { src: statsIcon, alt: 'statsIcon', href: 'stats', style: {  width: 'calc(100% / 3)',  padding: '3px', paddingLeft: '15px' } },
                   { src: settingsIcon, alt: 'settingsIcon', href: 'settings', style: {  width: 'calc(100% / 3)', padding: '3px', 
-                  borderLeft: '2px solid black', borderRight: '2px solid black' } },
-                  { src: logoutIcon, alt: 'logoutIcon', href: 'logout', style: { width: 'calc(100% / 3)', padding: '3px' 
+                  borderLeft: '2px solid black', borderRight: '2px solid black', paddingLeft: '15px' } },
+                  { src: logoutIcon, alt: 'logoutIcon', href: 'logout', style: { width: 'calc(100% / 3)', padding: '3px', paddingLeft: '15px'
                   } }
                 ]}
                 />

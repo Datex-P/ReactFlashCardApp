@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap'
 import { Context } from '../../Context'//step 4.1 import context instance
 import redCross from '../../icons/redCross.svg'
 
-export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDisplay, setShowDeck, close }) 
+export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDisplay, setShowDeck, close, setActive}) 
 
 {
   const { dataBase, setDataBase } = useContext(Context)
@@ -14,7 +14,7 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
     let newDataBase = { ...dataBase }
 
 
-    if (inputField in newDataBase.DeckNames) {
+    if (newDataBase.DeckNames.find(deck=>deck.name ===inputField)) {
 
       
       alert('Name of Deck already exists')
@@ -39,11 +39,13 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
     
     else {
       console.log('it works')
-      newDataBase.DeckNames[inputField] = {
+      let index = newDataBase.DeckNames.push({        
+        name: inputField,
         data: [],
         toStudyGoal: 20,
         cardsToday: 0
-      }
+      })
+        setActive(index-1)
       setDataBase(newDataBase)
       close()
     }

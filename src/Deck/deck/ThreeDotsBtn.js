@@ -11,11 +11,16 @@ import {withRouter} from 'react-router-dom'
 
 
 
-function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
+function ThreeDotsBtn({  
+  
+  text, showFromParent, style, 
+  className, editName, nameOfTopDeck, 
+  index, input, threeDotsContainer,
+  
+  setShowFromParent = () => { },
   editEvent = () => { }, 
-  trashEvent = () => { }, 
-  style,edit=false,trash=false,pause=false,reset=false, className, 
-  editName, nameOfTopDeck, index, input, threeDotsContainer
+  trashEvent = () => { },
+  edit=false,trash=false,pause=false,reset=false,
 }) {
 
   const [startAnimation, setStartAnimation] = useState(false)
@@ -24,7 +29,7 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
   const [show, setShow] = useState(showFromParent);
   const {dataBase, setDataBase} = useContext(Context);
 
-
+  let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
 
   const handleClick = () => {
     setShow(!show);
@@ -41,7 +46,6 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
     //delete newDataBase.DeckNames[name]
     console.log(newDataBase)
     setDataBase(newDataBase)
-  
   }
 
 
@@ -75,65 +79,107 @@ function ThreeDotsBtn({ text, showFromParent, setShowFromParent = () => { },
 
 
   return (
+    <>
+    {
+      index&& dataBase?.DeckNames[index].paused?
+    
+      null
+    :
+
     <div style={threeDotsContainer}>
+
       <div 
-       onClick={editName? handleClick: ()=>{} } 
-      className='rotateLittleModal' style={{height: '24px'}}>...</div>
+
+        className='rotateLittleModal' style={{height: '24px'}}
+        onClick={
+                editName? 
+                handleClick                
+                : 
+                ()=>{} 
+                } 
+      >
+              ...
+      </div>
 
       {show
         &&
         
         <div 
           ref={ref}
-         style={style}
+          style={style}
           className={`ml-2 rounded mt-2 ${className}`}>
-          {edit&&<button onClick={handleEdit}
+          {
+            edit&&
 
-            className='buttonStyling flexAlignCenter outline-none p-1 '>
-            <img className={
-              startAnimation ? 'blinkingIcon':''} 
-              src={editName? editimg: saveimg} 
-
-              alt='edit' style={{ marginRight: '3px' }} />{text}</button>}       
+            <button 
+                    onClick={handleEdit} 
+                    className='buttonStyling flexAlignCenter outline-none p-1 '>
+                    
+                    <img className={startAnimation ? 'blinkingIcon':''} 
+                         src={editName? editimg: saveimg} 
+                         alt='edit' 
+                         style={{ marginRight: '3px' }}              
+                     />
+                      
+                      {text}
+            </button>}       
           {
             pause&&
+
             <button className='buttonStyling flexAlignCenter outline-none p-1 '
-            style={{ borderTop: '1px solid black', borderBottom: '1px solid black' }
-            }
-             onClick={handlePause}
+                    style={{ borderTop: '1px solid black', borderBottom: '1px solid black' ,
+                            borderLeft: dataBase.DeckNames[index].paused? '1px solid black': null,
+                            borderRight: dataBase.DeckNames[index].paused? '1px solid black': null,
+                            borderRadius: dataBase.DeckNames[index].paused? '5px': null
+                          }}
+
+                    onClick={handlePause}
              >
-            <img src={ pauseIsActive? pauseimg: playimg}  alt='pause' 
-                 style={{ marginRight: '3px' }} />
-                 {text}
-          </button>
+                <img src={ pauseIsActive? pauseimg: playimg}  
+                     alt='pause' 
+                     style={{ marginRight: '3px'}} 
+                />
+                {text}
+             </button>
           }
           {
-            trash &&<button 
+            trash && 
+            
+            <button 
 
-            onClick={() => {
-              trashEvent()
-              setShow(false)
-            }}
-            className='buttonStyling flexAlignCenter outline-none p-1 '>
+              className='buttonStyling flexAlignCenter outline-none p-1 '
+              onClick={() => {
+                  trashEvent()
+                  setShow(false)
+              }}
+            >
 
-            <img src={trashimg} alt='trash' style={{ marginRight: '3px' }} />{text}
-          </button>
+               <img src={trashimg} alt='trash' style={{ marginRight: '3px' }} 
+               />
+               {text}
+            </button>
           }
           {
-            reset &&<button 
+            reset &&
+            
+            <button 
 
-            onClick={() => {
-             
-            }
-            }
-            className='buttonStyling flexAlignCenter outline-none p-1 '>
+              className='buttonStyling flexAlignCenter outline-none p-1 '
+              onClick={() => {}
+                }
+            >
 
-            <img src={resetimg} alt='reset' style={{ marginRight: '3px', width: '23px', height: '23px'}} />{text}
-          </button>
+              <img src={resetimg} alt='reset' style={{ marginRight: '3px', width: '23px', height: '23px'}}  
+              />
+              {text}
+
+            </button>
           }
         </div>
       }
-    </div>
+    </div>   
+    }
+    </>
   );
 }
 

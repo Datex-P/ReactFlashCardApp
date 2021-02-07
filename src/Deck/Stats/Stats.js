@@ -12,23 +12,16 @@ import DeleteCardQuestionBox from '../deck/DeleteCardQuestionBox'
 function Stats({ history}) {
 
   const [showDeleteFrame, setShowDeleteFrame] = useState(false)
-
-
-
-
   const [checked, setChecked] = useState(false)
   const [show, setShow] = useState(false);
-
-
-
-
-
-
 
 
   function setShowFunc() {
     history.push('/')
   }
+
+
+
 
   return (
     <div style={{
@@ -48,6 +41,11 @@ function Stats({ history}) {
             trashEvent={() => {
               setShowDeleteFrame(true)
             }}
+
+            // pauseEvent={() => {
+            //     // handlePause()
+            // }}
+            
 
             style={{
               position: 'absolute',
@@ -102,12 +100,10 @@ function Stats({ history}) {
 
         <div style={{width: '200px'}}>
 
-
         </div>
 
         <TimeAndProgess 
   
-
         />
 
       </BasicOrangeWindow>
