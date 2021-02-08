@@ -61,6 +61,7 @@ export default function DeckContainer() {
   return (
 
     !loadSpinner && dataBase ?
+
       <>
         <NavBar />
         <Container 
@@ -125,10 +126,9 @@ export default function DeckContainer() {
                         scrollHandler(event);
                       }}
                   >
-                      <div style={{ 
-                                  height: '1000px', position: 'absolute', top: '0px', width: '100%' 
-                                }}
-                      >                        
+                      <div style={{height: '1000px', position: 'absolute', top: '0px', width: '100%'}}
+                      >
+                                              
                       </div>
                   </div>
               </div>

@@ -38,6 +38,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
         className='d-flex justify-content-center align-items-center'
       >
         <div>
+
             <img 
                 src={questionMark} 
                  style={{ width: '40px', position: 'absolute', top: '-47px', right: '-10px'}}
@@ -48,7 +49,8 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
                style={{ width: '40px', position: 'absolute', top: '-65px', right: '-30px'}}
                alt='questionMark'              
             />
-      </div>
+
+        </div>
         <Modal.Header 
             closeButton 
         >
@@ -59,12 +61,13 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
                 >
                   <div>
              
-                  <img src={flashcards} 
-                       style={{ width: '26px', height: 'fit-content', marginRight: '20px' }}
-                       className='d-flex justify-content-center align-items-center' 
-                       alt='flashcards'                         
-                  />
+                      <img src={flashcards} 
+                          style={{ width: '26px', height: 'fit-content', marginRight: '20px' }}
+                          className='d-flex justify-content-center align-items-center' 
+                          alt='flashcards'                         
+                      />
                   </div>
+
                   <div>  Delete {card} </div>
               </div>
             </Modal.Title>
@@ -81,6 +84,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
                 className='d-flex justify-content-around align-items-center' 
                 style={{width: '100%'}}
             >
+            
                 <div 
                     style={{ display: 'flex', justifyContent: 'space-around', width: '75%' }}
                 >
@@ -107,13 +111,13 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
 
 
       <div 
-          style = {{
-            width: '300px', position: 'absolute', top: '175px'
+          style = {{width: '300px', position: 'absolute', top: '175px'
           }} 
           className='d-flex justify-content-center'
       >
 
           <div style={{width: '40px'}}>
+
               <input 
                   style= {{width: '45px'}} 
                   type='checkbox' 
@@ -121,11 +125,9 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
               />
     
           </div>
+
           <div 
-              style={{ 
-                  width: '200px',  
-                  zIndex: '2', 
-                  color: 'white' 
+              style={{ width: '200px', zIndex: '2', color: 'white' 
               }}
           >
             Don't show message again

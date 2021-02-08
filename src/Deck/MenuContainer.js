@@ -36,19 +36,22 @@ export default function MenuContainer() {
                     style={{ top: show ? '8px' : '0px' }}
                 >
                 </div>
+                
                 {
                   !show && 
+                  
                       <div 
                           className={'menuIcon'} 
                           style={{ top: '8px' }}
                       >                  
                       </div>
                 }
+
                 <div 
                     className={'menuIcon ' + (show ? 'transMinus' : ' ')} 
-                    style={{ 
-                            top: show ? '8px' : '16px' }}
-                >                  
+                    style={{top: show ? '8px' : '16px' }}
+                >  
+
                 </div>
             </div>
         </div>
@@ -86,7 +89,8 @@ export default function MenuContainer() {
                                         alt: 'settingsIcon', 
                                         href: 'settings', 
                                         style: {  width: 'calc(100% / 3)', padding: '3px', 
-                                        borderLeft: '2px solid black', borderRight: '2px solid black', paddingLeft: '15px' 
+                                        borderLeft: '2px solid black', 
+                                        borderRight: '2px solid black', paddingLeft: '15px' 
                                                 } 
                                         },
                                       { 

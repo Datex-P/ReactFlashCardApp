@@ -3,7 +3,7 @@ import redCross from '../../icons/redCross.svg'
 
 export default function BasicOrangeWindow({
               children, show, setShow,title,menu, 
-              setShowAnswer,
+              setShowAnswer = () => {},
               setEdit = () =>{} , 
               setShowRepeat = () => {}
             }) {

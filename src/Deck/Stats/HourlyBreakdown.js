@@ -37,8 +37,9 @@ export default function HourlyBreakdown() {
                   onChange={handleMonths}
               />
 
-              <label style={{ margin: '5px' }}>
-              
+              <label style={{ margin: '5px' }}
+              >
+                            
                   {comp}
               
               </label>

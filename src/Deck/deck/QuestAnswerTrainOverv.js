@@ -13,6 +13,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
   
   const [checked, setChecked] = useState(false)
   const [edit, setEdit] = useState(false);
+  const [pauseIsActive, setPauseIsActive] = useState(true);
   const [random, setRandom] = useState(null);
   
   const [show, setShow] = useState(false);
@@ -20,9 +21,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
   const [showRepeat, setShowRepeat] = useState(false);
   
   const [showDeleteFrame, setShowDeleteFrame] = useState(true)
-  const [pauseIsActive, setPauseIsActive] = useState(true)
   const [timer, setTimer] = useState(null)
-  
   const [trash, setTrash] = useState(false);
   const [openDeck, setOpenDeck] = useState(true)
   
@@ -124,20 +123,20 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
     <>
     
       <Button 
-       variant='secondary'
-       className= {'openDeck'}
-       size='sm'
-       style= {{
-                opacity: dataBase.DeckNames[index].paused? '0': '1',
-                cursor:  dataBase.DeckNames[index].paused? 'default': 'pointer'
-              }}
-        onClick={
-          paused
-          ?
-            null
-          :
-            generateRandom
-        }     
+          variant='secondary'
+          className= {'openDeck'}
+          size='sm'
+          style= {{
+                    opacity: dataBase.DeckNames[index].paused? '0': '1',
+                    cursor:  dataBase.DeckNames[index].paused? 'default': 'pointer'
+                  }}
+            onClick={
+              paused
+              ?
+                null
+              :
+                generateRandom
+            }     
       >
       Open Deck
       </Button>
@@ -171,15 +170,18 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                             // handlePause()
                     }}   
 
-                    trashEvent={() => {
-
+                    trashEvent={
+                      () => {
                       setTrash(true)
 
                     dataBase.checkboxClicked?
-                      deleteCurrentCard() : setShowDeleteFrame(true)
-
-                    }}
-                 />}
+                      deleteCurrentCard() 
+                      : 
+                      setShowDeleteFrame(true)
+                    }
+                    }
+                 />
+                }
           >
           {
             data[random]
@@ -203,11 +205,13 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                   style={{ width: '40%' }}
                   class='p-1'
                   variant='secondary'
-                  onClick={() => {
+                  className='showAnswer my-5'
+                  onClick={
+                    () => {
                     setShowAnswer(true)
                     setShowRepeat(true)
-                  }}
-                  className='showAnswer my-5'
+                  }
+                  }
                 >
                   Show answer
                 </Button>
@@ -215,40 +219,52 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
               {
                 showRepeat
                 &&
-                <div className="d-flex justify-content-between px-3">
+                <div 
+                    className='d-flex justify-content-between px-3'
+                >
 
-                  {dataBase.userTimePreferences.map((col, k) =>
-                    <RepeatBtn
-                      btn={col.name}
-                      onClick={() => {
-                        setShowAnswer(!showAnswer)
-                        setShowRepeat(false)
-                      }}
-                      label={'<' + col.amount + col.unit}
-                    />
-                  )}
+                    {
+                      dataBase.userTimePreferences.map((col, k) =>
+                          <RepeatBtn
+                              btn={col.name}
+                              onClick={() => {
+                                  setShowAnswer(!showAnswer)
+                                  setShowRepeat(false)
+                              }}
+                              label={'<' + col.amount + col.unit}
+                          />
+                      )
+                      }
                 </div>
               }
               {
                 showAnswer
                 &&
-                <div className='mt-4'>
-                  <p className='questionAnswerStyling'>Answer</p>
-                  <FormControl
-                    as="textarea"
-                    aria-label="With textarea"
-                    value={data[random].answer}
-                    className='w-100'
-                    disabled={!edit}
-                    name='answer'
-                    onChange={changeHandler}
-                  />
+                <div 
+                    className='mt-4'
+                >
+                    <p 
+                      className='questionAnswerStyling'
+                    >
+                        Answer
+                    </p>
+                    <FormControl
+                        as="textarea"
+                        aria-label="With textarea"
+                        value={data[random].answer}
+                        className='w-100'
+                        disabled={!edit}
+                        name='answer'
+                        onChange={changeHandler}
+                    />
                 </div>
               }
               {
                 edit && 
 
-                <div className='d-flex justify-content-center'>
+                <div     
+                    className='d-flex justify-content-center'
+                >
                     <SaveAndDiscard 
                         editEvent={() => {
                             setShowAnswer(false)

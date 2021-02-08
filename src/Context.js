@@ -16,6 +16,7 @@ export default function ContextProvider({ children }) {
 
   useEffect(() => {
     let dB = {
+
       DeckNames: [],
       active:null,
       queue: [],
@@ -68,6 +69,7 @@ export default function ContextProvider({ children }) {
 
     for (let i = 100; i < 105; i++) {
       let arr = [];
+
       for (let i = 1; i < 10; i++) {
         arr.push({
           question: `question${i}`,
@@ -95,11 +97,13 @@ export default function ContextProvider({ children }) {
 
     setDataBase(dB)
   }, []);
+  
   return (
 
     <Context.Provider value={{ dataBase, setDataBase, styles, setStyles }} >{/*step 2 declearing some value and creating provider*/}
 
       {children}
+
     </Context.Provider>
 
   )

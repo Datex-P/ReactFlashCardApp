@@ -112,10 +112,8 @@ input[type="checkbox"] {
   background-color: transparent !important; 
   /* background-color: blue !important; */
   border: none !important;
-  margin: auto;
+  margin: 0 auto;
   padding: 0px !important;
-  position: absolute;
-  top: -390px;
   width:99% !important;
 }
 

@@ -3,7 +3,7 @@ import BasicOrangeWindow from '../deck/BasicOrangeWindow'
 import ThreeDotsBtn from '../deck/ThreeDotsBtn'
 import { withRouter } from 'react-router-dom'
 import PieDiagramm from './PieDiagramm';
-import TimeAndProgess from './TimeAndProgress.js'
+import TimeAndProgress from './TimeAndProgress.js'
 import HourlyBreakdown from './HourlyBreakdown.js'
 import DeleteCardQuestionBox from '../deck/DeleteCardQuestionBox'
 
@@ -14,7 +14,7 @@ function Stats({ history}) {
   const [showDeleteFrame, setShowDeleteFrame] = useState(false)
   const [checked, setChecked] = useState(false)
   const [show, setShow] = useState(false);
-
+  
 
   function setShowFunc() {
     history.push('/')
@@ -30,6 +30,7 @@ function Stats({ history}) {
       <BasicOrangeWindow
         show={true}
         setShow={setShowFunc}
+  
         title={'Stats'}
 
         menu={
@@ -115,9 +116,7 @@ function Stats({ history}) {
 
         </div>
 
-        <TimeAndProgess 
-  
-        />
+        <TimeAndProgress/>
 
       </BasicOrangeWindow>
 

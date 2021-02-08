@@ -1,6 +1,6 @@
 
 
-export default function TimeAndProgess() {
+export default function TimeAndProgress() {
   let studyGoal = 80
   let timeObj = {
     5: 15,
@@ -11,9 +11,11 @@ export default function TimeAndProgess() {
   let widthAdjusted = Math.round(currentProgress) + 120;
 
   function renderLines() {
+
     let arr = []
     let previousWidthVar = 0
     for (let i = 5; i <= 25; i += 4) {
+
       if (i in timeObj) {
         let widthVar = (timeObj[i] || 0) / studyGoal * 100
         previousWidthVar += widthVar
@@ -52,44 +54,64 @@ export default function TimeAndProgess() {
       > 
         <div style={{ marginLeft: '10px', border: '1px solid black', width: '81px', paddingLeft: '3px', height: '24px'}}
         >
-        Study Goal
+
+            Study Goal
         </div>
+
         <div 
-        className='progressBar' 
-        style={{ marginLeft: '21px' }}>
-          <div
-            style={{
-              backgroundColor: 'orange',
-              color: 'black',
-              width: `${Object.values(timeObj).reduce((sum, i) => sum += i, 0) / studyGoal * 100}%`,
-              height: '10px'
-            }}>
-
+            className='progressBar' 
+            style={{ marginLeft: '21px' }}
+        >
+            <div
+                style={{
+                      backgroundColor: 'orange',
+                      color: 'black',
+                      width: `${Object.values(timeObj).reduce((sum, i) => sum += i, 0) / studyGoal * 100}%`,
+                      height: '10px'
+                }}
+            >
           </div>
-        </div>
-        <div style={{
-          position: 'absolute', top: '1px', left: `${widthAdjusted}px`, fontSize: '13px'
-        }}>
-          {currentProgress.toFixed(0)}%
-       </div>
-        </div> 
-        {renderLines()}
-      
 
+        </div>
+
+        <div style={{position: 'absolute', top: '1px', left: `${widthAdjusted}px`, fontSize: '13px'}}
+        >
+
+            {currentProgress.toFixed(0)}%
+
+       </div>
+
+       </div> 
+
+
+    {renderLines()}      
     </div>
 
   )
 }
 
 function Row({ time,previousWidthVar, widthVar }) {
+  
   return (
-    <div className='d-flex'>
-      <div className='time'>{time}</div>
-      <div className='progressBar'>
-        <div style={{ marginLeft: `${previousWidthVar}%`, backgroundColor: 'orange', width: `${widthVar}%`, height: '10px' }}>
 
+    <div className='d-flex'
+    >
+
+        <div className='time'
+        >
+            {time}
         </div>
+
+      <div className='progressBar'
+      >
+
+          <div style={{ marginLeft: `${previousWidthVar}%`, backgroundColor: 'orange', width: `${widthVar}%`, height: '10px' }}
+          >
+
+          </div>
+
       </div>
+
     </div>
   )
 }

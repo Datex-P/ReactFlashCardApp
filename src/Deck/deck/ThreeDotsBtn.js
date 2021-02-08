@@ -11,17 +11,16 @@ import {withRouter} from 'react-router-dom'
 
 
 
-function ThreeDotsBtn({  
-  
-  text, showFromParent, style, className, editName, nameOfTopDeck, 
-  index, input, threeDotsContainer, setEditName,
-  
-  setShowFromParent = () => { },
-  editEvent = () => { }, 
-  trashEvent = () => { },
+function ThreeDotsBtn({    
+                        text, showFromParent, style, className, editName, nameOfTopDeck, 
+                        index, input, threeDotsContainer, setEditName,
+                        
+                        setShowFromParent = () => { },
+                        editEvent = () => { }, 
+                        trashEvent = () => { },
 
-  edit=false,trash=false,pause=false,reset=false,
-}) 
+                        edit=false,trash=false,pause=false,reset=false,
+                      }) 
 
 {
 
@@ -31,7 +30,6 @@ function ThreeDotsBtn({
   const [show, setShow] = useState(showFromParent);
   const {dataBase, setDataBase} = useContext(Context);
 
-  let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
 
   const handleClick = () => {
     setShow(!show);
@@ -123,8 +121,10 @@ function ThreeDotsBtn({
                      src={editName? editimg: saveimg} 
                      alt='edit' 
                      style={{ marginRight: '3px' }}              
-                />      
+                /> 
+
                {text}
+
             </button>
           }       
           {
@@ -161,6 +161,7 @@ function ThreeDotsBtn({
                <img src={trashimg} 
                     alt='trash' style={{ marginRight: '3px' }} 
                />
+
                {text}
             </button>
           }
@@ -177,6 +178,7 @@ function ThreeDotsBtn({
                   alt='reset' 
                   style={{ marginRight: '3px', width: '23px', height: '23px'}}  
               />
+              
               {text}
 
             </button>
