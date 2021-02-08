@@ -6,7 +6,9 @@ import ContextProvider from './Context';
 
 
 ReactDOM.render(
-  <ContextProvider>{/* step 3 cover required parent component with context state */}
+
+  <ContextProvider>{/* step 3 cover required parent component with context state */}   
+   
     <React.StrictMode>
     
      <App/>

@@ -15,45 +15,94 @@ export default function MenuContainer() {
   const handleClose = () => setShow(false);
 
   return (
-    <div style={{
-
-       backgroundColor: dataBase && styles.backgroundColor[dataBase.userPreferences.backgroundColor],
-
-      zIndex: '100',
-      borderTopLeftRadius: '5px', borderTopRightRadius: '5px', width: '504px',
-    }}
-      className='mx-auto'
+    <div 
+        className='mx-auto'
+        style={{
+                backgroundColor: dataBase && styles.backgroundColor[dataBase.userPreferences.backgroundColor],
+                zIndex: '100', borderTopLeftRadius: '5px', borderTopRightRadius: '5px', width: '504px'
+                }}
     >
-      <div className='menu flexColumnAlignCenter p-3'
-      >
-        <div style={{fontSize: '18px'}}>Menu</div>
-        <div className='menuContainer flexColumnAlignCenter' onClick={() => setShow(!show)}>
-          <div className={'menuIcon ' + (show ? 'transPlus' : ' ')} style={{ top: show ? '8px' : '0px' }}></div>
-          {!show && <div className={'menuIcon'} style={{ top: '8px' }}></div>}
-          <div className={'menuIcon ' + (show ? 'transMinus' : ' ')} style={{ top: show ? '8px' : '16px' }}></div>
+        <div className='menu flexColumnAlignCenter p-3'
+        >
+            <div style={{fontSize: '18px'}}>
+                    Menu
+            </div>
+            <div 
+                className='menuContainer flexColumnAlignCenter' 
+                onClick={() => setShow(!show)}
+            >
+                <div 
+                    className={'menuIcon ' + (show ? 'transPlus' : ' ')} 
+                    style={{ top: show ? '8px' : '0px' }}
+                >
+                </div>
+                {
+                  !show && 
+                      <div 
+                          className={'menuIcon'} 
+                          style={{ top: '8px' }}
+                      >                  
+                      </div>
+                }
+                <div 
+                    className={'menuIcon ' + (show ? 'transMinus' : ' ')} 
+                    style={{ 
+                            top: show ? '8px' : '16px' }}
+                >                  
+                </div>
+            </div>
         </div>
-      </div>
 
-      {
-        show &&
-        <>
-
-          <Modal show={show} onHide={handleClose} contentClassName={'modNew'} dialogClassName='align-items-start  pl-3' centered>
-            <Modal.Body className='p-0' style={{position: 'relative', top: '42px', left: '10px'}}>
-              <div className='menuStyling' onClick={()=>{setShow(false)}}>
-                <Icons icons={[
-                  { src: statsIcon, alt: 'statsIcon', href: 'stats', style: {  width: 'calc(100% / 3)',  padding: '3px', paddingLeft: '15px' } },
-                  { src: settingsIcon, alt: 'settingsIcon', href: 'settings', style: {  width: 'calc(100% / 3)', padding: '3px', 
-                  borderLeft: '2px solid black', borderRight: '2px solid black', paddingLeft: '15px' } },
-                  { src: logoutIcon, alt: 'logoutIcon', href: 'logout', style: { width: 'calc(100% / 3)', padding: '3px', paddingLeft: '15px'
-                  } }
-                ]}
-                />
-              </div>
-            </Modal.Body>
-          </Modal>
-        </>
-      }
+        {
+          show &&
+          <>
+              <Modal 
+                  show={show} 
+                  onHide={handleClose} 
+                  contentClassName={'modNew'} 
+                  dialogClassName='align-items-start  pl-3' 
+                  centered
+              >
+                  <Modal.Body 
+                      className='p-0' 
+                      style={{position: 'relative', top: '42px', left: '10px'
+                              }}
+                  >
+                      <div 
+                          className='menuStyling' 
+                          onClick={()=>{setShow(false)}}
+                      >
+                          <Icons 
+                              icons={[
+                                      { 
+                                      src: statsIcon, 
+                                      alt: 'statsIcon', 
+                                      href: 'stats', 
+                                      style: {  width: 'calc(100% / 3)',  padding: '3px', paddingLeft: '15px' 
+                                             } 
+                                      },
+                                      {
+                                        src: settingsIcon, 
+                                        alt: 'settingsIcon', 
+                                        href: 'settings', 
+                                        style: {  width: 'calc(100% / 3)', padding: '3px', 
+                                        borderLeft: '2px solid black', borderRight: '2px solid black', paddingLeft: '15px' 
+                                                } 
+                                        },
+                                      { 
+                                        src: logoutIcon, 
+                                        alt: 'logoutIcon', 
+                                        href: 'logout', 
+                                        style: { width: 'calc(100% / 3)', padding: '3px', paddingLeft: '15px'
+                                                } 
+                                      }
+                                    ]}
+                          />
+                      </div>
+                  </Modal.Body>
+              </Modal>
+          </>
+        }
     </div>
   )
 }
@@ -62,6 +111,6 @@ export default function MenuContainer() {
 
 function Icons({ icons }) {
   return (
-    icons.map((icon, key) => <Icon key={key} {...icon} />)
+      icons.map((icon, key) => <Icon key={key} {...icon} />)
   )
 }

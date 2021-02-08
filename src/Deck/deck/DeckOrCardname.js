@@ -11,19 +11,18 @@ export default function DeckOrCardname({ name, index}) {
 
   return (
 
-    <div 
+    <div   
+        onMouseEnter={
     
-      onMouseEnter={
-    
-        name.length > 14 && !dataBase.DeckNames[index].paused ? 
-        ()=> {setHovered(true) }
-       
-        :
-       
-        null
-      }
+          name.length > 14 && !dataBase.DeckNames[index].paused ? 
+          ()=> {setHovered(true) }
 
-      onMouseLeave={
+          : 
+
+          null
+        }
+        
+        onMouseLeave={
 
         () => { setHovered(false)}
     
@@ -34,8 +33,12 @@ export default function DeckOrCardname({ name, index}) {
         position: 'relative',
         top: '4px', 
         cursor: name.length > 13 && !dataBase.DeckNames[index].paused ? 'pointer' : 'default',
-        width: '148px', 
-        background: colors[index % 5]
+        width: '201px',
+        paddingLeft: '7px',
+        background: colors[index % 5],
+        borderRadius: '5px',
+        // paddingLeft: '7px',
+        // paddingTop: '2px'
       }}
     >
       {
@@ -43,7 +46,6 @@ export default function DeckOrCardname({ name, index}) {
           ?
           <div
               style={{
-
               zIndex: 30000,
               width: '146px',
               height: '33px',

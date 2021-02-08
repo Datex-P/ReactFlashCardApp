@@ -24,9 +24,9 @@ function Stats({ history}) {
 
 
   return (
-    <div style={{
-    
-    width: '70%', height: '50%'}}>
+    <div style={{width: '70%', height: '50%'}}
+    >
+
       <BasicOrangeWindow
         show={true}
         setShow={setShowFunc}
@@ -63,12 +63,19 @@ function Stats({ history}) {
 
         <div>
 
-          <div style={{ width: '216px', textAlign: 'center', margin: 'auto', fontWeight: 'bold', fontSize: '17px' }}>Today's study breakdown</div>
+          <div style={{ width: '216px', textAlign: 'center', margin: 'auto', fontWeight: 'bold', fontSize: '17px' }}
+          >
+              Today's study breakdown
+          </div>
 
-          <div style={{ marginBottom: '10px', border: '1px solid black' }} className='d-flex flex-direction column align-items-center'>
+          <div 
+              style={{ marginBottom: '10px', border: '1px solid black' }} 
+              className='d-flex flex-direction column align-items-center'
+          >
 
-        {
-          showDeleteFrame &&
+            {
+              showDeleteFrame &&
+              
                 <DeleteCardQuestionBox
                   card='card'
                   checked = {checked}
@@ -80,13 +87,19 @@ function Stats({ history}) {
                  
                   }}
                   />
-                  }
-
+              }
 
             <PieDiagramm />
 
           </div>
-          <div className='theWordCalendar' style={{ marginTop: '20px', marginBottom: '3px', textAlign: 'center' }}>Calendar</div>
+
+          <div 
+              className='theWordCalendar' 
+              style={{ marginTop: '20px', marginBottom: '3px', textAlign: 'center' }}
+          >
+              Calendar
+
+          </div>
 
           <div className='d-flex align-items-center justify-content-center'>
 
@@ -131,25 +144,34 @@ function ButtonLeftAndRight() {
   };
 
   return (
+
     <div style={{display: 'flex', flexDirection: 'column'}}>
-      <div className='d-flex justify-content-center align-items-center' style={{marginTop: '-10px'}}>
-      {
+
+      <div 
+          className='d-flex justify-content-center align-items-center' 
+          style={{marginTop: '-10px'}}>
+
+          {
         
-        ['<', year, '>'].map(el =>
+            ['<', year, '>'].map(el =>
 
-          <div style={{ cursor: el === year ? 'default' : 'pointer', margin: el === year ? '5px' : '', width: '33px' }}
+              <div style={{ cursor: el === year ? 'default' : 'pointer', margin: el === year ? '5px' : '', width: '33px' }}
 
-            className={el !== year ? 'd-flex justify-content-center align-items-center calendarButtons' : ' align-items-center flex justify-content-center'}
+                className={el !== year ? 'd-flex justify-content-center align-items-center calendarButtons' : 
+                          ' align-items-center flex justify-content-center'}
 
-            onClick={el === '<' && el !== year ?
-              handleDecrement : handleIncrement
-            }
-          >
-            {el}
-          </div>
-        )
-      }
+                onClick={el === '<' && el !== year ?
+                  handleDecrement : handleIncrement
+                }
+              >
+
+                {el}
+              </div>
+              )
+          }
+
       </div>
+
         <RenderDays />
     </div>
   )
@@ -180,14 +202,19 @@ function RenderDays () {
 
 return (
 
-<div className= 'yearBoxContainer'>
-  {
-    days.map(day=>
-      <div className='day'></div>
-    )
-  }
-</div>
-)
+    <div className= 'yearBoxContainer'>
+
+        {
+          days.map(day=>
+          <div className='day'
+          >
+
+          </div>
+        )
+        }
+
+  </div>
+  )
 
 }
 

@@ -72,6 +72,7 @@ export default function ChartComp() {
     };
 
     function updateChart() {
+      
       config.data.datasets[0].data = [10, 20, 30, 40, 50];
       config.data.datasets[0].backgroundColor = ['green', 'blue', 'yellow',
         'purple', 'red'];

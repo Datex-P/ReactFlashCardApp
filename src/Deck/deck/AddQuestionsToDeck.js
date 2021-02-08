@@ -33,71 +33,107 @@ export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
   return (
     
     <div>
-      <button 
+        <button 
+            className={'addNewCardsButton outline-none'}
+            style= {{
+              background: dataBase.DeckNames[index].paused? bg: null,
+              cursor: dataBase.DeckNames[index].paused? 'default': 'pointer'
+              }}
         
-      onClick={dataBase.DeckNames[index].paused?
-      null:
-      () => { closePopup(); setShow(true) }} 
-      
-      className={'addNewCardsButton outline-none'}
-      style= {{background: dataBase.DeckNames[index].paused? bg: null,
-              cursor: dataBase.DeckNames[index].paused? 'default': 'pointer'}}
-      >
+            onClick={
+            
+            dataBase.DeckNames[index].paused?
+            
+            null
+            :            
+            () => { 
+              closePopup(); 
+              setShow(true)
+              }
+            } 
+        >
         +
       </button>
       
-      
-        
       <Modal
         show={show}
-        onHide={() => setShow(false)}
         contentClassName={'mod'}
-        backdrop="static"
+        backdrop='static'
+        onHide={
+          () => setShow(false)
+          }
         
       >
-        <Modal.Header className='border-bottom-0'>
-          <Modal.Title style={{ fontSize: '16px' }}>
+          <Modal.Header className='border-bottom-0'
+          >
+              <Modal.Title style={{fontSize: '16px'}}
+              >
 
-          Deck: {name}
-          
-          </Modal.Title>
+                  Deck: {name}
+              
+              </Modal.Title>
 
-          <button className='redCross' onClick={() => setShow(false)} ><img src={redCross} alt='redCross' /></button>
-        </Modal.Header>
-        <Modal.Body >
+              <button 
+                  className='redCross' 
+                  onClick={
+                          () => setShow(false)
+                          }
+                >
+                    <img 
+                        src={redCross} 
+                        alt='redCross'                           
+                    />
+              </button>
+            </Modal.Header>
+            <Modal.Body >
 
-          <div className='mb-2'>
-            <p className='questionAnswerStyling'>Question</p>
-            <FormControl
-              as="textarea"
-              aria-label="With textarea"
-              value={card.question} className='w-100'
-              name='question'
-              onChange={changeHandler}
-            />
-          </div>
+                <div className='mb-2'
+                >
+                    <p 
+                        className='questionAnswerStyling'
+                    >
+                        Question
+                    </p>
 
+                    <FormControl
+                        as="textarea"
+                        aria-label="With textarea"
+                        value={card.question} 
+                        className='w-100'
+                        name='question'
+                        onChange={changeHandler}
+                    />
 
-          <div className='mt-5'>
-            <p className='questionAnswerStyling'>Answer</p>
-            <FormControl
-              as="textarea"
-              aria-label="With textarea"
-              value={card.answer}
-              className='w-100'
-              name='answer'
-              onChange={changeHandler}
-            />
-          </div>
+                </div>
+                <div className='mt-5'
+                >
+                    <p className='questionAnswerStyling'
+                      >
+                      Answer
+                    </p>
+                    <FormControl
+                      as="textarea"
+                      aria-label="With textarea"
+                      value={card.answer}
+                      className='w-100'
+                      name='answer'
+                      onChange={changeHandler}
+                    />
 
-          <button onClick={addToDeck}
-                  className='generalButtonStyling'
-                  style={{width: '110px', marginTop: '20px', padding: '5px', boxSizing: 'border-box', marginLeft: '8px'}}>
-            Add to Deck
-          </button>
+                </div>
 
+                <button 
+                    onClick={addToDeck}
+                    className='generalButtonStyling'
+                    style={{
+                            width: '110px', marginTop: '20px', padding: '5px', boxSizing: 'border-box', marginLeft: '8px'
+                            }}
+                >
+                    Add to Deck
+                </button>
 
-        </Modal.Body>
+            </Modal.Body>
+
       </Modal>
       
     </div>

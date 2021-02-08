@@ -2,6 +2,7 @@
 export default function SaveAndDiscard({ editEvent }) {
 
   return (
+    
     <div className='saveAndDiscardContainer d-flex justify-content-around align-items-center'>
 
       {

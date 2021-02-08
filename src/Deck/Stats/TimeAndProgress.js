@@ -50,8 +50,13 @@ export default function TimeAndProgess() {
        <div
         className='d-flex'
       > 
-        <div style={{ marginLeft: '10px', border: '1px solid black', width: '81px', paddingLeft: '3px', height: '24px'}}>Study Goal</div>
-        <div className='progressBar' style={{ marginLeft: '21px' }}>
+        <div style={{ marginLeft: '10px', border: '1px solid black', width: '81px', paddingLeft: '3px', height: '24px'}}
+        >
+        Study Goal
+        </div>
+        <div 
+        className='progressBar' 
+        style={{ marginLeft: '21px' }}>
           <div
             style={{
               backgroundColor: 'orange',

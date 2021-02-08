@@ -89,9 +89,10 @@ function ThreeDotsBtn({
       null
     :
 
-    <div style={threeDotsContainer}>
-      <div 
+    <div style={threeDotsContainer}
+    >
 
+      <div 
         className='rotateLittleModal' style={{height: '24px'}}
         onClick={
                 editName? 
@@ -168,11 +169,13 @@ function ThreeDotsBtn({
             
             <button 
 
-              className='buttonStyling flexAlignCenter outline-none p-1 '
+              className='buttonStyling flexAlignCenter outline-none p-1'
               onClick={() => {}}
             >
 
-              <img src={resetimg} alt='reset' style={{ marginRight: '3px', width: '23px', height: '23px'}}  
+              <img src={resetimg} 
+                  alt='reset' 
+                  style={{ marginRight: '3px', width: '23px', height: '23px'}}  
               />
               {text}
 

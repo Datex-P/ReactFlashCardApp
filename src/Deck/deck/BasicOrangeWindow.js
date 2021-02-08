@@ -7,13 +7,17 @@ export default function BasicOrangeWindow({
               setEdit = () =>{} , 
               setShowRepeat = () => {}
             }) {
+
   return(
+
     <Modal
         show={show}
         onHide={() => setShow(false)}
         contentClassName={'mod'}
         backdrop="static"
-        style= {{left: '-160px !important', right: '45px !important'}}
+        style= {{
+                left: '-160px !important', right: '45px !important'
+                }}
       >
           <div 
               style={{
@@ -51,7 +55,7 @@ export default function BasicOrangeWindow({
 
               </Modal.Header>
               
-              <Modal.Body >
+              <Modal.Body>
 
                 {children}
 

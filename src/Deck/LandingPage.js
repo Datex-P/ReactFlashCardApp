@@ -31,12 +31,11 @@ export default function DeckContainer() {
     
     if (position < scrollPosition) {
       console.log('you are scrolling up')
-    }
-    else {
+    } else {
       console.log('you are scrolling down')
     }
-    setScrollPosition(position)
 
+    setScrollPosition(position)
   }
 
   useEffect(() => {
@@ -64,102 +63,126 @@ export default function DeckContainer() {
     !loadSpinner && dataBase ?
       <>
         <NavBar />
-        <Container className='align-items-center' style={{ 
-          backgroundColor: styles.backgroundColor[dataBase.userPreferences.backgroundColor], 
-          borderBottomLeftRadius: '5px', 
-          borderBottomRightRadius: '5px', 
-          height: '650px', 
-          width: '504px' }} >
-
-          <Row
+        <Container 
+            className='align-items-center' 
+            style={{ 
+                    backgroundColor: styles.backgroundColor[dataBase.userPreferences.backgroundColor], 
+                    borderBottomLeftRadius: '5px', 
+                    borderBottomRightRadius: '5px', 
+                    height: '650px', 
+                    width: '504px' 
+                    }} 
           >
-            {showDeck &&
-              <div style={{ position: 'relative', padding: '50px', width: '400px', marginLeft: '30px', marginTop: '60px' }}>
+          <Row>
+            {
+              showDeck &&
 
-                <div >
-                  {
-                    dataBase.DeckNames.map((deck, index) =>
-                      <Deck
-                        key={index}
-                        index={index}
-                        deck={deck}
-                        name={deck.name}
-                        setActive = {setActive}
-                        transform={active === index ? `rotate(0deg)` : 
-                        `rotate(${
-                          ( dataBase.DeckNames.length  - index) * -2}deg)`}
+              <div 
+                  style={{ 
+                          position: 'relative', padding: '50px', width: '400px', 
+                          marginLeft: '30px', marginTop: '60px' 
+                        }}
+              >
+                  <div>
+                      {
+                        dataBase.DeckNames.map((deck, index) =>
+                        <Deck
+                            key={index}
+                            index={index}
+                            deck={deck}
+                            name={deck.name}
+                            active={active === index}
+                            setActive = {setActive}
+                            transform={active === index ? `rotate(0deg)` : 
+                            `rotate(${
+                              ( dataBase.DeckNames.length  - index) * -2}deg)`}
 
-                        zIndex={active === index ? 2 : 0}
-                        active={active === index}
-                        background = 
-                        {active === index && deck.paused ? 
-                        `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
-                        ${colors[index % 5]} repeat`
-                        :
-                        colors[index % 5]}
-                      />
-                   
-                    )
-                  }
-                </div>
-                <div
-                  ref={scroller}
-                  style={{ height: '220px', width: '375px', overflow: 'scroll', 
-                  overflowX: 'hidden', position: 'absolute', top: '65px' }}
-                  onScroll={(event) => {
-
-                    let step = (1000 - 220) / ((dataBase.DeckNames).length - 1)
-                    let index = Math.floor(event.target.scrollTop / step)
-                    handleActive(index)
-                    console.log(index)
-                    scrollHandler(event)
-                  }}
-                >
+                            zIndex={active === index ? 2 : 0}
+                            background = 
+                            {
+                              active === index && deck.paused ? 
+                            `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
+                            ${colors[index % 5]} repeat`
+                            :
+                            colors[index % 5]
+                            }
+                      />     
+                      )
+                      }
+                  </div>
                   <div
-                    style={{ height: '1000px', position: 'absolute', top: '0px', width: '100%' }}
-                  ></div>
+                      ref={scroller}
+                      style={{ 
+                              height: '220px', width: '375px', overflow: 'scroll', 
+                              overflowX: 'hidden', position: 'absolute', top: '65px' 
+                            }}
+                      onScroll={(event) => {
 
-                </div>
+                        let step = (1000 - 220) / ((dataBase.DeckNames).length - 1);
+                        let index = Math.floor(event.target.scrollTop / step);
+                        handleActive(index);
+                        console.log(index);
+                        scrollHandler(event);
+                      }}
+                  >
+                      <div style={{ 
+                                  height: '1000px', position: 'absolute', top: '0px', width: '100%' 
+                                }}
+                      >                        
+                      </div>
+                  </div>
               </div>
             }
           </Row>
 
-          <Row className="justify-content-center"
+          <Row  className="justify-content-center"
           >
-            <button
-              onClick={() => {
+              <button
+                  style={{ 
+                      zIndex: '4', 
+                      padding: '2px', 
+                      position: 'fixed', 
+                      top: '630px', 
+                      width: '210px', 
+                      outline: 'none !important' 
+                      }} 
+                  className='generalButtonStyling'
+                  onClick={
+                  () => {
+                    setCreateNewDeckDisplay(true)
+                    setShowDeck(false)
+                  }
+                  }
+              >
+                  Create Deck
+              </button>
 
-                setCreateNewDeckDisplay(true)
-                setShowDeck(false)
-              }}
-              style={{ zIndex: '4', padding: '2px', position: 'fixed', 
-              top: '630px', width: '210px', outline: 'none !important' }} 
-              className='generalButtonStyling'
-            >
-              Create Deck
-          </button>
-
-            <CreateNewDeck 
-                createNewDeckDisplay={createNewDeckDisplay}      
-            setShowDeck={setShowDeck}
-            setActive={setActive}
-            setCreateNewDeckDisplay={setCreateNewDeckDisplay}
-            close={()=>{setShowDeck(true)
-              setCreateNewDeckDisplay(false)
-              }}
-            style={{ position: 'absolute', zIndex: '40' }} />
-
+              <CreateNewDeck 
+                  createNewDeckDisplay={createNewDeckDisplay}      
+                  setShowDeck={setShowDeck}
+                  setActive={setActive}
+                  setCreateNewDeckDisplay={setCreateNewDeckDisplay}
+                  style={{ position: 'absolute', zIndex: '40' }}
+                  close={
+                    ()=>{
+                    setShowDeck(true)
+                    setCreateNewDeckDisplay(false)
+                    }
+                    }
+              />
           </Row>
+      </Container>
+  </>
 
-        </Container>
-      </>
-      :
-      // 'database empty'
-        
-      <div className='d-flex align-items-center justify-content-center' style={{ height: '50vh' }}>
-        <Spinner animation="grow" />
+    :
+      // 'database empty'    
+      <div 
+          className='d-flex align-items-center justify-content-center' 
+          style={{ height: '50vh' }}
+      >
+          <Spinner animation="grow" />
       </div>
    )
-      }
+}
 
 
