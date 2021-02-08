@@ -1,12 +1,8 @@
-import React, {
-  useEffect,
-  useState,
-  useContext,useRef
-} from 'react';
-import Deck from './deck/';
-import { Container, Row, Spinner } from 'react-bootstrap'
-// import EffectTest from '../EffectTest.js';
+import React, {useEffect, useState, useContext,useRef} from 'react';
 import { Context } from '../Context'//step 4.1 import context instance
+import { Container, Row, Spinner } from 'react-bootstrap'
+
+import Deck from './deck/';
 import CreateNewDeck from './deck/CreateNewDeck'
 import NavBar from '../NavBar'
 
@@ -31,7 +27,7 @@ export default function DeckContainer() {
     
     if (position < scrollPosition) {
       console.log('you are scrolling up')
-      
+
     } else {
       console.log('you are scrolling down')
     }

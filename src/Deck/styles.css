@@ -190,7 +190,11 @@ cursor: pointer;
 width: 30%; 
 background-color: grey; 
 outline: none;
-
+width: 32%; 
+height: 32px; 
+padding: 0 !important; 
+position: relative; 
+left: 10px;
 }
 
 .openDeck {

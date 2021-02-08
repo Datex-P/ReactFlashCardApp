@@ -23,7 +23,8 @@ export default function HourlyBreakdown() {
           Hourly Breakdown
       </div>
 
-      <div  style={{display: 'flex', justifyContent: 'space-evenly', width: '270px', height: '38px', borderRadius: '5px',  border: '1px solid black', padding: '1px 5px', marginTop: '10px', marginBottom: '20px' }}>
+      <div  style={{display: 'flex', justifyContent: 'space-evenly', width: '270px', height: '38px', borderRadius: '5px',  border: '1px solid black', padding: '1px 5px', marginTop: '10px', marginBottom: '20px' }}
+      >
         
         {
           ['1 month', '3 month', '12 month'].map(comp =>
@@ -39,7 +40,7 @@ export default function HourlyBreakdown() {
 
               <label style={{ margin: '5px' }}
               >
-                            
+
                   {comp}
               
               </label>

@@ -15,7 +15,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
   const [checked, setChecked] = useState(false)
   const [edit, setEdit] = useState(false);
   const [pauseIsActive, setPauseIsActive] = useState(true);
-  const [random, setRandom] = useState(null);
+  const [randomQuestion, setRandomQuestion] = useState(null);
   
   const [show, setShow] = useState(false);
   const [showAnswerBtn, setShowAnswerBtn] = useState(false);
@@ -41,18 +41,18 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
 
 
   function generateRandom() {                                                                                                                                                                                                                                                                                                                                                                         
-    let random = null
+    let randomQuestion = null
     if (dataBase.queue[0] && dataBase.queue[0].timeLeft === 0) {
       //need to have algorithm to filter s in queue related onlz for this deck
       //also not tot forget add decremental time algorith for all crads no matter waht deck
 
 
-      random = dataBase.queue.shift().index
+      randomQuestion = dataBase.queue.shift().index
     } else {
-      random = Math.floor(Math.random() * data.length);
+      randomQuestion = Math.floor(Math.random() * data.length);
     }
 
-    setRandom(random);
+    setRandomQuestion(randomQuestion);
     setShow(true)
     closePopup()
     console.log(data)
@@ -69,8 +69,8 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
   function addToQueue(time) {
     let newDataBase = { ...dataBase }
     newDataBase.queue.push({
-      ...data[random],
-      index: random,
+      ...data[randomQuestion],
+      index: randomQuestion,
       timeLeft: time * 1000,
       item: name
     })
@@ -107,7 +107,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
 
   function deleteCurrentCard() {
     let newDataBase = { ...dataBase }
-    newDataBase.DeckNames[index].data.splice(random, 1)
+    newDataBase.DeckNames[index].data.splice(randomQuestion, 1)
     setDataBase(newDataBase)
     generateRandom()  
   }
@@ -115,7 +115,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
   function changeHandler(e) {
     let { name: input, value } = e.target;
     let newDataBase = { ...dataBase };
-    newDataBase.DeckNames[name].data[random][input] = value;
+    newDataBase.DeckNames[name].data[randomQuestion][input] = value;
     setDataBase(newDataBase)
   }
 
@@ -132,6 +132,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                     cursor:  dataBase.DeckNames[index].paused? 'default': 'pointer'
                   }}
             onClick={
+              
               paused
               ?
                 null
@@ -190,7 +191,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                 }
           >
           {
-            data[random]
+            data[randomQuestion]
             &&
             <>
               <div className='mb-4'
@@ -202,7 +203,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                 <FormControl
                   as="textarea"
                   aria-label="With textarea"
-                  value={data[random].question} 
+                  value={data[randomQuestion].question} 
                   className='w-100'
                   disabled={!edit}
                   name='question'
@@ -214,10 +215,10 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                 !showAnswerBtn &&
                 
                 <Button
-                  style={{ width: '32%', height: '32px', padding: '0 !important', position: 'relative', left: '10px'}}
+                  // style={{ width: '32%', height: '32px', padding: '0 !important', position: 'relative', left: '10px'}}
                   class='p-1'
                   variant='secondary'
-                  className='showAnswer my-5'
+                  className='showAnswer my-5 d-flex justify-content-center align-items-center'
                   onClick={() => {
                     setShowAnswerBtn(true)
                     setShowRepeatBtn(true)
@@ -227,6 +228,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                   Show answer
                 </Button>
               }
+
               {
                 showRepeatBtn &&
 
@@ -238,7 +240,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
 
                           <RepeatBtn
                               btn={col.name}
-                              label={'<' + col.amount + col.unit}
+                              label={'< ' + col.amount + col.unit}
                               onClick={() => {
                                   setShowAnswerBtn(!showAnswerBtn)
                                   setShowRepeatBtn(false)
@@ -261,7 +263,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                     <FormControl
                         as="textarea"
                         aria-label="With textarea"
-                        value={data[random].answer}
+                        value={data[randomQuestion].answer}
                         className='w-100'
                         disabled={!edit}
                         name='answer'

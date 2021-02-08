@@ -6,7 +6,9 @@ import '../styles.css'
 import questionMark from '../../icons/questionmark.svg'
 import flashcards from '../../icons/flashcards.svg'
 
-export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, deleteCurrentCard=()=>{}}) 
+export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, 
+                                                deleteCurrentCard=()=>{}
+                                              }) 
   
 {
 
@@ -83,8 +85,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
 
         </Modal.Body>
 
-        <Modal.Footer
-            contentClassName={'modFooter'}>
+        <Modal.Footer>
 
             <div 
                 className='d-flex justify-content-around align-items-center' 
@@ -120,7 +121,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
 
       <div 
           style = {{width: '300px', position: 'absolute', top: '175px'
-                   }} 
+                  }} 
           className='d-flex justify-content-center'
       >
 
@@ -136,6 +137,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
 
           <div style={{ width: '200px', zIndex: '2', color: 'white'}}
           >
+          
             Don't show message again
           </div>
       </div>

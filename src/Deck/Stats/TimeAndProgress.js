@@ -21,9 +21,25 @@ export default function TimeAndProgress() {
         previousWidthVar += widthVar
 
         if (i === 21) {
-          arr.push(<Row time={<div style={{paddingLeft: '3px', height: '21px'}}>{'21 - 24'}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
+          arr.push(
+          <Row time={<div style={{paddingLeft: '3px', height: '21px'}}
+          >
+              {'21 - 24'}
+              </div>
+              } 
+              previousWidthVar={previousWidthVar} 
+              widthVar={widthVar} 
+          />
+          )
         } else if (i === 25) {
-          arr.push(<Row time={<div style={{paddingLeft: '3px', height: '21px'}}>{'24 - 5'}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
+          arr.push(
+          <Row time={<div style={{paddingLeft: '3px', height: '21px'}}
+          >
+              {'24 - 5'}
+              </div>} 
+              previousWidthVar={previousWidthVar} 
+              widthVar={widthVar} 
+          />)
         } else if (i <= 9) {
 
           if (i <= 9 && i + 4 > 9) {

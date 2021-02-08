@@ -204,8 +204,9 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
           {
             dataBase.DeckNames[index].paused?
 
-              <div style={{background: colors[index % 5]}}
-                   className='deckPausedContainer'
+              <div 
+                  style={{background: colors[index % 5]}}
+                  className='deckPausedContainer'
               >
 
                   <div>
@@ -217,12 +218,12 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
                         Press:
                     
                     <button 
+                        className='playButton'
                         onClick={()=>{
                                     handlePause()
                                     // setShow(false)
                                 
                         }}
-                        className='playButton'
                     >
 
                         <img 

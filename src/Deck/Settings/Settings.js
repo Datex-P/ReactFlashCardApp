@@ -1,14 +1,15 @@
 import React, { useState, useContext, useEffect} from 'react';
-import BasicOrangeWindow from '../deck/BasicOrangeWindow'
 import { withRouter } from 'react-router-dom'
 import style from './style.module.css'
 import '../styles.css'
+import { Context } from '../../Context'
+
+import BasicOrangeWindow from '../deck/BasicOrangeWindow'
+
 import edit from '../../icons/edit.svg'
 import save from '../../icons/save.svg'
 import hexagonWhite from '../../icons/hexagon.svg'
 import hexagonGreen from '../../icons/hexagonGreen.svg'
-import { Context } from '../../Context'
-
 
 
 function Settings({ history }) {
@@ -43,61 +44,86 @@ function Settings({ history }) {
   }
 
   return (
+
     dataBase &&
+
     <BasicOrangeWindow
       show={true}
       setShow={setShow}
       title={
+
         <div
-          style={{
-            fontWeight: 'bold',
-            fontSize: '22px'
-          }}
+          style={{fontWeight: 'bold', fontSize: '22px'}}
           contentClassName={'pos'}
         >
+
           Settings
-          </div>
+       </div>
       }
     >
+      <div style={{ fontWeight: 'bold', fontSize: '17px', textAlign: 'center', marginBottom: '10px' }}
+      >
 
-      <div style={{ fontWeight: 'bold', fontSize: '17px', textAlign: 'center', marginBottom: '10px' }}>Change Repetition Interval</div>
-
-      <div className='d-flex border border-dark justify-content-around align-items-center'
-        style={{ padding: '1px', borderRadius: '5px', position: 'relative' }}>
-        <div className='d-flex justify-content-around align-items-center' style={{ width: '325px' }}>
-          {dataBase &&
-
-
-            dataBase.userTimePreferences.map((col, k) =>
-              <Col key={col.name} index={k} data={col} editable={editable} userTimePreferences={userTimePreferences} setUserTimePreferences={setUserTimePreferences} />
-            )
-
-          }
-        </div>
-        <div title='Click and change name buttons and repetition intervals for all decks.'
-          style={{ position: 'absolute', right: '5px', top: '29px', cursor: 'pointer' }}>
-          <img
-            onClick={() => {
-              setEditable(!editable)
-              setSaveOrEdit(!saveOrEdit)
-              saveT()
-            }}
-            src={saveOrEdit ? save : edit}
-            alt={saveOrEdit ? 'save' : 'edit'}
-            style={{ outline: 'none' }}
-          />
-
-        </div>
+          Change Repetition Interval
       </div>
 
-      <div style={{ fontWeight: 'bold', fontSize: '17px', marginTop: '25px', textAlign: 'center', marginBottom: '10px' }}>Goal Settings</div>
-      <div style={{ fontWeight: 'bold', fontSize: '13px', textAlign: 'center' }}>Current Weekly Target</div>
+      <div 
+          className='d-flex border border-dark justify-content-around align-items-center'
+          style={{ padding: '1px', borderRadius: '5px', position: 'relative' }}
+      >
+          <div 
+              className='d-flex justify-content-around align-items-center' 
+              style={{ width: '325px' }}
+          >
+              {dataBase &&
+                  
+                  dataBase.userTimePreferences.map((col, k) =>
+                  <Col key={col.name} 
+                      index={k} 
+                      data={col} 
+                      editable={editable} 
+                      userTimePreferences={userTimePreferences} 
+                      setUserTimePreferences={setUserTimePreferences} 
+                  />
+                  )
+              }
+            </div>
+            <div 
+                title='Click and change name buttons and repetition intervals for all decks.'
+                style={{ position: 'absolute', right: '5px', top: '29px', cursor: 'pointer' }}
+            >
+                <img
+                    src={saveOrEdit ? save : edit}
+                    alt={saveOrEdit ? 'save' : 'edit'}
+                    style={{ outline: 'none' }}
+                    onClick={() => {
+                    setEditable(!editable)
+                    setSaveOrEdit(!saveOrEdit)
+                    saveT()
+                    }}
+                />
+            </div>
+      </div>
 
-      <div className='d-flex border border-dark justify-content-between align-items-center'
+      <div 
+          style={{ fontWeight: 'bold', fontSize: '17px', marginTop: '25px', 
+                   textAlign: 'center', marginBottom: '10px' }}
+      >
+          Goal Settings
+      </div>
+
+      <div style={{ fontWeight: 'bold', fontSize: '13px', textAlign: 'center' }}
+      >
+          Current Weekly Target
+      </div>
+
+      <div 
+        className='d-flex border border-dark justify-content-between align-items-center'
         style={{
           borderRadius: '5px', position: 'relative', paddingLeft: '6px', margin: 'auto',
           paddingRight: '14px', paddingBottom: '3px', width: '211px', height: '59px'
-        }}>
+          }}
+      >
         {
 
           Array(7).fill('').map((el, idx) =>
@@ -107,46 +133,50 @@ function Settings({ history }) {
           )
         }
       </div>
-      <div style={{ position: 'absolute', top: '230px', right: '66px', cursor: 'pointer' }}>
+      <div style={{ position: 'absolute', top: '230px', right: '66px', cursor: 'pointer' }}
+      >
         <img
-          onClick={() => {
-            setSaveOrEditGoal(!saveOrEditGoal)
-
-
-            setEditHex(!editHex)
-
-          }}
-
           src={editHex ? edit : save}
           alt={saveOrEditGoal ? 'edit' : 'save'}
           style={{ outline: 'none' }}
+          
+          onClick={() => {
+            setSaveOrEditGoal(!saveOrEditGoal)
+            setEditHex(!editHex)
+          }}
+
         />
       </div>
-      <div className='weeklyTarget'>
+      <div className='weeklyTarget'
+      >
 
         Target met: {dataBase.userPreferences.weeksInRow} weeks in a row
 
-          </div>
-      <div style={{ fontWeight: 'bold', textAlign: 'center', marginTop: '20px' }}>Colorscheme</div>
+      </div>
+      <div style={{ fontWeight: 'bold', textAlign: 'center', marginTop: '20px' }}
+      >
+          Colorscheme
+      </div>
 
-      <div className='d-flex border border-dark justify-content-between align-items-center'
-        style={{
-          borderRadius: '5px',
-          padding: '5px',
-          width: '215px', marginTop: '10px', margin: 'auto'
-        }}>
+      <div 
+          className='d-flex border border-dark justify-content-between align-items-center'
+          style={{borderRadius: '5px', padding: '5px', width: '215px', marginTop: '10px', margin: 'auto'}}
+      >
 
         {
           ['light', 'dark', 'default'].map(comp =>
             <>
-              <input style={{ cursor: 'pointer' }}
+              <input 
+                style={{ cursor: 'pointer' }}
                 name='backgroundColor'
                 type='radio'
                 // title = `Change background color of main menu to ${comp}.`
                 value={comp}
                 onChange={handleColor}
               />
-              <label className='mb-0'>{comp}</label>
+              <label className='mb-0'>
+                  {comp}
+              </label>
             </>
           )
         }
@@ -183,25 +213,33 @@ function Col({ data: { name, amount, unit }, editable, index, userTimePreference
 
 
   return (
-    <div className=' p-2' style={{ flexDirection: 'column', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <p className=' border border-dark d-flex justify-content-center' style={{
-        borderRadius: '5px', width: '85px',
-   
-      }}>
-        <div style={{ marginRight: '4px' }}>{'<'}</div>
-        <input className={style.input}
-          type='number'
-          style={{
-            backgroundColor: 'transparent',
-            outline: 'none',
-            width: '40px',
-            height: '24px'
-          }} 
-          disabled={!editable}
-          value={inputNumb}
-          onChange={handleInputNumbers}
-        />{unit}</p>
-
+    <div 
+        className=' p-2' 
+        style={{ flexDirection: 'column', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+    >
+      <p 
+          className=' border border-dark d-flex justify-content-center' 
+          style={{borderRadius: '5px', width: '85px'}}
+      >
+          <div style={{ marginRight: '4px' }}
+          >
+              {'<'}
+          </div>
+          <input 
+              className={style.input}
+              type='number'
+              style={{
+                backgroundColor: 'transparent',
+                outline: 'none',
+                width: '40px',
+                height: '24px'
+              }} 
+              disabled={!editable}
+              value={inputNumb}
+              onChange={handleInputNumbers}
+        />
+            {unit}
+      </p>
 
       <input
         style={{
@@ -214,12 +252,14 @@ function Col({ data: { name, amount, unit }, editable, index, userTimePreference
           outline: 'none',
           border: 'none'
         }}
+
         value={inputText}
         type='text'
         key={name}
         disabled={!editable}
         onChange={handleInputText}
       />
+
     </div>
   )
 
@@ -243,11 +283,14 @@ function Hexagons({ idx, editHex, setEditHex }) {
   }
 
   return (
-    <div className='d-flex flex-column justify-content-center align-items-center'
+    
+    <div 
+      className='d-flex flex-column justify-content-center align-items-center'
       style={{
         width: '16px', height: '21px', position: 'relative',
         margin: '3px', padding: '3px', transform: 'rotate(90deg)'
-      }}>
+      }}
+    >
 
       {
         <img
@@ -260,17 +303,27 @@ function Hexagons({ idx, editHex, setEditHex }) {
 
         />
       }
+
       {
-        ((editHex && (showDay || idx === dataBase.userPreferences.days)) || idx === dataBase.userPreferences.days) 
+        ((editHex && 
+                (showDay || idx === dataBase.userPreferences.days)) || idx === dataBase.userPreferences.days) 
         &&
             
-          <div style={{
+        <div style={{
             transform: 'rotate(-90deg)', width: '54px',
             fontSize: '14px', paddingLeft: '14px', position: 'absolute', right: '-40px'
           }}>
-            <div className='blackArrow'></div>
-            <span style={{ fontWeight: 'bold' }}>{idx <= dataBase.userPreferences.days ? `${idx + 1}` : `${idx - 1}`}</span> {idx === 0? 'day': 'days'}
-          </div>
+            <div className='blackArrow'
+            >
+            </div>
+            
+            <span style={{ fontWeight: 'bold' }}
+            >
+                {idx <= dataBase.userPreferences.days ? `${idx + 1}` : `${idx - 1}`}
+            </span> 
+
+            {idx === 0? 'day': 'days'}
+        </div>
       }
     </div>
   )
