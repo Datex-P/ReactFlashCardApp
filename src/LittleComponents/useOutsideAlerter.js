@@ -11,14 +11,17 @@ export default function useOutsideAlerter(ref,editName, cb,cb2) {
          * Alert if clicked on outside of element
          */
         function handleClickOutside(event) {
+
             if ( (ref[0].current && !ref[0].current.contains(event.target)) ) {
                 if(editName){
                     cb()
                     // ()=>{setShow(false)}
-                }else{
-                    if(ref[1].current && !ref[1].current.contains(event.target)){
+                } else {
+
+                    if(ref[1].current && !ref[1].current.contains(event.target)) {
                         cb2()
-                    }else{
+                    
+                    } else {
                         
                     }                   
                     // ()=>{setStartAnimation(true)}

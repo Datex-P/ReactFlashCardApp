@@ -31,6 +31,7 @@ export default function DeckContainer() {
     
     if (position < scrollPosition) {
       console.log('you are scrolling up')
+      
     } else {
       console.log('you are scrolling down')
     }
@@ -78,10 +79,8 @@ export default function DeckContainer() {
             {
               showDeck &&
 
-              <div 
-                  style={{ 
-                          position: 'relative', padding: '50px', width: '400px', 
-                          marginLeft: '30px', marginTop: '60px' 
+              <div style={{ position: 'relative', padding: '50px', width: '400px', 
+                            marginLeft: '30px', marginTop: '60px' 
                         }}
               >
                   <div>
@@ -128,7 +127,7 @@ export default function DeckContainer() {
                   >
                       <div style={{height: '1000px', position: 'absolute', top: '0px', width: '100%'}}
                       >
-                                              
+
                       </div>
                   </div>
               </div>
@@ -166,8 +165,7 @@ export default function DeckContainer() {
                   close={
                     ()=>{
                     setShowDeck(true)
-                    setCreateNewDeckDisplay(false)
-                    }
+                    setCreateNewDeckDisplay(false)}
                     }
               />
           </Row>

@@ -1,7 +1,7 @@
 import React, {useState,useContext,useRef,useEffect} from 'react'
 import { Card} from 'react-bootstrap'
-import '../styles.css'
 import {Context} from '../../Context'
+import '../styles.css'
 
 import ThreeDotsBtn from './ThreeDotsBtn'
 import AddQuestionsToDeck from './AddQuestionsToDeck'
@@ -37,6 +37,7 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
     setPauseIsActive(savePausedState)
     dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
     setDataBase(newDataBase)    
+    // setShow(false) why does  three button window not close with this?
   }
 
   
@@ -216,7 +217,11 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
                         Press:
                     
                     <button 
-                        onClick={handlePause}
+                        onClick={()=>{
+                                    handlePause()
+                                    // setShow(false)
+                                
+                        }}
                         className='playButton'
                     >
 
@@ -256,6 +261,8 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
 
         <QuestAnswerTrainOverv 
             bg={style.background}
+            setEditName={setEditName}
+            editName={editName}
             name={name} 
             index={index} 
             data={data} 

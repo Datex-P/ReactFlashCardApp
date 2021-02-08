@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { Modal } from 'react-bootstrap'
 import { Context } from '../../Context'//step 4.1 import context instance
+
 import redCross from '../../icons/redCross.svg'
 
 export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDisplay, setShowDeck, close, setActive}) 

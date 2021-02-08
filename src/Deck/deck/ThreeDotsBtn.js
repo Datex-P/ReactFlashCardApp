@@ -1,14 +1,15 @@
 import React, { useState, useRef, useContext } from 'react'
+import {withRouter} from 'react-router-dom'
+import {Context} from '../../Context';
+
+import useOutsideAlerter from '../../LittleComponents/useOutsideAlerter'
+
 import trashimg from '../../icons/trash.svg'
 import pauseimg from '../../icons/pause.svg'
 import editimg from '../../icons/edit.svg'
 import resetimg from '../../icons/reset.svg'
 import saveimg from '../../icons/save.svg'
 import playimg from '../../icons/play.svg'
-import useOutsideAlerter from '../../LittleComponents/useOutsideAlerter'
-import {Context} from '../../Context';
-import {withRouter} from 'react-router-dom'
-
 
 
 function ThreeDotsBtn({    
@@ -33,7 +34,7 @@ function ThreeDotsBtn({
 
   const handleClick = () => {
     setShow(!show);
-    setShowFromParent(!show)
+    // setShowFromParent(!show)
 
   };
 
@@ -49,7 +50,10 @@ function ThreeDotsBtn({
   }
 
 
-  useOutsideAlerter([ref,input], editName, ()=>{setShow(false)},()=>{
+  useOutsideAlerter([ref,input], 
+                    editName, 
+                    ()=>{setShow(false)},
+                    ()=>{
     setStartAnimation(true)
     // input.current.focus()
     setTimeout(()=>{setStartAnimation(false)},2000)
@@ -62,7 +66,6 @@ function ThreeDotsBtn({
     // other way of writing it
     if (!editName) {
       setShow(false)
-
       handleDeckname()
     }
   }
@@ -75,6 +78,7 @@ function ThreeDotsBtn({
     dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
     setDataBase(newDataBase)
     setEditName(true)
+    setShow(false)
     
   }
 
@@ -89,103 +93,116 @@ function ThreeDotsBtn({
 
     <div style={threeDotsContainer}
     >
-
-      <div 
-        className='rotateLittleModal' style={{height: '24px'}}
-        onClick={
-                editName? 
-                handleClick                
-                : 
-                ()=>{} 
-                } 
-      >
-              ...
-      </div>
-
-      {
-        show&&
-        
         <div 
-          ref={ref}
-          style={style}
-          className={`ml-2 rounded mt-2 ${className}`}>
-          {
-            edit&&
+            className='rotateLittleModal' 
+            style={{height: '24px'}}
+            onClick={
+                    editName? 
 
-            <button 
-                className='buttonStyling flexAlignCenter outline-none p-1 '
-                onClick={handleEdit} 
-            >
-                    
-                <img className={startAnimation ? 'blinkingIcon':''} 
-                     src={editName? editimg: saveimg} 
-                     alt='edit' 
-                     style={{ marginRight: '3px' }}              
-                /> 
-
-               {text}
-
-            </button>
-          }       
-          {
-            pause&&
-
-            <button 
-                className='buttonStyling flexAlignCenter outline-none p-1 '
-                onClick={handlePause}
-                style={{ borderTop: '1px solid black', borderBottom: '1px solid black' ,
-                         borderLeft: dataBase.DeckNames[index].paused? '1px solid black': null,
-                         borderRight: dataBase.DeckNames[index].paused? '1px solid black': null,
-                         borderRadius: dataBase.DeckNames[index].paused? '5px': null
-                       }}
-             >
-                <img 
-                    src={ pauseIsActive? pauseimg: playimg}  
-                    alt='pause' 
-                    style={{ marginRight: '3px'}} 
-                />
-                {text}
-            </button>
-          }
-          {
-            trash && 
-            
-            <button 
-
-              className='buttonStyling flexAlignCenter outline-none p-1 '
-              onClick={() => {
-                  trashEvent()
-                  setShow(false)
-              }}
-            >
-               <img src={trashimg} 
-                    alt='trash' style={{ marginRight: '3px' }} 
-               />
-
-               {text}
-            </button>
-          }
-          {
-            reset &&
-            
-            <button 
-
-              className='buttonStyling flexAlignCenter outline-none p-1'
-              onClick={() => {}}
-            >
-
-              <img src={resetimg} 
-                  alt='reset' 
-                  style={{ marginRight: '3px', width: '23px', height: '23px'}}  
-              />
-              
-              {text}
-
-            </button>
-          }
+                    handleClick                
+                    : 
+                    ()=>{} 
+                    } 
+          >
+                  ...
+       
         </div>
-      }
+
+        {
+          show&&
+          
+          <div 
+            ref={ref}
+            style={style}
+            className={`ml-2 rounded mt-2 ${className}`}
+          >
+
+            {
+              edit&&
+
+              <button 
+                  className='buttonStyling flexAlignCenter outline-none p-1 '
+                  onClick={handleEdit} 
+              >
+                      
+                  <img 
+                      className={startAnimation ? 'blinkingIcon':''} 
+                      src={editName? editimg: saveimg} 
+                      alt='edit' 
+                      style={{ marginRight: '3px' }}              
+                  /> 
+
+                {text}
+
+              </button>
+            }
+
+            {
+              pause&&
+
+              <button 
+                  className='buttonStyling flexAlignCenter outline-none p-1 '
+                  onClick={handlePause}
+                  style={{ borderTop: '1px solid black', borderBottom: '1px solid black' ,
+                          borderLeft: dataBase.DeckNames[index].paused? '1px solid black': null,
+                          borderRight: dataBase.DeckNames[index].paused? '1px solid black': null,
+                          borderRadius: dataBase.DeckNames[index].paused? '5px': null
+                        }}
+              >
+                  <img 
+                      src={ pauseIsActive? pauseimg: playimg}  
+                      alt='pause' 
+                      style={{ marginRight: '3px'}} 
+                  />
+
+                  {text}
+
+              </button>
+            }
+
+            {
+              trash && 
+              
+              <button 
+
+                className='buttonStyling flexAlignCenter outline-none p-1 '
+                onClick={() => {
+                    trashEvent()
+                    setShow(false)
+                }}
+              >
+                <img 
+                      style={{ marginRight: '3px' }} 
+                      src={trashimg} 
+                      alt='trash' 
+                />
+
+                {text}
+
+              </button>
+            }
+            {
+              reset &&
+              
+              <button 
+                  className='buttonStyling flexAlignCenter outline-none p-1'
+                  onClick={() => {}}
+              >
+
+                <img 
+                    src={resetimg} 
+                    alt='reset' 
+                    style={{ marginRight: '3px', width: '23px', height: '23px'}}  
+                />
+
+                {text}
+
+              </button>
+            }
+          </div>
+        }
     </div>   
+ 
     }
     </>
   );

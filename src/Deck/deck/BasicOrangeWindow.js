@@ -15,21 +15,18 @@ export default function BasicOrangeWindow({
         onHide={() => setShow(false)}
         contentClassName={'mod'}
         backdrop="static"
-        style= {{
-                left: '-160px !important', right: '45px !important'
+        style= {{left: '-160px !important', right: '45px !important'
                 }}
       >
-          <div 
-              style={{
-                      width: '98%', height: '95%', margin: 'auto', overflow: 'hidden auto'
+      
+          <div  style={{width: '98%', height: '95%', margin: 'auto', overflow: 'hidden auto'
                       }}
           >
-              <Modal.Header 
-                  className='border-bottom-0'
+              <Modal.Header className='border-bottom-0'
               >
+
                   <Modal.Title 
-                      style={{ 
-                              fontSize: '16px', marginLeft: '12px', height: '24px', width: '240px'
+                      style={{fontSize: '16px', marginLeft: '12px', height: '24px', width: '240px'
                               }}
                   >
                       {title}
@@ -49,7 +46,10 @@ export default function BasicOrangeWindow({
                     }
                 } 
                 >
-                    <img src={redCross} alt='redCross' />
+                    <img 
+                        src={redCross} 
+                        alt='redCross'     
+                    />
 
                 </button>
 

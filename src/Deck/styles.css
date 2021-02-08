@@ -568,6 +568,14 @@ border-radius: 5px;
   outline: none !important;
 }
 
+.modal-footer {
+  background-color: green !important;
+  height: 45px !important;
+}
+
+.modal-body {
+  height: 75px !important;
+}
 
 
 

@@ -1,14 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Button, FormControl } from 'react-bootstrap'
-import ThreeDotsBtn from './ThreeDotsBtn';
 import { Context } from '../../Context'
+
+import ThreeDotsBtn from './ThreeDotsBtn';
 import BasicOrangeWindow from './BasicOrangeWindow'
 import DeleteCardQuestionBox from './DeleteCardQuestionBox'
 import SaveAndDiscard from './CardBodyParts/SaveAndDiscard'
 import RepeatBtn from './CardBodyParts/RepeatBtn'
 
 
-export default function QuestAnswerTrainOverv({name, data, closePopup,index,paused }) {
+export default function QuestAnswerTrainOverv({name, data, closePopup,index,paused, setEditName, editName }) {
   
   
   const [checked, setChecked] = useState(false)
@@ -17,8 +18,8 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
   const [random, setRandom] = useState(null);
   
   const [show, setShow] = useState(false);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [showRepeat, setShowRepeat] = useState(false);
+  const [showAnswerBtn, setShowAnswerBtn] = useState(false);
+  const [showRepeatBtn, setShowRepeatBtn] = useState(false);
   
   const [showDeleteFrame, setShowDeleteFrame] = useState(true)
   const [timer, setTimer] = useState(null)
@@ -138,7 +139,9 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                 generateRandom
             }     
       >
+
       Open Deck
+
       </Button>
     
       {
@@ -146,10 +149,10 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
 
         <BasicOrangeWindow 
           show={show}
-          showRepeat={showRepeat}
-          setShowRepeat={setShowRepeat}
+          showRepeatBtn={showRepeatBtn}
+          setShowRepeatBtn={setShowRepeatBtn}
           setShow={setShow}
-          setShowAnswer = {setShowAnswer}
+          setShowAnswerBtn = {setShowAnswerBtn}
           setEdit={setEdit}
           title={`Deck: ${name}`}
           menu={<ThreeDotsBtn
@@ -162,8 +165,10 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                    edit pause trash
           
                    editEvent={() => {
-                      setShowAnswer(true)
-                      setEdit(true)       
+                      setShowAnswerBtn(true)
+                      setEdit(true)  
+                      setShowRepeatBtn(false)  
+                      setEditName(false)   
                     }}
 
                     pauseEvent={() => {
@@ -175,6 +180,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                       setTrash(true)
 
                     dataBase.checkboxClicked?
+
                       deleteCurrentCard() 
                       : 
                       setShowDeleteFrame(true)
@@ -187,29 +193,34 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
             data[random]
             &&
             <>
-              <div className='mb-4'>
-                <p className='questionAnswerStyling'>Question</p>
+              <div className='mb-4'
+              >
+                <p className='questionAnswerStyling'
+                >
+                    Question
+                </p>
                 <FormControl
                   as="textarea"
                   aria-label="With textarea"
-                  value={data[random].question} className='w-100'
+                  value={data[random].question} 
+                  className='w-100'
                   disabled={!edit}
                   name='question'
                   onChange={changeHandler}
                 />
+
               </div>
               {
-                !showAnswer
-                &&
+                !showAnswerBtn &&
+                
                 <Button
-                  style={{ width: '40%' }}
+                  style={{ width: '32%', height: '32px', padding: '0 !important', position: 'relative', left: '10px'}}
                   class='p-1'
                   variant='secondary'
                   className='showAnswer my-5'
-                  onClick={
-                    () => {
-                    setShowAnswer(true)
-                    setShowRepeat(true)
+                  onClick={() => {
+                    setShowAnswerBtn(true)
+                    setShowRepeatBtn(true)
                   }
                   }
                 >
@@ -217,37 +228,36 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                 </Button>
               }
               {
-                showRepeat
-                &&
-                <div 
-                    className='d-flex justify-content-between px-3'
+                showRepeatBtn &&
+
+                <div className='d-flex justify-content-between px-3'
                 >
 
                     {
                       dataBase.userTimePreferences.map((col, k) =>
+
                           <RepeatBtn
                               btn={col.name}
-                              onClick={() => {
-                                  setShowAnswer(!showAnswer)
-                                  setShowRepeat(false)
-                              }}
                               label={'<' + col.amount + col.unit}
+                              onClick={() => {
+                                  setShowAnswerBtn(!showAnswerBtn)
+                                  setShowRepeatBtn(false)
+                              }}
                           />
                       )
                       }
                 </div>
               }
               {
-                showAnswer
-                &&
-                <div 
-                    className='mt-4'
+                showAnswerBtn &&
+
+                <div className='mt-4'
                 >
-                    <p 
-                      className='questionAnswerStyling'
+                    <p className='questionAnswerStyling'
                     >
                         Answer
                     </p>
+
                     <FormControl
                         as="textarea"
                         aria-label="With textarea"
@@ -259,20 +269,22 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                     />
                 </div>
               }
+
               {
                 edit && 
 
-                <div     
-                    className='d-flex justify-content-center'
+                <div className='d-flex justify-content-center'                
                 >
+
                     <SaveAndDiscard 
                         editEvent={() => {
-                            setShowAnswer(false)
+                            setShowAnswerBtn(false)
                             setEdit(false)
                         }}                       
                     />
                 </div>
               }
+              
               {
                 trash && showDeleteFrame &&
 
@@ -284,13 +296,14 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                   deleteFrame={() => setShowDeleteFrame(false)}
                   trashEvent={deleteCurrentCard}
                   onHide={()=>{
-                    setShowAnswer(false)
-                    setShowRepeat(false)
+                    setShowAnswerBtn(false)
+                    setShowRepeatBtn(false)
                   }}      
                 />
               }
             </>
           }
+
         </BasicOrangeWindow>
       }
     </>

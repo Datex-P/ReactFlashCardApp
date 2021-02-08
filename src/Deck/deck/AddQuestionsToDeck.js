@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import {Modal, FormControl } from 'react-bootstrap'
 import {Context} from '../../Context';
-import redCross from '../../icons/redCross.svg'
 import '../styles.css'
+
+import redCross from '../../icons/redCross.svg'
 
 export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
 
@@ -125,8 +126,8 @@ export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
                 <button 
                     onClick={addToDeck}
                     className='generalButtonStyling'
-                    style={{
-                            width: '110px', marginTop: '20px', padding: '5px', boxSizing: 'border-box', marginLeft: '8px'
+                    style={{width: '110px', marginTop: '20px', 
+                            padding: '5px', boxSizing: 'border-box', marginLeft: '8px'
                             }}
                 >
                     Add to Deck

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
-import CutWord from './CutWord'
 import {Context} from '../../Context'
+
+import CutWord from './CutWord'
 
 
 export default function DeckOrCardname({ name, index}) {
@@ -55,7 +56,9 @@ export default function DeckOrCardname({ name, index}) {
               background: colors[index % 5]
             }}
           >
+
               {name}
+
           </div>
       
           :

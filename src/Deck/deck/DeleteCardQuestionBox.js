@@ -1,9 +1,10 @@
-import flashcards from '../../icons/flashcards.svg'
 import React, { useState, useContext } from 'react'
+import {Context} from '../../Context'
 import { Modal } from 'react-bootstrap'
 import '../styles.css'
+
 import questionMark from '../../icons/questionmark.svg'
-import {Context} from '../../Context'
+import flashcards from '../../icons/flashcards.svg'
 
 export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, deleteCurrentCard=()=>{}}) 
   
@@ -72,24 +73,30 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
               </div>
             </Modal.Title>
         </Modal.Header>
+
         <Modal.Body 
             className='d-flex align-items-center' 
             style={{width:'100%', display: 'flex', justifyContent: 'center'}}  
         >
+
             Do you want to delete this {card} ?
+
         </Modal.Body>
-        <Modal.Footer>
+
+        <Modal.Footer
+            contentClassName={'modFooter'}>
 
             <div 
                 className='d-flex justify-content-around align-items-center' 
                 style={{width: '100%'}}
             >
-            
+
                 <div 
                     style={{ display: 'flex', justifyContent: 'space-around', width: '75%' }}
                 >
 
-                    {['No', 'Yes'].map(el =>
+                    {
+                      ['No', 'Yes'].map(el =>
                           <div 
                               className='deleteContainerNoAndYes d-flex justify-content-center align-items-center'
                               onClick={() => {
@@ -99,11 +106,12 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
                                   deleteCurrentCard()
                                 }
                               }}
-                            >
+                          >
+
                             {el}
                           </div>
-                    )}
-
+                          )
+                    }
                 </div>
             </div>
 
@@ -112,7 +120,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
 
       <div 
           style = {{width: '300px', position: 'absolute', top: '175px'
-          }} 
+                   }} 
           className='d-flex justify-content-center'
       >
 
@@ -126,9 +134,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, d
     
           </div>
 
-          <div 
-              style={{ width: '200px', zIndex: '2', color: 'white' 
-              }}
+          <div style={{ width: '200px', zIndex: '2', color: 'white'}}
           >
             Don't show message again
           </div>

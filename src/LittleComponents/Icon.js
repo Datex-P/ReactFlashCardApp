@@ -10,10 +10,21 @@ import { withRouter } from 'react-router-dom'
       style={{ ...style, display: 'flex' }}
       className='iconContainer'>
 
-      <img src={src} alt={alt} style={{ width: '20px' }} />
-      <Nav.Link onClick={()=>{history.push('/'+href)}} className={'link px-3'}> {href} </Nav.Link>
+      <img 
+          src={src} 
+          alt={alt} 
+          style={{ width: '20px' }} 
+      />
+      
+      <Nav.Link 
+          className={'link px-3'}
+          onClick={()=>{history.push('/'+href)}} 
+      > 
+          {href} 
+      </Nav.Link>
 
     </div>
   )
 }
+
 export default withRouter(Icon)
