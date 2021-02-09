@@ -82,7 +82,7 @@ export default function DeckContainer() {
               >
                   <div>
                       {
-                        dataBase.DeckNames.filter((i,k)=>k!==active).map((deck, index) =>
+                        dataBase.DeckNames.filter((i,k)=>active!==k).map((deck, index) =>
                         <Deck
                             key={index}
                             index={index}
@@ -101,11 +101,12 @@ export default function DeckContainer() {
                             `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
                             ${colors[index % 5]} repeat`
                             :
-                            colors[index % 5]
+                            colors.filter((i,k)=>active!==k)[index % 5]
                             }
                       />     
                       )
                       }
+
                       {
                         dataBase.DeckNames.filter((i,k)=>k===active).map((deck, index) =>
                         <Deck
@@ -116,7 +117,6 @@ export default function DeckContainer() {
                             active={true}
                             setActive = {setActive}
                             transform={`rotate(0deg)`}
-
                             zIndex={2}
                             background = 
                             {
@@ -133,10 +133,7 @@ export default function DeckContainer() {
                   </div>
                   <div
                       ref={scroller}
-                      style={{ 
-                              height: '220px', width: '375px', overflow: 'scroll', 
-                              overflowX: 'hidden', position: 'absolute', top: '65px' 
-                            }}
+                      className='scrollerStyling'
                       onScroll={(event) => {
 
                         let step = (1000 - 220) / ((dataBase.DeckNames).length - 1);
@@ -159,12 +156,8 @@ export default function DeckContainer() {
           >
               <button
                   style={{ 
-                      zIndex: '4', 
-                      padding: '2px', 
-                      position: 'fixed', 
-                      top: '630px', 
-                      width: '210px', 
-                      outline: 'none !important' 
+                      zIndex: '4', padding: '2px', position: 'fixed', 
+                      top: '630px',  width: '210px', outline: 'none !important' 
                       }} 
                   className='generalButtonStyling'
                   onClick={

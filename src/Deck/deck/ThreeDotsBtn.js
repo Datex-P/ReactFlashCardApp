@@ -129,7 +129,7 @@ function ThreeDotsBtn({
                       className={startAnimation ? 'blinkingIcon':''} 
                       src={editName? editimg: saveimg} 
                       alt='edit' 
-                      style={{ marginRight: '3px' }}              
+                      style={{marginRight: '3px'}}              
                   /> 
 
                 {text}
@@ -143,12 +143,14 @@ function ThreeDotsBtn({
               <button 
                   className='buttonStyling flexAlignCenter outline-none p-1 '
                   onClick={handlePause}
-                  style={{ borderTop: '1px solid black', borderBottom: '1px solid black' ,
+                  style={{
+                          borderTop: '1px solid black', borderBottom: '1px solid black' ,
                           borderLeft: dataBase.DeckNames[index].paused? '1px solid black': null,
                           borderRight: dataBase.DeckNames[index].paused? '1px solid black': null,
                           borderRadius: dataBase.DeckNames[index].paused? '5px': null
                         }}
               >
+
                   <img 
                       src={ pauseIsActive? pauseimg: playimg}  
                       alt='pause' 

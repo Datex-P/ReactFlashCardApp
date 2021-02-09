@@ -262,8 +262,8 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
 
         <QuestAnswerTrainOverv 
             bg={style.background}
-            setEditName={setEditName}
-            editName={editName}
+            // setEditName={setEditName}
+            // editName={editName}
             name={name} 
             index={index} 
             data={data} 

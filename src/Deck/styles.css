@@ -294,13 +294,13 @@ left: 10px;
 }
 
 .saveAndDiscardContainer {
-  width: 166px;
+  width: 210px;
   height: 71px;
-  top: 314px;
+  top: 284px;
   position: absolute;
   border: 1px grey solid;
   border-radius: 5px;
-  margin-top: 20px;
+
 }
 
 .form-control {
@@ -317,6 +317,18 @@ left: 10px;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) repeat;
 }
 
+
+
+.saveAndDiscardButtonStyling {
+  width: 71px;
+  height: 28px;
+  color: white !important;
+  cursor: pointer !important;
+  border-radius: 5px !important;
+  outline: none !important;
+  border: none !important;
+  font-size: 14px;
+}
 
 
 
@@ -740,4 +752,13 @@ border-bottom-left-radius: calc(.3rem - 1px);
   height: 30px; 
   outline: none; 
   padding-left: 5px;
+}
+
+.scrollerStyling {
+  height: 220px; 
+  width: 375px; 
+  overflow: scroll; 
+  overflow-x: hidden; 
+  position: absolute; 
+  top: 65px;
 }

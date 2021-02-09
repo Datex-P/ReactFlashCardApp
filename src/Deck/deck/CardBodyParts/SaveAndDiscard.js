@@ -1,5 +1,5 @@
 
-export default function SaveAndDiscard({ editEvent }) {
+export default function SaveAndDiscard({ editEvent, generateRandom }) {
 
   return (
 
@@ -8,18 +8,18 @@ export default function SaveAndDiscard({ editEvent }) {
       {
         ['Discard', 'Save'].map(el =>
           <div
-            className='generalButtonStyling d-flex justify-content-around align-items-center'
+            className='saveAndDiscardButtonStyling d-flex justify-content-around align-items-center'
             style={{
-              fontSize: '14px',
-              width: '63px',
-              height: '24px',
-              backgroundColor: el === 'Save' ? '#2d6a4f' : '#772e25'
-            }}
-            onClick={editEvent}
+              backgroundColor: el === 'Save' ? '#2d6a4f' : '#772e25'}}
+            onClick={
+              el === 'Save'? 
+              ()=>{generateRandom();editEvent()} : editEvent
+            }
+          
           >
 
             {el}
-            
+
           </div>
         )
       }

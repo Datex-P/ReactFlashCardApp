@@ -9,7 +9,9 @@ import SaveAndDiscard from './CardBodyParts/SaveAndDiscard'
 import RepeatBtn from './CardBodyParts/RepeatBtn'
 
 
-export default function QuestAnswerTrainOverv({name, data, closePopup,index,paused, setEditName, editName }) {
+export default function QuestAnswerTrainOverv({name, data, closePopup,index,paused, 
+  // setEditName, editName
+ }) {
   
   
   const [checked, setChecked] = useState(false)
@@ -18,7 +20,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
   const [randomQuestion, setRandomQuestion] = useState(null);
   
   const [show, setShow] = useState(false);
-  const [showAnswerBtn, setShowAnswerBtn] = useState(false);
+  const [showAnswerBtn, setShowAnswerBtn] = useState(true);
   const [showRepeatBtn, setShowRepeatBtn] = useState(false);
   
   const [showDeleteFrame, setShowDeleteFrame] = useState(true)
@@ -28,6 +30,8 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
   
   
   const { dataBase, setDataBase } = useContext(Context);
+
+
 
   function handlePause () {
     let newDataBase = {...dataBase}
@@ -45,9 +49,8 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
     if (dataBase.queue[0] && dataBase.queue[0].timeLeft === 0) {
       //need to have algorithm to filter s in queue related onlz for this deck
       //also not tot forget add decremental time algorith for all crads no matter waht deck
-
-
       randomQuestion = dataBase.queue.shift().index
+
     } else {
       randomQuestion = Math.floor(Math.random() * data.length);
     }
@@ -55,7 +58,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
     setRandomQuestion(randomQuestion);
     setShow(true)
     closePopup()
-    console.log(data)
+    // console.log(data)
  
 
      if (data.length === 0) {
@@ -131,17 +134,14 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                     opacity: dataBase.DeckNames[index].paused? '0': '1',
                     cursor:  dataBase.DeckNames[index].paused? 'default': 'pointer'
                   }}
-            onClick={
-
-              paused
-              ?
-                null
-              :
-                generateRandom
-            }     
+          onClick={paused?
+                    null
+                    :
+                    generateRandom
+                    }     
       >
 
-      Open Deck
+          Open Deck
 
       </Button>
     
@@ -166,27 +166,26 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                    edit pause trash
           
                    editEvent={() => {
-                      setShowAnswerBtn(true)
+                      setShowAnswerBtn(false)
                       setEdit(true)  
                       setShowRepeatBtn(false)  
-                      setEditName(false)   
+                      // setShow(false)
+                      // setEditName(false)   
                     }}
 
                     pauseEvent={() => {
                             // handlePause()
                     }}   
 
-                    trashEvent={
-                      () => {
-                      setTrash(true)
+                    trashEvent={() => {
+                        setTrash(true)
 
-                    dataBase.checkboxClicked?
+                        dataBase.checkboxClicked?
 
-                      deleteCurrentCard() 
-                      : 
-                      setShowDeleteFrame(true)
-                    }
-                    }
+                              deleteCurrentCard() 
+                                  : 
+                              setShowDeleteFrame(true)
+                          }}
                  />
                 }
           >
@@ -212,8 +211,9 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                 />
 
               </div>
+
               {
-                !showAnswerBtn &&
+                showAnswerBtn &&
                 
                 <Button
                   // style={{ width: '32%', height: '32px', padding: '0 !important', position: 'relative', left: '10px'}}
@@ -221,10 +221,9 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                   variant='secondary'
                   className='showAnswer my-5 d-flex justify-content-center align-items-center'
                   onClick={() => {
-                    setShowAnswerBtn(true)
+                    setShowAnswerBtn(false)
                     setShowRepeatBtn(true)
-                  }
-                  }
+                  }}
                 >
                 
                   Show answer
@@ -246,14 +245,15 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                               onClick={() => {
                                   setShowAnswerBtn(!showAnswerBtn)
                                   setShowRepeatBtn(false)
+                                  generateRandom()
                               }}
                           />
-                      )
-                      }
+                      )}
                 </div>
               }
+
               {
-                showAnswerBtn &&
+                !showAnswerBtn &&
 
                 <div className='mt-4'
                 >
@@ -282,9 +282,10 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
 
                     <SaveAndDiscard 
                         editEvent={() => {
-                            setShowAnswerBtn(false)
+                            setShowAnswerBtn(true)
                             setEdit(false)
-                        }}                       
+                        }}
+                        generateRandom={generateRandom}                       
                     />
                 </div>
               }
@@ -300,11 +301,12 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                   deleteFrame={() => setShowDeleteFrame(false)}
                   trashEvent={deleteCurrentCard}
                   onHide={()=>{
-                    setShowAnswerBtn(false)
+                    setShowAnswerBtn(true)
                     setShowRepeatBtn(false)
                   }}      
                 />
               }
+
             </>
           }
 

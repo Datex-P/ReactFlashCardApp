@@ -42,7 +42,7 @@ export default function BasicOrangeWindow({
                       setShow(false)
                       setEdit(false)
                       setShowRepeatBtn(false)
-                      setShowAnswerBtn(false)
+                      setShowAnswerBtn(true)
                     }
                 } 
                 >
@@ -60,7 +60,7 @@ export default function BasicOrangeWindow({
                 {children}
 
               </Modal.Body>
-              
+
         </div>
     </Modal>
    
