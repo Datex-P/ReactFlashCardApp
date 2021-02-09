@@ -71,6 +71,7 @@ export default function DeckContainer() {
                     width: '504px' 
                     }} 
           >
+
           <Row>
             {
               showDeck &&
@@ -81,19 +82,19 @@ export default function DeckContainer() {
               >
                   <div>
                       {
-                        dataBase.DeckNames.map((deck, index) =>
+                        dataBase.DeckNames.filter((i,k)=>k!==active).map((deck, index) =>
                         <Deck
                             key={index}
                             index={index}
                             deck={deck}
                             name={deck.name}
-                            active={active === index}
+                            active={false}
                             setActive = {setActive}
-                            transform={active === index ? `rotate(0deg)` : 
-                            `rotate(${
-                              ( dataBase.DeckNames.length  - index) * -2}deg)`}
+                            transform={`rotate(${
+                              ( dataBase.DeckNames.length-1  - index) * -2}deg)`
+                              }
 
-                            zIndex={active === index ? 2 : 0}
+                            zIndex={ 0}
                             background = 
                             {
                               active === index && deck.paused ? 
@@ -105,6 +106,30 @@ export default function DeckContainer() {
                       />     
                       )
                       }
+                      {
+                        dataBase.DeckNames.filter((i,k)=>k===active).map((deck, index) =>
+                        <Deck
+                            key={index}
+                            index={index}
+                            deck={deck}
+                            name={deck.name}
+                            active={true}
+                            setActive = {setActive}
+                            transform={`rotate(0deg)`}
+
+                            zIndex={2}
+                            background = 
+                            {
+                              active === index && deck.paused ? 
+                            `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
+                            ${colors[active % 5]} repeat`
+                            :
+                            colors[active % 5]
+                            }
+                      />     
+                      )
+                      }
+
                   </div>
                   <div
                       ref={scroller}
@@ -149,7 +174,9 @@ export default function DeckContainer() {
                   }
                   }
               >
+
                   Create Deck
+
               </button>
 
               <CreateNewDeck 
@@ -164,6 +191,7 @@ export default function DeckContainer() {
                     setCreateNewDeckDisplay(false)}
                     }
               />
+
           </Row>
       </Container>
   </>

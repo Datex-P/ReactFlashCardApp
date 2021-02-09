@@ -84,9 +84,8 @@ function Stats({ history}) {
                   show={show}
                   deleteFrame={() => setShowDeleteFrame(false)}
                   // trashEvent={deleteCurrentCard}
-                  onHide={()=>{
-                 
-                  }}
+                  onHide={()=>{ }
+                  }
                   />
               }
 
@@ -102,17 +101,18 @@ function Stats({ history}) {
 
           </div>
 
-          <div className='d-flex align-items-center justify-content-center'>
+          <div className='d-flex align-items-center justify-content-center'
+          >
 
             <ButtonLeftAndRight />
-
           </div>
 
           <HourlyBreakdown />
 
         </div>
 
-        <div style={{width: '200px'}}>
+        <div style={{width: '200px'}}
+        >
 
         </div>
 
@@ -144,11 +144,13 @@ function ButtonLeftAndRight() {
 
   return (
 
-    <div style={{display: 'flex', flexDirection: 'column'}}>
+    <div style={{display: 'flex', flexDirection: 'column'}}
+    >
 
       <div 
           className='d-flex justify-content-center align-items-center' 
-          style={{marginTop: '-10px'}}>
+          style={{marginTop: '-10px'}}
+      >
 
           {
         
@@ -201,7 +203,8 @@ function RenderDays () {
 
 return (
 
-    <div className= 'yearBoxContainer'>
+    <div className= 'yearBoxContainer'
+    >
 
         {
           days.map(day=>

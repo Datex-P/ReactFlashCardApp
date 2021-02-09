@@ -86,13 +86,13 @@ function ThreeDotsBtn({
   return (
     <>
     {
-      index&& dataBase?.DeckNames[index].paused?
+      index && dataBase?.DeckNames[index].paused?
     
       null
     :
 
-    <div style={threeDotsContainer}
-    >
+      <div style={threeDotsContainer}
+      >
         <div 
             className='rotateLittleModal' 
             style={{height: '24px'}}
@@ -109,7 +109,7 @@ function ThreeDotsBtn({
         </div>
 
         {
-          show&&
+          show &&
           
           <div 
             ref={ref}
@@ -164,7 +164,6 @@ function ThreeDotsBtn({
               trash && 
               
               <button 
-
                 className='buttonStyling flexAlignCenter outline-none p-1 '
                 onClick={() => {
                     trashEvent()
@@ -201,7 +200,7 @@ function ThreeDotsBtn({
             }
           </div>
         }
-    </div>   
+      </div>   
  
     }
     </>

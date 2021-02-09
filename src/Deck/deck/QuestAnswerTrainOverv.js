@@ -132,7 +132,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                     cursor:  dataBase.DeckNames[index].paused? 'default': 'pointer'
                   }}
             onClick={
-              
+
               paused
               ?
                 null
@@ -190,9 +190,10 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                  />
                 }
           >
+
           {
-            data[randomQuestion]
-            &&
+            data[randomQuestion] &&
+
             <>
               <div className='mb-4'
               >
@@ -225,6 +226,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                   }
                   }
                 >
+                
                   Show answer
                 </Button>
               }

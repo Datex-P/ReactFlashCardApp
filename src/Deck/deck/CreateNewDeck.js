@@ -44,7 +44,7 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
         toStudyGoal: 20,
         cardsToday: 0
       })
-        setActive(index-1)
+      setActive(index-1)
       setDataBase(newDataBase)
       close()
     }
@@ -97,7 +97,9 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
                               }  
                 >           
                 </input>
-                <select style={{ width: '90%', outline: 'none' }}>
+
+                <select style={{ width: '90%', outline: 'none' }}
+                >
                   <option>option 1</option>
                   <option>option 2</option>
                   <option>option 3</option>

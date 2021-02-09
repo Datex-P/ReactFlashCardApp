@@ -3,9 +3,9 @@ import redCross from '../../icons/redCross.svg'
 
 export default function BasicOrangeWindow({
               children, show, setShow,title,menu, 
-              setShowAnswer = () => {},
+              setShowAnswerBtn = () => {},
               setEdit = () =>{} , 
-              setShowRepeat = () => {}
+              setShowRepeatBtn = () => {}
             }) {
 
   return(
@@ -18,19 +18,19 @@ export default function BasicOrangeWindow({
         style= {{left: '-160px !important', right: '45px !important'
                 }}
       >
-      
+
           <div  style={{width: '98%', height: '95%', margin: 'auto', overflow: 'hidden auto'
                       }}
           >
+
               <Modal.Header className='border-bottom-0'
               >
 
-                  <Modal.Title 
-                      style={{fontSize: '16px', marginLeft: '12px', height: '24px', width: '240px'
+                  <Modal.Title style={{fontSize: '16px', marginLeft: '12px', height: '24px', width: '240px'
                               }}
                   >
+
                       {title}
-                
                   </Modal.Title>
 
                   {menu}
@@ -41,8 +41,8 @@ export default function BasicOrangeWindow({
                   
                       setShow(false)
                       setEdit(false)
-                      setShowRepeat(false)
-                      setShowAnswer(false)
+                      setShowRepeatBtn(false)
+                      setShowAnswerBtn(false)
                     }
                 } 
                 >
@@ -60,6 +60,7 @@ export default function BasicOrangeWindow({
                 {children}
 
               </Modal.Body>
+              
         </div>
     </Modal>
    

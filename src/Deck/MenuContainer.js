@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
+import { Modal } from 'react-bootstrap'
+import { Context } from '../Context'
 import './styles.css';
+
 import Icon from '../LittleComponents/Icon'
+
 import settingsIcon from '../icons/settings.svg';
 import statsIcon from '../icons/stats.svg';
 import logoutIcon from '../icons/logout.svg';
-import { Modal } from 'react-bootstrap'
-import { Context } from '../Context'
 
 
 export default function MenuContainer() {
@@ -39,11 +41,10 @@ export default function MenuContainer() {
                 
                 {
                   !show && 
-                  
-                      <div 
-                          className={'menuIcon'} 
-                          style={{ top: '8px' }}
-                      >                  
+
+                      <div className={'menuIcon'} style={{ top: '8px' }}
+                      >                
+                        
                       </div>
                 }
 
