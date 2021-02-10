@@ -72,7 +72,7 @@ export default function ChartComp() {
     };
 
     function updateChart() {
-      
+
       config.data.datasets[0].data = [10, 20, 30, 40, 50];
       config.data.datasets[0].backgroundColor = ['green', 'blue', 'yellow',
         'purple', 'red'];
@@ -93,7 +93,11 @@ export default function ChartComp() {
 
 
   return (
-    <canvas ref={ctx} style={{ width: '270px', height: '200px', overflow: 'hidden', borderRadius: '5px' }} className='pieChart'>
+    <canvas 
+        ref={ctx} 
+        className='pieChart'
+        style={{ width: '270px', height: '200px', overflow: 'hidden', borderRadius: '5px' }} 
+    >
 
     </canvas>
 

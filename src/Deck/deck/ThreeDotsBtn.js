@@ -13,27 +13,25 @@ import playimg from '../../icons/play.svg'
 
 
 function ThreeDotsBtn({    
-                        text, showFromParent, style, className, editName, nameOfTopDeck, 
-                        index, input, threeDotsContainer, setEditName,
-                        
+                        text, showFromParent, style, className, editButtonClicked, nameOfTopDeck, 
+                        index, input, threeDotsContainer, setEditButtonClicked, 
                         setShowFromParent = () => { },
                         editEvent = () => { }, 
                         trashEvent = () => { },
-
                         edit=false,trash=false,pause=false,reset=false,
                       }) 
 
 {
 
-  const [startAnimation, setStartAnimation] = useState(false)
+  const [blinkingSaveIcon, setBlinkingSaveIcon] = useState(false)
   const [pauseIsActive, setPauseIsActive] = useState(true)
   
-  const [show, setShow] = useState(showFromParent);
+  const [threeDotsOpen, setThreeDotsOpen] = useState(showFromParent);
   const {dataBase, setDataBase} = useContext(Context);
 
 
   const handleClick = () => {
-    setShow(!show);
+    setThreeDotsOpen(!threeDotsOpen);
     // setShowFromParent(!show)
 
   };
@@ -51,21 +49,24 @@ function ThreeDotsBtn({
 
 
   useOutsideAlerter([ref,input], 
-                    editName, 
-                    ()=>{setShow(false)},
+                    editButtonClicked, 
+                    ()=>{setThreeDotsOpen(false)
+                    },
                     ()=>{
-    setStartAnimation(true)
-    // input.current.focus()
-    setTimeout(()=>{setStartAnimation(false)},2000)
-  } )
+                    setBlinkingSaveIcon(true)
+                    setTimeout(()=>{
+                      setBlinkingSaveIcon(false)},
+                      2000)
+                    }                  
+  )
     
     
   function handleEdit() {
     editEvent() 
     // !editName && setShow(false) 
     // other way of writing it
-    if (!editName) {
-      setShow(false)
+    if (!editButtonClicked) {
+      setThreeDotsOpen(false)
       handleDeckname()
     }
   }
@@ -77,8 +78,8 @@ function ThreeDotsBtn({
     setPauseIsActive(savePausedState)
     dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
     setDataBase(newDataBase)
-    setEditName(true)
-    setShow(false)
+    setEditButtonClicked(true)
+    setThreeDotsOpen(false)
     
   }
 
@@ -88,7 +89,7 @@ function ThreeDotsBtn({
     {
       index && dataBase?.DeckNames[index].paused?
     
-      null
+      console.log('hello')
     :
 
       <div style={threeDotsContainer}
@@ -97,19 +98,19 @@ function ThreeDotsBtn({
             className='rotateLittleModal' 
             style={{height: '24px'}}
             onClick={
-                    editName? 
+                editButtonClicked? 
 
-                    handleClick                
-                    : 
-                    ()=>{} 
-                    } 
+                handleClick                
+                  : 
+                ()=>{} 
+            } 
           >
                   ...
        
         </div>
 
         {
-          show &&
+          threeDotsOpen && 
           
           <div 
             ref={ref}
@@ -126,10 +127,10 @@ function ThreeDotsBtn({
               >
                       
                   <img 
-                      className={startAnimation ? 'blinkingIcon':''} 
-                      src={editName? editimg: saveimg} 
                       alt='edit' 
-                      style={{marginRight: '3px'}}              
+                      style={{ marginRight: '3px' }}              
+                      className={ blinkingSaveIcon ? 'blinkingIcon':'' } 
+                      src={ editButtonClicked? editimg: saveimg } 
                   /> 
 
                 {text}
@@ -152,9 +153,9 @@ function ThreeDotsBtn({
               >
 
                   <img 
-                      src={ pauseIsActive? pauseimg: playimg}  
                       alt='pause' 
-                      style={{ marginRight: '3px'}} 
+                      style={{ marginRight: '3px' }} 
+                      src={ pauseIsActive? pauseimg: playimg }  
                   />
 
                   {text}
@@ -166,15 +167,15 @@ function ThreeDotsBtn({
               trash && 
               
               <button 
-                className='buttonStyling flexAlignCenter outline-none p-1 '
+                className='buttonStyling flexAlignCenter outline-none p-1'
                 onClick={() => {
                     trashEvent()
-                    setShow(false)
+                    setThreeDotsOpen(false)
                 }}
               >
                 <img 
                       style={{ marginRight: '3px' }} 
-                      src={trashimg} 
+                      src={ trashimg } 
                       alt='trash' 
                 />
 
@@ -187,17 +188,17 @@ function ThreeDotsBtn({
               
               <button 
                   className='buttonStyling flexAlignCenter outline-none p-1'
-                  onClick={() => {}}
+                  onClick={() => {}
+                  }
               >
 
                 <img 
                     src={resetimg} 
                     alt='reset' 
-                    style={{ marginRight: '3px', width: '23px', height: '23px'}}  
+                    style={{ marginRight: '3px', width: '23px', height: '23px' }}  
                 />
 
                 {text}
-
               </button>
             }
           </div>

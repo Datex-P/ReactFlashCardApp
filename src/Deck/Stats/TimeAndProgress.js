@@ -7,7 +7,7 @@ export default function TimeAndProgress() {
     9: 20,
     17: 14
   }
-  let currentProgress = Object.values(timeObj).reduce((sum, i) => sum += i, 0) / studyGoal * 100
+  let currentProgress = Object.values(timeObj).reduce((sum, i) => sum += i, 0) / studyGoal * 100;
   let widthAdjusted = Math.round(currentProgress) + 120;
 
   function renderLines() {
@@ -21,40 +21,78 @@ export default function TimeAndProgress() {
         previousWidthVar += widthVar
 
         if (i === 21) {
+          
           arr.push(
-          <Row time={<div style={{paddingLeft: '3px', height: '21px'}}
-          >
-              {'21 - 24'}
-              </div>
-              } 
+          <Row 
               previousWidthVar={previousWidthVar} 
               widthVar={widthVar} 
+              time={
+              
+              <div style={{paddingLeft: '3px', height: '21px'}}
+              >
+                  {'21 - 24'}
+              </div>
+              }
           />
           )
+
         } else if (i === 25) {
+
           arr.push(
-          <Row time={<div style={{paddingLeft: '3px', height: '21px'}}
-          >
-              {'24 - 5'}
-              </div>} 
-              previousWidthVar={previousWidthVar} 
-              widthVar={widthVar} 
-          />)
+            <Row 
+                previousWidthVar={previousWidthVar} 
+                widthVar={widthVar} 
+                time={
+                      <div style={{paddingLeft: '3px', height: '21px'}}
+                      >
+                          {'24 - 5'}
+                      </div>
+                    } 
+            />
+            )
         } else if (i <= 9) {
 
           if (i <= 9 && i + 4 > 9) {
-            arr.push(<Row time={<div style={{paddingLeft: '3px', height: '21px'}}>{'0' + i} - {(i + 4)}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
+            
+            arr.push(
+            <Row 
+                previousWidthVar={previousWidthVar} 
+                widthVar={widthVar} 
+                time={
+                    <div style={{paddingLeft: '3px', height: '21px'}}
+                    >
+                        {'0' + i} - {(i + 4)}
+                    </div>
+                    } 
+            />
+            )
           } else {
-            arr.push(<Row time={<div style={{paddingLeft: '3px', height: '21px'}}>
-            {'0' + i} - {'0' + (i + 4)}
-            </div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
+            arr.push(
+            <Row 
+            previousWidthVar={previousWidthVar} 
+            widthVar={widthVar} 
+            time={
+                  <div style={{paddingLeft: '3px', height: '21px'}}
+                  >
+                      {'0' + i} - {'0' + (i + 4)}
+                  </div>
+                  } 
+            />)
           }
+        } else {
+          arr.push(
+          <Row 
+              previousWidthVar={previousWidthVar} 
+              widthVar={widthVar} 
+              time={
+                    <div style={{paddingLeft: '3px'}}
+                    >
+                        {i} - {i + 4}
+                    </div>
+                    }
+           />
+           )
         }
-        else {
-          arr.push(<Row time={<div style={{paddingLeft: '3px'}}>{i} - {i + 4}</div>} previousWidthVar={previousWidthVar} widthVar={widthVar} />)
-
-        }
-
       }
     }
     return arr
@@ -94,14 +132,12 @@ export default function TimeAndProgress() {
         >
 
             {currentProgress.toFixed(0)}%
-
        </div>
 
-       </div> 
+    </div> 
 
-
-    {renderLines()}      
-    </div>
+  {renderLines()}      
+</div>
 
   )
 }

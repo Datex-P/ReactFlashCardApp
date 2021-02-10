@@ -17,8 +17,8 @@ export default function RepeatBtn({ label, btn, onClick }) {
           variant="secondary"
           onClick={onClick}
       >
-          {btn}
 
+          {btn}
       </Button>
     
     </div>

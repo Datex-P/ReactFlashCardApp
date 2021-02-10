@@ -62,13 +62,9 @@ export default function DeckContainer() {
       <>
         <NavBar />
         <Container 
-            className='align-items-center' 
+            className='align-items-center containerStyling' 
             style={{ 
-                    backgroundColor: styles.backgroundColor[dataBase.userPreferences.backgroundColor], 
-                    borderBottomLeftRadius: '5px', 
-                    borderBottomRightRadius: '5px', 
-                    height: '650px', 
-                    width: '504px' 
+             backgroundColor: styles.backgroundColor[dataBase.userPreferences.backgroundColor]
                     }} 
           >
 
@@ -94,7 +90,7 @@ export default function DeckContainer() {
                               ( dataBase.DeckNames.length-1  - index) * -2}deg)`
                               }
 
-                            zIndex={ 0}
+                            zIndex={0}
                             background = 
                             {
                               active === index && deck.paused ? 
@@ -178,11 +174,10 @@ export default function DeckContainer() {
                   setActive={setActive}
                   setCreateNewDeckDisplay={setCreateNewDeckDisplay}
                   style={{ position: 'absolute', zIndex: '40' }}
-                  close={
-                    ()=>{
+                  close={()=>{
                     setShowDeck(true)
                     setCreateNewDeckDisplay(false)}
-                    }
+                  }
               />
 
           </Row>

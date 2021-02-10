@@ -156,13 +156,22 @@ function ButtonLeftAndRight() {
         
             ['<', year, '>'].map(el =>
 
-              <div style={{ cursor: el === year ? 'default' : 'pointer', margin: el === year ? '5px' : '', width: '33px' }}
+              <div style={{ 
+                            width: '33px',
+                            cursor: el === year ? 'default' : 'pointer', 
+                            margin: el === year ? '5px' : ''
+                            }}
 
-                className={el !== year ? 'd-flex justify-content-center align-items-center calendarButtons' : 
+                className={
+                          el !== year ? 
+                          'd-flex justify-content-center align-items-center calendarButtons' 
+                              : 
                           ' align-items-center flex justify-content-center'}
 
                 onClick={el === '<' && el !== year ?
-                  handleDecrement : handleIncrement
+                          handleDecrement 
+                          : 
+                          handleIncrement
                 }
               >
 

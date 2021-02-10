@@ -89,7 +89,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent,
 
             <div 
                 className='d-flex justify-content-around align-items-center' 
-                style={{width: '100%'}}
+                style={{width: '100%', height: '14px'}}
             >
 
                 <div 
@@ -137,7 +137,7 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent,
 
           <div style={{ width: '200px', zIndex: '2', color: 'white'}}
           >
-          
+
             Don't show message again
           </div>
       </div>

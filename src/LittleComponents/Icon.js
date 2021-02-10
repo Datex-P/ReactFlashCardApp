@@ -18,7 +18,9 @@ import { withRouter } from 'react-router-dom'
       
       <Nav.Link 
           className={'link px-3'}
-          onClick={()=>{history.push('/'+href)}} 
+          onClick={()=>{
+            history.push('/'+href)}
+            } 
       > 
           {href} 
       </Nav.Link>

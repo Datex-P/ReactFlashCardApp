@@ -3,13 +3,13 @@ import { withRouter } from 'react-router-dom'
 import style from './style.module.css'
 import '../styles.css'
 import { Context } from '../../Context'
+import Hexagons from  './Hexagons'
 
 import BasicOrangeWindow from '../deck/BasicOrangeWindow'
 
 import edit from '../../icons/edit.svg'
 import save from '../../icons/save.svg'
-import hexagonWhite from '../../icons/hexagon.svg'
-import hexagonGreen from '../../icons/hexagonGreen.svg'
+
 
 
 function Settings({ history }) {
@@ -78,6 +78,7 @@ function Settings({ history }) {
               {dataBase &&
                   
                   dataBase.userTimePreferences.map((col, k) =>
+
                   <Col key={col.name} 
                       index={k} 
                       data={col} 
@@ -229,10 +230,7 @@ function Col({ data: { name, amount, unit }, editable, index, userTimePreference
               className={style.input}
               type='number'
               style={{
-                backgroundColor: 'transparent',
-                outline: 'none',
-                width: '40px',
-                height: '24px'
+                 backgroundColor: 'transparent', outline: 'none', width: '40px', height: '24px'
               }} 
               disabled={!editable}
               value={inputNumb}
@@ -266,68 +264,7 @@ function Col({ data: { name, amount, unit }, editable, index, userTimePreference
 }
 
 
-function Hexagons({ idx, editHex, setEditHex }) {
 
-  const { dataBase, setDataBase } = useContext(Context)
-  const [showDay, setShowDay] = useState(false)
-
-
-  function setIndex() {
-
-
-    let newDataBase = { ...dataBase }
-    newDataBase.userPreferences.days = idx
-    setDataBase(newDataBase)
-    setShowDay(true)
-
-  }
-
-  return (
-    
-    <div 
-      className='d-flex flex-column justify-content-center align-items-center'
-      style={{
-        width: '16px', height: '21px', position: 'relative',
-        margin: '3px', padding: '3px', transform: 'rotate(90deg)'
-      }}
-    >
-
-      {
-        <img
-          onMouseEnter={editHex ? () => { } : setIndex}
-          style={{ cursor: editHex ? 'default' : 'pointer' }}
-          src={idx <= dataBase.userPreferences.days ? hexagonGreen : hexagonWhite}
-          alt='hexagon'
-          onMouseLeave={editHex ? () => { } : () => { setShowDay(false) }}
-          onClick={() => { setEditHex(true) }}
-
-        />
-      }
-
-      {
-        ((editHex && 
-                (showDay || idx === dataBase.userPreferences.days)) || idx === dataBase.userPreferences.days) 
-        &&
-            
-        <div style={{
-            transform: 'rotate(-90deg)', width: '54px',
-            fontSize: '14px', paddingLeft: '14px', position: 'absolute', right: '-40px'
-          }}>
-            <div className='blackArrow'
-            >
-            </div>
-            
-            <span style={{ fontWeight: 'bold' }}
-            >
-                {idx <= dataBase.userPreferences.days ? `${idx + 1}` : `${idx - 1}`}
-            </span> 
-
-            {idx === 0? 'day': 'days'}
-        </div>
-      }
-    </div>
-  )
-}
 
 
 

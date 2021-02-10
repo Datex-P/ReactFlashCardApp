@@ -17,11 +17,11 @@ import playimg from '../../icons/play.svg'
 export default function Deck({ deck: { data,paused, name }, checked, setChecked,
    active, setActive, title, bg, index, ...style }) {
   
-  const [editName, setEditName] = useState(true); 
+  const [editButtonClicked, setEditButtonClicked] = useState(true); 
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name);
-  const [show, setShow] = useState(false);
+  const [threeDotsMenuOpen, setThreeDotsMenuOpen] = useState(false);
   
-  const [showDeleteFrame, setShowDeleteFrame] = useState(true);
+  const [showDeleteWindow, setShowDeleteWindow] = useState(true);
   const [trash, setTrash] = useState(false);
   const [pauseIsActive, setPauseIsActive] = useState(true)
   
@@ -77,17 +77,12 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
         >
 
         {
-         editName?
+         editButtonClicked?
 
          <DeckOrCardname 
-              bg={style.background} 
-              index={index}
-              show={show} 
-              name= {name}
-              style={{
-                   width: '159px', height: '73px', position: 'relative important',
-                   display: 'flex !important', justifyContent: 'center !important', left: '6px'
-                  }}
+            index={index}
+            name= {name}
+            className='deckOrCardNameStyling'
          />
 
          :
@@ -99,8 +94,8 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
               onChange={(e)=>{
             
                     if (e.target.value.length>25) {
+                     
                       alert('Deckname can not be longer than 25 characters')
-                    
                     } else {
                     
                     setNameOfTopDeck(e.target.value)}
@@ -118,10 +113,10 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
               text={'deck'}
               pauseIsActive={pauseIsActive}
               setPauseIsActive={setPauseIsActive}
-              showFromParent={show}
-              editName={editName}
-              setEditName={setEditName}
-              setShowFromParent={setShow}
+              showFromParent={threeDotsMenuOpen}
+              editButtonClicked={editButtonClicked}
+              setEditButtonClicked={setEditButtonClicked}
+              setShowFromParent={setThreeDotsMenuOpen}
               index={index}
               paused={paused}
               bg={style.background} 
@@ -137,8 +132,8 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
                       }}
        
               editEvent={() => {
-                setShow(show)
-                setEditName(!editName)
+                setThreeDotsMenuOpen(threeDotsMenuOpen)
+                setEditButtonClicked(!editButtonClicked)
               }}
 
 
@@ -152,19 +147,19 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
               :
               () => {
                 setTrash(true)
-                setShowDeleteFrame(true)
+                setShowDeleteWindow(true)
               }
               }
             />
           }
 
             {
-                trash && showDeleteFrame && !dataBase.DeckNames[index].paused &&
+              trash && showDeleteWindow && !dataBase.DeckNames[index].paused &&
 
                 <DeleteCardQuestionBox
                   card='deck'
-                  show={show}
-                  deleteFrame={() => setShowDeleteFrame(false)}
+                  threeDotsMenuOpen={threeDotsMenuOpen}
+                  deleteFrame={() => setShowDeleteWindow(false)}
                   trashEvent={()=>{
 
                   deleteDeck()
@@ -205,8 +200,8 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
             dataBase.DeckNames[index].paused?
 
               <div 
-                  style={{background: colors[index % 5]}}
                   className='deckPausedContainer'
+                  style={{background: colors[index % 5]}}
               >
 
                   <div>
@@ -221,7 +216,6 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
                         className='playButton'
                         onClick={()=>{
                                     handlePause()
-                                    // setShow(false)
                                 
                         }}
                     >
@@ -248,27 +242,23 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
           {
             name && 
           
-          <div 
-              className='divStyling'  
-              style={{opacity: dataBase.DeckNames[index].paused? '0': '1'}}
-          >
+            <div 
+                className='divStyling'  
+                style={{opacity: dataBase.DeckNames[index].paused? '0': '1'}}
+            >
 
-              {'Decksize:'.padEnd(10, '⠀')}{data.length}        
-          </div>
+                {'Decksize:'.padEnd(10, '⠀')}{data.length}        
+            </div>
 
           }
       
         </Card.Text>
 
         <QuestAnswerTrainOverv 
-            bg={style.background}
-            // setEditName={setEditName}
-            // editName={editName}
             name={name} 
             index={index} 
             data={data} 
             paused={paused} 
-            closePopup={() => setShow(false)} 
         />
         
         {
@@ -278,11 +268,10 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
               bg={style.background} 
               name= {name} 
               index= {index} 
-              closePopup={() => setShow(false)} 
           />        
         }
-      </Card.Body>
 
+      </Card.Body>
     </Card>
   )
 }

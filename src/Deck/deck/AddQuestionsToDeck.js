@@ -1,15 +1,17 @@
-import React, { useState, useContext } from 'react';
-import {Modal, FormControl } from 'react-bootstrap'
+
+import React, { useState, useContext, useEffect} from 'react';
+import {Modal, FormControl, Alert } from 'react-bootstrap'
 import {Context} from '../../Context';
 import '../styles.css'
 
 import redCross from '../../icons/redCross.svg'
 
-export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
+export default function AddQuestionsToDeck({  index, name, bg }) 
 
-
+  {
   const [show, setShow] = useState(false);
   const [card, setCard] = useState({question:'', answer:''})
+  const [newCardAdded, setNewCardAdded] = useState(false);
 
   const {dataBase, setDataBase}= useContext(Context);
 
@@ -19,9 +21,10 @@ export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
     //  newDataBase.DeckNames[index].push(card)
     setDataBase(newDataBase)
     setCard({question:'', answer:''})
-    alert('card is added successfully')
+    setNewCardAdded(true)
+ 
   }
-
+  
   function changeHandler (e) {
     console.log(card)
     let newCard =  {...card}
@@ -30,6 +33,14 @@ export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
     setCard(newCard)
     //setCard({...card,[name]:value}) would be another way of writing it
   }
+  
+//make method when adding was not successful
+
+  useEffect(() => {
+    
+      setTimeout(()=>{setNewCardAdded(false)},500) 
+  }, [newCardAdded]);
+  
 
   return (
     
@@ -48,7 +59,7 @@ export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
             null
             :            
             () => { 
-              closePopup(); 
+              // closePopup(); 
               setShow(true)
               }
             } 
@@ -76,15 +87,16 @@ export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
 
               <button 
                   className='redCross' 
-                  onClick={
-                          () => setShow(false)
+                  onClick={() => setShow(false)
                           }
                 >
+
                     <img 
                         src={redCross} 
                         alt='redCross'                           
                     />
               </button>
+
             </Modal.Header>
             <Modal.Body >
 
@@ -105,13 +117,37 @@ export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
                         onChange={changeHandler}
                     />
 
+                    { 
+                      newCardAdded?
+
+                          <div 
+                              className='d-flex justify-content-center align-items-center'
+                              style={{height: '52px'}}
+                          >
+
+                              <Alert 
+                                  variant="success"
+                                  style={{width: '145px', height: '35px'}}
+                              >
+
+                                  Card added to deck.
+                              </Alert>
+
+                          </div>
+
+                          : 
+                          null
+                    }
+
                 </div>
-                <div className='mt-5'
+                <div style={{marginTop: newCardAdded? '0px': '60px'}}
                 >
+
                     <p className='questionAnswerStyling'
-                      >
+                    >
                       Answer
                     </p>
+
                     <FormControl
                       as="textarea"
                       aria-label="With textarea"
@@ -130,6 +166,7 @@ export default function AddQuestionsToDeck({ closePopup, index, name, bg }) {
                             padding: '5px', boxSizing: 'border-box', marginLeft: '8px'
                             }}
                 >
+
                     Add to Deck
                 </button>
 

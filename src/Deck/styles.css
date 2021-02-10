@@ -585,7 +585,6 @@ border-radius: 5px;
 }
 
 .modal-footer {
-  background-color: green !important;
   height: 45px !important;
 }
 
@@ -630,10 +629,12 @@ height: 33px;
 .backgroundModal {
 
   background-color: rgba(0, 0, 0, 0.3);
-  width: 682px !important;
+  /* width: 682px !important; */
   padding: 163px;
   top: -9px;
-  height: 1005px !important;
+  /* height: 1005px !important; */
+  height: 730px !important;
+
   display:flex;
   align-items: center;
   justify-content: center;
@@ -761,4 +762,37 @@ border-bottom-left-radius: calc(.3rem - 1px);
   overflow-x: hidden; 
   position: absolute; 
   top: 65px;
+}
+
+.containerStyling {
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  height: 650px !important;
+  width: 504px !important; 
+}
+
+.alert {
+  margin-bottom: 0px !important;
+  padding: 5px !important;
+}
+
+.monthContainerBox {
+  display: flex;
+  justify-content: space-evenly; 
+  width: 270px;
+  height: 38px; 
+  border-radius: 5px;  
+  border: 1px solid black;
+  padding: 1px 5px; 
+  margin-top: 10px; 
+  margin-bottom: 20px;
+}
+
+.deckOrCardNameStyling {
+  width: 159px; 
+  height: 73px; 
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important; 
+  left: 6px;
 }

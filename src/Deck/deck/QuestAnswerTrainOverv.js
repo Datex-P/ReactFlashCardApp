@@ -9,74 +9,76 @@ import SaveAndDiscard from './CardBodyParts/SaveAndDiscard'
 import RepeatBtn from './CardBodyParts/RepeatBtn'
 
 
-export default function QuestAnswerTrainOverv({name, data, closePopup,index,paused, 
-  // setEditName, editName
- }) {
-  
+export default function QuestAnswerTrainOverv({name, data, index,paused
+ }) 
+ 
+ {
   
   const [checked, setChecked] = useState(false)
   const [edit, setEdit] = useState(false);
   const [pauseIsActive, setPauseIsActive] = useState(true);
   const [randomQuestion, setRandomQuestion] = useState(null);
-  
+      
   const [show, setShow] = useState(false);
   const [showAnswerBtn, setShowAnswerBtn] = useState(true);
   const [showRepeatBtn, setShowRepeatBtn] = useState(false);
-  
-  const [showDeleteFrame, setShowDeleteFrame] = useState(true)
+
+      
+  const [showDeleteWindow, setShowDeleteWindow] = useState(true)
   const [timer, setTimer] = useState(null)
   const [trash, setTrash] = useState(false);
   const [openDeck, setOpenDeck] = useState(true)
-  
-  
+      
   const { dataBase, setDataBase } = useContext(Context);
 
 
 
-  function handlePause () {
-    let newDataBase = {...dataBase}
-    let savePausedState = !pauseIsActive
-    setPauseIsActive(savePausedState)
-    dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
-    setDataBase(newDataBase)
+  // function handlePause () {
+  //   let newDataBase = {...dataBase}
+  //   let savePausedState = !pauseIsActive
+  //   setPauseIsActive(savePausedState)
+  //   dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
+  //   setDataBase(newDataBase)
     
-  }
+  // }
 
 
 
   function generateRandom() {                                                                                                                                                                                                                                                                                                                                                                         
     let randomQuestion = null
+    
+    if (data.length === 0) {
+      
+      
+      alert('add questions to deck')
+      setOpenDeck(false)
+    }
+
     if (dataBase.queue[0] && dataBase.queue[0].timeLeft === 0) {
       //need to have algorithm to filter s in queue related onlz for this deck
       //also not tot forget add decremental time algorith for all crads no matter waht deck
       randomQuestion = dataBase.queue.shift().index
 
     } else {
+      
       randomQuestion = Math.floor(Math.random() * data.length);
     }
 
     setRandomQuestion(randomQuestion);
     setShow(true)
-    closePopup()
     // console.log(data)
- 
-
-     if (data.length === 0) {
-
-
-      alert('add questions to deck')
-      setOpenDeck(false)
-    }
   }
 
   function addToQueue(time) {
     let newDataBase = { ...dataBase }
+
     newDataBase.queue.push({
       ...data[randomQuestion],
       index: randomQuestion,
       timeLeft: time * 1000,
       item: name
     })
+
     setDataBase(newDataBase)
   }
 
@@ -132,7 +134,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
           size='sm'
           style= {{
                     opacity: dataBase.DeckNames[index].paused? '0': '1',
-                    cursor:  dataBase.DeckNames[index].paused? 'default': 'pointer'
+                    cursor: dataBase.DeckNames[index].paused? 'default': 'pointer'
                   }}
           onClick={paused?
                     null
@@ -140,7 +142,6 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                     generateRandom
                     }     
       >
-
           Open Deck
 
       </Button>
@@ -159,7 +160,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
           menu={<ThreeDotsBtn
            
                    text={'card'}
-                   editName={true}
+                   editButtonClicked={true}
                    className='threeDotsInQuestionAnswerStyling'
                    threeDotsContainer = {{position: 'default'}}
                    index={index}
@@ -169,8 +170,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                       setShowAnswerBtn(false)
                       setEdit(true)  
                       setShowRepeatBtn(false)  
-                      // setShow(false)
-                      // setEditName(false)   
+                      setShow(false)
                     }}
 
                     pauseEvent={() => {
@@ -182,10 +182,10 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
 
                         dataBase.checkboxClicked?
 
-                              deleteCurrentCard() 
-                                  : 
-                              setShowDeleteFrame(true)
-                          }}
+                        deleteCurrentCard() 
+                          : 
+                        setShowDeleteWindow(true)
+                    }}
                  />
                 }
           >
@@ -200,6 +200,7 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                 >
                     Question
                 </p>
+
                 <FormControl
                   as="textarea"
                   aria-label="With textarea"
@@ -216,7 +217,6 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                 showAnswerBtn &&
                 
                 <Button
-                  // style={{ width: '32%', height: '32px', padding: '0 !important', position: 'relative', left: '10px'}}
                   class='p-1'
                   variant='secondary'
                   className='showAnswer my-5 d-flex justify-content-center align-items-center'
@@ -235,9 +235,8 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
 
                 <div className='d-flex justify-content-between px-3'
                 >
-
                     {
-                      dataBase.userTimePreferences.map((col, k) =>
+                      dataBase.userTimePreferences.map((col) =>
 
                           <RepeatBtn
                               btn={col.name}
@@ -248,7 +247,8 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                                   generateRandom()
                               }}
                           />
-                      )}
+                      )
+                      }
                 </div>
               }
 
@@ -291,14 +291,15 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
               }
               
               {
-                trash && showDeleteFrame &&
+                trash && showDeleteWindow &&
 
                 <DeleteCardQuestionBox
                   card='card'
                   checked = {checked}
                   setChecked = {setChecked}
                   show={show}
-                  deleteFrame={() => setShowDeleteFrame(false)}
+                  deleteWindow={() => setShowDeleteWindow(false)
+                  }
                   trashEvent={deleteCurrentCard}
                   onHide={()=>{
                     setShowAnswerBtn(true)
@@ -306,7 +307,6 @@ export default function QuestAnswerTrainOverv({name, data, closePopup,index,paus
                   }}      
                 />
               }
-
             </>
           }
 

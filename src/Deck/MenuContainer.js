@@ -44,7 +44,7 @@ export default function MenuContainer() {
 
                       <div className={'menuIcon'} style={{ top: '8px' }}
                       >                
-                        
+
                       </div>
                 }
 
@@ -59,6 +59,7 @@ export default function MenuContainer() {
 
         {
           show &&
+
           <>
               <Modal 
                   show={show} 
@@ -77,7 +78,7 @@ export default function MenuContainer() {
                           onClick={()=>{setShow(false)}}
                       >
                           <Icons 
-                              icons={[
+                               icons={[
                                       { 
                                       src: statsIcon, 
                                       alt: 'statsIcon', 

@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from "react";
 /**
  * Hook that alerts clicks outside of the passed ref
  */
-export default function useOutsideAlerter(ref,editName, cb,cb2) {
+export default function useOutsideAlerter(ref,editButtonClicked, cb,cb2) {
 
     
     useEffect(() => {
@@ -13,7 +13,7 @@ export default function useOutsideAlerter(ref,editName, cb,cb2) {
         function handleClickOutside(event) {
 
             if ( (ref[0].current && !ref[0].current.contains(event.target)) ) {
-                if(editName){
+                if(editButtonClicked){
                     cb()
                     // ()=>{setShow(false)}
                 } else {
@@ -35,5 +35,5 @@ export default function useOutsideAlerter(ref,editName, cb,cb2) {
             // Unbind the event listener on clean up
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [ref,editName]);
+    }, [ref,editButtonClicked]);
 }
