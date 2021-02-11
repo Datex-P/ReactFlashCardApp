@@ -4,7 +4,7 @@ import { Context } from '../../Context'//step 4.1 import context instance
 
 import redCross from '../../icons/redCross.svg'
 
-export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDisplay, setShowDeck, close, setActive}) 
+export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDisplay, setDecksAreVisible, close, setActive}) 
 
 {
   const { dataBase, setDataBase } = useContext(Context)
@@ -16,7 +16,6 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
 
     if (newDataBase.DeckNames.find(deck=>deck.name ===inputField)) {
 
-      
       alert('Name of Deck already exists')
       setInputField('')
       
@@ -53,15 +52,14 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
   return (
 
          <Modal
-
             show={createNewDeckDisplay}       
             backdrop="static"
             keyboard={false}
             id = 'createDeck'
             centered
           >
-              <Modal.Header >
 
+              <Modal.Header >
                   <Modal.Title>
                       Name for new deck
                   </Modal.Title>
@@ -70,9 +68,8 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
                       className='redCross'
                       onClick={() => {
                                 setCreateNewDeckDisplay(false)
-                                setShowDeck(true)
-                      }
-                      } 
+                                setDecksAreVisible(true)
+                      }} 
                   >
                     <img 
                         src={redCross} 
@@ -92,9 +89,8 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
                     className='createNewDeckInputField'
                     minLength='3'
                     maxLength='25'    
-                    onChange={
-                              event => setInputField(event.target.value)
-                              }  
+                    onChange={ event => setInputField(event.target.value)
+                    }  
                 >           
                 </input>
 
@@ -111,30 +107,27 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
       
               <div 
                   className='d-flex justify-content-between' 
-                  style={{ 
-                          width: '62%', 
-                          top: '-8px', 
-                          position: 'relative' }}
+                  style={{ width: '62%', top: '-8px', position: 'relative' }}
               >
                   {
                       ['Cancel', 'Ok'].map((el) =>
                       
-                      <button
-                          className='generalButtonStyling'
-                          style={{ cursor: 'pointer', width: '63px', height: '26px', borderRadius: '5px' 
+                        <button
+                            className='generalButtonStyling'
+                            style={{ cursor: 'pointer', width: '63px', height: '26px', borderRadius: '5px' 
                                   }}
-                          onClick={
-                            () => {
-                            el === 'Cancel' ?
-                            close()
-                            :
-                            addNewDeckName()
-                            }
-                            }
-                      >
-                        {el}
-                      </button>
-                      )
+                            onClick={() => {
+
+                              el === 'Cancel' ?
+                              close()
+                              :
+                              addNewDeckName()
+                              }}
+                        >
+                        
+                          {el}
+                        </button>
+                        )
                   }
               </div>
       </Modal> 

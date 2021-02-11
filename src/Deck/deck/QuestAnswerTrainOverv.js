@@ -9,10 +9,12 @@ import SaveAndDiscard from './CardBodyParts/SaveAndDiscard'
 import RepeatBtn from './CardBodyParts/RepeatBtn'
 
 
-export default function QuestAnswerTrainOverv({name, data, index,paused
+export default function QuestAnswerTrainOverv({name, data, index,paused, threeDotsMenuOpen, setThreeDotsMenuOpen
  }) 
  
  {
+
+  // const [threeDotsOpen, setThreeDotsOpen] = useState(showFromParent);
   
   const [checked, setChecked] = useState(false)
   const [edit, setEdit] = useState(false);
@@ -27,7 +29,7 @@ export default function QuestAnswerTrainOverv({name, data, index,paused
   const [showDeleteWindow, setShowDeleteWindow] = useState(true)
   const [timer, setTimer] = useState(null)
   const [trash, setTrash] = useState(false);
-  const [openDeck, setOpenDeck] = useState(true)
+  const [deckLengthNotZero, setDeckLengthNotZero] = useState(true)
       
   const { dataBase, setDataBase } = useContext(Context);
 
@@ -45,13 +47,13 @@ export default function QuestAnswerTrainOverv({name, data, index,paused
 
 
   function generateRandom() {                                                                                                                                                                                                                                                                                                                                                                         
-    let randomQuestion = null
+    let randomQuestion = null;
     
     if (data.length === 0) {
       
       
       alert('add questions to deck')
-      setOpenDeck(false)
+      setDeckLengthNotZero(false)
     }
 
     if (dataBase.queue[0] && dataBase.queue[0].timeLeft === 0) {
@@ -65,7 +67,7 @@ export default function QuestAnswerTrainOverv({name, data, index,paused
     }
 
     setRandomQuestion(randomQuestion);
-    setShow(true)
+    setShow(true);
     // console.log(data)
   }
 
@@ -101,13 +103,14 @@ export default function QuestAnswerTrainOverv({name, data, index,paused
       //everything  here will be returned when components unmounts
       setTimer(timeLeft)
     } else {
+
       console.log(timer)
       clearInterval(timer)
-
       console.log('oh you delete me')
     }
     //return function () {clearInterval(timeLeft)}
-  }, [show])
+  }, [show]
+  )
 
 
   function deleteCurrentCard() {
@@ -118,11 +121,19 @@ export default function QuestAnswerTrainOverv({name, data, index,paused
   }
 
   function changeHandler(e) {
-    let { name: input, value } = e.target;
+    // let { name: input, value } = e.target;
+    let { name: modifiedQuestion, modifiedAnswer} = e.target;
     let newDataBase = { ...dataBase };
-    newDataBase.DeckNames[name].data[randomQuestion][input] = value;
+    // newDataBase.DeckNames[name].data[randomQuestion][input] = value;
+    newDataBase.DeckNames[index].data[randomQuestion][modifiedQuestion] = modifiedAnswer;
     setDataBase(newDataBase)
+    console.log(modifiedQuestion)
+    console.log(modifiedAnswer)
   }
+
+
+          
+  
 
 
   return (
@@ -130,34 +141,35 @@ export default function QuestAnswerTrainOverv({name, data, index,paused
     
       <Button 
           variant='secondary'
-          className= {'openDeck'}
+          className='openDeck'
           size='sm'
           style= {{
                     opacity: dataBase.DeckNames[index].paused? '0': '1',
                     cursor: dataBase.DeckNames[index].paused? 'default': 'pointer'
                   }}
-          onClick={paused?
+          onClick={ paused?
                     null
                     :
                     generateRandom
-                    }     
+          }     
       >
           Open Deck
 
       </Button>
     
       {
-        openDeck && !dataBase.DeckNames[index].paused &&
+        deckLengthNotZero && !dataBase.DeckNames[index].paused &&
 
         <BasicOrangeWindow 
           show={show}
+          setShow={setShow}
           showRepeatBtn={showRepeatBtn}
           setShowRepeatBtn={setShowRepeatBtn}
-          setShow={setShow}
           setShowAnswerBtn = {setShowAnswerBtn}
           setEdit={setEdit}
           title={`Deck: ${name}`}
-          menu={<ThreeDotsBtn
+          menu={
+                <ThreeDotsBtn
            
                    text={'card'}
                    editButtonClicked={true}
@@ -170,7 +182,8 @@ export default function QuestAnswerTrainOverv({name, data, index,paused
                       setShowAnswerBtn(false)
                       setEdit(true)  
                       setShowRepeatBtn(false)  
-                      setShow(false)
+                      // setThreeDotsMenuOpen(false)
+                 
                     }}
 
                     pauseEvent={() => {
@@ -206,7 +219,7 @@ export default function QuestAnswerTrainOverv({name, data, index,paused
                   aria-label="With textarea"
                   value={data[randomQuestion].question} 
                   className='w-100'
-                  disabled={!edit}
+                  // disabled={!edit}
                   name='question'
                   onChange={changeHandler}
                 />
@@ -247,7 +260,7 @@ export default function QuestAnswerTrainOverv({name, data, index,paused
                                   generateRandom()
                               }}
                           />
-                      )
+                        )
                       }
                 </div>
               }
@@ -281,11 +294,11 @@ export default function QuestAnswerTrainOverv({name, data, index,paused
                 >
 
                     <SaveAndDiscard 
+                        generateRandom={generateRandom}                       
                         editEvent={() => {
                             setShowAnswerBtn(true)
                             setEdit(false)
                         }}
-                        generateRandom={generateRandom}                       
                     />
                 </div>
               }
@@ -298,13 +311,16 @@ export default function QuestAnswerTrainOverv({name, data, index,paused
                   checked = {checked}
                   setChecked = {setChecked}
                   show={show}
-                  deleteWindow={() => setShowDeleteWindow(false)
-                  }
+                  setShowAnswerBtn={setShowAnswerBtn}
+                  setShowRepeatBtn={setShowRepeatBtn}
                   trashEvent={deleteCurrentCard}
-                  onHide={()=>{
-                    setShowAnswerBtn(true)
-                    setShowRepeatBtn(false)
-                  }}      
+                  deleteWindow={() => 
+                    setShowDeleteWindow(false)
+                  }
+                  // onHide={()=>{
+                  //   setShowAnswerBtn(true)
+                  //   setShowRepeatBtn(false)
+                  // }}      
                 />
               }
             </>

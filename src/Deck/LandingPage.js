@@ -16,7 +16,7 @@ export default function DeckContainer() {
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
 
   const [active, setActive] = useState(null)
-  const [showDeck, setShowDeck] = useState(true)
+  const [decksAreVisible, setDecksAreVisible] = useState(true)
   const [loadSpinner, setLoadSpinner] = useState(true)
   const [createNewDeckDisplay, setCreateNewDeckDisplay] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
@@ -35,10 +35,12 @@ export default function DeckContainer() {
     setScrollPosition(position)
   }
 
-  useEffect(() => {
+  useEffect(
+    () => {
     setActive(dataBase && (dataBase.DeckNames.length-1))
 
-  }, [dataBase?.active==null])
+  }, [dataBase?.active==null]
+  )
 
   function handleActive(i){
     setActive(i)
@@ -48,11 +50,13 @@ export default function DeckContainer() {
   }
   
 
-  useEffect(() => {
+  useEffect(
+    () => {
     //scroller.current.scroll(0,800)
       setTimeout(()=>{setLoadSpinner(false)},2000)
     
-  }, []);
+  }, []
+  );
   
 
   return (
@@ -70,11 +74,11 @@ export default function DeckContainer() {
 
           <Row>
             {
-              showDeck &&
+              decksAreVisible &&
 
               <div style={{ position: 'relative', padding: '50px', width: '400px', 
                             marginLeft: '30px', marginTop: '60px' 
-                        }}
+                    }}
               >
                   <div>
                       {
@@ -87,13 +91,13 @@ export default function DeckContainer() {
                             active={false}
                             setActive = {setActive}
                             transform={`rotate(${
-                              ( dataBase.DeckNames.length-1  - index) * -2}deg)`
-                              }
+                                      ( dataBase.DeckNames.length-1  - index) * -2}deg)`
+                                }
 
                             zIndex={0}
-                            background = 
-                            {
+                            background = {
                               active === index && deck.paused ? 
+                              
                             `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
                             ${colors[index % 5]} repeat`
                             :
@@ -157,11 +161,10 @@ export default function DeckContainer() {
                       }} 
                   className='generalButtonStyling'
                   onClick={
-                  () => {
+                    () => {
                     setCreateNewDeckDisplay(true)
-                    setShowDeck(false)
-                  }
-                  }
+                    setDecksAreVisible(false)
+                  }}
               >
 
                   Create Deck
@@ -170,14 +173,15 @@ export default function DeckContainer() {
 
               <CreateNewDeck 
                   createNewDeckDisplay={createNewDeckDisplay}      
-                  setShowDeck={setShowDeck}
+                  setDecksAreVisible={setDecksAreVisible}
                   setActive={setActive}
                   setCreateNewDeckDisplay={setCreateNewDeckDisplay}
                   style={{ position: 'absolute', zIndex: '40' }}
-                  close={()=>{
-                    setShowDeck(true)
-                    setCreateNewDeckDisplay(false)}
-                  }
+                  close={
+                    ()=>{
+                    setDecksAreVisible(true)
+                    setCreateNewDeckDisplay(false)
+                    }}
               />
 
           </Row>

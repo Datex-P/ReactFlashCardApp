@@ -15,7 +15,7 @@ import playimg from '../../icons/play.svg'
 
 
 export default function Deck({ deck: { data,paused, name }, checked, setChecked,
-   active, setActive, title, bg, index, ...style }) {
+   active, setActive, title, bg, ...style }) {
   
   const [editButtonClicked, setEditButtonClicked] = useState(true); 
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name);
@@ -26,6 +26,11 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
   const [pauseIsActive, setPauseIsActive] = useState(true)
   
   const { dataBase, setDataBase} = useContext(Context)
+  const [index, setIndex] = useState(0)
+  useEffect(()=>{
+    let cIndex = dataBase.DeckNames.findIndex(item=>item.name === name)
+    setIndex(cIndex)
+  },[])
   
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
   
@@ -259,6 +264,10 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
             index={index} 
             data={data} 
             paused={paused} 
+
+            showFromParent={threeDotsMenuOpen}
+            setShowFromParent={setThreeDotsMenuOpen}
+
         />
         
         {

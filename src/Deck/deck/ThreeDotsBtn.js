@@ -66,7 +66,7 @@ function ThreeDotsBtn({
     // !editName && setShow(false) 
     // other way of writing it
     if (!editButtonClicked) {
-      setThreeDotsOpen(false)
+      // setThreeDotsOpen(false)
       handleDeckname()
     }
   }
@@ -89,9 +89,9 @@ function ThreeDotsBtn({
     {
       index && dataBase?.DeckNames[index].paused?
     
-      console.log('hello')
+    
+      null
     :
-
       <div style={threeDotsContainer}
       >
         <div 

@@ -12,13 +12,10 @@ export default function Hexagons({ idx, editHex, setEditHex }) {
 
 
   function setIndex() {
-
-
     let newDataBase = { ...dataBase }
     newDataBase.userPreferences.days = idx
     setDataBase(newDataBase)
     setShowDay(true)
-
   }
 
   return (
@@ -42,20 +39,19 @@ export default function Hexagons({ idx, editHex, setEditHex }) {
               hexagonWhite
           }
           alt='hexagon'
-          onClick={
-              () => { 
+          onClick={() => { 
                 setEditHex(true) 
-          }}
+                }}
           onMouseEnter={
               editHex ? 
 
               () => { } 
               : 
               setIndex
-          }
+              }
           onMouseLeave={
               editHex ? 
-              
+
               () => { } 
               : 
               () => { setShowDay(false) 
@@ -84,6 +80,7 @@ export default function Hexagons({ idx, editHex, setEditHex }) {
             >
                 {
                   idx <= dataBase.userPreferences.days ? 
+
                       `${idx + 1}` 
                         : 
                       `${idx - 1}`

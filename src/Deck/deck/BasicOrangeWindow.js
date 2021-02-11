@@ -43,8 +43,7 @@ export default function BasicOrangeWindow({
                       setEdit(false)
                       setShowRepeatBtn(false)
                       setShowAnswerBtn(true)
-                    }
-                } 
+                    }} 
                 >
                     <img 
                         src={redCross} 

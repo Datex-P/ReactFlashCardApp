@@ -6,8 +6,10 @@ import '../styles.css'
 import questionMark from '../../icons/questionmark.svg'
 import flashcards from '../../icons/flashcards.svg'
 
-export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent, 
-                                                deleteCurrentCard=()=>{}
+export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent, 
+                                                deleteCurrentCard=()=>{},
+                                                setShowAnswerBtn,
+                                                setShowRepeatBtn
                                               }) 
   
 {
@@ -19,6 +21,9 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent,
   const handleClose = () => {
     console.log('hello')
     setShow(false) 
+    
+    setShowAnswerBtn(true)
+    setShowRepeatBtn(false)
   }
 
   function handleCheckbox () {
@@ -64,7 +69,8 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent,
                 >
                   <div>
              
-                      <img src={flashcards} 
+                      <img 
+                          src={flashcards} 
                           style={{ width: '26px', height: 'fit-content', marginRight: '20px' }}
                           className='d-flex justify-content-center align-items-center' 
                           alt='flashcards'                         
@@ -101,11 +107,12 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent,
                           <div 
                               className='deleteContainerNoAndYes d-flex justify-content-center align-items-center'
                               onClick={() => {
-                                deleteFrame()
                                 if (el === 'Yes') {
                                   trashEvent()
                                   deleteCurrentCard()
                                 }
+
+                                deleteWindow()
                               }}
                           >
 
@@ -120,12 +127,13 @@ export default function DeleteCardQuestionBox({ card, deleteFrame, trashEvent,
 
 
       <div 
+          className='d-flex justify-content-center'
           style = {{width: '300px', position: 'absolute', top: '175px'
                   }} 
-          className='d-flex justify-content-center'
       >
 
-          <div style={{width: '40px'}}>
+          <div style={{width: '40px'}}
+          >
 
               <input 
                   style= {{width: '45px'}} 

@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect} from 'react';
 import { withRouter } from 'react-router-dom'
-import style from './style.module.css'
-import '../styles.css'
 import { Context } from '../../Context'
 import Hexagons from  './Hexagons'
+import RepetitionIntervalFields from './RepetitionIntervalFields'
 
 import BasicOrangeWindow from '../deck/BasicOrangeWindow'
 
@@ -75,11 +74,13 @@ function Settings({ history }) {
               className='d-flex justify-content-around align-items-center' 
               style={{ width: '325px' }}
           >
-              {dataBase &&
+              {
+                dataBase &&
                   
                   dataBase.userTimePreferences.map((col, k) =>
 
-                  <Col key={col.name} 
+                  <RepetitionIntervalFields
+                      key={col.name} 
                       index={k} 
                       data={col} 
                       editable={editable} 
@@ -98,17 +99,16 @@ function Settings({ history }) {
                     alt={saveOrEdit ? 'save' : 'edit'}
                     style={{ outline: 'none' }}
                     onClick={() => {
-                    setEditable(!editable)
-                    setSaveOrEdit(!saveOrEdit)
-                    saveT()
+                        setEditable(!editable)
+                        setSaveOrEdit(!saveOrEdit)
+                        saveT()
                     }}
                 />
             </div>
       </div>
 
       <div 
-          style={{ fontWeight: 'bold', fontSize: '17px', marginTop: '25px', 
-                   textAlign: 'center', marginBottom: '10px' }}
+          className='goalSettingsContainer'
       >
           Goal Settings
       </div>
@@ -119,18 +119,18 @@ function Settings({ history }) {
       </div>
 
       <div 
-        className='d-flex border border-dark justify-content-between align-items-center'
-        style={{
-          borderRadius: '5px', position: 'relative', paddingLeft: '6px', margin: 'auto',
-          paddingRight: '14px', paddingBottom: '3px', width: '211px', height: '59px'
-          }}
+        className='d-flex border border-dark justify-content-between align-items-center hexagonContainer'
       >
         {
 
           Array(7).fill('').map((el, idx) =>
 
-            <Hexagons idx={idx} editHex={editHex} setEditHex={setEditHex} saveOrEditGoal={saveOrEditGoal} />
-
+            <Hexagons 
+                idx={idx} 
+                editHex={editHex} 
+                setEditHex={setEditHex} 
+                saveOrEditGoal={saveOrEditGoal} 
+            />
           )
         }
       </div>
@@ -145,7 +145,6 @@ function Settings({ history }) {
             setSaveOrEditGoal(!saveOrEditGoal)
             setEditHex(!editHex)
           }}
-
         />
       </div>
       <div className='weeklyTarget'
@@ -188,80 +187,6 @@ function Settings({ history }) {
 }
 
 export default withRouter(Settings)
-
-
-function Col({ data: { name, amount, unit }, editable, index, userTimePreferences, setUserTimePreferences }) {
-
-  const [inputNumb, setInputNumb] = useState(amount)
-  const [inputText, setInputText] = useState(name)
-
-  function handleInputNumbers(e) {
-
-    setInputNumb(e.target.value)
-    let newUserTimePreferences = [ ...userTimePreferences ]
-    newUserTimePreferences[index].amount = e.target.value
-    setUserTimePreferences(newUserTimePreferences)
-  }
-
-
-  function handleInputText(e) {
-
-    setInputText(e.target.value)
-    let newUserTimePreferences = [ ...userTimePreferences ]
-    newUserTimePreferences[index].name = e.target.value
-    setUserTimePreferences(newUserTimePreferences)
-  }
-
-
-  return (
-    <div 
-        className=' p-2' 
-        style={{ flexDirection: 'column', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-    >
-      <p 
-          className=' border border-dark d-flex justify-content-center' 
-          style={{borderRadius: '5px', width: '85px'}}
-      >
-          <div style={{ marginRight: '4px' }}
-          >
-              {'<'}
-          </div>
-          <input 
-              className={style.input}
-              type='number'
-              style={{
-                 backgroundColor: 'transparent', outline: 'none', width: '40px', height: '24px'
-              }} 
-              disabled={!editable}
-              value={inputNumb}
-              onChange={handleInputNumbers}
-        />
-            {unit}
-      </p>
-
-      <input
-        style={{
-          width: '86px', height: '27px',
-          textAlign: editable ? '' : 'center',
-          paddingLeft: '7px', backgroundColor: 'grey',
-          color: 'white',
-          cursor: editable ? 'pointer' : 'default',
-          borderRadius: '5px',
-          outline: 'none',
-          border: 'none'
-        }}
-
-        value={inputText}
-        type='text'
-        key={name}
-        disabled={!editable}
-        onChange={handleInputText}
-      />
-
-    </div>
-  )
-
-}
 
 
 

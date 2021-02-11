@@ -6,9 +6,8 @@ import '../styles.css'
 
 import redCross from '../../icons/redCross.svg'
 
-export default function AddQuestionsToDeck({  index, name, bg }) 
-
-  {
+export default function AddQuestionsToDeck({  index, name, bg }) {
+  
   const [show, setShow] = useState(false);
   const [card, setCard] = useState({question:'', answer:''})
   const [newCardAdded, setNewCardAdded] = useState(false);
@@ -53,15 +52,13 @@ export default function AddQuestionsToDeck({  index, name, bg })
               }}
         
             onClick={
-            
-            dataBase.DeckNames[index].paused?
-            
-            null
-            :            
-            () => { 
-              // closePopup(); 
-              setShow(true)
-              }
+                dataBase.DeckNames[index].paused?
+                
+                null
+                :            
+                () => { 
+                  setShow(true)
+                }
             } 
         >
         +
@@ -71,9 +68,8 @@ export default function AddQuestionsToDeck({  index, name, bg })
         show={show}
         contentClassName={'mod'}
         backdrop='static'
-        onHide={
-          () => setShow(false)
-          }
+        onHide={() => setShow(false)
+        }
         
       >
           <Modal.Header className='border-bottom-0'
@@ -88,7 +84,7 @@ export default function AddQuestionsToDeck({  index, name, bg })
               <button 
                   className='redCross' 
                   onClick={() => setShow(false)
-                          }
+                  }
                 >
 
                     <img 
@@ -161,10 +157,7 @@ export default function AddQuestionsToDeck({  index, name, bg })
 
                 <button 
                     onClick={addToDeck}
-                    className='generalButtonStyling'
-                    style={{width: '110px', marginTop: '20px', 
-                            padding: '5px', boxSizing: 'border-box', marginLeft: '8px'
-                            }}
+                    className='generalButtonStyling addToDeckButton'
                 >
 
                     Add to Deck

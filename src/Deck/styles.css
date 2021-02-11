@@ -796,3 +796,43 @@ border-bottom-left-radius: calc(.3rem - 1px);
   justify-content: center !important; 
   left: 6px;
 }
+
+.addToDeckButton {
+  width: 110px;
+  margin-top: 20px;
+  padding: 5px; 
+  box-sizing: border-box; 
+  margin-left: 8px;
+}
+
+.hexagonContainer {
+  
+  border-radius: 5px; 
+  position: relative; 
+  padding-left: 8px; 
+  margin: auto;
+  padding-right: 14px; 
+  padding-bottom: 3px; 
+  width: 211px; 
+  height: 62px;
+  }
+
+  .goalSettingsContainer {
+    font-weight: bold; 
+    font-size: 17px; 
+    margin-top: 25px;
+    text-align: center; 
+    margin-bottom: 10px;
+  }
+
+  .repetitionIntervalTextFields {
+    width: 86px;
+    height: 27px;
+    padding-left: 7px; 
+    background-color: grey;
+    color: white;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+  }
+
