@@ -4,7 +4,7 @@ import { Context } from '../../Context'//step 4.1 import context instance
 
 import redCross from '../../icons/redCross.svg'
 
-export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDisplay, setDecksAreVisible, close, setActive}) 
+export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, close, setActive}) 
 
 {
   const { dataBase, setDataBase } = useContext(Context)
@@ -52,14 +52,15 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
   return (
 
          <Modal
-            show={createNewDeckDisplay}       
+            show={addNewDeckWindow}       
             backdrop="static"
             keyboard={false}
             id = 'createDeck'
             centered
           >
-
+          
               <Modal.Header >
+
                   <Modal.Title>
                       Name for new deck
                   </Modal.Title>
@@ -67,7 +68,7 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
                   <button 
                       className='redCross'
                       onClick={() => {
-                                setCreateNewDeckDisplay(false)
+                                addNewDeckWindow(false)
                                 setDecksAreVisible(true)
                       }} 
                   >
@@ -94,7 +95,7 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
                 >           
                 </input>
 
-                <select style={{ width: '90%', outline: 'none' }}
+                <select style={{ width: '96%', height: '26px', borderRadius: '5px', paddingLeft: '3px', outline: 'none' }}
                 >
                   <option>option 1</option>
                   <option>option 2</option>
@@ -113,12 +114,11 @@ export default function CreateNewDeck({ createNewDeckDisplay, setCreateNewDeckDi
                       ['Cancel', 'Ok'].map((el) =>
                       
                         <button
-                            className='generalButtonStyling'
-                            style={{ cursor: 'pointer', width: '63px', height: '26px', borderRadius: '5px' 
-                                  }}
+                            className='generalButtonStyling okCancelButtonStyling'
                             onClick={() => {
 
                               el === 'Cancel' ?
+
                               close()
                               :
                               addNewDeckName()

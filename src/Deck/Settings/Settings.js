@@ -12,12 +12,12 @@ import save from '../../icons/save.svg'
 
 
 function Settings({ history }) {
-  const [editable, setEditable] = useState(false)
+  const [editIsPossible, setEditIsPossible] = useState(false)
   const [saveOrEdit, setSaveOrEdit] = useState(false)
   const [saveOrEditGoal, setSaveOrEditGoal] = useState(false)
-  const { dataBase, setDataBase } = useContext(Context)
   const [editHex, setEditHex] = useState(true)
-
+  
+  const { dataBase, setDataBase } = useContext(Context)
   const [userTimePreferences, setUserTimePreferences] = useState({})
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function Settings({ history }) {
   }
 
 
-  function saveT() {
+  function saveTimeNumberChanges() {
     let newDataBase = { ...dataBase }
     newDataBase.userTimePreferences = userTimePreferences
     setDataBase(newDataBase)
@@ -58,9 +58,9 @@ function Settings({ history }) {
 
           Settings
        </div>
-      }
+      } 
     >
-      <div style={{ fontWeight: 'bold', fontSize: '17px', textAlign: 'center', marginBottom: '10px' }}
+      <div style={{ fontWeight: 'bold', fontSize: '17px', textAlign: 'center', marginBottom: '8px' }}
       >
 
           Change Repetition Interval
@@ -83,7 +83,7 @@ function Settings({ history }) {
                       key={col.name} 
                       index={k} 
                       data={col} 
-                      editable={editable} 
+                      editIsPossible={editIsPossible} 
                       userTimePreferences={userTimePreferences} 
                       setUserTimePreferences={setUserTimePreferences} 
                   />
@@ -99,9 +99,9 @@ function Settings({ history }) {
                     alt={saveOrEdit ? 'save' : 'edit'}
                     style={{ outline: 'none' }}
                     onClick={() => {
-                        setEditable(!editable)
+                        setEditIsPossible(!editIsPossible)
                         setSaveOrEdit(!saveOrEdit)
-                        saveT()
+                        saveTimeNumberChanges()
                     }}
                 />
             </div>
@@ -113,7 +113,7 @@ function Settings({ history }) {
           Goal Settings
       </div>
 
-      <div style={{ fontWeight: 'bold', fontSize: '13px', textAlign: 'center' }}
+      <div style={{ fontWeight: 'bold', fontSize: '13px', textAlign: 'center', marginBottom: '2px' }}
       >
           Current Weekly Target
       </div>
@@ -134,7 +134,7 @@ function Settings({ history }) {
           )
         }
       </div>
-      <div style={{ position: 'absolute', top: '230px', right: '66px', cursor: 'pointer' }}
+      <div style={{ position: 'absolute', top: '238px', right: '66px', cursor: 'pointer' }}
       >
         <img
           src={editHex ? edit : save}
@@ -153,7 +153,7 @@ function Settings({ history }) {
         Target met: {dataBase.userPreferences.weeksInRow} weeks in a row
 
       </div>
-      <div style={{ fontWeight: 'bold', textAlign: 'center', marginTop: '20px' }}
+      <div style={{ fontWeight: 'bold', textAlign: 'center', marginTop: '20px', marginBottom: '2px' }}
       >
           Colorscheme
       </div>

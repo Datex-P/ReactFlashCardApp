@@ -68,7 +68,7 @@ export default function Hexagons({ idx, editHex, setEditHex }) {
             
         <div style={{
             transform: 'rotate(-90deg)', width: '54px',
-            fontSize: '14px', paddingLeft: '14px', position: 'absolute', right: '-40px'
+            fontSize: '14px', paddingLeft: '14px', position: 'absolute', right: '-42px'
           }}
         >
 
@@ -88,9 +88,9 @@ export default function Hexagons({ idx, editHex, setEditHex }) {
             </span> 
             {
               idx === 0?
-               'day'
+               ' day'
                : 
-               'days'
+               ' days'
                }
         </div>
       }

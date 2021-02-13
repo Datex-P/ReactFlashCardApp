@@ -7,9 +7,10 @@ import questionMark from '../../icons/questionmark.svg'
 import flashcards from '../../icons/flashcards.svg'
 
 export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent, 
-                                                deleteCurrentCard=()=>{},
                                                 setShowAnswerBtn,
-                                                setShowRepeatBtn
+                                                setShowRepeatBtn,
+                                                setEditBtnClicked,
+                                                deleteCurrentCard=()=>{}
                                               }) 
   
 {
@@ -22,8 +23,6 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
     console.log('hello')
     setShow(false) 
     
-    setShowAnswerBtn(true)
-    setShowRepeatBtn(false)
   }
 
   function handleCheckbox () {
@@ -71,8 +70,7 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
              
                       <img 
                           src={flashcards} 
-                          style={{ width: '26px', height: 'fit-content', marginRight: '20px' }}
-                          className='d-flex justify-content-center align-items-center' 
+                          className='d-flex justify-content-center align-items-center flashCardsStyling' 
                           alt='flashcards'                         
                       />
                   </div>
@@ -83,8 +81,7 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
         </Modal.Header>
 
         <Modal.Body 
-            className='d-flex align-items-center' 
-            style={{width:'100%', display: 'flex', justifyContent: 'center'}}  
+            className='d-flex align-items-center justify-content-center' 
         >
 
             Do you want to delete this {card} ?
@@ -110,6 +107,9 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
                                 if (el === 'Yes') {
                                   trashEvent()
                                   deleteCurrentCard()
+                                  setShowRepeatBtn(false)
+                                  setShowAnswerBtn(true)
+                                  setEditBtnClicked(false)
                                 }
 
                                 deleteWindow()

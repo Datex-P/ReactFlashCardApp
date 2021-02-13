@@ -231,6 +231,7 @@ left: 10px;
   width: 400px !important;
   margin-top: 90px !important;
   margin: auto;
+  /* padding: 20px 0; */
   /* overflow: hidden scroll; */
 }
 
@@ -241,6 +242,10 @@ left: 10px;
   font-size: 14px; 
   font-weight: normal;
   margin: auto;
+  position: relative;
+  top: 1px;
+  display: flex; 
+  justify-content: center;
 }
 
 .questionAnswerStyling {
@@ -425,6 +430,7 @@ border-radius: 5px;
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
+  height: 200px;
 }
 
 /* Track */
@@ -468,7 +474,7 @@ border-radius: 5px;
   font-size: 16px;
   font-weight: bold;
   position: absolute; 
-  top: 0px;
+  top: -2px;
   left: 26px;
 }
 
@@ -501,6 +507,8 @@ border-radius: 5px;
   margin-bottom: 3px;
   font-weight: bold;
   font-size: 18px;
+  margin-top: 20px; 
+  text-align: center;
 }
 
 .yearBoxContainer {
@@ -518,6 +526,7 @@ border-radius: 5px;
   margin: auto;
   padding: 4px;
   padding-top: 10px;
+  border-radius: 3px;
 }
 
 .progressBar {
@@ -526,6 +535,8 @@ border-radius: 5px;
   height: 16px; 
   width: 146px; 
   margin-left: 37px; 
+  border-radius: 3px;
+  margin-top: 5px;
 }
 
 .time {
@@ -658,17 +669,18 @@ height: 33px;
   font-size: 17px;
   font-weight: bold; 
   background-color: transparent !important;
-  padding-left: 28px;
+  padding-left: 23px;
   width: 175px;
 }
 
 #createDeck .modal-content {
-  width: 50%;
-  height: 160px;
+  width: 54%;
+  height: 175px;
   background-color: rgba(200, 168, 115, 0.95) !important; 
   align-items: center;
   margin: auto;
-  top: -170px;
+  margin-bottom: 470px;
+  /* position: fixed; */
 }
 
 
@@ -745,7 +757,7 @@ border-bottom-left-radius: calc(.3rem - 1px);
 }
 
 .createNewDeckInputField {
-  width: 90%;
+  width: 96%;
   margin-top: 10px;  
   border-radius: 5px; 
   border: 1px solid black;
@@ -784,7 +796,7 @@ border-bottom-left-radius: calc(.3rem - 1px);
   border-radius: 5px;  
   border: 1px solid black;
   padding: 1px 5px; 
-  margin-top: 10px; 
+  margin-top: 8px; 
   margin-bottom: 20px;
 }
 
@@ -814,7 +826,7 @@ border-bottom-left-radius: calc(.3rem - 1px);
   padding-right: 14px; 
   padding-bottom: 3px; 
   width: 211px; 
-  height: 62px;
+  height: 66px;
   }
 
   .goalSettingsContainer {
@@ -822,7 +834,7 @@ border-bottom-left-radius: calc(.3rem - 1px);
     font-size: 17px; 
     margin-top: 25px;
     text-align: center; 
-    margin-bottom: 10px;
+    margin-bottom: 9px;
   }
 
   .repetitionIntervalTextFields {
@@ -836,3 +848,78 @@ border-bottom-left-radius: calc(.3rem - 1px);
     border: none;
   }
 
+  .createDeckButtonStyling {
+    z-index: 4; 
+    padding: 2px; 
+    position: fixed;
+    top: 630px; 
+    width: 210px; 
+    outline: none !important;
+  }
+
+  .okCancelButtonStyling {
+    cursor: pointer;
+    width: 65px;
+    height: 28px;
+    border-radius: 5px;
+  }
+
+  .hoveredDeckOrCardName {
+    position: relative;
+    z-index: 30000; 
+    width: 146px; 
+    height: 33px;
+  }
+
+  .resetButtonStyling {
+    position: absolute;
+    top: 17px;
+    right: 26px;
+    z-index: 2000;
+    background-color: white;
+    border: 1px solid black;
+    overflow: hidden;
+  }
+
+  .studyBreakdownHeader {
+    width: 216px; 
+    text-align: center;
+    margin: auto; 
+    font-weight: bold; 
+    font-size: 17px; 
+    margin-bottom: 3px;
+  }
+
+  .flashCardsStyling {
+  width: 26px; 
+  height: fit-content;
+  margin-right: 20px;
+  }
+
+  .studyGoalStyling {
+    margin-left: 10px; 
+    border: 1px solid black; 
+    width: 81px; 
+    padding-left: 3px; 
+    height: 24px;
+  }
+
+  .deckOrCardNameContainer {
+    width: 201px;
+    padding-left: 7px;
+    border-radius: 5px;
+    height: 30px;
+    position: relative;
+    top: 4px;
+  }
+
+  .firstRowStyling {
+
+    position: relative; 
+    padding: 50px; 
+    width: 400px;
+    margin-left: 30px; 
+    margin-top: 60px;
+
+
+  }

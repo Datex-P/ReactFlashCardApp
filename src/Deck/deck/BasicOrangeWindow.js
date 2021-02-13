@@ -2,10 +2,12 @@ import { Modal } from 'react-bootstrap'
 import redCross from '../../icons/redCross.svg'
 
 export default function BasicOrangeWindow({
-              children, show, setShow,title,menu, 
-              setShowAnswerBtn = () => {},
-              setEdit = () =>{} , 
-              setShowRepeatBtn = () => {}
+                                          children, show, 
+                                          setShow,title,
+                                          menu, 
+                                          setShowAnswerBtn = () => {},
+                                          setEdit = () =>{} , 
+                                          setShowRepeatBtn = () => {},
             }) {
 
   return(
@@ -54,7 +56,7 @@ export default function BasicOrangeWindow({
 
               </Modal.Header>
               
-              <Modal.Body>
+              <Modal.Body >
 
                 {children}
 

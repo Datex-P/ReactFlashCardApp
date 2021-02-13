@@ -4,14 +4,14 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ContextProvider from './Context';
 
-
 ReactDOM.render(
 
   <ContextProvider>{/* step 3 cover required parent component with context state */}   
    
     <React.StrictMode>
     
-     <App/>
+  
+        <App/>
       
     </React.StrictMode>
 

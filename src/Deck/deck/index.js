@@ -6,7 +6,7 @@ import '../styles.css'
 import ThreeDotsBtn from './ThreeDotsBtn'
 import AddQuestionsToDeck from './AddQuestionsToDeck'
 import QuestAnswerTrainOverv from './QuestAnswerTrainOverv'
-import DeckOrCardname from  './DeckOrCardname'
+import DeckOrCardName from  './DeckOrCardName'
 import DeleteCardQuestionBox from  './DeleteCardQuestionBox';
 
 import playimg from '../../icons/play.svg'
@@ -14,33 +14,39 @@ import playimg from '../../icons/play.svg'
 
 
 
-export default function Deck({ deck: { data,paused, name }, checked, setChecked,
-   active, setActive, title, bg, ...style }) {
+export default function Deck({ deck, checked, setChecked,
+                   active, setActive, title, bg, pauseIsActive, setPauseIsActive, trigger, ...style }) {
+     
+    
+  let { data, paused, name }  = deck
   
   const [editButtonClicked, setEditButtonClicked] = useState(true); 
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name);
   const [threeDotsMenuOpen, setThreeDotsMenuOpen] = useState(false);
   
+  
   const [showDeleteWindow, setShowDeleteWindow] = useState(true);
   const [trash, setTrash] = useState(false);
-  const [pauseIsActive, setPauseIsActive] = useState(true)
+  
   
   const { dataBase, setDataBase} = useContext(Context)
-  const [index, setIndex] = useState(0)
+   const [index, setIndex] = useState(0)
   useEffect(()=>{
     let cIndex = dataBase.DeckNames.findIndex(item=>item.name === name)
     setIndex(cIndex)
-  },[])
+    //console.log(cIndex)
+  },[trigger])
   
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
   
   let input  = useRef(null)
 
   function handlePause () {
+    console.log(index)
     let newDataBase = {...dataBase}
-    let savePausedState = !pauseIsActive
-    setPauseIsActive(savePausedState)
-    dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
+  
+    newDataBase.DeckNames[index].paused = !paused;
+    console.log(newDataBase.DeckNames)
     setDataBase(newDataBase)    
     // setShow(false) why does  three button window not close with this?
   }
@@ -84,40 +90,41 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
         {
          editButtonClicked?
 
-         <DeckOrCardname 
-            index={index}
-            name= {name}
-            className='deckOrCardNameStyling'
-         />
+            <DeckOrCardName 
+                // bg={style.background}
+                index={index}
+                paused={paused}
+                name= {name}
+                active={active}
+                setActive={setActive}
+                className='deckOrCardNameStyling'
+            />
 
-         :
+               :
 
-         <input 
-              ref = {input} 
-              className= 'addToDeckInput'
-              value = {nameOfTopDeck}
-              onChange={(e)=>{
-            
-                    if (e.target.value.length>25) {
-                     
-                      alert('Deckname can not be longer than 25 characters')
-                    } else {
-                    
-                    setNameOfTopDeck(e.target.value)}
+            <input 
+                  ref = {input} 
+                  className= 'addToDeckInput'
+                  value = {nameOfTopDeck}
+                  onChange={(e)=>{
+                
+                        if (e.target.value.length>25) {
+                        
+                          alert('Deckname can not be longer than 25 characters')
+                        } else {
+                        
+                        setNameOfTopDeck(e.target.value)}
+                        }
                     }
-                }
          />
 
          }
 
-         {
-         true &&
+        
 
           <ThreeDotsBtn
               name={name}
               text={'deck'}
-              pauseIsActive={pauseIsActive}
-              setPauseIsActive={setPauseIsActive}
               showFromParent={threeDotsMenuOpen}
               editButtonClicked={editButtonClicked}
               setEditButtonClicked={setEditButtonClicked}
@@ -132,12 +139,12 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
               input={input}
               threeDotsContainer= {{position: 'fixed', right: '50px', top: '18px'}}
               className='threeDotsBtnIndex'
-              style= {{border: dataBase.DeckNames[index].paused? 'none': '1px solid black',
-                      backgroundColor: dataBase.DeckNames[index].paused? 'black': 'white'
+              style= {{border: paused? 'none': '1px solid black',
+                      backgroundColor: paused? 'black': 'white'
                       }}
        
               editEvent={() => {
-                setThreeDotsMenuOpen(threeDotsMenuOpen)
+                setThreeDotsMenuOpen(false)
                 setEditButtonClicked(!editButtonClicked)
               }}
 
@@ -156,15 +163,15 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
               }
               }
             />
-          }
+          
 
             {
-              trash && showDeleteWindow && !dataBase.DeckNames[index].paused &&
+              trash && showDeleteWindow && !paused &&
 
                 <DeleteCardQuestionBox
                   card='deck'
                   threeDotsMenuOpen={threeDotsMenuOpen}
-                  deleteFrame={() => setShowDeleteWindow(false)}
+                  deleteWindow={() => setShowDeleteWindow(false)}
                   trashEvent={()=>{
 
                   deleteDeck()
@@ -179,14 +186,14 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
 
           <div 
               className='divStyling' 
-              style={{opacity: dataBase.DeckNames[index].paused? '0': '1'}}
+              style={{opacity: paused? '0': '1'}}
           >
                 To study:   
 
                 <input 
                     type='number' 
                     className='inputStyling' 
-                    style={{background: dataBase.DeckNames[index].paused? style.background: 'none'}}
+                    style={{background: paused? style.background: 'none'}}
                 >   
 
                 </input>
@@ -195,14 +202,14 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
           
           <div 
               className='divStyling'  
-              style={{opacity: dataBase.DeckNames[index].paused? '0': '1'}}
+              style={{opacity: paused? '0': '1'}}
           >    
 
-              {'To review:'.padEnd(10, '⠀')}  {dataBase.userPreferences.toReview}     
+              {'To review:'.padEnd(10, '⠀')}  {dataBase.userPreferences.toReview}
           </div>
 
           {
-            dataBase.DeckNames[index].paused?
+            paused?
 
               <div 
                   className='deckPausedContainer'
@@ -249,10 +256,10 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
           
             <div 
                 className='divStyling'  
-                style={{opacity: dataBase.DeckNames[index].paused? '0': '1'}}
+                style={{opacity: paused? '0': '1'}}
             >
 
-                {'Decksize:'.padEnd(10, '⠀')}{data.length}        
+                {'Decksize:'.padEnd(10, '⠀')}   {data.length}        
             </div>
 
           }
@@ -264,20 +271,16 @@ export default function Deck({ deck: { data,paused, name }, checked, setChecked,
             index={index} 
             data={data} 
             paused={paused} 
-
-            showFromParent={threeDotsMenuOpen}
-            setShowFromParent={setThreeDotsMenuOpen}
-
         />
         
         {
           active && 
           
-          <AddQuestionsToDeck 
-              bg={style.background} 
-              name= {name} 
-              index= {index} 
-          />        
+            <AddQuestionsToDeck 
+                background={style.background} 
+                name= {name} 
+                index= {index} 
+            />        
         }
 
       </Card.Body>

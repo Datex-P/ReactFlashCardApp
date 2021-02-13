@@ -1,5 +1,5 @@
 
-export default function SaveAndDiscard({ editEvent, generateRandom }) {
+export default function SaveAndDiscard({ saveEvent, generateRandom, setCardModified,discardEvent }) {
 
   return (
 
@@ -11,11 +11,16 @@ export default function SaveAndDiscard({ editEvent, generateRandom }) {
             className='saveAndDiscardButtonStyling d-flex justify-content-around align-items-center'
             style={{backgroundColor: el === 'Save' ? '#2d6a4f' : '#772e25'
                     }}
-            onClick={el === 'Save'? 
-              ()=>{generateRandom();editEvent()} 
-              : 
-              editEvent
-            }
+            onClick={
+                    el === 'Save'? 
+                    ()=>{
+                        generateRandom();
+                        saveEvent();
+                        setCardModified(true)
+                      } 
+                        : 
+                      discardEvent
+                  }
           >
 
             {el}

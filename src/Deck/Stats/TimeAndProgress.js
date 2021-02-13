@@ -50,6 +50,7 @@ export default function TimeAndProgress() {
                     } 
             />
             )
+            
         } else if (i <= 9) {
 
           if (i <= 9 && i + 4 > 9) {
@@ -69,15 +70,16 @@ export default function TimeAndProgress() {
           } else {
             arr.push(
             <Row 
-            previousWidthVar={previousWidthVar} 
-            widthVar={widthVar} 
-            time={
-                  <div style={{paddingLeft: '3px', height: '21px'}}
-                  >
-                      {'0' + i} - {'0' + (i + 4)}
-                  </div>
-                  } 
-            />)
+                previousWidthVar={previousWidthVar} 
+                widthVar={widthVar} 
+                time={
+                      <div style={{paddingLeft: '3px', height: '21px'}}
+                      >
+                          {'0' + i} - {'0' + (i + 4)}
+                      </div>
+                      } 
+            />
+            )
           }
         } else {
           arr.push(
@@ -118,17 +120,15 @@ export default function TimeAndProgress() {
         >
             <div
                 style={{
-                      backgroundColor: 'orange',
-                      color: 'black',
-                      width: `${Object.values(timeObj).reduce((sum, i) => sum += i, 0) / studyGoal * 100}%`,
-                      height: '10px'
+                      backgroundColor: 'orange',color: 'black',height: '10px',
+                      width: `${Object.values(timeObj).reduce((sum, i) => sum += i, 0) / studyGoal * 100}%`
                 }}
             >
           </div>
 
         </div>
 
-        <div style={{position: 'absolute', top: '1px', left: `${widthAdjusted}px`, fontSize: '13px'}}
+        <div style={{position: 'absolute', top: '5px', left: `${widthAdjusted}px`, fontSize: '13px'}}
         >
 
             {currentProgress.toFixed(0)}%
@@ -136,7 +136,9 @@ export default function TimeAndProgress() {
 
     </div> 
 
-  {renderLines()}      
+    {
+      renderLines()
+      }      
 </div>
 
   )

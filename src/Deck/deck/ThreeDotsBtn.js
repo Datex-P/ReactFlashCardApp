@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext,useEffect } from 'react'
 import {withRouter} from 'react-router-dom'
 import {Context} from '../../Context';
 
@@ -13,19 +13,18 @@ import playimg from '../../icons/play.svg'
 
 
 function ThreeDotsBtn({    
-                        text, showFromParent, style, className, editButtonClicked, nameOfTopDeck, 
+                        text, name,showFromParent, style, className, editButtonClicked, nameOfTopDeck, 
                         index, input, threeDotsContainer, setEditButtonClicked, 
                         setShowFromParent = () => { },
                         editEvent = () => { }, 
                         trashEvent = () => { },
-                        edit=false,trash=false,pause=false,reset=false,
+                        edit=false,trash=false,pause=false,reset=false,paused
                       }) 
 
 {
 
   const [blinkingSaveIcon, setBlinkingSaveIcon] = useState(false)
   const [pauseIsActive, setPauseIsActive] = useState(true)
-  
   const [threeDotsOpen, setThreeDotsOpen] = useState(showFromParent);
   const {dataBase, setDataBase} = useContext(Context);
 
@@ -37,6 +36,10 @@ function ThreeDotsBtn({
   };
 
   const ref = useRef(null)
+
+  useEffect(()=>{
+    setThreeDotsOpen(showFromParent)
+  },[showFromParent])
 
 
   function handleDeckname() {
@@ -50,7 +53,8 @@ function ThreeDotsBtn({
 
   useOutsideAlerter([ref,input], 
                     editButtonClicked, 
-                    ()=>{setThreeDotsOpen(false)
+                    ()=>{
+                      setThreeDotsOpen(false)
                     },
                     ()=>{
                     setBlinkingSaveIcon(true)
@@ -63,6 +67,7 @@ function ThreeDotsBtn({
     
   function handleEdit() {
     editEvent() 
+    setThreeDotsOpen(false)
     // !editName && setShow(false) 
     // other way of writing it
     if (!editButtonClicked) {
@@ -76,7 +81,8 @@ function ThreeDotsBtn({
     let newDataBase = {...dataBase}
     let savePausedState = !pauseIsActive
     setPauseIsActive(savePausedState)
-    dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
+    let key = newDataBase.DeckNames.findIndex(deck=>deck.name === name)
+    newDataBase.DeckNames[key].paused = true
     setDataBase(newDataBase)
     setEditButtonClicked(true)
     setThreeDotsOpen(false)
@@ -87,11 +93,10 @@ function ThreeDotsBtn({
   return (
     <>
     {
-      index && dataBase?.DeckNames[index].paused?
-    
+      paused?
     
       null
-    :
+         :
       <div style={threeDotsContainer}
       >
         <div 

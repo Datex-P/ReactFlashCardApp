@@ -6,8 +6,8 @@ import '../styles.css'
 
 export default function RepetitionIntervalFields(
                                       { data: { name, amount, unit }, 
-                                      editable, index, 
-                                      userTimePreferences, setUserTimePreferences 
+                                      editIsPossible, index, 
+                                      userTimePreferences, setUserTimePreferences,
                                       }) 
   {
 
@@ -49,11 +49,15 @@ export default function RepetitionIntervalFields(
 
           <input 
               className={style.input}
-              type='number'
-              style={{ backgroundColor: 'transparent', outline: 'none', width: '40px', height: '24px'
+              type='text'
+              maxLength="3" 
+              oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+              style={{ backgroundColor: 'transparent', outline: 'none', width: '40px', height: '24px', textAlign: 'center'
                     }} 
-              disabled={!editable}
+              disabled={!editIsPossible}
               value={inputNumb}
+              min='1'
+              max='99'
               onChange={handleInputNumbers}
           />
 
@@ -64,12 +68,12 @@ export default function RepetitionIntervalFields(
         value={inputText}
         type='text'
         key={name}
-        disabled={!editable}
+        disabled={!editIsPossible}
         onChange={handleInputText}
         className='repetitionIntervalTextFields'
         style={{
-                textAlign: editable ? '' : 'center', 
-                cursor: editable ? 'pointer' : 'default'
+                textAlign: editIsPossible ? '' : 'center', 
+                cursor: editIsPossible ? 'pointer' : 'default'
               }}
       />
 

@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { Button, FormControl } from 'react-bootstrap'
+import React, { useState, useContext, useEffect} from 'react'
+import { Button, FormControl, Alert } from 'react-bootstrap'
 import { Context } from '../../Context'
 
 import ThreeDotsBtn from './ThreeDotsBtn';
@@ -9,30 +9,30 @@ import SaveAndDiscard from './CardBodyParts/SaveAndDiscard'
 import RepeatBtn from './CardBodyParts/RepeatBtn'
 
 
-export default function QuestAnswerTrainOverv({name, data, index,paused, threeDotsMenuOpen, setThreeDotsMenuOpen
- }) 
- 
- {
+export default function QuestAnswerTrainOverv({ name, data, index, paused, 
+}) {
 
   // const [threeDotsOpen, setThreeDotsOpen] = useState(showFromParent);
+
   
+
   const [checked, setChecked] = useState(false)
-  const [edit, setEdit] = useState(false);
-  const [pauseIsActive, setPauseIsActive] = useState(true);
+  const [editBtnClicked, setEditBtnClicked] = useState(false);
   const [randomQuestion, setRandomQuestion] = useState(null);
-      
+  const [cardModified, setCardModified] = useState(false)
+
   const [show, setShow] = useState(false);
   const [showAnswerBtn, setShowAnswerBtn] = useState(true);
   const [showRepeatBtn, setShowRepeatBtn] = useState(false);
 
-      
   const [showDeleteWindow, setShowDeleteWindow] = useState(true)
   const [timer, setTimer] = useState(null)
   const [trash, setTrash] = useState(false);
   const [deckLengthNotZero, setDeckLengthNotZero] = useState(true)
-      
-  const { dataBase, setDataBase } = useContext(Context);
 
+  const { dataBase, setDataBase } = useContext(Context);
+  const [card, setCard] = useState({answer:'', question:''})
+  const [threeDotsMenuOpen, setThreeDotsMenuOpen] = useState(false);
 
 
   // function handlePause () {
@@ -41,34 +41,48 @@ export default function QuestAnswerTrainOverv({name, data, index,paused, threeDo
   //   setPauseIsActive(savePausedState)
   //   dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
   //   setDataBase(newDataBase)
-    
+
   // }
 
+  useEffect(() => {
+      setTimeout( 
+      ()=>
+          {setCardModified(false)},500
+      ) 
+    }, [cardModified]
+  );
 
 
-  function generateRandom() {                                                                                                                                                                                                                                                                                                                                                                         
+
+  function generateRandom() {
     let randomQuestion = null;
-    
+
     if (data.length === 0) {
-      
-      
+
+
       alert('add questions to deck')
       setDeckLengthNotZero(false)
-    }
-
-    if (dataBase.queue[0] && dataBase.queue[0].timeLeft === 0) {
-      //need to have algorithm to filter s in queue related onlz for this deck
-      //also not tot forget add decremental time algorith for all crads no matter waht deck
-      randomQuestion = dataBase.queue.shift().index
-
     } else {
-      
-      randomQuestion = Math.floor(Math.random() * data.length);
+      setDeckLengthNotZero(true)
+      if (dataBase.queue[0] && dataBase.queue[0].timeLeft === 0) {
+        //need to have algorithm to filter s in queue related onlz for this deck
+        //also not tot forget add decremental time algorith for all crads no matter waht deck
+        randomQuestion = dataBase.queue.shift().index
+
+      } else {
+
+        randomQuestion = Math.floor(Math.random() * data.length);
+      }
+
+      setRandomQuestion(randomQuestion);
+      setCard(data[randomQuestion])
+      setShow(true);
     }
 
-    setRandomQuestion(randomQuestion);
-    setShow(true);
-    // console.log(data)
+  }
+
+  function discardHandler(){
+    setCard(data[randomQuestion])
   }
 
   function addToQueue(time) {
@@ -114,94 +128,103 @@ export default function QuestAnswerTrainOverv({name, data, index,paused, threeDo
 
 
   function deleteCurrentCard() {
+    
     let newDataBase = { ...dataBase }
     newDataBase.DeckNames[index].data.splice(randomQuestion, 1)
     setDataBase(newDataBase)
-    generateRandom()  
+    generateRandom()
   }
 
-  function changeHandler(e) {
-    // let { name: input, value } = e.target;
-    let { name: modifiedQuestion, modifiedAnswer} = e.target;
+  function saveHandler() {
+    
     let newDataBase = { ...dataBase };
-    // newDataBase.DeckNames[name].data[randomQuestion][input] = value;
-    newDataBase.DeckNames[index].data[randomQuestion][modifiedQuestion] = modifiedAnswer;
+    newDataBase.DeckNames[index].data[randomQuestion]=card
     setDataBase(newDataBase)
-    console.log(modifiedQuestion)
-    console.log(modifiedAnswer)
+
+  }
+
+  function changeHandler(e){
+    let {name,value} = e.target;
+    setCard({...card, [name]:value})
   }
 
 
-          
-  
 
 
   return (
     <>
-    
-      <Button 
-          variant='secondary'
-          className='openDeck'
-          size='sm'
-          style= {{
-                    opacity: dataBase.DeckNames[index].paused? '0': '1',
-                    cursor: dataBase.DeckNames[index].paused? 'default': 'pointer'
-                  }}
-          onClick={ paused?
-                    null
-                    :
-                    generateRandom
-          }     
+
+      <Button
+        variant='secondary'
+        className='openDeck'
+        size='sm'
+        style={{
+          opacity: paused ? '0' : '1',
+          cursor: paused ? 'default' : 'pointer'
+        }}
+        onClick={
+          paused ?
+            null
+            :
+            generateRandom
+        }
       >
-          Open Deck
+        Open Deck
 
       </Button>
-    
-      {
-        deckLengthNotZero && !dataBase.DeckNames[index].paused &&
 
-        <BasicOrangeWindow 
+      {
+        deckLengthNotZero && !paused &&
+
+        <BasicOrangeWindow
           show={show}
           setShow={setShow}
           showRepeatBtn={showRepeatBtn}
           setShowRepeatBtn={setShowRepeatBtn}
-          setShowAnswerBtn = {setShowAnswerBtn}
-          setEdit={setEdit}
+          setShowAnswerBtn={setShowAnswerBtn}
+          setEditBtnClicked={setEditBtnClicked}
           title={`Deck: ${name}`}
           menu={
-                <ThreeDotsBtn
-           
-                   text={'card'}
-                   editButtonClicked={true}
-                   className='threeDotsInQuestionAnswerStyling'
-                   threeDotsContainer = {{position: 'default'}}
-                   index={index}
-                   edit pause trash
-          
-                   editEvent={() => {
-                      setShowAnswerBtn(false)
-                      setEdit(true)  
-                      setShowRepeatBtn(false)  
-                      // setThreeDotsMenuOpen(false)
-                 
-                    }}
+            <ThreeDotsBtn
 
-                    pauseEvent={() => {
-                            // handlePause()
-                    }}   
+              text={'card'}
+              editButtonClicked={true}
+              className='threeDotsInQuestionAnswerStyling'
+              threeDotsContainer={{ position: 'default' }}
+              paused={paused}
+              showFromParent={threeDotsMenuOpen}
+              setShowFromParent={setThreeDotsMenuOpen}
+              index={index}
+              edit pause trash
 
-                    trashEvent={() => {
-                        setTrash(true)
+              editEvent={() => {
+                setShowAnswerBtn(false)
+                setEditBtnClicked(true)
+                setShowRepeatBtn(false)
+              }}
 
-                        dataBase.checkboxClicked?
+              pauseEvent={() => {
+                // handlePause()
+              }}
 
-                        deleteCurrentCard() 
-                          : 
-                        setShowDeleteWindow(true)
-                    }}
-                 />
-                }
-          >
+              trashEvent={() => {
+                setTrash(true)
+
+                dataBase.checkboxClicked ?
+
+                  deleteCurrentCard()
+
+                  // ()=>{
+                  // deleteCurrentCard() 
+                  // setShowRepeatBtn(false)
+                  // setShowAnswerBtn(true)
+                  // }
+                  :
+                  setShowDeleteWindow(true)
+              }}
+            />
+          }
+        >
 
           {
             data[randomQuestion] &&
@@ -211,15 +234,15 @@ export default function QuestAnswerTrainOverv({name, data, index,paused, threeDo
               >
                 <p className='questionAnswerStyling'
                 >
-                    Question
+                  Question
                 </p>
 
                 <FormControl
                   as="textarea"
                   aria-label="With textarea"
-                  value={data[randomQuestion].question} 
+                  value={card.question}
                   className='w-100'
-                  // disabled={!edit}
+                  disabled={!editBtnClicked}
                   name='question'
                   onChange={changeHandler}
                 />
@@ -228,17 +251,17 @@ export default function QuestAnswerTrainOverv({name, data, index,paused, threeDo
 
               {
                 showAnswerBtn &&
-                
+
                 <Button
-                  class='p-1'
                   variant='secondary'
-                  className='showAnswer my-5 d-flex justify-content-center align-items-center'
-                  onClick={() => {
-                    setShowAnswerBtn(false)
-                    setShowRepeatBtn(true)
-                  }}
+                  className='p-1 showAnswer my-5 d-flex justify-content-center align-items-center'
+                  onClick={
+                    () => {
+                      setShowAnswerBtn(false)
+                      setShowRepeatBtn(true)
+                    }}
                 >
-                
+
                   Show answer
                 </Button>
               }
@@ -248,21 +271,43 @@ export default function QuestAnswerTrainOverv({name, data, index,paused, threeDo
 
                 <div className='d-flex justify-content-between px-3'
                 >
-                    {
-                      dataBase.userTimePreferences.map((col) =>
+                  {
+                    dataBase.userTimePreferences.map((col) =>
 
-                          <RepeatBtn
-                              btn={col.name}
-                              label={'< ' + col.amount + col.unit}
-                              onClick={() => {
-                                  setShowAnswerBtn(!showAnswerBtn)
-                                  setShowRepeatBtn(false)
-                                  generateRandom()
-                              }}
-                          />
-                        )
-                      }
+                      <RepeatBtn
+                        btn={col.name}
+                        label={'< ' + col.amount + col.unit}
+                        onClick={() => {
+                          setShowAnswerBtn(!showAnswerBtn)
+                          setShowRepeatBtn(false)
+                          generateRandom()
+                        }}
+                      />
+                    )
+                  }
                 </div>
+              }
+
+              { 
+                  cardModified?
+
+                      <div 
+                          className='d-flex justify-content-center align-items-center'
+                          style={{height: '52px'}}
+                      >
+
+                          <Alert 
+                              variant="success"
+                              style={{width: '145px', height: '35px'}}
+                          >
+
+                              Card was modified.
+                          </Alert>
+
+                    </div>
+
+                      : 
+                      null
               }
 
               {
@@ -270,57 +315,64 @@ export default function QuestAnswerTrainOverv({name, data, index,paused, threeDo
 
                 <div className='mt-4'
                 >
-                    <p className='questionAnswerStyling'
-                    >
-                        Answer
+                  <p className='questionAnswerStyling'
+                  >
+                    Answer
                     </p>
 
-                    <FormControl
-                        as="textarea"
-                        aria-label="With textarea"
-                        value={data[randomQuestion].answer}
-                        className='w-100'
-                        disabled={!edit}
-                        name='answer'
-                        onChange={changeHandler}
-                    />
+                  <FormControl
+                    as="textarea"
+                    aria-label="With textarea"
+                    value={card.answer}
+                    className='w-100'
+                    disabled={!editBtnClicked}
+                    name='answer'
+                    onChange={changeHandler}
+                  />
                 </div>
               }
 
               {
-                edit && 
+                editBtnClicked &&
 
-                <div className='d-flex justify-content-center'                
+                <div className='d-flex justify-content-center'
                 >
 
-                    <SaveAndDiscard 
-                        generateRandom={generateRandom}                       
-                        editEvent={() => {
-                            setShowAnswerBtn(true)
-                            setEdit(false)
-                        }}
-                    />
+                  <SaveAndDiscard
+                    generateRandom={generateRandom}
+                    setCardModified={setCardModified}
+                    cardModified={cardModified}
+                    saveEvent={() => {
+                      setShowAnswerBtn(true)
+                      setEditBtnClicked(false)
+                      saveHandler()
+                      }}
+                    discardEvent={()=>{
+                      setShowAnswerBtn(true)
+                      setEditBtnClicked(false)
+                      discardHandler()
+                      }}
+                  />
                 </div>
               }
-              
+
               {
                 trash && showDeleteWindow &&
 
                 <DeleteCardQuestionBox
                   card='card'
-                  checked = {checked}
-                  setChecked = {setChecked}
+                  checked={checked}
+                  setChecked={setChecked}
                   show={show}
+                  editBtnClicked={editBtnClicked}
+                  setEditBtnClicked={setEditBtnClicked}
                   setShowAnswerBtn={setShowAnswerBtn}
                   setShowRepeatBtn={setShowRepeatBtn}
                   trashEvent={deleteCurrentCard}
-                  deleteWindow={() => 
+                  deleteWindow={() =>
                     setShowDeleteWindow(false)
                   }
-                  // onHide={()=>{
-                  //   setShowAnswerBtn(true)
-                  //   setShowRepeatBtn(false)
-                  // }}      
+                 
                 />
               }
             </>

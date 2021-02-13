@@ -6,7 +6,7 @@ import '../styles.css'
 
 import redCross from '../../icons/redCross.svg'
 
-export default function AddQuestionsToDeck({  index, name, bg }) {
+export default function AddQuestionsToDeck({  index, name, background }) {
   
   const [show, setShow] = useState(false);
   const [card, setCard] = useState({question:'', answer:''})
@@ -47,7 +47,7 @@ export default function AddQuestionsToDeck({  index, name, bg }) {
         <button 
             className={'addNewCardsButton outline-none'}
             style= {{
-              background: dataBase.DeckNames[index].paused? bg: null,
+              background: dataBase.DeckNames[index].paused? background: null,
               cursor: dataBase.DeckNames[index].paused? 'default': 'pointer'
               }}
         

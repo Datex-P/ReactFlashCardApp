@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import BasicOrangeWindow from '../deck/BasicOrangeWindow'
 import ThreeDotsBtn from '../deck/ThreeDotsBtn'
 import { withRouter } from 'react-router-dom'
@@ -15,7 +15,7 @@ function Stats({ history}) {
   const [checked, setChecked] = useState(false)
   const [show, setShow] = useState(false);
   
-
+ 
   function setShowFunc() {
     history.push('/')
   }
@@ -30,8 +30,12 @@ function Stats({ history}) {
       <BasicOrangeWindow
         show={true}
         setShow={setShowFunc}
-  
-        title={'Stats'}
+        title={
+          
+          <div style={{fontSize: '22px', fontWeight: 'bold'}}
+          >
+              Stats
+          </div>}
 
         menu={
           <ThreeDotsBtn
@@ -39,24 +43,11 @@ function Stats({ history}) {
           editName
     
             text={'stats'}
+            className='resetButtonStyling'
             trashEvent={() => {
               setShowDeleteFrame(true)
             }}
 
-            // pauseEvent={() => {
-            //     // handlePause()
-            // }}
-            
-
-            style={{
-              position: 'absolute',
-              top: '17px', 
-              right: '26px',
-              zIndex: '2000', 
-              backgroundColor: 'white',
-              border: '1px solid black', 
-              overflow: 'hidden'
-            }}
             reset
           />
         }
@@ -64,7 +55,7 @@ function Stats({ history}) {
 
         <div>
 
-          <div style={{ width: '216px', textAlign: 'center', margin: 'auto', fontWeight: 'bold', fontSize: '17px' }}
+          <div className='studyBreakdownHeader'
           >
               Today's study breakdown
           </div>
@@ -87,7 +78,7 @@ function Stats({ history}) {
                   onHide={()=>{ }
                   }
                   />
-              }
+            }
 
             <PieDiagramm />
 
@@ -95,7 +86,6 @@ function Stats({ history}) {
 
           <div 
               className='theWordCalendar' 
-              style={{ marginTop: '20px', marginBottom: '3px', textAlign: 'center' }}
           >
               Calendar
 
@@ -201,11 +191,12 @@ function RenderDays () {
         thisYear.getMonth() !== 0 ||
         thisYear.getDate() !== 1 ||
         thisYear.getFullYear() === +year
-      ) {
+        ) 
+        {
         date.push(thisYear.toDateString())
         thisYear.setDate(thisYear.getDate() + 1);
-      }
-    setDays(date)
+        }
+        setDays(date)
   
 }, [year])
 

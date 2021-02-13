@@ -10,15 +10,16 @@ import NavBar from '../NavBar'
 export default function DeckContainer() {
   //const { dataBase,styles } = useContext(Context);// step 4.2 destructure context value
   const { dataBase, setDataBase, styles } = useContext(Context)
- 
+  const [trigger, setTrigger] = useState(null)
   const scroller = useRef();
 
-  let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
+  let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875']
 
+  const [pauseIsActive, setPauseIsActive] = useState(true)
   const [active, setActive] = useState(null)
   const [decksAreVisible, setDecksAreVisible] = useState(true)
-  const [loadSpinner, setLoadSpinner] = useState(true)
-  const [createNewDeckDisplay, setCreateNewDeckDisplay] = useState(false)
+  const [spinnerIsVisible, setSpinnerIsVisible] = useState(true)
+  const [addNewDeckWindow, setAddNewDeckWindow] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
 
 
@@ -33,6 +34,7 @@ export default function DeckContainer() {
     }
 
     setScrollPosition(position)
+    setTrigger(Symbol())
   }
 
   useEffect(
@@ -53,15 +55,16 @@ export default function DeckContainer() {
   useEffect(
     () => {
     //scroller.current.scroll(0,800)
-      setTimeout(()=>{setLoadSpinner(false)},2000)
-    
+      setTimeout(
+        ()=>{setSpinnerIsVisible(false)},2000
+        )
   }, []
   );
   
 
   return (
 
-    !loadSpinner && dataBase ?
+    !spinnerIsVisible && dataBase ?
 
       <>
         <NavBar />
@@ -76,113 +79,121 @@ export default function DeckContainer() {
             {
               decksAreVisible &&
 
-              <div style={{ position: 'relative', padding: '50px', width: '400px', 
-                            marginLeft: '30px', marginTop: '60px' 
-                    }}
-              >
-                  <div>
-                      {
-                        dataBase.DeckNames.filter((i,k)=>active!==k).map((deck, index) =>
-                        <Deck
-                            key={index}
-                            index={index}
-                            deck={deck}
-                            name={deck.name}
-                            active={false}
-                            setActive = {setActive}
-                            transform={`rotate(${
-                                      ( dataBase.DeckNames.length-1  - index) * -2}deg)`
-                                }
-
-                            zIndex={0}
-                            background = {
-                              active === index && deck.paused ? 
-                              
-                            `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
-                            ${colors[index % 5]} repeat`
-                            :
-                            colors.filter((i,k)=>active!==k)[index % 5]
-                            }
-                      />     
-                      )
-                      }
-
-                      {
-                        dataBase.DeckNames.filter((i,k)=>k===active).map((deck, index) =>
-                        <Deck
-                            key={index}
-                            index={index}
-                            deck={deck}
-                            name={deck.name}
-                            active={true}
-                            setActive = {setActive}
-                            transform={`rotate(0deg)`}
-                            zIndex={2}
-                            background = 
-                            {
-                              active === index && deck.paused ? 
-                            `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
-                            ${colors[active % 5]} repeat`
-                            :
-                            colors[active % 5]
-                            }
-                      />     
-                      )
-                      }
-
-                  </div>
-                  <div
-                      ref={scroller}
-                      className='scrollerStyling'
-                      onScroll={(event) => {
-
-                        let step = (1000 - 220) / ((dataBase.DeckNames).length - 1);
-                        let index = Math.floor(event.target.scrollTop / step);
-                        handleActive(index);
-                        console.log(index);
-                        scrollHandler(event);
-                      }}
+                  <div className='firstRowStyling'
+                  
                   >
-                      <div style={{height: '1000px', position: 'absolute', top: '0px', width: '100%'}}
-                      >
+                      <div>
+                          {
+                            dataBase.DeckNames.filter((i,k)=>active!==k).map((deck, index) =>
+                            <Deck
+                                key={index}
+                                index={index}
+                                deck={deck}
+                                name={deck.name}
+                                active={false}
+                                trigger={trigger}
+                                transform={
+                                          `rotate(${( dataBase.DeckNames.length-1  - index) * -2}deg)`
+                                          }
+                                setActive = {setActive}
+                                zIndex={0}
+                                background = {
+                                  deck.paused ? 
+                                  
+                                `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
+                                ${colors[index % colors.length]} repeat`
+                                :
+                                colors.map((i,k,ar)=>{
+                                  if(active===k){
+                                    return ar[ar.length%(k||1)]
+                                  }else{
+                                    return i
+                                  }
+                                })
+                                [index % colors.length]
+                                }
+                          />     
+                          )
+                          }
+
+                          {
+                            dataBase.DeckNames.filter((i,k)=>k===active).map((deck, index) =>
+                            <Deck
+                                key={index}
+                                index={index}
+                                deck={deck}
+                                name={deck.name}
+                                active={true}
+                                trigger={trigger}
+                                pauseIsActive={pauseIsActive}
+                                setPauseIsActive={setPauseIsActive}
+                                setActive = {setActive}
+                                transform={`rotate(0deg)`}
+                                zIndex={2}
+                                background = 
+
+                                {
+                                   deck.paused ? 
+
+                                `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
+                                ${colors[active % colors.length]} repeat`
+                                :
+                                colors[active % colors.length]
+                                }
+                          />     
+                          )
+                          }
 
                       </div>
+                      <div
+                          ref={scroller}
+                          className='scrollerStyling'
+                          onScroll={(event) => {
+
+                            let step = (1000 - 220) / ((dataBase.DeckNames).length - 1);
+                            let index = Math.floor(event.target.scrollTop / step);
+                            handleActive(index);
+                            console.log(index + 'actual handle active index');
+                            scrollHandler(event);
+                          }}
+                      >
+                          <div style={{height: '1000px', position: 'absolute', top: '0px', width: '100%'}}
+                          >
+
+                          </div>
+                      </div>
                   </div>
-              </div>
             }
           </Row>
 
           <Row  className="justify-content-center"
           >
               <button
-                  style={{ 
-                      zIndex: '4', padding: '2px', position: 'fixed', 
-                      top: '630px',  width: '210px', outline: 'none !important' 
-                      }} 
-                  className='generalButtonStyling'
+                  className='generalButtonStyling createDeckButtonStyling'
                   onClick={
                     () => {
-                    setCreateNewDeckDisplay(true)
+                    setAddNewDeckWindow(true)
                     setDecksAreVisible(false)
                   }}
               >
 
                   Create Deck
-
               </button>
-
-              <CreateNewDeck 
-                  createNewDeckDisplay={createNewDeckDisplay}      
-                  setDecksAreVisible={setDecksAreVisible}
-                  setActive={setActive}
-                  setCreateNewDeckDisplay={setCreateNewDeckDisplay}
-                  style={{ position: 'absolute', zIndex: '40' }}
-                  close={
-                    ()=>{
-                    setDecksAreVisible(true)
-                    setCreateNewDeckDisplay(false)
-                    }}
-              />
+              
+              <div style={{marginTop: '40px'}}>
+                  <CreateNewDeck 
+                      addNewDeckWindow={addNewDeckWindow}      
+                      setDecksAreVisible={setDecksAreVisible}
+                      setAddNewDeckWindow={setAddNewDeckWindow}
+                      setActive={setActive}
+                      style={{ position: 'absolute', zIndex: '40' }}
+                      close={
+                            ()=>{
+                            setDecksAreVisible(true)
+                            setAddNewDeckWindow(false)
+                            }}
+                  />
+              </div>
 
           </Row>
       </Container>
