@@ -184,6 +184,7 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
           setShowAnswerBtn={setShowAnswerBtn}
           setEditBtnClicked={setEditBtnClicked}
           title={`Deck: ${name}`}
+          showFromParent={threeDotsMenuOpen}
           menu={
             <ThreeDotsBtn
 
@@ -192,7 +193,7 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
               className='threeDotsInQuestionAnswerStyling'
               threeDotsContainer={{ position: 'default' }}
               paused={paused}
-              showFromParent={threeDotsMenuOpen}
+              
               setShowFromParent={setThreeDotsMenuOpen}
               index={index}
               edit pause trash
@@ -201,6 +202,7 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
                 setShowAnswerBtn(false)
                 setEditBtnClicked(true)
                 setShowRepeatBtn(false)
+                setThreeDotsMenuOpen(false)
               }}
 
               pauseEvent={() => {

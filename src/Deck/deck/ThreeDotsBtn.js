@@ -67,7 +67,7 @@ function ThreeDotsBtn({
     
   function handleEdit() {
     editEvent() 
-    setThreeDotsOpen(false)
+    
     // !editName && setShow(false) 
     // other way of writing it
     if (!editButtonClicked) {

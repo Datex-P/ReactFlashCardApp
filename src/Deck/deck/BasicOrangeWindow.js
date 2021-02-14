@@ -1,5 +1,6 @@
 import { Modal } from 'react-bootstrap'
 import redCross from '../../icons/redCross.svg'
+import React from 'react'
 
 export default function BasicOrangeWindow({
                                           children, show, 
@@ -7,7 +8,7 @@ export default function BasicOrangeWindow({
                                           menu, 
                                           setShowAnswerBtn = () => {},
                                           setEdit = () =>{} , 
-                                          setShowRepeatBtn = () => {},
+                                          setShowRepeatBtn = () => {},showFromParent
             }) {
 
   return(
@@ -35,7 +36,7 @@ export default function BasicOrangeWindow({
                       {title}
                   </Modal.Title>
 
-                  {menu}
+                  {React.cloneElement(menu,{showFromParent})}
 
                 <button 
                     className='redCross'
