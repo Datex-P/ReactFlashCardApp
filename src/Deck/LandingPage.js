@@ -37,12 +37,7 @@ export default function DeckContainer() {
     setTrigger(Symbol())
   }
 
-  useEffect(
-    () => {
-    setActive(dataBase && (dataBase.DeckNames.length-1))
-
-  }, [dataBase?.active==null]
-  )
+  
 
   function handleActive(i){
     setActive(i)

@@ -35,6 +35,7 @@ export default function Deck({ deck, checked, setChecked,
     let cIndex = dataBase.DeckNames.findIndex(item=>item.name === name)
     setIndex(cIndex)
     //console.log(cIndex)
+    // eslint-disable-next-line 
   },[trigger])
   
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
@@ -91,7 +92,7 @@ export default function Deck({ deck, checked, setChecked,
          editButtonClicked?
 
             <DeckOrCardName 
-                // bg={style.background}
+                bg={style.background}
                 index={index}
                 paused={paused}
                 name= {name}
@@ -182,7 +183,7 @@ export default function Deck({ deck, checked, setChecked,
 
         </Card.Title>
 
-        <Card.Text>
+        <div className='mb-3'>
 
           <div 
               className='divStyling' 
@@ -264,7 +265,7 @@ export default function Deck({ deck, checked, setChecked,
 
           }
       
-        </Card.Text>
+        </div>
 
         <QuestAnswerTrainOverv 
             name={name} 
@@ -274,7 +275,7 @@ export default function Deck({ deck, checked, setChecked,
         />
         
         {
-          active && 
+          active  && 
           
             <AddQuestionsToDeck 
                 background={style.background} 

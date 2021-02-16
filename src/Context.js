@@ -18,7 +18,7 @@ export default function ContextProvider({ children }) {
     let dB = {
 
       DeckNames: [],
-      active:null,
+      active:-1,
       queue: [],
       checkboxClicked: false,
       showDeleteFrame: true,
@@ -78,7 +78,7 @@ export default function ContextProvider({ children }) {
         })
       };
 
-  let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
+      let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
 
       dB.DeckNames.push(
         {
@@ -94,7 +94,7 @@ export default function ContextProvider({ children }) {
       );
       dB.active++
     }
-
+    console.log(dB.active)
     setDataBase(dB)
   }, []);
   

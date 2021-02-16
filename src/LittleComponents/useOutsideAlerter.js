@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useEffect } from "react";
 
 /**
  * Hook that alerts clicks outside of the passed ref
@@ -35,5 +35,5 @@ export default function useOutsideAlerter(ref,editButtonClicked, cb,cb2) {
             // Unbind the event listener on clean up
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [ref,editButtonClicked]);
+    }, [ref,editButtonClicked, cb, cb2]);
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect} from 'react';
 import BasicOrangeWindow from '../deck/BasicOrangeWindow'
 import ThreeDotsBtn from '../deck/ThreeDotsBtn'
 import { withRouter } from 'react-router-dom'
@@ -13,7 +13,7 @@ function Stats({ history}) {
 
   const [showDeleteFrame, setShowDeleteFrame] = useState(false)
   const [checked, setChecked] = useState(false)
-  const [show, setShow] = useState(false);
+  const [show] = useState(false);
   
  
   function setShowFunc() {
@@ -179,7 +179,7 @@ function ButtonLeftAndRight() {
 
 function RenderDays () {
 
- const [year, setNewYear] = useState(new Date().getFullYear())
+ const [year] = useState(new Date().getFullYear())
  const [days, setDays] = useState([])
 
   useEffect(()=> {

@@ -13,7 +13,7 @@ import logoutIcon from '../icons/logout.svg';
 export default function MenuContainer() {
 
   const [show, setShow] = useState(false);
-  const { dataBase,setDataBase, styles } = useContext(Context)
+  const { dataBase,styles } = useContext(Context)
   const handleClose = () => setShow(false);
 
   return (

@@ -4,11 +4,11 @@ import React from 'react'
 
 export default function BasicOrangeWindow({
                                           children, show, 
-                                          setShow,title,
-                                          menu, 
+                                          setShow, title,
+                                          menu, showFromParent,
                                           setShowAnswerBtn = () => {},
                                           setEdit = () =>{} , 
-                                          setShowRepeatBtn = () => {},showFromParent
+                                          setShowRepeatBtn = () => {}
             }) {
 
   return(

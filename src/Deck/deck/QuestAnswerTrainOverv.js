@@ -85,18 +85,18 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
     setCard(data[randomQuestion])
   }
 
-  function addToQueue(time) {
-    let newDataBase = { ...dataBase }
+  // function addToQueue(time) {
+  //   let newDataBase = { ...dataBase }
 
-    newDataBase.queue.push({
-      ...data[randomQuestion],
-      index: randomQuestion,
-      timeLeft: time * 1000,
-      item: name
-    })
+  //   newDataBase.queue.push({
+  //     ...data[randomQuestion],
+  //     index: randomQuestion,
+  //     timeLeft: time * 1000,
+  //     item: name
+  //   })
 
-    setDataBase(newDataBase)
-  }
+  //   setDataBase(newDataBase)
+  // }
 
 
   useEffect(() => {
@@ -110,7 +110,6 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
         //   } else {
         //     dataBase.queue[index].timeLeft = 0
         //   }
-        console.log(name, timeLeft)
         //     // })
       }, 1000)
       // })
@@ -118,11 +117,12 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
       setTimer(timeLeft)
     } else {
 
-      console.log(timer)
+      
       clearInterval(timer)
       console.log('oh you delete me')
     }
     //return function () {clearInterval(timeLeft)}
+    // eslint-disable-next-line
   }, [show]
   )
 

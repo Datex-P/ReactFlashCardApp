@@ -13,9 +13,9 @@ import playimg from '../../icons/play.svg'
 
 
 function ThreeDotsBtn({    
-                        text, name,showFromParent, style, className, editButtonClicked, nameOfTopDeck, 
+                        text, name,showFromParent, style, 
+                        className, editButtonClicked, nameOfTopDeck, 
                         index, input, threeDotsContainer, setEditButtonClicked, 
-                        setShowFromParent = () => { },
                         editEvent = () => { }, 
                         trashEvent = () => { },
                         edit=false,trash=false,pause=false,reset=false,paused
