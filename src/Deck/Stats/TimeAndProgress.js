@@ -50,7 +50,7 @@ export default function TimeAndProgress() {
                     } 
             />
             )
-            
+
         } else if (i <= 9) {
 
           if (i <= 9 && i + 4 > 9) {
@@ -103,12 +103,12 @@ export default function TimeAndProgress() {
   return (
 
 
-    <div className='diagramHourlyBreakdownContainer d-flex flex-column justify-content-around
-    '>
+    <div className='diagramHourlyBreakdownContainer d-flex flex-column justify-content-around'
+    >
        <div
         className='d-flex'
       > 
-        <div style={{ marginLeft: '10px', border: '1px solid black', width: '81px', paddingLeft: '3px', height: '24px'}}
+        <div className='studyGoalStyling'
         >
 
             Study Goal

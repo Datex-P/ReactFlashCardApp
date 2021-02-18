@@ -23,7 +23,7 @@ export default function App(){
   return(
 
     <Container>
-      {Array(10).fill('a').map((el=><Div />))}
+      {Array(10).fill('oiojoijjioijo').map((el=><Div />))}
     </Container>
 
   )

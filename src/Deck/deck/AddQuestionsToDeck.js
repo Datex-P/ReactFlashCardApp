@@ -5,6 +5,7 @@ import {Context} from '../../Context';
 import '../styles.css'
 
 import redCross from '../../icons/redCross.svg'
+import { HashRouter } from 'react-router-dom';
 
 export default function AddQuestionsToDeck({  index, name, background }) {
   
@@ -170,4 +171,3 @@ export default function AddQuestionsToDeck({  index, name, background }) {
     </div>
   )
 }
-

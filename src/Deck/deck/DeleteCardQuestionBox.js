@@ -42,7 +42,7 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
         id='deleteWindow'
         dialogClassName='backgroundModal'
         contentClassName='widthFitContent'
-        className='d-flex justify-content-center align-items-center'
+        className='d-flex justify-content-center '
       >
         <div>
 
