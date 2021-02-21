@@ -16,9 +16,11 @@ function ThreeDotsBtn({
                         text, name,showFromParent, style, 
                         className, editButtonClicked, nameOfTopDeck, 
                         index, input, threeDotsContainer, setEditButtonClicked, 
+                        edit=false,trash=false,pause=false,reset=false,
+                        // paused,
+                        setNameOfTopDeck=()=>{},
                         editEvent = () => { }, 
-                        trashEvent = () => { },
-                        edit=false,trash=false,pause=false,reset=false,paused
+                        trashEvent = () => { }
                       }) 
 
 {
@@ -78,14 +80,19 @@ function ThreeDotsBtn({
   
 
   function handlePause () {
+    console.log(index)
     let newDataBase = {...dataBase}
     let savePausedState = !pauseIsActive
     setPauseIsActive(savePausedState)
+
+    dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
+
     let key = newDataBase.DeckNames.findIndex(deck=>deck.name === name)
     newDataBase.DeckNames[key].paused = true
     setDataBase(newDataBase)
     setEditButtonClicked(true)
     setThreeDotsOpen(false)
+    setNameOfTopDeck(name)
     
   }
 
@@ -93,7 +100,8 @@ function ThreeDotsBtn({
   return (
     <>
     {
-      paused?
+      dataBase?.DeckNames?.[index]?.paused?
+      //paused?
     
       null
          :
@@ -160,7 +168,7 @@ function ThreeDotsBtn({
                   <img 
                       alt='pause' 
                       style={{ marginRight: '3px' }} 
-                      src={ pauseIsActive? pauseimg: playimg }  
+                      src={ !dataBase.DeckNames[index].paused? pauseimg: playimg }  
                   />
 
                   {text}

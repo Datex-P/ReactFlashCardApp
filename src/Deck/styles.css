@@ -645,7 +645,7 @@ height: 33px;
   top: -12px;
   /* height: 1005px !important; */
   height: 730px !important;
-
+  max-width: 505px !important;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -653,7 +653,9 @@ height: 33px;
   top: 16px;
   overflow: hidden;
   padding-left: none; */
+  border-radius: 5px;
 }
+
 .widthFitContent{
   width:fit-content !important;
 }

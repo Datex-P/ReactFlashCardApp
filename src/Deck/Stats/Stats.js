@@ -40,10 +40,12 @@ function Stats({ history}) {
         menu={
           <ThreeDotsBtn
        
-          editName
-    
+          //editName
+            // index={index}
+            // paused={paused}
             text={'stats'}
             className='resetButtonStyling'
+            editButtonClicked
             trashEvent={() => {
               setShowDeleteFrame(true)
             }}
@@ -75,8 +77,8 @@ function Stats({ history}) {
                   show={show}
                   deleteFrame={() => setShowDeleteFrame(false)}
                   // trashEvent={deleteCurrentCard}
-                  onHide={()=>{ }
-                  }
+                  onHide={
+                    ()=>{ }}
                   />
             }
 

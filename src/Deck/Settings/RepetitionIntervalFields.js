@@ -15,18 +15,28 @@ export default function RepetitionIntervalFields(
   const [inputText, setInputText] = useState(name)
 
   function handleInputNumbers(e) {
+    if(e.target.value.length<3){
+      setInputNumb(e.target.value)
+      let newUserTimePreferences = [ ...userTimePreferences ]
+      newUserTimePreferences[index].amount = e.target.value
+      setUserTimePreferences(newUserTimePreferences)
+    }
+  }
+  function checker(e){
+    let {value} = e.target;
+    let newValue = value.replace(/[^0-9]/g,'')
+    if(newValue.length<3){
+      setInputNumb(newValue)
+    }
+    
 
-    setInputNumb(e.target.value)
-    let newUserTimePreferences = [ ...userTimePreferences ]
-    newUserTimePreferences[index].amount = e.target.value
-    setUserTimePreferences(newUserTimePreferences)
   }
 
 
   function handleInputText(e) {
 
     setInputText(e.target.value)
-    let newUserTimePreferences = [ ...userTimePreferences ]
+   let newUserTimePreferences = [ ...userTimePreferences ]
     newUserTimePreferences[index].name = e.target.value
     setUserTimePreferences(newUserTimePreferences)
   }
@@ -46,29 +56,27 @@ export default function RepetitionIntervalFields(
 
               {'<'}
           </div>
+          <form>
+
 
           <input 
               className={style.input}
               type='number'
-              maxLength="3" 
-              minLength='1'
-              oninput="this.value=this.value.replace(/[^0-9]/g,'')"
               style={{ backgroundColor: 'transparent', outline: 'none', width: '40px', height: '24px', textAlign: 'center'
                     }} 
               disabled={!editIsPossible}
               value={inputNumb}
-              min='1'
-              max='99'
               onChange={handleInputNumbers}
+              onInput={checker}
           />
+          </form>
 
             {unit}
       </p>
-
+      <form>
       <input
         value={inputText}
         type='text'
-        key={name}
         disabled={!editIsPossible}
         onChange={handleInputText}
         className='repetitionIntervalTextFields'
@@ -79,6 +87,7 @@ export default function RepetitionIntervalFields(
                 cursor: editIsPossible ? 'pointer' : 'default'
               }}
       />
+      </form>
 
     </div>
   )

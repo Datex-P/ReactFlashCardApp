@@ -80,7 +80,7 @@ function Settings({ history }) {
                   dataBase.userTimePreferences.map((col, k) =>
 
                   <RepetitionIntervalFields
-                      key={col.name} 
+                      key={k} 
                       index={k} 
                       data={col} 
                       editIsPossible={editIsPossible} 

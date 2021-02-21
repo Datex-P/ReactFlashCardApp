@@ -15,7 +15,8 @@ import playimg from '../../icons/play.svg'
 
 
 export default function Deck({ deck, checked, setChecked,
-                   active, setActive, title, bg, pauseIsActive, setPauseIsActive, trigger, ...style }) {
+                               active, setActive, title, bg, 
+                              pauseIsActive, setPauseIsActive, trigger, ...style }) {
      
     
   let { data, paused, name }  = deck
@@ -24,13 +25,11 @@ export default function Deck({ deck, checked, setChecked,
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name);
   const [threeDotsMenuOpen, setThreeDotsMenuOpen] = useState(false);
   
-  
   const [showDeleteWindow, setShowDeleteWindow] = useState(true);
   const [trash, setTrash] = useState(false);
-  
-  
   const { dataBase, setDataBase} = useContext(Context)
-   const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0);
+
   useEffect(()=>{
     let cIndex = dataBase.DeckNames.findIndex(item=>item.name === name)
     setIndex(cIndex)
@@ -113,11 +112,15 @@ export default function Deck({ deck, checked, setChecked,
                         
                           alert('Deckname can not be longer than 25 characters')
                         } else {
+
+                          // if (!dataBase.DeckNames[index].paused) {
                         
-                        setNameOfTopDeck(e.target.value)}
+                            setNameOfTopDeck(e.target.value)}
+                            // }
+
                         }
                     }
-         />
+            />
 
          }
 
@@ -134,6 +137,7 @@ export default function Deck({ deck, checked, setChecked,
               paused={paused}
               bg={style.background} 
               nameOfTopDeck={nameOfTopDeck}
+              setNameOfTopDeck={setNameOfTopDeck}
               edit={!paused} 
               pause 
               trash={!paused}
@@ -149,19 +153,18 @@ export default function Deck({ deck, checked, setChecked,
                 setEditButtonClicked(!editButtonClicked)
               }}
 
-
               trashEvent={
                 dataBase.checkboxClicked
-              ?
-              () => {
-                deleteDeck()
-                handleActive(index-1)
-              }
-              :
-              () => {
-                setTrash(true)
-                setShowDeleteWindow(true)
-              }
+                    ?
+                    () => {
+                      deleteDeck()
+                      handleActive(index-1)
+                    }
+                    :
+                    () => {
+                      setTrash(true)
+                      setShowDeleteWindow(true)
+                    }
               }
             />
           
@@ -178,6 +181,7 @@ export default function Deck({ deck, checked, setChecked,
                   deleteDeck()
                   handleActive(index-1)}
                   }
+                  showDeleteWindow={showDeleteWindow}
                 />
             }
 
@@ -288,5 +292,44 @@ export default function Deck({ deck, checked, setChecked,
     </Card>
   )
 }
+
+
+//adding a facebook login at the very beginning
+
+//   window.fbAsyncInit = function() {
+//     FB.init({
+//       appId      : '699586404315736',
+//       cookie     : true,
+//       xfbml      : true,
+//       version    : 'v9.0'
+//     });
+      
+//     FB.getLoginStatus(function(response) {
+//       statusChangeCallback(response);
+//   });
+      
+//   };
+
+//   (function(d, s, id){
+//      var js, fjs = d.getElementsByTagName(s)[0];
+//      if (d.getElementById(id)) {return;}
+//      js = d.createElement(s); js.id = id;
+//      js.src = "https://connect.facebook.net/en_US/sdk.js";
+//      fjs.parentNode.insertBefore(js, fjs);
+//    }(document, 'script', 'facebook-jssdk'));
+
+//    function statusChangeCallback(response) {
+//      if (response.status === 'connnected') {
+//        console.log('Logged in and authenticated')
+//      } else {
+//        console.log('Not authenticated');
+//      }
+//    }
+
+//    function checkLoginState() {
+//   FB.getLoginStatus(function(response) {
+//     statusChangeCallback(response);
+//   });
+// }
 
 

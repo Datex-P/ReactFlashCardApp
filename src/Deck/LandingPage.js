@@ -16,7 +16,7 @@ export default function DeckContainer() {
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875']
 
   const [pauseIsActive, setPauseIsActive] = useState(true)
-  const [active, setActive] = useState(null)
+  const [active, setActive] = useState(0)
   const [decksAreVisible, setDecksAreVisible] = useState(true)
   const [spinnerIsVisible, setSpinnerIsVisible] = useState(true)
   const [addNewDeckWindow, setAddNewDeckWindow] = useState(false)

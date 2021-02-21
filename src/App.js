@@ -1,30 +1,38 @@
 import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-function Container({children}){
-  let color='green';
-  return(
+import LandingPage from './Deck/LandingPage.js'
+import Settings from './Deck/Settings/Settings'
+import Stats from './Deck/Stats/Stats'
+
+
+
+export default function App() {
+
+  return (
+
+    <Router>
     
-      <div>{
-        React.Children.map(children, (child)=>React.cloneElement(child,{colors:color}))
-      }</div>
-    
-  )
-}
+      <LandingPage />
 
+      <Switch>
+          <Route path='/stats'>
+              <Stats />
+          </Route>
 
-function Div({colors}){
-  return(
-    <div>my color is {colors}</div>
-  )
-}
+          <Route path='/settings'>
+              <Settings />
+          </Route>
 
+          <Route path='/' exact>            
+          </Route>
 
-export default function App(){
-  return(
+          <Route path='/logout'>
+          </Route>
+      </Switch>
 
-    <Container>
-      {Array(10).fill('oiojoijjioijo').map((el=><Div />))}
-    </Container>
+    </Router>
 
   )
 }
+

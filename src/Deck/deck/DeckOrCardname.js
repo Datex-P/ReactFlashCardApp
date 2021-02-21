@@ -13,7 +13,7 @@ export default function DeckOrCardName({ name, paused, index
 
     <div   
         onMouseEnter={
-          name.length > 14 && !paused ? 
+          name.length > 13 && !paused ? 
 
           ()=> {setHovered(true) }
           : 

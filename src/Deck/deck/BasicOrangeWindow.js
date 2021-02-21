@@ -7,8 +7,9 @@ export default function BasicOrangeWindow({
                                           setShow, title,
                                           menu, showFromParent,
                                           setShowAnswerBtn = () => {},
-                                          setEdit = () =>{} , 
-                                          setShowRepeatBtn = () => {}
+                                          setEdit = () => {} , 
+                                          setShowRepeatBtn = () => {},
+                                          setEditBtnClicked = () => {}
             }) {
 
   return(
@@ -36,7 +37,7 @@ export default function BasicOrangeWindow({
                       {title}
                   </Modal.Title>
 
-                  {React.cloneElement(menu,{showFromParent})}
+                  {menu}
 
                 <button 
                     className='redCross'
@@ -46,6 +47,7 @@ export default function BasicOrangeWindow({
                       setEdit(false)
                       setShowRepeatBtn(false)
                       setShowAnswerBtn(true)
+                      setEditBtnClicked(false)
                     }} 
                 >
                     <img 

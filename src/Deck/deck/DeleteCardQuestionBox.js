@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import {Context} from '../../Context'
 import { Modal } from 'react-bootstrap'
 import '../styles.css'
@@ -10,20 +10,14 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
                                                 setShowAnswerBtn,
                                                 setShowRepeatBtn,
                                                 setEditBtnClicked,
-                                                deleteCurrentCard=()=>{}
+                                                deleteCurrentCard=()=>{},
+                                                showDeleteWindow
                                               }) 
   
 {
 
-  const [show, setShow] = useState(true);
   const { dataBase, setDataBase} = useContext(Context)
- 
 
-  const handleClose = () => {
-    console.log('hello')
-    setShow(false) 
-    
-  }
 
   function handleCheckbox () {
   
@@ -35,8 +29,8 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
  
     
       <Modal
-        show={show}
-        onHide={handleClose}
+        show={showDeleteWindow}
+        onHide={deleteWindow}
         backdrop="static"
         keyboard={false}
         id='deleteWindow'

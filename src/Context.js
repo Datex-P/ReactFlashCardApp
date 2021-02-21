@@ -18,7 +18,7 @@ export default function ContextProvider({ children }) {
     let dB = {
 
       DeckNames: [],
-      active:-1,
+      active:2,
       queue: [],
       checkboxClicked: false,
       showDeleteFrame: true,
