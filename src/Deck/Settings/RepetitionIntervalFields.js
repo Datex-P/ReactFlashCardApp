@@ -67,7 +67,8 @@ export default function RepetitionIntervalFields(
               disabled={!editIsPossible}
               value={inputNumb}
               onChange={handleInputNumbers}
-              onInput={checker}
+               onInput={checker}
+         
           />
           </form>
 

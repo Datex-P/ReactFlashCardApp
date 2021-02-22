@@ -17,10 +17,11 @@ function ThreeDotsBtn({
                         className, editButtonClicked, nameOfTopDeck, 
                         index, input, threeDotsContainer, setEditButtonClicked, 
                         edit=false,trash=false,pause=false,reset=false,
-                        // paused,
+                        // paused
                         setNameOfTopDeck=()=>{},
                         editEvent = () => { }, 
-                        trashEvent = () => { }
+                        trashEvent = () => { },
+                        type
                       }) 
 
 {
@@ -69,7 +70,9 @@ function ThreeDotsBtn({
     
   function handleEdit() {
     editEvent() 
-    
+    if(type==='card'){
+      handleClick()
+    }
     // !editName && setShow(false) 
     // other way of writing it
     if (!editButtonClicked) {

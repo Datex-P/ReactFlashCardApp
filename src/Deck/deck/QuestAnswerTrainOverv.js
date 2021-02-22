@@ -1,6 +1,7 @@
-import React, { useState, useContext, useEffect} from 'react'
+import React, { useState, useContext, useEffect, useRef} from 'react'
 import { Button, FormControl, Alert } from 'react-bootstrap'
 import { Context } from '../../Context'
+import editimg from '../../icons/edit.svg'
 
 import ThreeDotsBtn from './ThreeDotsBtn';
 import BasicOrangeWindow from './BasicOrangeWindow'
@@ -33,6 +34,14 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
   const { dataBase, setDataBase } = useContext(Context);
   const [card, setCard] = useState({answer:'', question:''})
   const [threeDotsMenuOpen, setThreeDotsMenuOpen] = useState(false);
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (editBtnClicked) {
+      inputRef.current.focus();
+    }
+  }, [editBtnClicked]);
 
 
   // function handlePause () {
@@ -197,12 +206,11 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
               setShowFromParent={setThreeDotsMenuOpen}
               index={index}
               edit pause trash
-
+              type='card'
               editEvent={() => {
                 setShowAnswerBtn(false)
                 setEditBtnClicked(true)
                 setShowRepeatBtn(false)
-                setThreeDotsMenuOpen(false)
               }}
 
               pauseEvent={() => {
@@ -222,11 +230,29 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
                   // setShowAnswerBtn(true)
                   // }
                   :
+                
                   setShowDeleteWindow(true)
               }}
             />
           }
         >
+
+          {
+            editBtnClicked?
+          
+            <div style={{top: '-18px', position: 'relative', marginLeft: '14px', display: 'flex', alignItems: 'center'}}
+            >
+
+              <img 
+                      alt='edit' 
+                      src={editimg} 
+              /> 
+              <span style={{marginLeft: '3px'}}>mode</span>
+
+            </div>
+              :
+            null
+          }
 
           {
             data[randomQuestion] &&
@@ -247,6 +273,7 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
                   disabled={!editBtnClicked}
                   name='question'
                   onChange={changeHandler}
+                  ref={inputRef}
                 />
 
               </div>

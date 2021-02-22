@@ -428,10 +428,10 @@ border-radius: 5px;
 }
 
 /* width */
-::-webkit-scrollbar {
+ ::-webkit-scrollbar {
   width: 10px;
-  height: 200px;
-}
+ 
+} 
 
 /* Track */
 ::-webkit-scrollbar-track {
@@ -584,6 +584,10 @@ border-radius: 5px;
   color: white;
 }
 
+.modal-open .modal{
+  overflow-y: hidden !important;
+}
+
 #deleteWindow, #createDeck .modal-footer,
 #createDeck .modal-header {
     border-top: 0px;
@@ -613,7 +617,8 @@ border-radius: 5px;
 }
 
 .deleteWindow #modal {
-  background-color: rgba(0, 0, 0, 0.7)
+  background-color: rgba(0, 0, 0, 0.7);
+  /* overflow-y: none !important; */
 }
 
 .modal-title {

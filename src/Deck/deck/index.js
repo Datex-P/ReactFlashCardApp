@@ -189,10 +189,15 @@ export default function Deck({ deck, checked, setChecked,
 
         <div className='mb-3'>
 
-          <div 
+           {
+            data.length === 0?
+              null
+              :
+              <>
+          <div
               className='divStyling' 
               style={{opacity: paused? '0': '1'}}
-          >
+              >
                 To study:   
 
                 <input 
@@ -212,6 +217,8 @@ export default function Deck({ deck, checked, setChecked,
 
               {'To review:'.padEnd(10, '⠀')}  {dataBase.userPreferences.toReview}
           </div>
+           </>
+          } 
 
           {
             paused?
@@ -257,7 +264,7 @@ export default function Deck({ deck, checked, setChecked,
           }
 
           {
-            name && 
+            name && data.length !== 0?
           
             <div 
                 className='divStyling'  
@@ -266,6 +273,8 @@ export default function Deck({ deck, checked, setChecked,
 
                 {'Decksize:'.padEnd(10, '⠀')}   {data.length}        
             </div>
+            :
+            null
 
           }
       
