@@ -16,7 +16,10 @@ import playimg from '../../icons/play.svg'
 
 export default function Deck({ deck, checked, setChecked,
                                active, setActive, title, bg, 
-                              pauseIsActive, setPauseIsActive, trigger, ...style }) {
+                              pauseIsActive, setPauseIsActive, trigger, 
+                              changeDeckName,
+                              setChangeDeckNameOpen,
+                              ...style }) {
      
     
   let { data, paused, name }  = deck
@@ -36,6 +39,10 @@ export default function Deck({ deck, checked, setChecked,
     //console.log(cIndex)
     // eslint-disable-next-line 
   },[trigger])
+
+  useEffect(()=>{
+    setChangeDeckNameOpen(!editButtonClicked)
+  },[editButtonClicked])
   
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
   
@@ -94,6 +101,7 @@ export default function Deck({ deck, checked, setChecked,
                 bg={style.background}
                 index={index}
                 paused={paused}
+                data={data}
                 name= {name}
                 active={active}
                 setActive={setActive}
@@ -101,10 +109,12 @@ export default function Deck({ deck, checked, setChecked,
             />
 
                :
-
+        
             <input 
                   ref = {input} 
+                  // changeDeckNameOpen={true}
                   className= 'addToDeckInput'
+                  style={{top: data.length === 0? '-69px': 'default'}}
                   value = {nameOfTopDeck}
                   onChange={(e)=>{
                 
@@ -129,6 +139,7 @@ export default function Deck({ deck, checked, setChecked,
           <ThreeDotsBtn
               name={name}
               text={'deck'}
+              data={data}
               showFromParent={threeDotsMenuOpen}
               editButtonClicked={editButtonClicked}
               setEditButtonClicked={setEditButtonClicked}
@@ -191,7 +202,25 @@ export default function Deck({ deck, checked, setChecked,
 
            {
             data.length === 0?
-              null
+              
+
+            <div 
+                  className='deckPausedContainer'
+                  style={{left: '84px', textAlign: 'center'}}
+              >
+
+               
+
+                  <div 
+                  > 
+                        
+                  Click the + button
+                  </div>
+                  <div>
+                        to add questions to the deck
+                  </div>
+              </div>
+
               :
               <>
           <div
@@ -204,6 +233,7 @@ export default function Deck({ deck, checked, setChecked,
                     type='number' 
                     className='inputStyling' 
                     style={{background: paused? style.background: 'none'}}
+                    disabled
                 >   
 
                 </input>

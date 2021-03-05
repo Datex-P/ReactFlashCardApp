@@ -73,6 +73,7 @@ export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, cl
                       }} 
                   >
                     <img 
+                        className='nonDraggableIcon'
                         src={redCross} 
                         alt='redCross' 
                         style={{
@@ -108,7 +109,7 @@ export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, cl
       
               <div 
                   className='d-flex justify-content-between' 
-                  style={{ width: '62%', top: '-8px', position: 'relative' }}
+                  style={{ width: '57%', top: '-8px', position: 'relative' }}
               >
                   {
                       ['Cancel', 'Ok'].map((el) =>

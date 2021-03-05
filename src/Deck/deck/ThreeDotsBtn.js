@@ -13,14 +13,19 @@ import playimg from '../../icons/play.svg'
 
 
 function ThreeDotsBtn({    
-                        text, name,showFromParent, style, 
+                        text, //this for smth
+                        name,
+                        showFromParent, style, 
                         className, editButtonClicked, nameOfTopDeck, 
                         index, input, threeDotsContainer, setEditButtonClicked, 
                         edit=false,trash=false,pause=false,reset=false,
-                        // paused
+                        editBtnClicked, data,
+                         paused,
                         setNameOfTopDeck=()=>{},
                         editEvent = () => { }, 
                         trashEvent = () => { },
+                        resetEvent = () => { },
+                        pauseEvent = () => {},
                         type
                       }) 
 
@@ -83,7 +88,8 @@ function ThreeDotsBtn({
   
 
   function handlePause () {
-    console.log(index)
+    pauseEvent()
+
     let newDataBase = {...dataBase}
     let savePausedState = !pauseIsActive
     setPauseIsActive(savePausedState)
@@ -100,11 +106,12 @@ function ThreeDotsBtn({
   }
 
 
+  {/* || data.length===0? */}
+  //paused?
   return (
     <>
     {
-      dataBase?.DeckNames?.[index]?.paused?
-      //paused?
+      dataBase?.DeckNames?.[index]?.paused || editBtnClicked ?
     
       null
          :
@@ -135,7 +142,7 @@ function ThreeDotsBtn({
           >
 
             {
-              edit&&
+              edit&& data.length !==0 &&
 
               <button 
                   className='buttonStyling flexAlignCenter outline-none p-1 '
@@ -155,7 +162,8 @@ function ThreeDotsBtn({
             }
 
             {
-              pause&&
+              pause && data.length !==0 &&
+
 
               <button 
                   className='buttonStyling flexAlignCenter outline-none p-1 '
@@ -204,8 +212,7 @@ function ThreeDotsBtn({
               
               <button 
                   className='buttonStyling flexAlignCenter outline-none p-1'
-                  onClick={() => {}
-                  }
+                  onClick={resetEvent}
               >
 
                 <img 

@@ -43,11 +43,14 @@ function Stats({ history}) {
           //editName
             // index={index}
             // paused={paused}
+            showFromParent={!showDeleteFrame}
             text={'stats'}
             className='resetButtonStyling'
             editButtonClicked
-            trashEvent={() => {
+          //  editBtnClicked={editBtnClicked}
+            resetEvent={() => {
               setShowDeleteFrame(true)
+            //  setEditBtnClicked(false)
             }}
 
             reset
@@ -71,11 +74,13 @@ function Stats({ history}) {
               showDeleteFrame &&
               
                 <DeleteCardQuestionBox
+                  resetQuestionText
                   card='card'
                   checked = {checked}
                   setChecked = {setChecked}
+                  showDeleteWindow={showDeleteFrame}
                   show={show}
-                  deleteFrame={() => setShowDeleteFrame(false)}
+                  deleteWindow={() => setShowDeleteFrame(false)}
                   // trashEvent={deleteCurrentCard}
                   onHide={
                     ()=>{ }}
@@ -99,7 +104,11 @@ function Stats({ history}) {
             <ButtonLeftAndRight />
           </div>
 
-          <HourlyBreakdown />
+          <HourlyBreakdown
+            key='1'
+            //can I give a key like that??
+            //https://sentry.io/answers/unique-key-prop/
+           />
 
         </div>
 

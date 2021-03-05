@@ -51,6 +51,7 @@ export default function BasicOrangeWindow({
                     }} 
                 >
                     <img 
+                        className='nonDraggableIcon'
                         src={redCross} 
                         alt='redCross'     
                     />

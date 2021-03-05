@@ -14,6 +14,8 @@ import { withRouter } from 'react-router-dom'
           src={src} 
           alt={alt} 
           style={{ width: '20px' }} 
+          className='nonDraggableIcon'                                              
+
       />
       
       <Nav.Link 

@@ -15,6 +15,8 @@ export default function DeckContainer() {
 
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875']
 
+  const [changeDeckNameOpen, setChangeDeckNameOpen] = useState(false)
+
   const [pauseIsActive, setPauseIsActive] = useState(true)
   const [active, setActive] = useState(0)
   const [decksAreVisible, setDecksAreVisible] = useState(true)
@@ -83,6 +85,9 @@ export default function DeckContainer() {
                             <Deck
                                 key={index}
                                 index={index}
+                                changeDeckNameOpen = {changeDeckNameOpen}
+                                setChangeDeckNameOpen = {setChangeDeckNameOpen}
+                                setDeck
                                 deck={deck}
                                 name={deck.name}
                                 active={false}
@@ -124,6 +129,7 @@ export default function DeckContainer() {
                                 setPauseIsActive={setPauseIsActive}
                                 setActive = {setActive}
                                 transform={`rotate(0deg)`}
+                                setChangeDeckNameOpen={setChangeDeckNameOpen}
                                 zIndex={2}
                                 background = 
 
@@ -145,11 +151,15 @@ export default function DeckContainer() {
                           className='scrollerStyling'
                           onScroll={(event) => {
 
+                            if (!changeDeckNameOpen) {
+
                             let step = (1000 - 220) / ((dataBase.DeckNames).length - 1);
                             let index = Math.floor(event.target.scrollTop / step);
                             handleActive(index);
                             console.log(index + 'actual handle active index');
                             scrollHandler(event);
+                            }
+
                           }}
                       >
                           <div style={{height: '1000px', position: 'absolute', top: '0px', width: '100%'}}

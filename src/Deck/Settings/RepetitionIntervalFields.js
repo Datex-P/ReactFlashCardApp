@@ -8,28 +8,33 @@ export default function RepetitionIntervalFields(
                                       { data: { name, amount, unit }, 
                                       editIsPossible, index, 
                                       userTimePreferences, setUserTimePreferences,
+                                      saveOrEdit
                                       }) 
   {
 
   const [inputNumb, setInputNumb] = useState(amount)
   const [inputText, setInputText] = useState(name)
+  
+  // let value = inputNumb;
 
   function handleInputNumbers(e) {
-    if(e.target.value.length<3){
+
+    
+    if(e.target.value.length<3) {
+
       setInputNumb(e.target.value)
       let newUserTimePreferences = [ ...userTimePreferences ]
       newUserTimePreferences[index].amount = e.target.value
       setUserTimePreferences(newUserTimePreferences)
     }
   }
+
   function checker(e){
     let {value} = e.target;
     let newValue = value.replace(/[^0-9]/g,'')
     if(newValue.length<3){
       setInputNumb(newValue)
     }
-    
-
   }
 
 
@@ -43,9 +48,9 @@ export default function RepetitionIntervalFields(
 
 
   return (
+    
     <div 
         className='p-2 d-flex flex-column justify-content-center align-items-center' 
-        // style={{ flexDirection: 'column', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
       <p 
           className=' border border-dark d-flex justify-content-center' 
@@ -58,36 +63,36 @@ export default function RepetitionIntervalFields(
           </div>
           <form>
 
-
-          <input 
-              className={style.input}
-              type='number'
-              style={{ backgroundColor: 'transparent', outline: 'none', width: '40px', height: '24px', textAlign: 'center'
-                    }} 
-              disabled={!editIsPossible}
-              value={inputNumb}
-              onChange={handleInputNumbers}
-               onInput={checker}
-         
-          />
+              <input 
+                  className={style.input}
+                  type='number'
+                  style={{ backgroundColor: 'transparent', outline: 'none', width: '40px', 
+                  height: '24px', textAlign: 'center', cursor: saveOrEdit? 'pointer': 'default'
+                        }} 
+                  disabled={!editIsPossible}
+                  value={inputNumb}
+                  onChange={handleInputNumbers}
+                  onInput={checker}
+            
+              />
           </form>
 
             {unit}
       </p>
       <form>
-      <input
-        value={inputText}
-        type='text'
-        disabled={!editIsPossible}
-        onChange={handleInputText}
-        className='repetitionIntervalTextFields'
-        maxLength = '8'
-        minLength = '3'
-        style={{
-                textAlign: editIsPossible ? '' : 'center', 
-                cursor: editIsPossible ? 'pointer' : 'default'
-              }}
-      />
+          <input
+            value={inputText}
+            type='text'
+            disabled={!editIsPossible}
+            onChange={handleInputText}
+            className='repetitionIntervalTextFields'
+            maxLength = '8'
+            minLength = '3'
+            style={{
+                    textAlign: editIsPossible ? '' : 'center', 
+                    cursor: editIsPossible ? 'pointer' : 'default'
+                  }}
+          />
       </form>
 
     </div>

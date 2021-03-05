@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 import CutWord from './CutWord'
 
 
-export default function DeckOrCardName({ name, paused, index
+export default function DeckOrCardName({ name, paused, index, data
                                       }) {
 
   const [hovered, setHovered] = useState(false)
@@ -10,6 +10,7 @@ export default function DeckOrCardName({ name, paused, index
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
 
   return (
+
 
     <div   
         onMouseEnter={
@@ -28,8 +29,10 @@ export default function DeckOrCardName({ name, paused, index
             cursor: name.length > 13 && !paused ? 
               'pointer' 
                   : 
-              'default'
-      }}
+              'default',
+            top: data.length === 0? '-66px': '4px',
+            left: data.length === 0? '18px': 'auto'
+        }}
     >
       {
         hovered

@@ -83,7 +83,7 @@ export default function AddQuestionsToDeck({  index, name, background }) {
               </Modal.Title>
 
               <button 
-                  className='redCross' 
+                  className='redCross'
                   onClick={() => setShow(false)
                   }
                 >
@@ -91,6 +91,7 @@ export default function AddQuestionsToDeck({  index, name, background }) {
                     <img 
                         src={redCross} 
                         alt='redCross'                           
+                        className='nonDraggableIcon'
                     />
               </button>
 

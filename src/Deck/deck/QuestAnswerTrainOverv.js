@@ -168,11 +168,11 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
         className='openDeck'
         size='sm'
         style={{
-          opacity: paused ? '0' : '1',
-          cursor: paused ? 'default' : 'pointer'
+          opacity: paused || data.length === 0 ? '0' : '1',
+          cursor: paused || data.length === 0 ? 'default' : 'pointer'
         }}
         onClick={
-          paused ?
+          paused  ?
             null
             :
             generateRandom
@@ -199,6 +199,7 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
 
               text={'card'}
               editButtonClicked={true}
+              editBtnClicked={editBtnClicked}
               className='threeDotsInQuestionAnswerStyling'
               threeDotsContainer={{ position: 'default' }}
               paused={paused}
@@ -215,6 +216,7 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
 
               pauseEvent={() => {
                 // handlePause()
+                setShowDeleteWindow(true)
               }}
 
               trashEvent={() => {
@@ -230,8 +232,9 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
                   // setShowAnswerBtn(true)
                   // }
                   :
-                
+                   setShowRepeatBtn(false)
                   setShowDeleteWindow(true)
+                   setShowAnswerBtn(true)
               }}
             />
           }
@@ -398,6 +401,7 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
                   setShowAnswerBtn={setShowAnswerBtn}
                   setShowRepeatBtn={setShowRepeatBtn}
                   trashEvent={deleteCurrentCard}
+                  showDeleteWindow={showDeleteWindow}
                   deleteWindow={() =>
                     setShowDeleteWindow(false)
                   }

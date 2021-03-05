@@ -31,6 +31,8 @@ export default function Hexagons({ idx, editHex, setEditHex }) {
       {
         <img
           style={{ cursor: editHex ? 'default' : 'pointer' }}
+      
+          draggable={false}
           src={
               idx <= dataBase.userPreferences.days ? 
               

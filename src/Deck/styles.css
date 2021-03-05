@@ -126,7 +126,6 @@ input[type="checkbox"] {
   border: none;
   outline: none;
   text-align: center;
-  cursor: pointer;
 }
 
 .myDiv{
@@ -136,10 +135,10 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU0
 }
 
 
-input[type=number]  {
+input[type=number]:not(.inputStyling)  {
   -moz-appearance:textfield; 
   text-align: center;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
  
  input::-webkit-outer-spin-button,
@@ -147,6 +146,18 @@ input[type=number]  {
 -webkit-appearance: auto;
 opacity: 1;
 cursor: pointer;
+}
+
+.nonDraggableIcon {
+ 
+user-drag: none;  
+user-select: none;
+-moz-user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+-ms-user-select: none;
+
+-webkit-user-drag: none;
 }
 
 
@@ -584,6 +595,12 @@ border-radius: 5px;
   color: white;
 }
 
+.modal {
+  padding: 0px !important
+}
+
+
+
 .modal-open .modal{
   overflow-y: hidden !important;
 }
@@ -781,6 +798,7 @@ border-bottom-left-radius: calc(.3rem - 1px);
   overflow-x: hidden; 
   position: absolute; 
   top: 65px;
+  cursor: pointer;
 }
 
 .containerStyling {
@@ -841,7 +859,7 @@ border-bottom-left-radius: calc(.3rem - 1px);
     font-size: 17px; 
     margin-top: 25px;
     text-align: center; 
-    margin-bottom: 9px;
+    margin-bottom: 7px;
   }
 
   .repetitionIntervalTextFields {

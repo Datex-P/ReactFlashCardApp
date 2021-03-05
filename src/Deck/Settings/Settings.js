@@ -83,6 +83,7 @@ function Settings({ history }) {
                       key={k} 
                       index={k} 
                       data={col} 
+                      saveOrEdit={saveOrEdit}
                       editIsPossible={editIsPossible} 
                       userTimePreferences={userTimePreferences} 
                       setUserTimePreferences={setUserTimePreferences} 
@@ -97,6 +98,7 @@ function Settings({ history }) {
                 <img
                     src={saveOrEdit ? save : edit}
                     alt={saveOrEdit ? 'save' : 'edit'}
+                    className= 'nonDraggableIcon'
                     style={{ outline: 'none' }}
                     onClick={() => {
                         setEditIsPossible(!editIsPossible)
@@ -140,6 +142,7 @@ function Settings({ history }) {
           src={editHex ? edit : save}
           alt={saveOrEditGoal ? 'edit' : 'save'}
           style={{ outline: 'none' }}
+          className= 'nonDraggableIcon'
           
           onClick={() => {
             setSaveOrEditGoal(!saveOrEditGoal)

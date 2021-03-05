@@ -74,7 +74,7 @@ export default function MenuContainer() {
                               }}
                   >
                       <div 
-                          className='menuStyling' 
+                          className='menuStyling nonDraggableIcon' 
                           onClick={()=>{setShow(false)}}
                       >
                           <Icons 
@@ -85,6 +85,7 @@ export default function MenuContainer() {
                                       href: 'stats', 
                                       style: {  width: 'calc(100% / 3)',  padding: '3px', paddingLeft: '15px' 
                                              } 
+                                        
                                       },
                                       {
                                         src: settingsIcon, 

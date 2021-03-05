@@ -1,7 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import {Context} from '../../Context'
 import { Modal } from 'react-bootstrap'
 import '../styles.css'
+import resetimg from '../../icons/reset.svg'
 
 import questionMark from '../../icons/questionmark.svg'
 import flashcards from '../../icons/flashcards.svg'
@@ -10,8 +11,9 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
                                                 setShowAnswerBtn,
                                                 setShowRepeatBtn,
                                                 setEditBtnClicked,
+                                                showDeleteWindow,
                                                 deleteCurrentCard=()=>{},
-                                                showDeleteWindow
+                                                resetQuestionText=false
                                               }) 
   
 {
@@ -61,15 +63,31 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
                   style={{height:'100%', width: '100%'}}
                 >
                   <div>
-             
-                      <img 
-                          src={flashcards} 
-                          className='d-flex justify-content-center align-items-center flashCardsStyling' 
-                          alt='flashcards'                         
-                      />
+                      {
+                        resetQuestionText? 
+                          <img 
+                              src={resetimg} 
+                              className='d-flex justify-content-center align-items-center flashCardsStyling' 
+                              alt='reset'                         
+                          />
+                          :
+                          <img 
+                              src={flashcards} 
+                              className='d-flex justify-content-center align-items-center flashCardsStyling' 
+                              alt='flashcards'                         
+                          />
+
+                      }
                   </div>
 
-                  <div>  Delete {card} </div>
+                  <div>  
+                      {
+                        resetQuestionText? 
+                                          'Reset progress'
+                                            :
+                                          `Delete ${card}`
+                      }
+                  </div>
               </div>
             </Modal.Title>
         </Modal.Header>
@@ -78,8 +96,11 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
             className='d-flex align-items-center justify-content-center' 
         >
 
-            Do you want to delete this {card} ?
-
+            {
+              resetQuestionText?  'Do you want to reset the stats?'
+                                       : 
+                                  `Do you want to delete this ${card} ?` 
+            }
         </Modal.Body>
 
         <Modal.Footer>
