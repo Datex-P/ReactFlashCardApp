@@ -3,12 +3,12 @@ import React from 'react'
 import './LittleComponents/styles.css'
 import MenuContainer from './Deck/MenuContainer'
 
-export default function NavBar() {
+export default function NavBar({editBtnClicked}) {
   
   
   return (
     <>   
-      <MenuContainer/> 
+      <MenuContainer editBtnClicked={editBtnClicked}/> 
     </>
   )
 }

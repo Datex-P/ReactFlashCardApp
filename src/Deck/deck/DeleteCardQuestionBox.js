@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {Context} from '../../Context'
 import { Modal } from 'react-bootstrap'
 import '../styles.css'
@@ -8,17 +8,29 @@ import questionMark from '../../icons/questionmark.svg'
 import flashcards from '../../icons/flashcards.svg'
 
 export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent, 
-                                                setShowAnswerBtn,
-                                                setShowRepeatBtn,
-                                                setEditBtnClicked,
+                                                setShowAnswerBtn=()=>{},
+                                                setShowRepeatBtn=()=>{},
+                                                setEditBtnClicked=()=>{},
                                                 showDeleteWindow,
                                                 deleteCurrentCard=()=>{},
-                                                resetQuestionText=false
+                                                resetQuestionText=false,
+                                               // index,
+                                               // setIndex,
+                                                //name
                                               }) 
   
 {
 
   const { dataBase, setDataBase} = useContext(Context)
+
+  // useEffect(()=>{
+  //   let cIndex = dataBase.DeckNames.findIndex(item=>item.name === name)
+  //   setIndex(cIndex)
+  //   //console.log(cIndex)
+  //   // eslint-disable-next-line 
+  // },[trigger])
+
+
 
 
   function handleCheckbox () {
@@ -123,10 +135,10 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
                                   trashEvent()
                                   deleteCurrentCard()
                                   setShowRepeatBtn(false)
-                                  setShowAnswerBtn(true)
+                                   setShowAnswerBtn(true)
                                   setEditBtnClicked(false)
+                               //   setIndex(0)
                                 }
-
                                 deleteWindow()
                               }}
                           >

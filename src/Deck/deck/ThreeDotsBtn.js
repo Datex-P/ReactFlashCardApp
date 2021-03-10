@@ -16,10 +16,13 @@ function ThreeDotsBtn({
                         text, //this for smth
                         name,
                         showFromParent, style, 
-                        className, editButtonClicked, nameOfTopDeck, 
+                        className, 
+                        editButtonClicked,  //active when editButton next to DeckName is clicked
+                        nameOfTopDeck, 
                         index, input, threeDotsContainer, setEditButtonClicked, 
                         edit=false,trash=false,pause=false,reset=false,
-                        editBtnClicked, data,
+                        editBtnClicked, //is the editBtn in the main Question/Answer Overview
+                        data,
                          paused,
                         setNameOfTopDeck=()=>{},
                         editEvent = () => { }, 
@@ -80,7 +83,7 @@ function ThreeDotsBtn({
     }
     // !editName && setShow(false) 
     // other way of writing it
-    if (!editButtonClicked) {
+    if (!editButtonClicked) { //open input field when deckname is triggered
       // setThreeDotsOpen(false)
       handleDeckname()
     }
@@ -106,8 +109,6 @@ function ThreeDotsBtn({
   }
 
 
-  {/* || data.length===0? */}
-  //paused?
   return (
     <>
     {
@@ -142,7 +143,8 @@ function ThreeDotsBtn({
           >
 
             {
-              edit&& data.length !==0 &&
+              edit&& 
+              data?.length !==0 &&
 
               <button 
                   className='buttonStyling flexAlignCenter outline-none p-1 '
@@ -162,7 +164,8 @@ function ThreeDotsBtn({
             }
 
             {
-              pause && data.length !==0 &&
+              pause && 
+              data?.length !==0 &&
 
 
               <button 

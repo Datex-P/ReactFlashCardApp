@@ -880,7 +880,15 @@ border-bottom-left-radius: calc(.3rem - 1px);
     top: 630px; 
     width: 210px; 
     outline: none !important;
+
+    background-color: grey !important;
+    color: white !important;
+    border-radius: 5px !important;
+    border: none !important;
   }
+
+
+  
 
   .okCancelButtonStyling {
     cursor: pointer;

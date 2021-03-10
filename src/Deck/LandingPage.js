@@ -15,8 +15,8 @@ export default function DeckContainer() {
 
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875']
 
-  const [changeDeckNameOpen, setChangeDeckNameOpen] = useState(false)
-
+  const [changeDeckNameOpen, setChangeDeckNameOpen] = useState(false) //input field to change deckname is open
+  const [editButtonClicked, setEditButtonClicked] = useState(true); 
   const [pauseIsActive, setPauseIsActive] = useState(true)
   const [active, setActive] = useState(0)
   const [decksAreVisible, setDecksAreVisible] = useState(true)
@@ -64,7 +64,7 @@ export default function DeckContainer() {
     !spinnerIsVisible && dataBase ?
 
       <>
-        <NavBar />
+        <NavBar editButtonClicked={editButtonClicked}/>
         <Container 
             className='align-items-center containerStyling' 
             style={{ 
@@ -87,6 +87,8 @@ export default function DeckContainer() {
                                 index={index}
                                 changeDeckNameOpen = {changeDeckNameOpen}
                                 setChangeDeckNameOpen = {setChangeDeckNameOpen}
+                                editButtonClicked={editButtonClicked}
+                                setEditButtonClicked={setEditButtonClicked}
                                 setDeck
                                 deck={deck}
                                 name={deck.name}
@@ -121,6 +123,8 @@ export default function DeckContainer() {
                             <Deck
                                 key={index}
                                 index={index}
+                                editButtonClicked={editButtonClicked}
+                                setEditButtonClicked={setEditButtonClicked}
                                 deck={deck}
                                 name={deck.name}
                                 active={true}
@@ -174,11 +178,17 @@ export default function DeckContainer() {
           <Row  className="justify-content-center"
           >
               <button
-                  className='generalButtonStyling createDeckButtonStyling'
+                  className='createDeckButtonStyling'
+                  style={{cursor: !editButtonClicked? 'default': 'pointer'}}
                   onClick={
                     () => {
-                    setAddNewDeckWindow(true)
+                      if (!editButtonClicked) {  //editButtonClicked is set to true by default
+
+                      } else{
+
+                    setAddNewDeckWindow(true) //open the pop up to add a new deck
                     setDecksAreVisible(false)
+                      }
                   }}
               >
 

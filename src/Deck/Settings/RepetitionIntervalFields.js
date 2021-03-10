@@ -15,8 +15,6 @@ export default function RepetitionIntervalFields(
   const [inputNumb, setInputNumb] = useState(amount)
   const [inputText, setInputText] = useState(name)
   
-  // let value = inputNumb;
-
   function handleInputNumbers(e) {
 
     

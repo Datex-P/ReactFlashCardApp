@@ -10,7 +10,9 @@ import SaveAndDiscard from './CardBodyParts/SaveAndDiscard'
 import RepeatBtn from './CardBodyParts/RepeatBtn'
 
 
-export default function QuestAnswerTrainOverv({ name, data, index, paused, 
+export default function QuestAnswerTrainOverv({ name, data, 
+                                                index, paused, 
+                                                editButtonClicked //activated when change deckname field is open
 }) {
 
   // const [threeDotsOpen, setThreeDotsOpen] = useState(showFromParent);
@@ -168,11 +170,11 @@ export default function QuestAnswerTrainOverv({ name, data, index, paused,
         className='openDeck'
         size='sm'
         style={{
-          opacity: paused || data.length === 0 ? '0' : '1',
-          cursor: paused || data.length === 0 ? 'default' : 'pointer'
+          opacity: paused || data.length === 0 ? '0' : '1',   //open deck button is not visible when length is zero
+          cursor: paused || data.length === 0 || !editButtonClicked? 'default' : 'pointer'
         }}
         onClick={
-          paused  ?
+          paused  || !editButtonClicked? //when edit button is clicked or deck is paused, the question/answer view does not open, by default this button is true
             null
             :
             generateRandom

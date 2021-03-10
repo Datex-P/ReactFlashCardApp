@@ -43,7 +43,7 @@ function Stats({ history}) {
           //editName
             // index={index}
             // paused={paused}
-            showFromParent={!showDeleteFrame}
+            showFromParent={showDeleteFrame}
             text={'stats'}
             className='resetButtonStyling'
             editButtonClicked
@@ -106,8 +106,6 @@ function Stats({ history}) {
 
           <HourlyBreakdown
             key='1'
-            //can I give a key like that??
-            //https://sentry.io/answers/unique-key-prop/
            />
 
         </div>

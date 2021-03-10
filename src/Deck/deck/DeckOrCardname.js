@@ -30,8 +30,10 @@ export default function DeckOrCardName({ name, paused, index, data
               'pointer' 
                   : 
               'default',
-            top: data.length === 0? '-66px': '4px',
-            left: data.length === 0? '18px': 'auto'
+          //  top: '4px',
+          //  left: 'auto'
+           top: data.length === 0? '-66px': '4px',
+           left: data.length === 0? '18px': 'auto'
         }}
     >
       {

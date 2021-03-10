@@ -19,16 +19,18 @@ export default function Deck({ deck, checked, setChecked,
                               pauseIsActive, setPauseIsActive, trigger, 
                               changeDeckName,
                               setChangeDeckNameOpen,
+                              editButtonClicked,
+                              setEditButtonClicked,
                               ...style }) {
      
     
   let { data, paused, name }  = deck
   
-  const [editButtonClicked, setEditButtonClicked] = useState(true); 
+ //const [editButtonClicked, setEditButtonClicked] = useState(true); 
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name);
   const [threeDotsMenuOpen, setThreeDotsMenuOpen] = useState(false);
   
-  const [showDeleteWindow, setShowDeleteWindow] = useState(true);
+  const [showDeleteWindow, setShowDeleteWindow] = useState(true); //if true and triggered the delete window with yes and no button is shown
   const [trash, setTrash] = useState(false);
   const { dataBase, setDataBase} = useContext(Context)
   const [index, setIndex] = useState(0);
@@ -68,6 +70,7 @@ export default function Deck({ deck, checked, setChecked,
     let newDataBase = {...dataBase}
     newDataBase.DeckNames.splice(index,1);
     setDataBase(newDataBase)
+    setActive(0)
   }
 
  
@@ -133,8 +136,7 @@ export default function Deck({ deck, checked, setChecked,
             />
 
          }
-
-        
+     
 
           <ThreeDotsBtn
               name={name}
@@ -186,6 +188,8 @@ export default function Deck({ deck, checked, setChecked,
                 <DeleteCardQuestionBox
                   card='deck'
                   threeDotsMenuOpen={threeDotsMenuOpen}
+                  index={index}
+                  setIndex={setIndex}
                   deleteWindow={() => setShowDeleteWindow(false)}
                   trashEvent={()=>{
 
@@ -214,7 +218,8 @@ export default function Deck({ deck, checked, setChecked,
                   <div 
                   > 
                         
-                  Click the + button
+                  Click the <span style={{height: '25px', width: '25px', border: '1px solid black'
+                  ,borderRadius: '50%'}}>+</span> button
                   </div>
                   <div>
                         to add questions to the deck
@@ -311,6 +316,7 @@ export default function Deck({ deck, checked, setChecked,
         </div>
 
         <QuestAnswerTrainOverv 
+            editButtonClicked={editButtonClicked}
             name={name} 
             index={index} 
             data={data} 
@@ -321,6 +327,7 @@ export default function Deck({ deck, checked, setChecked,
           active  && 
           
             <AddQuestionsToDeck 
+                editButtonClicked={editButtonClicked}
                 background={style.background} 
                 name= {name} 
                 index= {index} 

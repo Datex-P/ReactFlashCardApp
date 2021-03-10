@@ -3,11 +3,9 @@ import React, { useState, useContext, useEffect} from 'react';
 import {Modal, FormControl, Alert } from 'react-bootstrap'
 import {Context} from '../../Context';
 import '../styles.css'
-
 import redCross from '../../icons/redCross.svg'
-import { HashRouter } from 'react-router-dom';
 
-export default function AddQuestionsToDeck({  index, name, background }) {
+export default function AddQuestionsToDeck({  index, name, background, editButtonClicked }) {
   
   const [show, setShow] = useState(false);
   const [card, setCard] = useState({question:'', answer:''})
@@ -16,13 +14,26 @@ export default function AddQuestionsToDeck({  index, name, background }) {
   const {dataBase, setDataBase}= useContext(Context);
 
   function addToDeck(){
+
+    // if (card.question.trim().length === 0 || card.answer.trim().length === 0) {
+    //   alert('error')
+    // } else {
+
+     console.log(card.question.trim().length, 'cardQuestionLength')
+
+      console.log(card.question.length)
     let newDataBase = {...dataBase}
       newDataBase.DeckNames[index].data.push(card)
     //  newDataBase.DeckNames[index].push(card)
     setDataBase(newDataBase)
-    setCard({question:'', answer:''})
     setNewCardAdded(true)
- 
+    if (card.question.trim().length !== 0  && card.answer.trim().length !== 0) {
+     // setCard({question:'', answer:''})
+     setTimeout(()=>{setCard({question:'', answer:''})},650) 
+    }
+
+    
+   // }
   }
   
   function changeHandler (e) {
@@ -43,17 +54,19 @@ export default function AddQuestionsToDeck({  index, name, background }) {
   
 
   return (
+   
+    
     
     <div>
         <button 
             className={'addNewCardsButton outline-none'}
             style= {{
               background: dataBase.DeckNames[index].paused? background: null,
-              cursor: dataBase.DeckNames[index].paused? 'default': 'pointer'
+              cursor: dataBase.DeckNames[index].paused || !editButtonClicked? 'default': 'pointer'
               }}
         
             onClick={
-                dataBase.DeckNames[index].paused?
+                dataBase.DeckNames[index].paused || !editButtonClicked?
                 
                 null
                 :            
@@ -124,11 +137,22 @@ export default function AddQuestionsToDeck({  index, name, background }) {
                           >
 
                               <Alert 
-                                  variant="success"
-                                  style={{width: '145px', height: '35px'}}
+                                //when question or answer is empty, show a warning message
+                                  variant={card.question.trim().length !==0 && card.answer.trim().length !==0? "success" : "danger"}
+                                  style={{width: card.question.trim().length !==0 && card.answer.trim().length !==0? '180px' : '100px', 
+                                           height: '35px'}}
                               >
-
-                                  Card added to deck.
+                                {
+                                  card.question.trim().length !==0 && card.answer.trim().length !==0?
+                                 
+                                  <div style={{width: '180px'}}>
+                                   Card added to Deck.                                                                    
+                                  </div>
+                                  : 
+                                  <div style={{width: '120px', height: '35px'}}>
+                                    Input needed.
+                                  </div>
+                                }
                               </Alert>
 
                           </div>
@@ -170,5 +194,6 @@ export default function AddQuestionsToDeck({  index, name, background }) {
       </Modal>
       
     </div>
+
   )
 }
