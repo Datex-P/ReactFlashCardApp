@@ -45,7 +45,6 @@ export default function AddQuestionsToDeck({  index, name, background, editButto
     //setCard({...card,[name]:value}) would be another way of writing it
   }
   
-//make method when adding was not successful
 
   useEffect(() => {
     
@@ -61,12 +60,12 @@ export default function AddQuestionsToDeck({  index, name, background, editButto
         <button 
             className={'addNewCardsButton outline-none'}
             style= {{
-              background: dataBase.DeckNames[index].paused? background: null,
-              cursor: dataBase.DeckNames[index].paused || !editButtonClicked? 'default': 'pointer'
+              background: dataBase.DeckNames[index]?.paused? background: null,
+              cursor: dataBase.DeckNames[index]?.paused || !editButtonClicked? 'default': 'pointer'
               }}
         
             onClick={
-                dataBase.DeckNames[index].paused || !editButtonClicked?
+                dataBase.DeckNames[index]?.paused || !editButtonClicked?
                 
                 null
                 :            
@@ -139,13 +138,13 @@ export default function AddQuestionsToDeck({  index, name, background, editButto
                               <Alert 
                                 //when question or answer is empty, show a warning message
                                   variant={card.question.trim().length !==0 && card.answer.trim().length !==0? "success" : "danger"}
-                                  style={{width: card.question.trim().length !==0 && card.answer.trim().length !==0? '180px' : '100px', 
+                                  style={{width: card.question.trim().length !==0 && card.answer.trim().length !==0? '140px' : '100px', 
                                            height: '35px'}}
                               >
                                 {
                                   card.question.trim().length !==0 && card.answer.trim().length !==0?
                                  
-                                  <div style={{width: '180px'}}>
+                                  <div style={{width: '140px'}}>
                                    Card added to Deck.                                                                    
                                   </div>
                                   : 

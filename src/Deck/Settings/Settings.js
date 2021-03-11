@@ -175,6 +175,7 @@ function Settings({ history }) {
                 type='radio'
                 // title = `Change background color of main menu to ${comp}.`
                 value={comp}
+                checked   //how to combine checked and handleColor accurately?
                 onChange={handleColor}
               />
               <label className='mb-0'>

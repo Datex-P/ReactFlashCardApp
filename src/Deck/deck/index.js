@@ -26,7 +26,6 @@ export default function Deck({ deck, checked, setChecked,
     
   let { data, paused, name }  = deck
   
- //const [editButtonClicked, setEditButtonClicked] = useState(true); 
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name);
   const [threeDotsMenuOpen, setThreeDotsMenuOpen] = useState(false);
   
@@ -43,7 +42,7 @@ export default function Deck({ deck, checked, setChecked,
   },[trigger])
 
   useEffect(()=>{
-    setChangeDeckNameOpen(!editButtonClicked)
+    setChangeDeckNameOpen(!editButtonClicked) //when input field of deck name is open it is set to false
   },[editButtonClicked])
   
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
@@ -70,7 +69,7 @@ export default function Deck({ deck, checked, setChecked,
     let newDataBase = {...dataBase}
     newDataBase.DeckNames.splice(index,1);
     setDataBase(newDataBase)
-    setActive(0)
+    setActive(1)
   }
 
  
@@ -101,7 +100,7 @@ export default function Deck({ deck, checked, setChecked,
          editButtonClicked?
 
             <DeckOrCardName 
-                bg={style.background}
+                bg={bg}
                 index={index}
                 paused={paused}
                 data={data}
@@ -218,8 +217,9 @@ export default function Deck({ deck, checked, setChecked,
                   <div 
                   > 
                         
-                  Click the <span style={{height: '25px', width: '25px', border: '1px solid black'
-                  ,borderRadius: '50%'}}>+</span> button
+                  Click the <span className= 'plusInfoMessage'
+                            >+
+                            </span> button
                   </div>
                   <div>
                         to add questions to the deck
@@ -324,7 +324,8 @@ export default function Deck({ deck, checked, setChecked,
         />
         
         {
-          active  && 
+         Number(active) === 1 &&
+         // active || active ??
           
             <AddQuestionsToDeck 
                 editButtonClicked={editButtonClicked}

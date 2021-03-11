@@ -171,7 +171,9 @@ export default function QuestAnswerTrainOverv({ name, data,
         size='sm'
         style={{
           opacity: paused || data.length === 0 ? '0' : '1',   //open deck button is not visible when length is zero
-          cursor: paused || data.length === 0 || !editButtonClicked? 'default' : 'pointer'
+          cursor: paused || data.length === 0 || !editButtonClicked? 'default' : 'pointer',
+          //backgroundColor: !editButtonClicked? "rgb(108, 117, 125) !important" : 'blue'
+          //warum funktioniert die obige Zeile nicht, besser mit refs machen??
         }}
         onClick={
           paused  || !editButtonClicked? //when edit button is clicked or deck is paused, the question/answer view does not open, by default this button is true

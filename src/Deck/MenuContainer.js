@@ -10,11 +10,13 @@ import statsIcon from '../icons/stats.svg';
 import logoutIcon from '../icons/logout.svg';
 
 
-export default function MenuContainer() {
+export default function MenuContainer(
+    {editButtonClicked} //set to false when editButton is not clicked gets activated when editButton is clicked
+    ) {
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false); //opens the Menu when set to true
   const { dataBase,styles } = useContext(Context)
-  const handleClose = () => setShow(false);
+  const handleClose = () => setShow(false); // closes the Menu when handleclos is triggered
 
   return (
     <div 
@@ -25,13 +27,19 @@ export default function MenuContainer() {
                 }}
     >
         <div className='menu flexColumnAlignCenter p-3'
+             style= {{cursor: !editButtonClicked? 'default': 'pointer'}} //cursor is default when edit input field is activated
         >
             <div style={{fontSize: '18px'}}>
                     Menu
             </div>
             <div 
                 className='menuContainer flexColumnAlignCenter' 
-                onClick={() => setShow(!show)}
+                onClick={() => 
+                 !editButtonClicked?
+                    null
+                    :
+                setShow(!show)
+                }
             >
                 <div 
                     className={'menuIcon ' + (show ? 'transPlus' : ' ')} 
@@ -58,7 +66,7 @@ export default function MenuContainer() {
         </div>
 
         {
-          show &&
+          show && editButtonClicked?
 
           <>
               <Modal 
@@ -109,6 +117,8 @@ export default function MenuContainer() {
                   </Modal.Body>
               </Modal>
           </>
+          :
+          null
         }
     </div>
   )

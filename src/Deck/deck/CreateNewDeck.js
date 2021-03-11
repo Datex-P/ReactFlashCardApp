@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useRef, useEffect} from 'react'
 import { Modal } from 'react-bootstrap'
 import { Context } from '../../Context'//step 4.1 import context instance
 
@@ -9,6 +9,16 @@ export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, cl
 {
   const { dataBase, setDataBase } = useContext(Context)
   const [inputField, setInputField] = useState('')
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (addNewDeckWindow) {
+      inputRef.current.focus();
+    }
+  }, [addNewDeckWindow]);
+
+
 
   function addNewDeckName() {
 
@@ -91,12 +101,16 @@ export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, cl
                     className='createNewDeckInputField'
                     minLength='3'
                     maxLength='25'    
+                    ref={inputRef}
                     onChange={ event => setInputField(event.target.value)
                     }  
                 >           
                 </input>
 
-                <select style={{ width: '96%', height: '26px', borderRadius: '5px', paddingLeft: '3px', outline: 'none' }}
+                <select style={{
+                                 width: '96%', height: '26px', borderRadius: '5px', 
+                                paddingLeft: '3px', outline: 'none', cursor: 'pointer' 
+                                }}
                 >
                   <option>option 1</option>
                   <option>option 2</option>

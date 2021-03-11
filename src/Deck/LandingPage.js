@@ -16,7 +16,7 @@ export default function DeckContainer() {
   let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875']
 
   const [changeDeckNameOpen, setChangeDeckNameOpen] = useState(false) //input field to change deckname is open
-  const [editButtonClicked, setEditButtonClicked] = useState(true); 
+  const [editButtonClicked, setEditButtonClicked] = useState(true); //active when editButton next to DeckName is clicked
   const [pauseIsActive, setPauseIsActive] = useState(true)
   const [active, setActive] = useState(0)
   const [decksAreVisible, setDecksAreVisible] = useState(true)
@@ -99,6 +99,15 @@ export default function DeckContainer() {
                                           }
                                 setActive = {setActive}
                                 zIndex={0}
+                                bg={
+                                  colors.map((i,k,ar)=>{
+                                  if(active===k){
+                                    return ar[ar.length%(k||1)]
+                                  }else{
+                                    return i
+                                  }
+                                })
+                                }
                                 background = {
                                   deck.paused ? 
                                   

@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 import CutWord from './CutWord'
 
 
-export default function DeckOrCardName({ name, paused, index, data
+export default function DeckOrCardName({ name, paused, index, data,bg
                                       }) {
 
   const [hovered, setHovered] = useState(false)
@@ -25,7 +25,7 @@ export default function DeckOrCardName({ name, paused, index, data
     
         className='deckOrCardNameContainer'
         style={{
-            background: colors[index % 5],
+            background: bg,
             cursor: name.length > 13 && !paused ? 
               'pointer' 
                   : 
