@@ -108,7 +108,7 @@ export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, cl
                 </input>
 
                 <select style={{
-                                 width: '96%', height: '26px', borderRadius: '5px', 
+                                 width: '86%', height: '26px', borderRadius: '5px', 
                                 paddingLeft: '3px', outline: 'none', cursor: 'pointer' 
                                 }}
                 >
@@ -130,6 +130,7 @@ export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, cl
                       
                         <button
                             className='generalButtonStyling okCancelButtonStyling'
+                            key= {el}
                             onClick={() => {
 
                               el === 'Cancel' ?

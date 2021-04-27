@@ -52,7 +52,7 @@ export default function RepetitionIntervalFields(
     >
       <p 
           className=' border border-dark d-flex justify-content-center' 
-          style={{borderRadius: '5px', width: '85px'}}
+          style={{borderRadius: '5px', width: '79 px'}}
       >
           <div style={{ marginRight: '4px' }}
           >

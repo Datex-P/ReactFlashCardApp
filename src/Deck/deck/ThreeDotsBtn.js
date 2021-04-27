@@ -173,16 +173,16 @@ function ThreeDotsBtn({
                   onClick={handlePause}
                   style={{
                           borderTop: '1px solid black', borderBottom: '1px solid black' ,
-                          borderLeft: dataBase.DeckNames[index].paused? '1px solid black': null,
-                          borderRight: dataBase.DeckNames[index].paused? '1px solid black': null,
-                          borderRadius: dataBase.DeckNames[index].paused? '5px': null
+                          borderLeft: dataBase.DeckNames[index]?.paused? '1px solid black': null,
+                          borderRight: dataBase.DeckNames[index]?.paused? '1px solid black': null,
+                          borderRadius: dataBase.DeckNames[index]?.paused? '5px': null
                         }}
               >
 
                   <img 
                       alt='pause' 
                       style={{ marginRight: '3px' }} 
-                      src={ !dataBase.DeckNames[index].paused? pauseimg: playimg }  
+                      src={ !dataBase.DeckNames[index]?.paused? pauseimg: playimg }  
                   />
 
                   {text}

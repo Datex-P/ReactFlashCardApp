@@ -72,7 +72,7 @@ function Settings({ history }) {
       >
           <div 
               className='d-flex justify-content-around align-items-center' 
-              style={{ width: '325px' }}
+              style={{ width: '299px' }}
           >
               {
                 dataBase &&
@@ -136,7 +136,7 @@ function Settings({ history }) {
           )
         }
       </div>
-      <div style={{ position: 'absolute', top: '238px', right: '66px', cursor: 'pointer' }}
+      <div style={{ position: 'absolute', top: '232px', right: '50px', cursor: 'pointer' }}
       >
         <img
           src={editHex ? edit : save}

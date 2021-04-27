@@ -12,7 +12,7 @@ export default function DeckOrCardName({ name, paused, index, data,bg
   return (
 
 
-    <div   
+    <div        
         onMouseEnter={
           name.length > 13 && !paused ? 
 
@@ -32,8 +32,10 @@ export default function DeckOrCardName({ name, paused, index, data,bg
               'default',
           //  top: '4px',
           //  left: 'auto'
-           top: data.length === 0? '-66px': '4px',
-           left: data.length === 0? '18px': 'auto'
+          top: '-21px',
+          left: '5px'
+           //top: data.length === 0? '-66px': '-19px', needed for when deckname is longer than 17 letters
+           //left: data.length === 0? '0px': 'auto'
         }}
     >
       {
@@ -42,10 +44,11 @@ export default function DeckOrCardName({ name, paused, index, data,bg
           <div
               className='hoveredDeckOrCardName'
               style={{
-                  top: name.length > 17 && !paused ? 
-                      '-13px' 
-                        : 
-                      '0px',
+                  // top: name.length > 17 && !paused ? //needed for when deckname is longer than 17 letters
+                  //     '-13px' 
+                  //       : 
+                  //     '-19px',
+                  top: '-21px',
                   background: colors[index % 5],
                   cursor: name.length > 15 && !paused ? 
                       'pointer' 

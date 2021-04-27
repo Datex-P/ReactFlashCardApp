@@ -13,9 +13,9 @@ export default function App() {
 
     <Router>
     
-      <LandingPage />
+      <LandingPage /> {/*the main part of the application*/}
 
-      <Switch>
+      <Switch>               {/*the menu container in the overview*/}
           <Route path='/stats'>
               <Stats />
           </Route>

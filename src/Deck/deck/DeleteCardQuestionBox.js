@@ -14,6 +14,7 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
                                                 showDeleteWindow,
                                                 deleteCurrentCard=()=>{},
                                                 resetQuestionText=false,
+                                                showMessageAgain= false,
                                                // index,
                                                // setIndex,
                                                 //name
@@ -129,6 +130,7 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
                     {
                       ['No', 'Yes'].map(el =>
                           <div 
+                          key={el}
                               className='deleteContainerNoAndYes d-flex justify-content-center align-items-center'
                               onClick={() => {
                                 if (el === 'Yes') {
@@ -152,6 +154,7 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
 
         </Modal.Footer>
 
+      {!showMessageAgain?
 
       <div 
           className='d-flex justify-content-center'
@@ -176,6 +179,9 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
             Don't show message again
           </div>
       </div>
+      : 
+      null
+      }
 
       </Modal>
   );

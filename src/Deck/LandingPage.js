@@ -79,7 +79,7 @@ export default function DeckContainer() {
                   <div className='firstRowStyling'
                   
                   >
-                      <div>
+                      <div style={{position: 'absolute', left: '10px'}}>
                           {
                             dataBase.DeckNames.filter((i,k)=>active!==k).map((deck, index) =>
                             <Deck
@@ -109,11 +109,11 @@ export default function DeckContainer() {
                                 })
                                 }
                                 background = {
-                                  deck.paused ? 
+                                //   deck.paused ? 
                                   
-                                `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
-                                ${colors[index % colors.length]} repeat`
-                                :
+                                // `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
+                                // ${colors[index % colors.length]} repeat`
+                                // :
                                 colors.map((i,k,ar)=>{
                                   if(active===k){
                                     return ar[ar.length%(k||1)]
@@ -147,11 +147,11 @@ export default function DeckContainer() {
                                 background = 
 
                                 {
-                                   deck.paused ? 
+                                //    deck.paused ? 
 
-                                `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
-                                ${colors[active % colors.length]} repeat`
-                                :
+                                // `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) 
+                                // ${colors[active % colors.length]} repeat`
+                                // :
                                 colors[active % colors.length]
                                 }
                           />     
@@ -186,6 +186,7 @@ export default function DeckContainer() {
 
           <Row  className="justify-content-center"
           >
+           
               <button
                   className='createDeckButtonStyling'
                   style={{cursor: !editButtonClicked? 'default': 'pointer'}}
@@ -197,15 +198,21 @@ export default function DeckContainer() {
 
                     setAddNewDeckWindow(true) //open the pop up to add a new deck
                     setDecksAreVisible(false)
+                 
                       }
-                  }}
+                  } }
               >
 
                   Create Deck
               </button>
+            
               
-              <div style={{marginTop: '40px'}}>
+              <div style={{marginTop: '40px'}}
+               
+              >
                   <CreateNewDeck 
+                      decksAreVisible={decksAreVisible}
+                      setDecksAreVisible={setDecksAreVisible}
                       addNewDeckWindow={addNewDeckWindow}      
                       setDecksAreVisible={setDecksAreVisible}
                       setAddNewDeckWindow={setAddNewDeckWindow}

@@ -3,9 +3,10 @@
 export default function TimeAndProgress() {
   let studyGoal = 80
   let timeObj = {
-    5: 15,
-    9: 20,
-    17: 14
+    6: 15,
+    12: 20,
+    18: 14,
+    24: 4
   }
   let currentProgress = Object.values(timeObj).reduce((sum, i) => sum += i, 0) / studyGoal * 100;
   let widthAdjusted = Math.round(currentProgress) + 120;
@@ -14,13 +15,13 @@ export default function TimeAndProgress() {
 
     let arr = []
     let previousWidthVar = 0
-    for (let i = 5; i <= 25; i += 4) {
+    for (let i = 6; i <= 24; i += 6) {
 
       if (i in timeObj) {
         let widthVar = (timeObj[i] || 0) / studyGoal * 100
         previousWidthVar += widthVar
 
-        if (i === 21) {
+        if (i === 18) {
           
           arr.push(
           <Row 
@@ -30,13 +31,13 @@ export default function TimeAndProgress() {
               
               <div style={{paddingLeft: '3px', height: '21px'}}
               >
-                  {'21 - 24'}
+                  {'18 - 24'}
               </div>
               }
           />
           )
 
-        } else if (i === 25) {
+        } else if (i === 24) {
 
           arr.push(
             <Row 
@@ -45,15 +46,15 @@ export default function TimeAndProgress() {
                 time={
                       <div style={{paddingLeft: '3px', height: '21px'}}
                       >
-                          {'24 - 5'}
+                          {'24 - 6'}
                       </div>
                     } 
             />
             )
 
-        } else if (i <= 9) {
+        } else if (i <= 12) {
 
-          if (i <= 9 && i + 4 > 9) {
+          if (i <12) {
             
             arr.push(
             <Row 
@@ -62,7 +63,7 @@ export default function TimeAndProgress() {
                 time={
                     <div style={{paddingLeft: '3px', height: '21px'}}
                     >
-                        {'0' + i} - {(i + 4)}
+                        {'0' + i} - {(i + 6)}
                     </div>
                     } 
             />
@@ -75,7 +76,7 @@ export default function TimeAndProgress() {
                 time={
                       <div style={{paddingLeft: '3px', height: '21px'}}
                       >
-                          {'0' + i} - {'0' + (i + 4)}
+                          {'12'} - {'18'}
                       </div>
                       } 
             />
@@ -109,6 +110,7 @@ export default function TimeAndProgress() {
         className='d-flex'
       > 
         <div className='studyGoalStyling'
+              style={{height: '27px'}}        
         >
 
             Study Goal
@@ -128,9 +130,8 @@ export default function TimeAndProgress() {
 
         </div>
 
-        <div style={{position: 'absolute', top: '5px', left: `${widthAdjusted}px`, fontSize: '13px'}}
+        <div style={{position: 'absolute', top: '2px', left: `${widthAdjusted}px`, fontSize: '13px'}}
         >
-
             {currentProgress.toFixed(0)}%
        </div>
 
@@ -150,8 +151,7 @@ function Row({ time,previousWidthVar, widthVar }) {
 
     <div className='d-flex'
     >
-
-        <div className='time'
+        <div className='time d-flex justify-content-center'
         >
             {time}
         </div>

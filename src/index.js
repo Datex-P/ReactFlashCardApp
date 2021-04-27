@@ -8,12 +8,12 @@ ReactDOM.render(
 
   <ContextProvider>{/* step 3 cover required parent component with context state */}   
    
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
     
   
         <App/>
       
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
 
   </ContextProvider>,
   document.getElementById('root')

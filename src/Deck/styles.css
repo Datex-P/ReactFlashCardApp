@@ -10,8 +10,8 @@ input[type="checkbox"] {
 }
 
 .newDeckContainer {
-  height: 230px;
-  width: 307px;
+  height: 206px;
+  width: 310px;
   padding: 10px 0px 0px 0px;
   margin: 10px 0 0 20px;
   background-color: #dcc9b6;
@@ -19,14 +19,23 @@ input[type="checkbox"] {
   transform-origin: 0px 215px;
 }
 
-.divStyling {
+.nav-link, .nav-link:visited, .nav-link:active, .nav-link:hover {
+  padding: .5rem 0.4rem !important;
+  color: black;
+}
+
+.divStyling { /*shown on the main page to study, to review etc*/
   border-radius: 5px;
   outline: none;
   border: 1px solid black;
   background-color: white;
-  width: 140px;
-  padding: 5px;
-  margin-bottom: 10px
+  width: 125px;
+  padding: 4px;
+  padding-left: 10px;
+  height: 26px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .addNewCardsButton {
@@ -39,7 +48,7 @@ input[type="checkbox"] {
   background-color: grey;
   position: absolute;
   left: -20px;
-  top: 192px;
+  top: 173px;
   z-index: 3;
   border: none !important;
   
@@ -104,7 +113,7 @@ input[type="checkbox"] {
   font-weight: bold !important;
   font-size: 23px !important;
   cursor:pointer;
-  margin-right: 21px;
+  margin-right: 28px;
 }
 
 .modNew {
@@ -121,7 +130,8 @@ input[type="checkbox"] {
 }
 
 .inputStyling {
-  width: 49px; 
+  width: 43px; 
+  height: 33px;
   border: none;
   outline: none;
   text-align: center;
@@ -134,16 +144,12 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU0
 }
 
 
-input[type=number]:not(.inputStyling)  {
-  -moz-appearance:textfield; 
-  text-align: center;
-  /* cursor: pointer; */
-}
  
  input::-webkit-outer-spin-button,
  input::-webkit-inner-spin-button {
--webkit-appearance: auto;
-opacity: 1;
+-webkit-appearance: auto !important;
+opacity: 1 ;
+/*!important;*/
 cursor: pointer;
 }
 
@@ -169,17 +175,11 @@ user-select: none;
   display: flex;
   cursor: pointer; 
   background-color: #dcc9b6;
-  border: 2px black solid;
+  border: 3px black solid;
   border-radius: 5px;
   margin: auto;
-  margin-top: -12px;
-  width: 83%
-}
-
-
-.link, .link:visited, .link:active, .link:hover{
-  color: black;
-  cursor: pointer;
+  margin-top: 1px;
+  width: 321px;
 }
 
 .inputGro {
@@ -217,6 +217,10 @@ left: 10px;
   border: none !important;
 }
 
+.openDeck:hover {
+  background-color: #545863 !important;
+}
+
 
 .openDeck:focus{
   outline: none !important;
@@ -234,13 +238,15 @@ left: 10px;
 }
 
 
-.mod {
-  background-color: rgba(200, 168, 115, 0.95) !important;
+.mod { /*specifies the width etc. of basic orange window*/
+  background-color: rgba(200, 168, 115) !important;
   border-radius: 20px !important;
-  height: 500px; 
-  width: 400px !important;
+  height: 544px; 
+  width: 374px !important;
   margin-top: 90px !important;
   margin: auto;
+  border: 2px solid black !important;
+  top: 25px;
   /* padding: 20px 0; */
   /* overflow: hidden scroll; */
 }
@@ -556,11 +562,12 @@ border-radius: 5px;
   margin-top: 5px;
 }
 
-.time {
+.time { /*used in stats for the border of the individual times*/
   margin-left: 10px ;
   border: 1px solid black;
   width: 65px;
   padding: 1px;
+  border-radius: 3px;
 }
 
 .yearBoxContainer {
@@ -592,7 +599,7 @@ border-radius: 5px;
 
 #deleteWindow .modal-header {
 
-  background-color: rgba(200, 168, 115, 0.95) !important; 
+  background-color: rgba(200, 168, 115) !important; 
   width: 300px !important; 
   height: 45px;
   font-weight: bold; 
@@ -602,13 +609,18 @@ border-radius: 5px;
 }
 
 .modal {
-  padding: 0px !important
+  padding: 0px !important;
+  /* width: 600px !important; */
 }
 
 
 
 .modal-open .modal{
   overflow-y: hidden !important;
+}
+
+#deleteWindow { /*background color of reset progress in stats*/
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 #deleteWindow, #createDeck .modal-footer,
@@ -665,23 +677,25 @@ height: 33px;
   margin-left: 8px;
 }
 
-.backgroundModal {
+.countToStudyGoal {
+  width: 191px;
+  position: relative;
+  top: 20px;
+  font-size: 13px;
+  left: 14px;
+}
+
+.backgroundModal { /*background styling that is shown when threedotscontainer in stats is clicked*/
 
   background-color: rgba(0, 0, 0, 0.3);
-  /* width: 682px !important; */
   padding: 163px;
   top: -12px;
-  /* height: 1005px !important; */
   height: 730px !important;
-  max-width: 505px !important;
+  max-width: 440px !important;
   display:flex;
   align-items: center;
   justify-content: center;
-  /* height: 95%;
-  top: 16px;
-  overflow: hidden;
-  padding-left: none; */
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .widthFitContent{
@@ -704,13 +718,13 @@ height: 33px;
 }
 
 #createDeck .modal-content {
-  width: 54%;
+  width: 258px;
   height: 175px;
   background-color: rgba(200, 168, 115, 0.95) !important; 
   align-items: center;
   margin: auto;
   margin-bottom: 470px;
-  /* position: fixed; */
+  top: 105px;
 }
 
 
@@ -753,11 +767,11 @@ border-bottom-left-radius: calc(.3rem - 1px);
 
 
 .deckPausedContainer {
-  border: 1px solid black;
   padding: 5px;
   width: 152px; 
   position: absolute; 
-  top: 64px;
+  top: 50px;
+  left: 75px;
   height: 111px;
   display: flex;
   justify-content: space-evenly;
@@ -766,13 +780,16 @@ border-bottom-left-radius: calc(.3rem - 1px);
   flex-direction: column
 }
 
-.addToDeckInput {
-  width: 132px; 
+.addToDeckInput { /*the styling of the input field that appears when deckname edit is clicked*/
+  width: 129px; 
   border-radius: 5px;
   padding-left: 5px; 
   position: relative;
-  left: -4px; 
+  left: 10px; 
+  top: -23px;
+  height: 26px;
   outline: none;
+  z-index: 2;
 }
 
 .threeDotsInQuestionAnswerStyling {
@@ -787,12 +804,12 @@ border-bottom-left-radius: calc(.3rem - 1px);
 }
 
 .createNewDeckInputField {
-  width: 96%;
+  width: 92%;
   margin-top: 10px;  
   border-radius: 5px; 
   border: 1px solid black;
   margin-bottom: 10px; 
-  height: 30px; 
+  height: 27px; 
   outline: none; 
   padding-left: 5px;
 }
@@ -805,22 +822,33 @@ border-bottom-left-radius: calc(.3rem - 1px);
   display: inline-block;
 }
 
+.formControlinAddQuestions  {
+  width: 93% !important;
+  height: 93px !important;
+  position: relative;
+  left: 10px;
+}
+
+.plusInfoMessage:hover {
+  cursor: pointer;
+}
+
 .scrollerStyling {
-  height: 220px; 
-  width: 15px; 
+  height: 174px; 
+  width: 20px; 
   overflow: scroll; 
   overflow-x: hidden; 
   position: absolute; 
-  top: 65px;
-  right: -26px;
+  top: 78px;
+  right: 11px;
   cursor: pointer;
 }
 
 .containerStyling {
-  border-bottom-left-radius: 5px !important;
-  border-bottom-right-radius: 5px !important;
-  height: 650px !important;
-  width: 504px !important; 
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  height: 651px !important;
+  width: 440px !important; 
 }
 
 .alert {
@@ -888,15 +916,15 @@ border-bottom-left-radius: calc(.3rem - 1px);
     border: none;
   }
 
-  .createDeckButtonStyling {
+  .createDeckButtonStyling {  /*background color of create deck button*/
     z-index: 4; 
     padding: 2px; 
-    position: fixed;
+    position: absolute;
     top: 630px; 
-    width: 210px; 
+    width: 217px; 
+    height: 30px;
     outline: none !important;
-
-    background-color: grey !important;
+    background-color: #545863 !important;
     color: white !important;
     border-radius: 5px !important;
     border: none !important;
@@ -953,21 +981,115 @@ border-bottom-left-radius: calc(.3rem - 1px);
   }
 
   .deckOrCardNameContainer {
-    width: 201px;
+    width: 127px;
     padding-left: 7px;
     border-radius: 5px;
     height: 30px;
     position: relative;
-    top: 4px;
+    top: px;
   }
 
-  .firstRowStyling {
-
+  .firstRowStyling { /*the positioning of all the decks*/
     position: relative; 
     padding: 50px; 
     width: 400px;
     margin-left: 30px; 
-    margin-top: 60px;
-
-
+    margin-top: 77px;
   }
+  
+ input::-webkit-outer-spin-button,
+ input::-webkit-inner-spin-button {
+  -webkit-appearance: auto;
+  opacity: 1;
+}
+
+
+.onoffswitch {
+  position: fixed; 
+  width: 81px;
+  -webkit-user-select:none; 
+  -moz-user-select:none; 
+  -ms-user-select: none;
+  right: 338px;
+}
+.onoffswitch-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.onoffswitch-label {
+  display: block; 
+  overflow: hidden; 
+  width: 81px;
+  height: 25px;
+  border: 1px solid #1F1E1E; 
+  border-radius: 14px;
+  position: relative;
+  left: -185px;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.onoffswitch-inner {
+  display: block; 
+  width: 200%; 
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+  display: block; 
+  float: left; 
+  width: 50%; 
+  height: 23px; 
+  padding: 0; 
+  line-height: 23px;
+  font-size: 14px; 
+  color: white; 
+  font-family: Trebuchet, Arial, sans-serif; 
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+  content: "Paused";
+  padding-left: 7px;
+  background-color: #FAF8F5; 
+  color: #999999;
+}
+
+.onoffswitch-inner:after {
+  content: "Paused";
+  
+  padding-right: 7px;
+  padding-top: 1px;
+  background-color: rgba(200, 168, 115); color: #FFFFFF;
+  text-align: right;
+  font-size: 12px;
+}
+
+.onoffswitch-switch {
+  display: block; 
+  width: 17px; 
+  height: 17px;
+  margin: 4px;
+  font-size: 14px;
+  text-align: center;
+  background: #FFFFFF;
+  position: absolute; 
+  top: 0px; 
+  bottom: 0px;
+  right: 53px;
+  border: 1px solid #1F1E1E; 
+  border-radius: 14px;
+  transition: all 0.3s ease-in 0s; 
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0px;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px; 
+}

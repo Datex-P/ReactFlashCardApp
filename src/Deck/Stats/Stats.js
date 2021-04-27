@@ -13,7 +13,7 @@ function Stats({ history}) {
 
   const [showDeleteFrame, setShowDeleteFrame] = useState(false)
   const [checked, setChecked] = useState(false)
-  const [show] = useState(false);
+  const [show,setShow] = useState(false);
   
  
   function setShowFunc() {
@@ -24,6 +24,7 @@ function Stats({ history}) {
 
 
   return (
+
     <div style={{width: '70%', height: '50%'}}
     >
 
@@ -36,21 +37,20 @@ function Stats({ history}) {
           >
               Stats
           </div>}
-
         menu={
           <ThreeDotsBtn
        
-          //editName
-            // index={index}
-            // paused={paused}
-            showFromParent={showDeleteFrame}
+           
             text={'stats'}
             className='resetButtonStyling'
             editButtonClicked
-          //  editBtnClicked={editBtnClicked}
             resetEvent={() => {
-              setShowDeleteFrame(true)
-            //  setEditBtnClicked(false)
+              //!editButtonClicked
+              setShow(!show)
+              console.log('erjngjkerngkjrne')
+              setShowDeleteFrame(true);
+              
+            //  reset=false
             }}
 
             reset
@@ -66,7 +66,7 @@ function Stats({ history}) {
           </div>
 
           <div 
-              style={{ marginBottom: '10px', border: '1px solid black' }} 
+              style={{ marginBottom: '10px', border: '1px solid black'}} 
               className='d-flex flex-direction column align-items-center'
           >
 
@@ -75,15 +75,16 @@ function Stats({ history}) {
               
                 <DeleteCardQuestionBox
                   resetQuestionText
+                  showMessageAgain
                   card='card'
                   checked = {checked}
                   setChecked = {setChecked}
                   showDeleteWindow={showDeleteFrame}
-                  show={show}
-                  deleteWindow={() => setShowDeleteFrame(false)}
+                  deleteWindow={() => 
+                    setShowDeleteFrame(false)
+                  }
                   // trashEvent={deleteCurrentCard}
-                  onHide={
-                    ()=>{ }}
+                  onHide={ ()=>{ }}
                   />
             }
 
@@ -219,9 +220,7 @@ return (
           days.map(day=>
           <div className='day'
           >
-
-          </div>
-        )
+          </div>)
         }
 
   </div>

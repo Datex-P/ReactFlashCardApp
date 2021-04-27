@@ -3,6 +3,7 @@ import { Button, FormControl, Alert } from 'react-bootstrap'
 import { Context } from '../../Context'
 import editimg from '../../icons/edit.svg'
 
+
 import ThreeDotsBtn from './ThreeDotsBtn';
 import BasicOrangeWindow from './BasicOrangeWindow'
 import DeleteCardQuestionBox from './DeleteCardQuestionBox'
@@ -12,6 +13,8 @@ import RepeatBtn from './CardBodyParts/RepeatBtn'
 
 export default function QuestAnswerTrainOverv({ name, data, 
                                                 index, paused, 
+                                                createDeckButtonIsVisible,
+                                                setCreateDeckButtonIsVisible = () =>{},
                                                 editButtonClicked //activated when change deckname field is open
 }) {
 
@@ -23,6 +26,7 @@ export default function QuestAnswerTrainOverv({ name, data,
   const [editBtnClicked, setEditBtnClicked] = useState(false);
   const [randomQuestion, setRandomQuestion] = useState(null);
   const [cardModified, setCardModified] = useState(false)
+  const [cardsPausedAndClicked, setCardsPausedAndClicked] = useState(true)
 
   const [show, setShow] = useState(false);
   const [showAnswerBtn, setShowAnswerBtn] = useState(true);
@@ -36,6 +40,8 @@ export default function QuestAnswerTrainOverv({ name, data,
   const { dataBase, setDataBase } = useContext(Context);
   const [card, setCard] = useState({answer:'', question:''})
   const [threeDotsMenuOpen, setThreeDotsMenuOpen] = useState(false);
+
+  const [mainBox, setMainBox] = useState(true)
 
   const inputRef = useRef(null);
 
@@ -165,21 +171,26 @@ export default function QuestAnswerTrainOverv({ name, data,
   return (
     <>
 
-      <Button
+      <Button  
         variant='secondary'
         className='openDeck'
         size='sm'
         style={{
           opacity: paused || data.length === 0 ? '0' : '1',   //open deck button is not visible when length is zero
           cursor: paused || data.length === 0 || !editButtonClicked? 'default' : 'pointer',
-          //backgroundColor: !editButtonClicked? "rgb(108, 117, 125) !important" : 'blue'
+          backgroundColor: !editButtonClicked? "rgb(108, 117, 125)" : 'grey',
           //warum funktioniert die obige Zeile nicht, besser mit refs machen??
+          position: 'relative',
+          top: '25px'
         }}
         onClick={
           paused  || !editButtonClicked? //when edit button is clicked or deck is paused, the question/answer view does not open, by default this button is true
             null
             :
-            generateRandom
+            ()=> {
+            generateRandom();
+            // setCreateDeckButtonIsVisible(false) why is not a function?
+            }
         }
       >
         Open Deck
@@ -187,15 +198,21 @@ export default function QuestAnswerTrainOverv({ name, data,
       </Button>
 
       {
-        deckLengthNotZero && !paused &&
+        deckLengthNotZero && !paused &&  
 
-        <BasicOrangeWindow
+        <BasicOrangeWindow 
           show={show}
           setShow={setShow}
+          mainBox={mainBox}
+          index={index}
+          cardsPausedAndClicked = {cardsPausedAndClicked}
+          setCardsPausedAndClicked= {setCardsPausedAndClicked}
           showRepeatBtn={showRepeatBtn}
           setShowRepeatBtn={setShowRepeatBtn}
           setShowAnswerBtn={setShowAnswerBtn}
           setEditBtnClicked={setEditBtnClicked}
+          createDeckButtonIsVisible={createDeckButtonIsVisible}
+          setCreateDeckButtonIsVisible={setCreateDeckButtonIsVisible}
           title={`Deck: ${name}`}
           showFromParent={threeDotsMenuOpen}
           menu={
@@ -207,7 +224,6 @@ export default function QuestAnswerTrainOverv({ name, data,
               className='threeDotsInQuestionAnswerStyling'
               threeDotsContainer={{ position: 'default' }}
               paused={paused}
-              
               setShowFromParent={setThreeDotsMenuOpen}
               index={index}
               edit pause trash
@@ -345,7 +361,6 @@ export default function QuestAnswerTrainOverv({ name, data,
                       : 
                       null
               }
-
               {
                 !showAnswerBtn &&
 

@@ -3,6 +3,7 @@ import { Card} from 'react-bootstrap'
 import {Context} from '../../Context'
 import '../styles.css'
 
+
 import ThreeDotsBtn from './ThreeDotsBtn'
 import AddQuestionsToDeck from './AddQuestionsToDeck'
 import QuestAnswerTrainOverv from './QuestAnswerTrainOverv'
@@ -21,11 +22,13 @@ export default function Deck({ deck, checked, setChecked,
                               setChangeDeckNameOpen,
                               editButtonClicked,
                               setEditButtonClicked,
+                              createDeckButtonIsVisible,
+                              setCreateDeckButtonIsVisible,
                               ...style }) {
      
     
   let { data, paused, name }  = deck
-  const [show, setShow] = useState(false);
+  
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name);
   const [threeDotsMenuOpen, setThreeDotsMenuOpen] = useState(false);
   
@@ -69,7 +72,6 @@ export default function Deck({ deck, checked, setChecked,
     let newDataBase = {...dataBase}
     newDataBase.DeckNames.splice(index,1);
     setDataBase(newDataBase)
-    console.log(newDataBase)
     setActive(1)
   }
 
@@ -94,7 +96,7 @@ export default function Deck({ deck, checked, setChecked,
 
         <Card.Title 
             className='d-flex align-items-center justify-content-between position-relative'
-            style={{width:'151px', left: '3px', height: '0px'}}
+            style={{width:'126px', left: '-5px', top: '-12px'}}
         >
 
         {
@@ -180,8 +182,6 @@ export default function Deck({ deck, checked, setChecked,
                     }
               }
             />
-          
-
             {
               trash && showDeleteWindow && !paused &&
 
@@ -202,8 +202,8 @@ export default function Deck({ deck, checked, setChecked,
 
         </Card.Title>
 
-        <div className='d-flex flex-column justify-content-between'
-             style={{height: '82px'}}
+        <div className='mb-3 d-flex flex-column justify-content-between'   //container for the decksize and cards thing
+            style= {{height: '256px', position: 'relative', top: '-17px'}}
         >
 
            {
@@ -213,16 +213,13 @@ export default function Deck({ deck, checked, setChecked,
             <div 
                   className='deckPausedContainer'
                   style={{left: '84px', textAlign: 'center'}}
-              >
+              >          
 
-               
-
-                  <div> 
+                  <div 
+                  > 
                         
-                  Click the 
-                  <span className= 'plusInfoMessage'
-                                  onClick={()=>setShow(true)} 
-                      > +
+                  Click the <span className= 'plusInfoMessage'
+                            >+
                             </span> button
                   </div>
                   <div>
@@ -241,14 +238,24 @@ export default function Deck({ deck, checked, setChecked,
                 <input 
                     type='number' 
                     className='inputStyling' 
-                    style={{background: paused? style.background: 'none'}}
-                  
+                   // style={{background: paused? style.background: 'none'}}
+                    min='10'
+                    //min='2'
+                    max='30'
+                    disabled
                 >   
 
                 </input>
 
           </div>
           
+          {/* <div 
+              className='divStyling'  
+              style={{opacity: paused? '0': '1'}}
+          >    
+
+              {'To review:'.padEnd(10, '⠀')}  {dataBase.userPreferences.toReview}
+          </div> */}
            </>
           } 
 
@@ -259,9 +266,8 @@ export default function Deck({ deck, checked, setChecked,
                   className='deckPausedContainer'
                   style={{background: colors[index % 5]}}
               >
-
                   <div>
-                      This deck is paused. 
+                      {/* Deck is paused.  */}
                   </div>
 
                   <div style={{display: 'flex', alignItems: 'center'}}
@@ -285,8 +291,10 @@ export default function Deck({ deck, checked, setChecked,
                     </button>
                     
                   </div>
-                  <div className='countToStudyGoal'>
-                        It doesn't count to the study goal.
+                  <div 
+                  // style={{textAlign: 'center'}}
+                  >
+                        to unpause the Deck. Paused decks don't count to the study goal.
                   </div>
               </div>
 
@@ -318,6 +326,9 @@ export default function Deck({ deck, checked, setChecked,
             index={index} 
             data={data} 
             paused={paused} 
+            createDeckButtonIsVisible={createDeckButtonIsVisible}
+            setCreateDeckButtonIsVisble={setCreateDeckButtonIsVisible}
+
         />
         
         {
@@ -329,8 +340,6 @@ export default function Deck({ deck, checked, setChecked,
                 background={style.background} 
                 name= {name} 
                 index= {index} 
-                show={show}
-                setShow={setShow}
             />        
         }
 
@@ -338,17 +347,4 @@ export default function Deck({ deck, checked, setChecked,
     </Card>
   )
 }
-
-
-// function addQuestions () {
-//   <AddQuestionsToDeck 
-//   editButtonClicked={editButtonClicked}
-//   background={style.background} 
-//   name= {name} 
-//   index= {index} 
-// />  
-// }
-
-
-
 

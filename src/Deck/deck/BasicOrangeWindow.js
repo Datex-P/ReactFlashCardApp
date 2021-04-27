@@ -1,15 +1,22 @@
 import { Modal } from 'react-bootstrap'
 import redCross from '../../icons/redCross.svg'
 import React from 'react'
+import InputCheckbox from './InputCheckbox'
+
+
 
 export default function BasicOrangeWindow({
                                           children, show, 
                                           setShow, title,
+                                          cardsPausedAndClicked,
+                                          setCardsPausedAndClicked,
                                           menu, showFromParent,
+                                          mainBox,
                                           setShowAnswerBtn = () => {},
                                           setEdit = () => {} , 
                                           setShowRepeatBtn = () => {},
-                                          setEditBtnClicked = () => {}
+                                          setEditBtnClicked = () => {},
+                                          index
             }) {
 
   return(
@@ -19,11 +26,12 @@ export default function BasicOrangeWindow({
         onHide={() => setShow(false)}
         contentClassName={'mod'}
         backdrop="static"
-        style= {{left: '-160px !important', right: '45px !important'
+        style= {{left: '-160px !important', right: '45px !important', backgroundColor: 'rgba(0, 0, 0, 0.6)'
+    
                 }}
       >
 
-          <div  style={{width: '98%', height: '95%', margin: 'auto', overflow: 'hidden auto'
+          <div  style={{width: '98%', height: '95%', margin: 'auto', overflow: 'hidden auto',
                       }}
           >
 
@@ -37,8 +45,22 @@ export default function BasicOrangeWindow({
                       {title}
                   </Modal.Title>
 
+                  <div className="onoffswitch"
+                       onClick = {() => {  
+                        setCardsPausedAndClicked(true)
+                       }}
+                  >
+                  {mainBox?
+                    <InputCheckbox
+                      cardsPausedAndClicked={cardsPausedAndClicked}
+                      index={index}
+                    />
+                     :
+                     null
+                  }
+                  </div>
+                  
                   {menu}
-
                 <button 
                     className='redCross'
                     onClick={() => {

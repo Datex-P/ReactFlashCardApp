@@ -23,7 +23,7 @@ export default function MenuContainer(
         className='mx-auto'
         style={{
                 backgroundColor: dataBase && styles.backgroundColor[dataBase.userPreferences.backgroundColor],
-                zIndex: '100', borderTopLeftRadius: '5px', borderTopRightRadius: '5px', width: '504px'
+                zIndex: '100', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', width: '440px'
                 }}
     >
         <div className='menu flexColumnAlignCenter p-3'

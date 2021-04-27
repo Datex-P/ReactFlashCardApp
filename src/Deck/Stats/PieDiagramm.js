@@ -38,20 +38,31 @@ export default function ChartComp() {
       },
       options: {
         elements: {
-          center: {
-            text: `Data from ${new Date().toLocaleString('de-DE', {
-              day: 'numeric',
-              month: 'numeric',
-              year: 'numeric',
-            })}`,
-            //color: '#FF6384', // Default is #000000
-            color: 'black',
-            fontStyle: 'Arial', // Default is Arial
-            sidePadding: 2, // Default is 20 (as a percentage)
-            minFontSize: 14, // Default is 20 (in px), set to false and text will not wrap.
-            lineHeight: 19,
-            // Default is 25 (in px), used for when text wraps
-          }
+          // center: {
+          //   text: `Data from ${new Date().toLocaleString('de-DE', {
+          //     day: 'numeric',
+          //     month: 'numeric',
+          //     year: 'numeric',
+          //   })}`,
+
+        //   center:{
+        // text: 
+        // //!dataBase.openedToday ? 
+        // 'No cards studied today' : `Data from ${todayDate.toLocaleString('de-DE', {
+
+        //     day: 'numeric',
+        //     month: 'numeric',
+        //     year: 'numeric',
+        //   })}`
+        //   ,
+        //     //color: '#FF6384', // Default is #000000
+        //     color: 'black',
+        //     fontStyle: 'Arial', // Default is Arial
+        //     sidePadding: 2, // Default is 20 (as a percentage)
+        //     minFontSize: 14, // Default is 20 (in px), set to false and text will not wrap.
+        //     lineHeight: 19,
+        //     // Default is 25 (in px), used for when text wraps
+        //   }
         },
         legend: {
           position: 'bottom',

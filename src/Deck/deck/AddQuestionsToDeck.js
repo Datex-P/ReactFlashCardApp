@@ -1,197 +1,203 @@
 
-import React, { useState, useContext, useEffect} from 'react';
-import {Modal, FormControl, Alert } from 'react-bootstrap'
-import {Context} from '../../Context';
+import React, { useState, useContext, useEffect } from 'react';
+import { Modal, FormControl, Alert } from 'react-bootstrap'
+import { Context } from '../../Context';
 import '../styles.css'
 import redCross from '../../icons/redCross.svg'
 
-export default function AddQuestionsToDeck({  index, name, background, editButtonClicked }) {
-  
-  const [show, setShow] = useState(false);
-  const [card, setCard] = useState({question:'', answer:''})
+export default function AddQuestionsToDeck({ index, name, background, editButtonClicked, show, setShow}) {
+
+  const [card, setCard] = useState({ question: '', answer: '' })
   const [newCardAdded, setNewCardAdded] = useState(false);
 
-  const {dataBase, setDataBase}= useContext(Context);
+  const { dataBase, setDataBase } = useContext(Context);
 
-  function addToDeck(){
+  function addToDeck() {
 
     // if (card.question.trim().length === 0 || card.answer.trim().length === 0) {
     //   alert('error')
     // } else {
 
-     console.log(card.question.trim().length, 'cardQuestionLength')
+    console.log(card.question.trim().length, 'cardQuestionLength')
 
-      console.log(card.question.length)
-    let newDataBase = {...dataBase}
-      newDataBase.DeckNames[index].data.push(card)
+    console.log(card.question.length)
+    let newDataBase = { ...dataBase }
+    newDataBase.DeckNames[index].data.push(card)
     //  newDataBase.DeckNames[index].push(card)
     setDataBase(newDataBase)
     setNewCardAdded(true)
-    if (card.question.trim().length !== 0  && card.answer.trim().length !== 0) {
-     // setCard({question:'', answer:''})
-     setTimeout(()=>{setCard({question:'', answer:''})},650) 
+    if (card.question.trim().length !== 0 && card.answer.trim().length !== 0) {
+      // setCard({question:'', answer:''})
+      setTimeout(() => {
+        setCard({ question: '', answer: '' })
+        setNewCardAdded(false)
+      }, 650)
     }
 
-    
-   // }
+
+    // }
   }
-  
-  function changeHandler (e) {
+
+  function changeHandler(e) {
     console.log(card)
-    let newCard =  {...card}
-    let {name, value} = e.target;
-    newCard[name]=value
+    let newCard = { ...card }
+    let { name, value } = e.target;
+    newCard[name] = value
     setCard(newCard)
     //setCard({...card,[name]:value}) would be another way of writing it
   }
-  
+
 
   useEffect(() => {
-    
-      setTimeout(()=>{setNewCardAdded(false)},500) 
+
+    setTimeout(() => { setNewCardAdded(false) }, 5000)
   }, [newCardAdded]);
-  
+
 
   return (
-   
-    
-    
+
+
+
     <div>
-        <button 
-            className={'addNewCardsButton outline-none'}
-            style= {{
-              background: dataBase.DeckNames[index]?.paused? background: null,
-              cursor: dataBase.DeckNames[index]?.paused || !editButtonClicked? 'default': 'pointer'
-              }}
-        
-            onClick={
-                dataBase.DeckNames[index]?.paused || !editButtonClicked?
-                
-                null
-                :            
-                () => { 
-                  setShow(true)
-                }
-            } 
-        >
+      <button
+        className={'addNewCardsButton outline-none'}
+        style={{
+          cursor: dataBase.DeckNames[index]?.paused || !editButtonClicked ? 'default' : 'pointer'
+        }}
+
+        onClick={
+          dataBase.DeckNames[index]?.paused || !editButtonClicked ?
+
+            null
+            :
+            () => {
+              setShow(true)
+            }
+        }
+      >
         +
       </button>
-      
+
       <Modal
         show={show}
         contentClassName={'mod'}
         backdrop='static'
         onHide={() => setShow(false)
         }
-        
+
       >
-          <Modal.Header className='border-bottom-0'
+        <Modal.Header className='border-bottom-0'
+        >
+          <Modal.Title style={{ fontSize: '16px' }}
           >
-              <Modal.Title style={{fontSize: '16px'}}
-              >
 
-                  Deck: {name}
-              
-              </Modal.Title>
+            Deck: {name}
 
-              <button 
-                  className='redCross'
-                  onClick={() => setShow(false)
-                  }
-                >
+          </Modal.Title>
 
-                    <img 
-                        src={redCross} 
-                        alt='redCross'                           
-                        className='nonDraggableIcon'
-                    />
-              </button>
+          <button
+            className='redCross'
+            onClick={() => setShow(false)
+            }
+          >
 
-            </Modal.Header>
-            <Modal.Body >
+            <img
+              src={redCross}
+              alt='redCross'
+              className='nonDraggableIcon'
+            />
+          </button>
 
-                <div className='mb-2'
-                >
-                    <p 
-                        className='questionAnswerStyling'
-                    >
-                        Question
+        </Modal.Header>
+        <Modal.Body >
+
+          <div className='mb-2'
+          >
+            <p
+              className='questionAnswerStyling'
+            >
+              Question
                     </p>
 
-                    <FormControl
-                        as="textarea"
-                        aria-label="With textarea"
-                        value={card.question} 
-                        className='w-100'
-                        name='question'
-                        onChange={changeHandler}
-                    />
+            <FormControl
+              as="textarea"
+              aria-label="With textarea"
+              value={card.question}
+              // className='w-75'
+              name='question'
+              onChange={changeHandler}
+              class='formControlinAddQuestions'
+            />
 
-                    { 
-                      newCardAdded?
+            {
+              newCardAdded ?
 
-                          <div 
-                              className='d-flex justify-content-center align-items-center'
-                              style={{height: '52px'}}
-                          >
+                <div
+                  className='d-flex justify-content-center align-items-center'
+                  style={{ height: '52px' }}
+                >
 
-                              <Alert 
-                                //when question or answer is empty, show a warning message
-                                  variant={card.question.trim().length !==0 && card.answer.trim().length !==0? "success" : "danger"}
-                                  style={{width: card.question.trim().length !==0 && card.answer.trim().length !==0? '140px' : '100px', 
-                                           height: '35px'}}
-                              >
-                                {
-                                  card.question.trim().length !==0 && card.answer.trim().length !==0?
-                                 
-                                  <div style={{width: '140px'}}>
-                                   Card added to Deck.                                                                    
+                  <Alert
+                    //when question or answer is empty, show a warning message
+                    variant={card.question.trim().length !== 0 && card.answer.trim().length !== 0 ? "success" : "danger"}
+                    style={{
+                      width: card.question.trim().length !== 0 && card.answer.trim().length !== 0 ? '140px' : '100px',
+                      height: '35px'
+                    }}
+                  >
+                    {
+                      card.question.trim().length !== 0 && card.answer.trim().length !== 0 ?
+
+                        <div style={{ width: '140px' }}>
+                          Card added to Deck.
                                   </div>
-                                  : 
-                                  <div style={{width: '120px', height: '35px'}}>
-                                    Input needed.
+                        :
+                        <div style={{ width: '120px', height: '35px' }}>
+                          Input needed.
                                   </div>
-                                }
-                              </Alert>
 
-                          </div>
-
-                          : 
-                          null
                     }
+                  </Alert>
 
                 </div>
-                <div style={{marginTop: newCardAdded? '0px': '60px'}}
-                >
 
-                    <p className='questionAnswerStyling'
-                    >
-                      Answer
+                :
+                null
+            }
+
+          </div>
+          <div style={{ marginTop: newCardAdded ? '0px' : '60px' }}
+          >
+
+            <p className='questionAnswerStyling'
+            >
+              Answer
                     </p>
 
-                    <FormControl
-                      as="textarea"
-                      aria-label="With textarea"
-                      value={card.answer}
-                      className='w-100'
-                      name='answer'
-                      onChange={changeHandler}
-                    />
+            <FormControl
+              as="textarea"
+              aria-label="With textarea"
+              value={card.answer}
+              // className='w-100'
+              name='answer'
+              onChange={changeHandler}
+              className='formControlinAddQuestions'
+            />
 
-                </div>
+          </div>
 
-                <button 
-                    onClick={addToDeck}
-                    className='generalButtonStyling addToDeckButton'
-                >
+          <button
+            onClick={addToDeck}
+            className='generalButtonStyling addToDeckButton'
+          >
 
-                    Add to Deck
+            Add to Deck
                 </button>
 
-            </Modal.Body>
+        </Modal.Body>
 
       </Modal>
-      
+
     </div>
 
   )
