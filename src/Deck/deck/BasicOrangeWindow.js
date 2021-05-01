@@ -16,6 +16,8 @@ export default function BasicOrangeWindow({
                                           setEdit = () => {} , 
                                           setShowRepeatBtn = () => {},
                                           setEditBtnClicked = () => {},
+                                          showProgressDiagram, //needed that diagram in mainview gets displayed again
+                                          setShowProgressDiagram,
                                           index
             }) {
 
@@ -70,6 +72,7 @@ export default function BasicOrangeWindow({
                       setShowRepeatBtn(false)
                       setShowAnswerBtn(true)
                       setEditBtnClicked(false)
+                      setShowProgressDiagram(true)
                     }} 
                 >
                     <img 

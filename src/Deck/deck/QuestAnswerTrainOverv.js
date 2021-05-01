@@ -14,6 +14,10 @@ import RepeatBtn from './CardBodyParts/RepeatBtn'
 export default function QuestAnswerTrainOverv({ name, data, 
                                                 index, paused, 
                                                 createDeckButtonIsVisible,
+                                                pauseIsActive,
+                                                setPauseIsActive,
+                                                showProgressDiagram,
+                                                setShowProgressDiagram,
                                                 setCreateDeckButtonIsVisible = () =>{},
                                                 editButtonClicked //activated when change deckname field is open
 }) {
@@ -52,14 +56,14 @@ export default function QuestAnswerTrainOverv({ name, data,
   }, [editBtnClicked]);
 
 
-  // function handlePause () {
-  //   let newDataBase = {...dataBase}
-  //   let savePausedState = !pauseIsActive
-  //   setPauseIsActive(savePausedState)
-  //   dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
-  //   setDataBase(newDataBase)
+  function handlePause () {
+    let newDataBase = {...dataBase}
+    let savePausedState = !pauseIsActive
+    setPauseIsActive(savePausedState)
+    dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
+    setDataBase(newDataBase)
 
-  // }
+  }
 
   useEffect(() => {
       setTimeout( 
@@ -68,6 +72,8 @@ export default function QuestAnswerTrainOverv({ name, data,
       ) 
     }, [cardModified]
   );
+
+ 
 
 
 
@@ -189,7 +195,14 @@ export default function QuestAnswerTrainOverv({ name, data,
             :
             ()=> {
             generateRandom();
-            // setCreateDeckButtonIsVisible(false) why is not a function?
+
+
+          // let newDataBase = {...dataBase}
+           dataBase.openedToday = true
+           setShowProgressDiagram(false) //progress diagram gets hidden when deck is opened
+           //setDataBase(newDataBase)
+           console.log(dataBase.openedToday, 'database opened tod')
+
             }
         }
       >
@@ -201,6 +214,8 @@ export default function QuestAnswerTrainOverv({ name, data,
         deckLengthNotZero && !paused &&  
 
         <BasicOrangeWindow 
+            showProgressDiagram={showProgressDiagram}
+            setShowProgressDiagram={setShowProgressDiagram}
           show={show}
           setShow={setShow}
           mainBox={mainBox}
@@ -235,7 +250,7 @@ export default function QuestAnswerTrainOverv({ name, data,
               }}
 
               pauseEvent={() => {
-                // handlePause()
+                 handlePause()
                 setShowDeleteWindow(true)
               }}
 
@@ -292,10 +307,10 @@ export default function QuestAnswerTrainOverv({ name, data,
                   as="textarea"
                   aria-label="With textarea"
                   value={card.question}
-                  className='w-100'
                   disabled={!editBtnClicked}
                   name='question'
                   onChange={changeHandler}
+                  className='formControlIn'
                   ref={inputRef}
                 />
 
@@ -321,22 +336,26 @@ export default function QuestAnswerTrainOverv({ name, data,
               {
                 showRepeatBtn &&
 
-                <div className='d-flex justify-content-between px-3'
+                <div className='d-flex justify-content-center'
                 >
-                  {
-                    dataBase.userTimePreferences.map((col) =>
+                    <div className='d-flex justify-content-between px-3'
+                        style={{border: '1px solid grey', padding: '12px', borderRadius: '5px', width:'88%'}}
+                    >
+                      {
+                        dataBase.userTimePreferences.map((col) =>
 
-                      <RepeatBtn
-                        btn={col.name}
-                        label={'< ' + col.amount + col.unit}
-                        onClick={() => {
-                          setShowAnswerBtn(!showAnswerBtn)
-                          setShowRepeatBtn(false)
-                          generateRandom()
-                        }}
-                      />
-                    )
-                  }
+                          <RepeatBtn
+                            btn={col.name}
+                            label={'< ' + col.amount + col.unit}
+                            onClick={() => {
+                              setShowAnswerBtn(!showAnswerBtn)
+                              setShowRepeatBtn(false)
+                              generateRandom()
+                            }}
+                          />
+                        )
+                      }
+                    </div>
                 </div>
               }
 
@@ -375,10 +394,10 @@ export default function QuestAnswerTrainOverv({ name, data,
                     as="textarea"
                     aria-label="With textarea"
                     value={card.answer}
-                    className='w-100'
                     disabled={!editBtnClicked}
                     name='answer'
                     onChange={changeHandler}
+                    className='formControlIn'
                   />
                 </div>
               }

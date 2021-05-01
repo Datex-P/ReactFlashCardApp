@@ -3,6 +3,7 @@ import { Card} from 'react-bootstrap'
 import {Context} from '../../Context'
 import '../styles.css'
 
+
 import ThreeDotsBtn from './ThreeDotsBtn'
 import AddQuestionsToDeck from './AddQuestionsToDeck'
 import QuestAnswerTrainOverv from './QuestAnswerTrainOverv'
@@ -11,16 +12,22 @@ import DeleteCardQuestionBox from  './DeleteCardQuestionBox';
 
 import playimg from '../../icons/play.svg'
 
+import plusimg from '../../icons/plus.svg'
+
 
 
 
 export default function Deck({ deck, checked, setChecked,
+                              decksAreVisible, //needed to hide all the decks in deckhandler
+                              setDecksAreVisible,
                                active, setActive, title, bg, 
                               pauseIsActive, setPauseIsActive, trigger, 
                               changeDeckName,
                               setChangeDeckNameOpen,
                               editButtonClicked,
                               setEditButtonClicked,
+                              showProgressDiagram,
+                              setShowProgressDiagram,
                               ...style }) {
      
     
@@ -28,6 +35,8 @@ export default function Deck({ deck, checked, setChecked,
   const [show, setShow] = useState(false);
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name);
   const [threeDotsMenuOpen, setThreeDotsMenuOpen] = useState(false);
+
+ 
   
   const [showDeleteWindow, setShowDeleteWindow] = useState(true); //if true and triggered the delete window with yes and no button is shown
   const [trash, setTrash] = useState(false);
@@ -67,10 +76,19 @@ export default function Deck({ deck, checked, setChecked,
 
   function deleteDeck(){
     let newDataBase = {...dataBase}
-    newDataBase.DeckNames.splice(index,1);
+    newDataBase.DeckNames.splice(index,1); //index where delete starts second para is delete count
+   
+    // if (index ===1) {
+    //   newDataBase.DeckNames.splice(0,1)
+    // }
+    if (dataBase.DeckNames.length ===1) {
+      setDecksAreVisible(false)
+    }
+
+    console.log(index, 'that is the index')
     setDataBase(newDataBase)
     console.log(newDataBase)
-    setActive(1)
+     setActive(1)
   }
 
  
@@ -118,21 +136,21 @@ export default function Deck({ deck, checked, setChecked,
                   // changeDeckNameOpen={true}
                   className= 'addToDeckInput'
                   style={{top: data.length === 0? '-69px': 'default'}}
-                  value = {nameOfTopDeck}
-                  onChange={(e)=>{
+                 // value = {nameOfTopDeck}
+                //   onChange={(e)=>{
                 
-                        if (e.target.value.length>25) {
-                        
-                          alert('Deckname can not be longer than 25 characters')
-                        } else {
+                // // if (e.target.value.length>25) {
+                
+                // //   alert('Deckname can not be longer than 25 characters')
+                // // } else {
 
-                          // if (!dataBase.DeckNames[index].paused) {
-                        
-                            setNameOfTopDeck(e.target.value)}
-                            // }
+                // //   // if (!dataBase.DeckNames[index].paused) {
+                
+                // //     setNameOfTopDeck(e.target.value)}
+                // //     // }
 
-                        }
-                    }
+                // }
+           // }
             />
 
          }
@@ -181,7 +199,6 @@ export default function Deck({ deck, checked, setChecked,
               }
             />
           
-
             {
               trash && showDeleteWindow && !paused &&
 
@@ -211,22 +228,38 @@ export default function Deck({ deck, checked, setChecked,
               
 
             <div 
-                  className='deckPausedContainer'
+                  className='deckEmptyContainer'
                   style={{left: '84px', textAlign: 'center'}}
               >
 
                
 
-                  <div> 
+                  <div 
+                  className='d-flex flex-column justify-content-around'
+                  style={{height: '90px', width: '122px'}}
+                  > 
                         
-                  Click the 
-                  <span className= 'plusInfoMessage'
-                                  onClick={()=>setShow(true)} 
-                      > +
-                            </span> button
+                      <div>      
+                      Deck is empty. 
+                      </div>
+                      <div>
+                        Press:
+                          <span 
+                            style={{marginLeft:'10px', cursor:'pointer'}}
+                            onClick={()=>setShow(true)} 
+                          > 
+                          
+                                    <img 
+                                    src={plusimg}
+                                    alt='plus' 
+                                    />
+                          </span> 
+                      </div>
                   </div>
-                  <div>
-                        to add questions to the deck
+                  <div 
+                      style={{fontSize: '13px', position: 'absolute', top:' 110px'}}
+                  >
+                        to add cards to the deck.
                   </div>
               </div>
 
@@ -242,6 +275,11 @@ export default function Deck({ deck, checked, setChecked,
                     type='number' 
                     className='inputStyling' 
                     style={{background: paused? style.background: 'none'}}
+                   // max= {`${data.length}`}
+                    min = '1'
+                    value= '0'
+                    // {`${dataBase.DeckNames.toStudyValue}`} //how to set value accordingly?
+                    //value = '0'
                   
                 >   
 
@@ -251,6 +289,8 @@ export default function Deck({ deck, checked, setChecked,
           
            </>
           } 
+          
+          
 
           {
             paused?
@@ -294,7 +334,7 @@ export default function Deck({ deck, checked, setChecked,
 
               null
           }
-
+         
           {
             name && data.length !== 0?
           
@@ -318,6 +358,10 @@ export default function Deck({ deck, checked, setChecked,
             index={index} 
             data={data} 
             paused={paused} 
+            pauseIsActive={pauseIsActive}
+            setPauseIsActive={setPauseIsActive}
+            showProgressDiagram={showProgressDiagram}
+            setShowProgressDiagram={setShowProgressDiagram}
         />
         
         {
@@ -340,14 +384,6 @@ export default function Deck({ deck, checked, setChecked,
 }
 
 
-// function addQuestions () {
-//   <AddQuestionsToDeck 
-//   editButtonClicked={editButtonClicked}
-//   background={style.background} 
-//   name= {name} 
-//   index= {index} 
-// />  
-// }
 
 
 

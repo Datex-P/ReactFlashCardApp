@@ -21,6 +21,7 @@ export default function App() {
           </Route>
 
           <Route path='/settings'>
+              {console.log('yippi')}
               <Settings />
           </Route>
 

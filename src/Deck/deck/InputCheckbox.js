@@ -8,7 +8,7 @@ export default function InputCheckbox ({cardsPausedAndClicked, index}) {
 
   function cardsPaused() {
     console.log('function cardsPaused was fired')
-    return  dataBase.DeckNames[index].data.filter(x => x.pause === true).length || 0
+    // return  dataBase.DeckNames[index].data.filter(x => x.pause === true).length || 0
   }
 
 
@@ -21,11 +21,11 @@ export default function InputCheckbox ({cardsPausedAndClicked, index}) {
                     }
       >
           <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox myonoffswitch" 
-            // id="myonoffswitch" 
-          //  tabindex="0" 
-            //{cardsPausedAndClicked? defaultChecked={true} : defaultChecked={false} }
-            //defaultChecked: cardsPausedAndClicked? {true}: {false}
-            checked={clicked}
+            id="myonoffswitch" 
+           tabIndex="0" 
+            // {cardsPausedAndClicked? defaultChecked={true} : defaultChecked={false} }
+            // defaultChecked: cardsPausedAndClicked? {true}: {false}
+            // checked={clicked}
           />
         <label className="onoffswitch-label" htmlFor="myonoffswitch">
             <span className="onoffswitch-inner"></span>

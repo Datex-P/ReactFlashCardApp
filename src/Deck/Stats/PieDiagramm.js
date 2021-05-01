@@ -1,9 +1,13 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useContext} from 'react'
 import Chart from "chart.js";
+import {Context} from '../../Context'
 
 export default function ChartComp() {
 
+  const { dataBase, setDataBase } = useContext(Context);
   let ctx = useRef(null)
+
+ // console.log(dataBase.openedToday, 'openedToday')
 
   useEffect(() => {
 
@@ -17,7 +21,9 @@ export default function ChartComp() {
           "Yellow"
         ],
         datasets: [{
-          data: [300, 50, 100],
+          data: [
+            300, 50, 100
+          ],
           backgroundColor: [
             "#FF6384",
             "#36A2EB",
@@ -37,7 +43,22 @@ export default function ChartComp() {
         }]
       },
       options: {
+        center:{
         elements: {
+
+          text: 'hello how is it going'
+
+          // text: !dataBase.openedToday ? 'No cards studied today'
+          // //<div style='font-size:12px'>No data</div> 
+          // :
+          // 'bla nla'
+
+
+          // `Data from ${todayDate.toLocaleString('de-DE', {
+          //   day: 'numeric',
+          //   month: 'numeric',
+          //   year: 'numeric',
+          // })}`
           // center: {
           //   text: `Data from ${new Date().toLocaleString('de-DE', {
           //     day: 'numeric',
@@ -63,7 +84,8 @@ export default function ChartComp() {
         //     lineHeight: 19,
         //     // Default is 25 (in px), used for when text wraps
         //   }
-        },
+        }
+      },
         legend: {
           position: 'bottom',
           labels: {
@@ -96,7 +118,7 @@ export default function ChartComp() {
 
       //config.update()
     }
-    updateChart()
+   // updateChart()
 
     new Chart(ctx.current, config);
 

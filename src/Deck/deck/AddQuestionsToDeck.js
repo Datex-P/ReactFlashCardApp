@@ -50,7 +50,7 @@ export default function AddQuestionsToDeck({ index, name, background, editButton
 
   useEffect(() => {
 
-    setTimeout(() => { setNewCardAdded(false) }, 5000)
+    setTimeout(() => { setNewCardAdded(false) }, 650)
   }, [newCardAdded]);
 
 
@@ -126,7 +126,7 @@ export default function AddQuestionsToDeck({ index, name, background, editButton
               // className='w-75'
               name='question'
               onChange={changeHandler}
-              class='formControlinAddQuestions'
+              className='formControlIn'
             />
 
             {
@@ -181,7 +181,7 @@ export default function AddQuestionsToDeck({ index, name, background, editButton
               // className='w-100'
               name='answer'
               onChange={changeHandler}
-              className='formControlinAddQuestions'
+              className='formControlIn'
             />
 
           </div>

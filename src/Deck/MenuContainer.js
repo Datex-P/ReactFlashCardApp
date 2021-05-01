@@ -10,13 +10,22 @@ import statsIcon from '../icons/stats.svg';
 import logoutIcon from '../icons/logout.svg';
 
 
-export default function MenuContainer(
-    {editButtonClicked} //set to false when editButton is not clicked gets activated when editButton is clicked
+export default function MenuContainer({
+    editButtonClicked, //set to false when editButton is not clicked gets activated when editButton is clicked
+    showProgressDiagram,
+    setShowProgressDiagram
+
+} 
     ) {
 
   const [show, setShow] = useState(false); //opens the Menu when set to true
   const { dataBase,styles } = useContext(Context)
   const handleClose = () => setShow(false); // closes the Menu when handleclos is triggered
+
+  function triggerDiagramAndState () {
+    setShow(!show)
+    setShowProgressDiagram(!showProgressDiagram)
+  }
 
   return (
     <div 
@@ -38,7 +47,7 @@ export default function MenuContainer(
                  !editButtonClicked?
                     null
                     :
-                setShow(!show)
+                 triggerDiagramAndState() 
                 }
             >
                 <div 
@@ -83,7 +92,8 @@ export default function MenuContainer(
                   >
                       <div 
                           className='menuStyling nonDraggableIcon' 
-                          onClick={()=>{setShow(false)}}
+                          onClick={()=>{setShow(false)
+                           }}
                       >
                           <Icons 
                                icons={[
@@ -118,13 +128,11 @@ export default function MenuContainer(
               </Modal>
           </>
           :
-          null
+          setShowProgressDiagram(true)  //needed so that diagram is displayed again when menu icon is closed
         }
     </div>
   )
 }
-
-
 
 function Icons({ icons }) {
   return (

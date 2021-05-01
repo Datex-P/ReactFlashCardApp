@@ -5,6 +5,40 @@
   color:turquoise
 } */
 
+/* *:active {outline:none !important} */
+
+/*Chrome, Safari, Edge, Opera  tried to hide the up and down number field in settings with that*/
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#createYourFirstDeckPrompt {
+  /* text-align: center; */
+  top: 275px;
+  position: absolute;
+  /* margin-top: 270px; */
+  font-weight: bold;
+  font-size: 16px;
+  /* display: none; */
+}
+
+button:focus,
+input:focus,
+textarea:focus,
+textarea:active,
+textarea {
+  outline: none !important;
+}
+
 input[type="checkbox"] {
   cursor: pointer;
 }
@@ -17,6 +51,39 @@ input[type="checkbox"] {
   background-color: #dcc9b6;
   position: absolute;
   transform-origin: 0px 215px;
+}
+
+.arrowDown {
+  margin-top: 180px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  position: absolute;
+  top: 60px;
+  /* display: none; */
+}
+
+.arrowDown::after {
+  content: "";
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  margin: 0 auto;
+  top:70px; 
+  /* top: -150px; */
+  border-right: 4px solid black;
+  border-bottom: 4px solid black;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-animation: 3s arrow infinite ease;
+  animation: 3s arrow infinite ease;
+  padding: 1px;
+}
+
+#arrow {
+  display: flex; 
+  justify-content: center; 
+  width: 100%;
 }
 
 .nav-link, .nav-link:visited, .nav-link:active, .nav-link:hover {
@@ -166,6 +233,9 @@ user-select: none;
 }
 
 
+
+
+
  
 .transMinus {
   transform: rotate(-135deg); 
@@ -266,7 +336,7 @@ left: 10px;
 
 .questionAnswerStyling {
   font-weight: bold; 
-  margin-left: 12px; 
+  margin-left: 19px; 
   margin-bottom: 10px;
 }
 
@@ -315,9 +385,10 @@ left: 10px;
 }
 
 .saveAndDiscardContainer {
-  width: 210px;
+  width: 166px;
+  padding: 4px;
   height: 71px;
-  top: 284px;
+  top: 345px;
   position: absolute;
   border: 1px grey solid;
   border-radius: 5px;
@@ -338,12 +409,14 @@ left: 10px;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAe0lEQVQoU03PURECMQxF0RMbrIzFBjbQUR3YwAYrA2xkJ2l3hn61fZl7XwI7jkAyghd+5jtjBXvwwKgAN3zReZ0K3sGx3omtSDVQ2FE/MXWf7OskFaJw7Sxtcr9I3Wl1aGcQf6TudKEy2HKRSlmderuY2B4sXfK8tqlOJ205I9rLApoiAAAAAElFTkSuQmCC) repeat;
 }
 
-
+.backgroundColor {
+  background-color: blue !important;
+}
 
 .saveAndDiscardButtonStyling {
-  width: 71px;
-  height: 28px;
-  color: white !important;
+  width: 65px;
+  height: 27px;
+  /* color: white !important; */
   cursor: pointer !important;
   border-radius: 5px !important;
   outline: none !important;
@@ -356,7 +429,7 @@ left: 10px;
 .generalButtonStyling {
   /* width: 63px;
   height: 24px; */
-  background-color: grey !important;
+  background-color: grey /*important;*/;
   color: white !important;
   cursor: pointer !important;
   border-radius: 5px !important;
@@ -567,7 +640,7 @@ border-radius: 5px;
   border: 1px solid black;
   width: 65px;
   padding: 1px;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 .yearBoxContainer {
@@ -717,14 +790,21 @@ height: 33px;
   width: 175px;
 }
 
+.pieDiagramContainer {
+  width: 190px; 
+  right: 102px; 
+  top:48px;
+  position:absolute;
+}
+
 #createDeck .modal-content {
   width: 258px;
-  height: 175px;
+  height: 178px;
   background-color: rgba(200, 168, 115, 0.95) !important; 
   align-items: center;
   margin: auto;
   margin-bottom: 470px;
-  top: 105px;
+  top: 145px;
 }
 
 
@@ -765,13 +845,35 @@ border-bottom-left-radius: calc(.3rem - 1px);
   left: 30px; */
 }
 
+.save:hover {
+  background:#2D6A4F;
+}
+
+
+.deckEmptyContainer {
+  padding: 5px;
+  width: 152px; 
+  position: absolute; 
+  top: 45px;
+  left: 75px !important;
+  height: 111px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 5px;
+  flex-direction: column
+}
+
+
+
+
 
 .deckPausedContainer {
   padding: 5px;
   width: 152px; 
   position: absolute; 
-  top: 50px;
-  left: 75px;
+  top: 45px;
+  left: 75px !important;
   height: 111px;
   display: flex;
   justify-content: space-evenly;
@@ -814,20 +916,39 @@ border-bottom-left-radius: calc(.3rem - 1px);
   padding-left: 5px;
 }
 
+
 .plusInfoMessage {
   height: 24px; 
   width: 24px; 
+  margin-left: 9px;
   border: 1px solid black;
   border-radius: 50%; 
   display: inline-block;
 }
 
-.formControlinAddQuestions  {
+textarea.form-control:active, textarea.form-control:focus {
+  outline: none !important;
+}
+
+.formControlIn  {
   width: 93% !important;
   height: 93px !important;
   position: relative;
   left: 10px;
+  outline: none !important;
 }
+
+/* .fromControlIn:focus{ //does not work, probabyl to be removed
+  outline: none !important;
+} */
+
+/* .fromControlinQuestAnswer {
+  outline: none !important;
+  width: 90% !important;
+  height: 93px !important;
+  position: relative;
+  left: 10px;
+} */
 
 .plusInfoMessage:hover {
   cursor: pointer;
@@ -916,6 +1037,16 @@ border-bottom-left-radius: calc(.3rem - 1px);
     border: none;
   }
 
+  textarea:focus {
+    border: 3px solid grey;
+    box-shadow: 0px 0px 15px grey;
+    outline: none !important;
+  }
+  textarea:enabled {
+    border: 3px solid grey;
+    outline: none !important;
+  }
+
   .createDeckButtonStyling {  /*background color of create deck button*/
     z-index: 4; 
     padding: 2px; 
@@ -939,6 +1070,12 @@ border-bottom-left-radius: calc(.3rem - 1px);
     height: 28px;
     border-radius: 5px;
   }
+
+  .okCancelButtonStyling:hover {
+    background-color:#545863;
+  }
+
+
 
   .hoveredDeckOrCardName {
     position: relative;
@@ -978,6 +1115,7 @@ border-bottom-left-radius: calc(.3rem - 1px);
     width: 81px; 
     padding-left: 3px; 
     height: 24px;
+    border-radius: 2px;
   }
 
   .deckOrCardNameContainer {
@@ -1005,7 +1143,6 @@ border-bottom-left-radius: calc(.3rem - 1px);
 
 
 .onoffswitch {
-  position: fixed; 
   width: 81px;
   -webkit-user-select:none; 
   -moz-user-select:none; 
@@ -1024,8 +1161,8 @@ border-bottom-left-radius: calc(.3rem - 1px);
   height: 25px;
   border: 1px solid #1F1E1E; 
   border-radius: 14px;
-  position: relative;
-  left: -185px;
+  position: absolute;
+  right: 110px;
 }
 
 .cursor {

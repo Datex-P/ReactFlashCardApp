@@ -22,8 +22,7 @@ export default function ContextProvider({ children }) {
       queue: [],
       checkboxClicked: false,
       showDeleteFrame: true,
-      toStudyGoal: 20,
-      toReviewGoal: 0,
+      openedToday: false,
       timeValues: {
         left: 2,
         middle: 5,
@@ -57,6 +56,7 @@ export default function ContextProvider({ children }) {
         weeksInRow: 0,
         toReview: 0
       },
+      hourlyBreakdown: 'default',
       studyTime: 0,
       calendarReset: false,
       weeklyTarget: 1,
@@ -67,10 +67,10 @@ export default function ContextProvider({ children }) {
 
     };
 
-    for (let i = 100; i < 105; i++) {
+    for (let i = 100; i < 103; i++) {
       let arr = [];
 
-      for (let i = 1; i < 10; i++) {
+      for (let i = 1; i < 4; i++) {
         arr.push({
           question: `question${i}`,
           answer: `answer${i}`,
@@ -86,6 +86,7 @@ export default function ContextProvider({ children }) {
           backgroundColor: colors[-100+i],
           data: arr,
           toStudyGoal: 20,
+          toStudyValue:0,
           cardsToday: 0,
           paused:false,
           skipPausedCards: 0

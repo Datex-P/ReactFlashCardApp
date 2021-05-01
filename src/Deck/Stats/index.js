@@ -1,7 +1,7 @@
 import React, {useState,useContext,useRef,useEffect} from 'react'
 import { Card} from 'react-bootstrap'
 import {Context} from '../../Context'
-import '../styles.css'
+
 
 
 import ThreeDotsBtn from './ThreeDotsBtn'

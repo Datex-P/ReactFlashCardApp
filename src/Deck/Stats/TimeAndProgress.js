@@ -46,7 +46,7 @@ export default function TimeAndProgress() {
                 time={
                       <div style={{paddingLeft: '3px', height: '21px'}}
                       >
-                          {'24 - 6'}
+                          {'24 - 06'}
                       </div>
                     } 
             />

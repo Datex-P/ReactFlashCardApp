@@ -29,6 +29,7 @@ function Stats({ history}) {
     >
 
       <BasicOrangeWindow
+    
         show={true}
         setShow={setShowFunc}
         title={

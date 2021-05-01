@@ -5,7 +5,7 @@ import Hexagons from  './Hexagons'
 import RepetitionIntervalFields from './RepetitionIntervalFields'
 
 import BasicOrangeWindow from '../deck/BasicOrangeWindow'
-
+import '../styles.css'
 import edit from '../../icons/edit.svg'
 import save from '../../icons/save.svg'
 
@@ -32,6 +32,8 @@ function Settings({ history }) {
   function handleColor(e) {
     let newDataBase = { ...dataBase }
     newDataBase.userPreferences[e.target.name] = e.target.value
+   // this.checked = true
+   //checked={true}
     setDataBase(newDataBase)
   }
 
@@ -175,7 +177,8 @@ function Settings({ history }) {
                 type='radio'
                 // title = `Change background color of main menu to ${comp}.`
                 value={comp}
-                checked   //how to combine checked and handleColor accurately?
+                //checked={false}
+                checked ={dataBase.userPreferences?.backgroundColor === comp}  //how to combine checked and handleColor accurately?
                 onChange={handleColor}
               />
               <label className='mb-0'>

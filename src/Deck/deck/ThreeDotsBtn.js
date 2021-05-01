@@ -100,7 +100,7 @@ function ThreeDotsBtn({
     dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
 
     let key = newDataBase.DeckNames.findIndex(deck=>deck.name === name)
-    newDataBase.DeckNames[key].paused = true
+    newDataBase.DeckNames[key].paused = true //does not work for some reason
     setDataBase(newDataBase)
     setEditButtonClicked(true)
     setThreeDotsOpen(false)

@@ -4,7 +4,12 @@ import { Context } from '../../Context'//step 4.1 import context instance
 
 import redCross from '../../icons/redCross.svg'
 
-export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, close, setActive}) 
+export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, 
+                                        close, setActive,
+                                        setShowProgressDiagram,
+                                        showProgressDiagram
+
+}) 
 
 {
   const { dataBase, setDataBase } = useContext(Context)
@@ -123,7 +128,7 @@ export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, cl
       
               <div 
                   className='d-flex justify-content-between' 
-                  style={{ width: '57%', top: '-8px', position: 'relative' }}
+                  style={{ width: '57%', top: '-15px', position: 'relative' }}
               >
                   {
                       ['Cancel', 'Ok'].map((el) =>
@@ -133,12 +138,14 @@ export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, cl
                             key= {el}
                             onClick={() => {
 
+                              setShowProgressDiagram(true)
                               el === 'Cancel' ?
 
                               close()
                               :
                               addNewDeckName()
-                              }}
+                              }
+                              }
                         >
                         
                           {el}

@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import style from './style.module.css'
-import '../styles.css'
+//import '../styles.css'
 
 
 
@@ -87,7 +87,7 @@ export default function RepetitionIntervalFields(
             maxLength = '8'
             minLength = '3'
             style={{
-                    textAlign: editIsPossible ? '' : 'center', 
+                    textAlign: 'center', 
                     cursor: editIsPossible ? 'pointer' : 'default'
                   }}
           />
