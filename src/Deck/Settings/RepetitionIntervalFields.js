@@ -30,7 +30,7 @@ export default function RepetitionIntervalFields(
   function checker(e){
     let {value} = e.target;
     let newValue = value.replace(/[^0-9]/g,'')
-    if(newValue.length<3){
+    if(newValue.length<4){
       setInputNumb(newValue)
     }
   }
@@ -52,17 +52,19 @@ export default function RepetitionIntervalFields(
     >
       <p 
           className=' border border-dark d-flex justify-content-center' 
-          style={{borderRadius: '5px', width: '79 px'}}
+          style={{borderRadius: '5px', width: '72px'}}
       >
           <div style={{ marginRight: '4px' }}
           >
 
               {'<'}
           </div>
-          <form>
+          <form
+              style={{width:'34px'}}
+          >
 
               <input 
-                  className={style.input}
+                   className={style.input}
                   type='number'
                   style={{ backgroundColor: 'transparent', outline: 'none', width: '40px', 
                   height: '24px', textAlign: 'center', cursor: saveOrEdit? 'pointer': 'default'
@@ -75,7 +77,13 @@ export default function RepetitionIntervalFields(
               />
           </form>
 
-            {unit}
+            {
+              <div style={{fontWeight: 'bold'}} //makes m h d values in settings fontweight bold
+              >
+                
+                {unit}
+              </div>
+            }
       </p>
       <form>
           <input

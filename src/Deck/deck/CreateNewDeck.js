@@ -1,19 +1,16 @@
-import React, {useContext, useState, useRef, useEffect} from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import { Modal } from 'react-bootstrap'
 import { Context } from '../../Context'//step 4.1 import context instance
 
 import redCross from '../../icons/redCross.svg'
 
-export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible, 
-                                        close, setActive,
-                                        setShowProgressDiagram,
-                                        showProgressDiagram
+export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible,
+  close, setActive, setArrowDown, 
 
-}) 
-
-{
-  const { dataBase, setDataBase } = useContext(Context)
+}) {
+  const { dataBase, setDataBase, setShowProgressDiagram, scrollbarVisible, setScrollbarVisible } = useContext(Context)
   const [inputField, setInputField] = useState('')
+
 
   const inputRef = useRef(null);
 
@@ -21,139 +18,183 @@ export default function CreateNewDeck({ addNewDeckWindow, setDecksAreVisible,
     if (addNewDeckWindow) {
       inputRef.current.focus();
     }
+
+    setShowProgressDiagram(false)
   }, [addNewDeckWindow]);
+
+  // function scrollbarVisible () {
+  //   if(dataBase.DeckNames.length ===0) {
+  //     let newDataBase = { ...dataBase }   
+
+  //     //let newDataBase = { ...dataBase };
+  //   newDataBase.active = i;
+  //   setDataBase(newDataBase);
+
+
+
+
+  // }
 
 
 
   function addNewDeckName() {
 
+    // if(dataBase.DeckNames.length ===0) {
+    //   setScrollbarVisible(false)
+    // }
+
     let newDataBase = { ...dataBase }
 
-    if (newDataBase.DeckNames.find(deck=>deck.name ===inputField)) {
+    if (newDataBase.DeckNames.find(deck => deck.name === inputField)) {
 
       alert('Name of Deck already exists')
       setInputField('')
-      
+
     } else if (!inputField) {
-    
+
       alert('Input needed')
     } else if (document.getElementById('inputField').value.length > 25) {
-    
-      alert('Deckname is too long')
-      document.getElementById('inputField').value= '';
+
+      alert('Deckname is too lo')
+      setInputField('')
       document.getElementById('inputField').focus();
-    
+
     } else if (document.getElementById('inputField').value.length < 3) {
-    
+
       alert('Deckname is too short')
-      document.getElementById('inputField').value= '';
+      setInputField('')
       document.getElementById('inputField').focus();
-    
+
     } else {
-    
+
       console.log('it works')
-      let index = newDataBase.DeckNames.push({        
+      let index = newDataBase.DeckNames.push({
         name: inputField,
         data: [],
-        toStudyGoal: 20,
-        cardsToday: 0
+        cardsToday: 0,
+        paused:false,
+        skipPausedCards: 0,
+        pauseMode:false,   //when active the pause switch can be clicked in question answers when cards are paused
+        editModeActive:false //when editModeActive is true, pause switch can t be clicked
       })
-      setActive(index-1)
-      setDataBase(newDataBase)
+
+      console.log(dataBase.DeckNames.length, 'here databse length')
+      if(dataBase.DeckNames.length ===1 || dataBase.DeckNames.length ===0) {
+
+      setScrollbarVisible(false)
+    }
+    setActive(index - 1)
+    setInputField('')
+    setDataBase(newDataBase)
+    console.log(scrollbarVisible, 'scrollbar visible')
       close()
     }
   }
 
   return (
 
-         <Modal
-            show={addNewDeckWindow}       
-            backdrop="static"
-            keyboard={false}
-            id = 'createDeck'
-            centered
-          >
-          
-              <Modal.Header >
+    <Modal
+      show={addNewDeckWindow}
+      backdrop="static"
+      keyboard={false}
+      id='createDeck'
+      centered
+    >
 
-                  <Modal.Title>
-                      Name for new deck
+      <Modal.Header >
+
+        <Modal.Title>
+          Name for new deck
                   </Modal.Title>
 
-                  <button 
-                      className='redCross'
-                      onClick={() => {
-                                addNewDeckWindow(false)
-                                setDecksAreVisible(true)
-                      }} 
-                  >
-                    <img 
-                        className='nonDraggableIcon'
-                        src={redCross} 
-                        alt='redCross' 
-                        style={{
-                            position: 'relative', top: '0px', right: '-9px', width: '15px'
-                        }}   
-                    />
-                  </button>
-              </Modal.Header>
+        <button
+          className='redCross'
+          onClick={() => {
 
-              <Modal.Body className='d-flex flex-column align-items-center'
-              >
-     
-                <input 
-                    id='inputField'
-                    className='createNewDeckInputField'
-                    minLength='3'
-                    maxLength='25'    
-                    ref={inputRef}
-                    onChange={ event => setInputField(event.target.value)
-                    }  
-                >           
-                </input>
+            if(dataBase.DeckNames.length ===0) { //when no deck in list, show arrow Down again
+              setArrowDown(true)
+              setDecksAreVisible(false)
+              setScrollbarVisible(false)
+            } else {
 
-                <select style={{
-                                 width: '86%', height: '26px', borderRadius: '5px', 
-                                paddingLeft: '3px', outline: 'none', cursor: 'pointer' 
-                                }}
-                >
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
-                </select>
-              
-              </Modal.Body>
-      
-              <div 
-                  className='d-flex justify-content-between' 
-                  style={{ width: '57%', top: '-15px', position: 'relative' }}
-              >
-                  {
-                      ['Cancel', 'Ok'].map((el) =>
-                      
-                        <button
-                            className='generalButtonStyling okCancelButtonStyling'
-                            key= {el}
-                            onClick={() => {
+            addNewDeckWindow(false)
+            setDecksAreVisible(true)
+            }
+            close()
+          }}
+        >
+          <img
+            className='nonDraggableIcon'
+            src={redCross}
+            alt='redCross'
+            style={{
+              position: 'relative', top: '0px', right: '-9px', width: '15px'
+            }}
+          />
+        </button>
+      </Modal.Header>
 
-                              setShowProgressDiagram(true)
-                              el === 'Cancel' ?
+      <Modal.Body className='d-flex flex-column align-items-center'
+      >
 
-                              close()
-                              :
-                              addNewDeckName()
-                              }
-                              }
-                        >
-                        
-                          {el}
-                        </button>
-                        )
-                  }
-              </div>
-      </Modal> 
+        <input
+          id='inputField'
+          className='createNewDeckInputField'
+          minLength='3'
+          maxLength='25'
+          ref={inputRef}
+          value={inputField}
+          onChange={event => setInputField(event.target.value)
+          }
+        />
+
+        <select className='selectStyling'>
+          <option>option 1</option>
+          <option>option 2</option>
+          <option>option 3</option>
+          <option>option 4</option>
+          <option>option 5</option>
+        </select>
+
+      </Modal.Body>
+
+      <div
+        className='d-flex justify-content-between cancelOkContainer'
+      >
+        {
+          ['Cancel', 'Ok'].map((el) =>
+
+            <button
+              className='generalButtonStyling okCancelButtonStyling'
+              key={el}
+              onClick={() => {
+
+                el === 'Cancel' ?
+
+                  (()=>{
+                  close()
+                  setInputField('')
+
+                  if(dataBase.DeckNames.length ===0) { //when no deck in list, show arrow Down again
+                 setArrowDown(true)
+                 setDecksAreVisible(false)
+                 console.log('yippi yeah yeah yeah')
+            }
+
+
+                  })()
+                  :
+                  addNewDeckName()
+              }
+              }
+            >
+
+              {el}
+            </button>
+          )
+        }
+      </div>
+    </Modal>
   )
 }
 

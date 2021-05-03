@@ -1,5 +1,5 @@
 
-import React, { useState, useContext, useEffect } from 'react';
+import React from 'react';
 
 export default function SaveAndDiscard({ saveEvent, generateRandom, setCardModified,discardEvent }) {
 

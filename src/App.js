@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-
 import LandingPage from './Deck/LandingPage.js'
 import Settings from './Deck/Settings/Settings'
 import Stats from './Deck/Stats/Stats'
@@ -8,6 +7,7 @@ import Stats from './Deck/Stats/Stats'
 
 
 export default function App() {
+  
 
   return (
 
@@ -21,8 +21,11 @@ export default function App() {
           </Route>
 
           <Route path='/settings'>
-              {console.log('yippi')}
-              <Settings />
+              
+              
+              <Settings 
+                
+              />
           </Route>
 
           <Route path='/' exact>            

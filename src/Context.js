@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 export const Context = React.createContext(null)//step 1 createing context instance
 
 export default function ContextProvider({ children }) {
+  const [showProgressDiagram, setShowProgressDiagram] = useState(true);
+  const [scrollbarVisible, setScrollbarVisible] = useState(true)
+
 
   const [dataBase, setDataBase] = useState(null);
   const [styles, setStyles] = useState({
@@ -13,6 +16,7 @@ export default function ContextProvider({ children }) {
     }
   });
 
+  // 
 
   useEffect(() => {
     let dB = {
@@ -56,7 +60,7 @@ export default function ContextProvider({ children }) {
         weeksInRow: 0,
         toReview: 0
       },
-      hourlyBreakdown: 'default',
+      hourlyBreakdown: '1 month',
       studyTime: 0,
       calendarReset: false,
       weeklyTarget: 1,
@@ -67,15 +71,24 @@ export default function ContextProvider({ children }) {
 
     };
 
-    for (let i = 100; i < 103; i++) {
+    for (let i = 100; i < 100; i++) {
       let arr = [];
 
-      for (let i = 1; i < 4; i++) {
-        arr.push({
-          question: `question${i}`,
-          answer: `answer${i}`,
-          paused: false
-        })
+      for (let i = 1; i < 10; i++) {
+        
+        if(i===3 || i ===2) {
+          arr.push({
+            question: `question${i}`,
+            answer: `answer${i}`,
+            paused: false
+          })
+        }else{
+          arr.push({
+            question: `question${i}`,
+            answer: `answer${i}`,
+            paused: true
+          })
+        }
       };
 
       let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
@@ -85,11 +98,12 @@ export default function ContextProvider({ children }) {
           name:`Literature${i}`,
           backgroundColor: colors[-100+i],
           data: arr,
-          toStudyGoal: 20,
           toStudyValue:0,
           cardsToday: 0,
           paused:false,
-          skipPausedCards: 0
+          skipPausedCards: 0,
+          pauseMode:false,   //when active the pause switch can be clicked in question answers when cards are paused
+          editModeActive:false //when editModeActive is true, pause switch can t be clicked
 
         }
 
@@ -102,13 +116,16 @@ export default function ContextProvider({ children }) {
   
   return (
 
-    <Context.Provider value={{ dataBase, setDataBase, styles, setStyles }} >{/*step 2 declearing some value and creating provider*/}
+    <Context.Provider value={{ dataBase, setDataBase, styles, setStyles,showProgressDiagram, setShowProgressDiagram
+    ,scrollbarVisible, setScrollbarVisible }} >{/*step 2 declearing some value and creating provider*/}
 
       {children}
 
     </Context.Provider>
 
   )
+
+  
 }
 
 // from the other project

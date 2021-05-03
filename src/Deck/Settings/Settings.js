@@ -17,16 +17,20 @@ function Settings({ history }) {
   const [saveOrEditGoal, setSaveOrEditGoal] = useState(false)
   const [editHex, setEditHex] = useState(true)
   
-  const { dataBase, setDataBase } = useContext(Context)
+  const { dataBase, setDataBase,setShowProgressDiagram } = useContext(Context)
   const [userTimePreferences, setUserTimePreferences] = useState({})
 
   useEffect(() => {
     setUserTimePreferences(dataBase?.userTimePreferences || {})
   }, [dataBase?.userTimePreferences])
 
+    useEffect(()=>{
+      setShowProgressDiagram(false)
+    },[])
 
   function setShow() {
     history.push('/')
+    setShowProgressDiagram(true)
   }
 
   function handleColor(e) {
@@ -67,48 +71,51 @@ function Settings({ history }) {
 
           Change Repetition Interval
       </div>
-
-      <div 
-          className='d-flex border border-dark justify-content-around align-items-center'
-          style={{ padding: '1px', borderRadius: '5px', position: 'relative' }}
+      <div className='d-flex justify-content-center'
       >
           <div 
-              className='d-flex justify-content-around align-items-center' 
-              style={{ width: '299px' }}
+              className='d-flex border border-dark justify-content-center align-items-center'
+              style={{ padding: '1px', borderRadius: '5px', position: 'relative', width: '284px', height:'88px' }}
           >
-              {
-                dataBase &&
-                  
-                  dataBase.userTimePreferences.map((col, k) =>
+              <div 
+                  className='d-flex justify-content-around align-items-center' 
+                  style={{width: '280px'}}
+              >
+                  {
+                    dataBase &&
+                      
+                      dataBase.userTimePreferences.map((col, k) =>
 
-                  <RepetitionIntervalFields
-                      key={k} 
-                      index={k} 
-                      data={col} 
-                      saveOrEdit={saveOrEdit}
-                      editIsPossible={editIsPossible} 
-                      userTimePreferences={userTimePreferences} 
-                      setUserTimePreferences={setUserTimePreferences} 
-                  />
-                  )
-              }
-            </div>
-            <div 
-                title='Click and change name buttons and repetition intervals for all decks.'
-                style={{ position: 'absolute', right: '5px', top: '29px', cursor: 'pointer' }}
-            >
-                <img
-                    src={saveOrEdit ? save : edit}
-                    alt={saveOrEdit ? 'save' : 'edit'}
-                    className= 'nonDraggableIcon'
-                    style={{ outline: 'none' }}
-                    onClick={() => {
-                        setEditIsPossible(!editIsPossible)
-                        setSaveOrEdit(!saveOrEdit)
-                        saveTimeNumberChanges()
-                    }}
-                />
-            </div>
+                      <RepetitionIntervalFields
+                          key={k} 
+                          index={k} 
+                          data={col} 
+                          saveOrEdit={saveOrEdit}
+                          editIsPossible={editIsPossible} 
+                          userTimePreferences={userTimePreferences} 
+                          setUserTimePreferences={setUserTimePreferences} 
+                      />
+                      )
+                  }
+                </div>
+              
+          </div>
+          <div 
+              title='Click and change name buttons and repetition intervals for all decks.'
+              style={{ position: 'absolute', right: '11px', top: '77px', cursor: 'pointer' }}
+          >
+              <img
+                  src={saveOrEdit ? save : edit}
+                  alt={saveOrEdit ? 'save' : 'edit'}
+                  className= 'nonDraggableIcon'
+                  style={{ outline: 'none' }}
+                  onClick={() => {
+                          setEditIsPossible(!editIsPossible)
+                          setSaveOrEdit(!saveOrEdit)
+                          saveTimeNumberChanges()
+                        }}
+              />
+          </div>
       </div>
 
       <div 

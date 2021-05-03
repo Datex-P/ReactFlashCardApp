@@ -5,12 +5,12 @@ import { Context } from '../../Context';
 import '../styles.css'
 import redCross from '../../icons/redCross.svg'
 
-export default function AddQuestionsToDeck({ index, name, background, editButtonClicked, show, setShow}) {
+export default function AddQuestionsToDeck({ index, name, editButtonClicked, show, setShow}) {
 
   const [card, setCard] = useState({ question: '', answer: '' })
   const [newCardAdded, setNewCardAdded] = useState(false);
 
-  const { dataBase, setDataBase } = useContext(Context);
+  const { dataBase, setDataBase, setShowProgressDiagram, setScrollbarVisible} = useContext(Context);
 
   function addToDeck() {
 
@@ -47,6 +47,18 @@ export default function AddQuestionsToDeck({ index, name, background, editButton
     //setCard({...card,[name]:value}) would be another way of writing it
   }
 
+  useEffect(() => {
+   
+    if (show) {
+     setShowProgressDiagram(false)
+    setScrollbarVisible(false)
+    } else {
+       setShowProgressDiagram(true)
+      setScrollbarVisible(true)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [show]);
+
 
   useEffect(() => {
 
@@ -72,6 +84,8 @@ export default function AddQuestionsToDeck({ index, name, background, editButton
             :
             () => {
               setShow(true)
+              setShowProgressDiagram(false)
+              setScrollbarVisible(false)
             }
         }
       >
@@ -82,7 +96,10 @@ export default function AddQuestionsToDeck({ index, name, background, editButton
         show={show}
         contentClassName={'mod'}
         backdrop='static'
-        onHide={() => setShow(false)
+        onHide={() => {
+        setShow(false)
+        setShowProgressDiagram(true)
+        }
         }
 
       >

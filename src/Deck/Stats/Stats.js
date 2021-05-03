@@ -1,4 +1,5 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext} from 'react';
+import { Context } from '../../Context'
 import BasicOrangeWindow from '../deck/BasicOrangeWindow'
 import ThreeDotsBtn from '../deck/ThreeDotsBtn'
 import { withRouter } from 'react-router-dom'
@@ -14,11 +15,17 @@ function Stats({ history}) {
   const [showDeleteFrame, setShowDeleteFrame] = useState(false)
   const [checked, setChecked] = useState(false)
   const [show,setShow] = useState(false);
+ const {setShowProgressDiagram } = useContext(Context)
   
  
   function setShowFunc() {
     history.push('/')
+    setShowProgressDiagram(true)
   }
+
+  useEffect(()=>{
+    setShowProgressDiagram(false)
+  },[])
 
 
 

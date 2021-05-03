@@ -9,7 +9,7 @@ export default function HourlyBreakdown() {
 
   function handleMonths(e) {
     let newDataBase = { ...dataBase }
-    newDataBase.hourlyBreakdown[e.target.name] = e.target.value
+    newDataBase.hourlyBreakdown = e.target.value
     setDataBase(newDataBase)
   }
 
@@ -34,7 +34,7 @@ export default function HourlyBreakdown() {
                   type='radio'
                 // title = `Change background color of main menu to ${comp}.`
                   value={comp}
-                //  checked ={dataBase.hourlyBreakdown === comp}  //how to combine checked and handleColor accurately?
+                  checked ={dataBase.hourlyBreakdown === comp}  //how to combine checked and handleColor accurately?
                   onChange={handleMonths}
               />
 

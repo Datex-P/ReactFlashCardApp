@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext} from 'react'
 import {Context} from '../../Context'
 import { Modal } from 'react-bootstrap'
 import '../styles.css'
@@ -7,7 +7,7 @@ import resetimg from '../../icons/reset.svg'
 import questionMark from '../../icons/questionmark.svg'
 import flashcards from '../../icons/flashcards.svg'
 
-export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent, 
+export default function DeleteCardQuestionBox({ card, pauseOrDelete,deleteWindow, trashEvent, 
                                                 setShowAnswerBtn=()=>{},
                                                 setShowRepeatBtn=()=>{},
                                                 setEditBtnClicked=()=>{},
@@ -15,6 +15,10 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
                                                 deleteCurrentCard=()=>{},
                                                 resetQuestionText=false,
                                                 showMessageAgain= false,
+                                                 pauseCardinQuestionAnswer=false,
+                                                 randomQuestion,
+                                                 index,
+                                                 setPauseOrDeleteText=()=>{}
                                                // index,
                                                // setIndex,
                                                 //name
@@ -98,7 +102,7 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
                         resetQuestionText? 
                                           'Reset progress'
                                             :
-                                          `Delete ${card}`
+                                          `${pauseOrDelete} ${card}`
                       }
                   </div>
               </div>
@@ -112,7 +116,7 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
             {
               resetQuestionText?  'Do you want to reset the stats?'
                                        : 
-                                  `Do you want to delete this ${card} ?` 
+                                  `Do you want to ${pauseOrDelete.toLowerCase()} this ${card} ?` 
             }
         </Modal.Body>
 
@@ -140,8 +144,22 @@ export default function DeleteCardQuestionBox({ card, deleteWindow, trashEvent,
                                    setShowAnswerBtn(true)
                                   setEditBtnClicked(false)
                                //   setIndex(0)
+
+                                 if(pauseCardinQuestionAnswer){
+
+                                  let newDataBase = { ...dataBase }
+
+                                  //newDataBase.DeckNames[index].data[randomQuestion]=card
+                                //  console.log(randomQuestion, 'randomQ')
+                                //  console.log(index, 'index')
+                                //  console.log(newDataBase.DeckNames[index].data[randomQuestion].paused, 'ausedstate')
+                                  dataBase.DeckNames[index].data[randomQuestion].paused = true
+                                  setDataBase(newDataBase)
+                                   console.log(dataBase.DeckNames)
+                                 }
                                 }
                                 deleteWindow()
+                                setPauseOrDeleteText(true)
                               }}
                           >
 

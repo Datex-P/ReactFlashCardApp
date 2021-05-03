@@ -68,6 +68,13 @@ export default function Deck({ deck, checked, setChecked,
     // setShow(false) why does  three button window not close with this?
   }
 
+  function handleToStudy(e) {
+
+    if(e.target.length ===2) {
+      console.log('yeah that works')
+    }
+  }
+
   
   useEffect(()=>{
     setNameOfTopDeck(name)
@@ -136,21 +143,22 @@ export default function Deck({ deck, checked, setChecked,
                   // changeDeckNameOpen={true}
                   className= 'addToDeckInput'
                   style={{top: data.length === 0? '-69px': 'default'}}
-                 // value = {nameOfTopDeck}
-                //   onChange={(e)=>{
+                  //defaultValue=''
+                 value = {nameOfTopDeck}
+                  onChange={(e)=>{
                 
-                // // if (e.target.value.length>25) {
+                if (e.target.value.length>25) {
                 
-                // //   alert('Deckname can not be longer than 25 characters')
-                // // } else {
+                  alert('Deckname can not be longer than 25 characters')
+                } else {
 
-                // //   // if (!dataBase.DeckNames[index].paused) {
+                  // if (!dataBase.DeckNames[index].paused) {
                 
-                // //     setNameOfTopDeck(e.target.value)}
-                // //     // }
+                    setNameOfTopDeck(e.target.value)}
+                     }
 
-                // }
-           // }
+                
+           }
             />
 
          }
@@ -203,6 +211,7 @@ export default function Deck({ deck, checked, setChecked,
               trash && showDeleteWindow && !paused &&
 
                 <DeleteCardQuestionBox
+                  pauseOrDelete='Delete'
                   card='deck'
                   threeDotsMenuOpen={threeDotsMenuOpen}
                   index={index}
@@ -276,8 +285,19 @@ export default function Deck({ deck, checked, setChecked,
                     className='inputStyling' 
                     style={{background: paused? style.background: 'none'}}
                    // max= {`${data.length}`}
+                   value={dataBase.DeckNames[index].data.length}
+                    max='2'
                     min = '1'
-                    value= '0'
+                    onChange={handleToStudy}
+
+
+      //               inputToStudy.max = `${dataBase.DeckNames[item].data.length -
+      // dataBase.DeckNames[item].data.filter((x) => x.pause === true).length ||
+      // 0}`;
+
+                  
+                    defaultValue='0'
+                    // onChange={defaultValue}
                     // {`${dataBase.DeckNames.toStudyValue}`} //how to set value accordingly?
                     //value = '0'
                   
@@ -360,8 +380,6 @@ export default function Deck({ deck, checked, setChecked,
             paused={paused} 
             pauseIsActive={pauseIsActive}
             setPauseIsActive={setPauseIsActive}
-            showProgressDiagram={showProgressDiagram}
-            setShowProgressDiagram={setShowProgressDiagram}
         />
         
         {

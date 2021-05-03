@@ -69,7 +69,7 @@ input[type="checkbox"] {
   height: 15px;
   position: absolute;
   margin: 0 auto;
-  top:70px; 
+  top:150px; 
   /* top: -150px; */
   border-right: 4px solid black;
   border-bottom: 4px solid black;
@@ -274,7 +274,8 @@ width: 32%;
 height: 32px; 
 padding: 0 !important; 
 position: relative; 
-left: 10px;
+left: 22px;
+top:-24px;
 }
 
 .openDeck {
@@ -681,6 +682,31 @@ border-radius: 5px;
   color: white;
 }
 
+#deleteWindow .modal-footer {
+  height: 55px !important;
+}
+
+.unpauseAndKeepPausedButton {
+  cursor: pointer;
+  width: 113px;
+  padding: 7px;
+}
+.pointer {
+  cursor:pointer !important;
+}
+
+.showAnswerButton {
+  background-color: grey;
+  color: white;
+  width: 105px;
+  height: 35px;
+  margin-left: 7px;
+  border-radius: 5px;
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+}
+
 .modal {
   padding: 0px !important;
   /* width: 600px !important; */
@@ -780,6 +806,13 @@ height: 33px;
 }
 
 
+#questionAnswerOverview .modal-body {
+  padding: 10px; 
+   background-color: blue !important;
+}
+
+
+
 #createDeck .modal-title {
   height: 30px;
   background-color: rgba(200, 168, 115, 0.95) !important;
@@ -791,20 +824,36 @@ height: 33px;
 }
 
 .pieDiagramContainer {
-  width: 190px; 
-  right: 102px; 
-  top:48px;
+  width: 100px; 
+  right: 242px; 
+  top:26px;
   position:absolute;
 }
 
 #createDeck .modal-content {
   width: 258px;
   height: 178px;
-  background-color: rgba(200, 168, 115, 0.95) !important; 
+  background-color: rgba(200, 168, 115) !important; 
   align-items: center;
   margin: auto;
   margin-bottom: 470px;
-  top: 145px;
+  top: 32px;
+}
+
+.selectStyling {
+  width: 86%; 
+  height: 26px; 
+  border-radius: 5px;
+  padding-left: 3px; 
+  outline: none; 
+  cursor: pointer;
+}
+
+.cancelOkContainer {
+  width: 57%; 
+  top: -15px; 
+  position: relative;
+  
 }
 
 
@@ -1003,7 +1052,7 @@ textarea.form-control:active, textarea.form-control:focus {
   margin-top: 20px;
   padding: 5px; 
   box-sizing: border-box; 
-  margin-left: 8px;
+  margin-left: 21px;
 }
 
 .hexagonContainer {
@@ -1027,7 +1076,7 @@ textarea.form-control:active, textarea.form-control:focus {
   }
 
   .repetitionIntervalTextFields {
-    width: 86px;
+    width: 72px;
     height: 27px;
     padding-left: 7px; 
     background-color: grey;
@@ -1036,6 +1085,25 @@ textarea.form-control:active, textarea.form-control:focus {
     outline: none;
     border: none;
   }
+
+@-webkit-keyframes arrow {
+  0%,
+  100% {
+    top: 50px;
+  }
+  50% {
+    top: 80px;
+  }
+}
+@keyframes arrow {
+  0%,
+  100% {
+    top: 50px;
+  }
+  50% {
+    top: 80px;
+  }
+}
 
   textarea:focus {
     border: 3px solid grey;

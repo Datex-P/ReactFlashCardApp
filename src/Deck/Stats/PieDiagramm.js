@@ -6,6 +6,7 @@ export default function ChartComp() {
 
   const { dataBase, setDataBase } = useContext(Context);
   let ctx = useRef(null)
+  let todayDate = new Date();
 
  // console.log(dataBase.openedToday, 'openedToday')
 
@@ -16,37 +17,45 @@ export default function ChartComp() {
       type: 'doughnut',
       data: {
         labels: [
-          "Red",
-          "Green",
-          "Yellow"
+          // "Red",
+          // "Green",
+          // "Yellow"
         ],
         datasets: [{
           data: [
-            300, 50, 100
+            //  300, 50, 100
           ],
           backgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
+            //  "#FF6384",
+            // "#36A2EB",
+            // "#FFCE56"
           ],
           borderColor: [
-            'rgba(184, 156, 110, 0.95)',
-            'rgba(184, 156, 110, 0.95)',
-            'rgba(184, 156, 110, 0.95)'
+            //  'rgba(184, 156, 110, 0.95)',
+            // 'rgba(184, 156, 110, 0.95)',
+            // 'rgba(184, 156, 110, 0.95)'
           ],
           borderWidth: 1,
           hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
+           "#FF6384",
+            // "#36A2EB",
+            // "#FFCE56"
           ]
         }]
       },
       options: {
-        center:{
         elements: {
+        center:{
 
           text: 'hello how is it going'
+          // text: !dataBase.openedToday ? 'No cards studied today'
+          // //<div style='font-size:12px'>No data</div> 
+          // :
+          // `Data from ${todayDate.toLocaleString('de-DE', {
+          //   day: 'numeric',
+          //   month: 'numeric',
+          //   year: 'numeric',
+          // })}`
 
           // text: !dataBase.openedToday ? 'No cards studied today'
           // //<div style='font-size:12px'>No data</div> 

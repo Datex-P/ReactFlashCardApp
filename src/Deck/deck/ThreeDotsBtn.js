@@ -14,7 +14,7 @@ import playimg from '../../icons/play.svg'
 
 function ThreeDotsBtn({    
                         text, //this for smth
-                        name,
+                        
                         showFromParent, style, 
                         className, 
                         editButtonClicked,  //active when editButton next to DeckName is clicked
@@ -23,8 +23,7 @@ function ThreeDotsBtn({
                         edit=false,trash=false,pause=false,reset=false,
                         editBtnClicked, //is the editBtn in the main Question/Answer Overview
                         data,
-                         paused,
-                        setNameOfTopDeck=()=>{},
+                        
                         editEvent = () => { }, 
                         trashEvent = () => { },
                         resetEvent = () => { },
@@ -35,7 +34,7 @@ function ThreeDotsBtn({
 {
 
   const [blinkingSaveIcon, setBlinkingSaveIcon] = useState(false)
-  const [pauseIsActive, setPauseIsActive] = useState(true)
+  // const [pauseIsActive, setPauseIsActive] = useState(true)
   const [threeDotsOpen, setThreeDotsOpen] = useState(showFromParent);
   const {dataBase, setDataBase} = useContext(Context);
 
@@ -91,20 +90,21 @@ function ThreeDotsBtn({
   
 
   function handlePause () {
+  
     pauseEvent()
 
-    let newDataBase = {...dataBase}
-    let savePausedState = !pauseIsActive
-    setPauseIsActive(savePausedState)
+    // let newDataBase = {...dataBase}
+    // let savePausedState = !pauseIsActive
+    // setPauseIsActive(savePausedState)
 
-    dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
+    // dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
 
-    let key = newDataBase.DeckNames.findIndex(deck=>deck.name === name)
-    newDataBase.DeckNames[key].paused = true //does not work for some reason
-    setDataBase(newDataBase)
-    setEditButtonClicked(true)
-    setThreeDotsOpen(false)
-    setNameOfTopDeck(name)
+    // let key = newDataBase.DeckNames.findIndex(deck=>deck.name === name)
+    // newDataBase.DeckNames[key].paused = true //does not work for some reason
+    // setDataBase(newDataBase)
+    // setEditButtonClicked(true)
+    // setThreeDotsOpen(false)
+    // setNameOfTopDeck(name)
     
   }
 
