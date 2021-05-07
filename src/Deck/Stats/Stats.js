@@ -25,6 +25,7 @@ function Stats({ history}) {
 
   useEffect(()=>{
     setShowProgressDiagram(false)
+       // eslint-disable-next-line
   },[])
 
 
@@ -55,7 +56,7 @@ function Stats({ history}) {
             resetEvent={() => {
               //!editButtonClicked
               setShow(!show)
-              console.log('erjngjkerngkjrne')
+              // console.log('erjngjkerngkjrne')
               setShowDeleteFrame(true);
               
             //  reset=false
@@ -110,7 +111,8 @@ function Stats({ history}) {
           <div className='d-flex align-items-center justify-content-center'
           >
 
-            <ButtonLeftAndRight />
+            <ButtonLeftAndRight
+            key='1' />
           </div>
 
           <HourlyBreakdown
@@ -124,7 +126,9 @@ function Stats({ history}) {
 
         </div>
 
-        <TimeAndProgress/>
+        <TimeAndProgress
+         
+        />
 
       </BasicOrangeWindow>
 
@@ -162,7 +166,7 @@ function ButtonLeftAndRight() {
 
           {
         
-            ['<', year, '>'].map(el =>
+            ['<', year, '>'].map((el,index) =>
 
               <div style={{ 
                             width: '33px',
@@ -181,6 +185,7 @@ function ButtonLeftAndRight() {
                           : 
                           handleIncrement
                 }
+                key={index}
               >
 
                 {el}
@@ -190,7 +195,8 @@ function ButtonLeftAndRight() {
 
       </div>
 
-        <RenderDays />
+        <RenderDays
+        key='1' />
     </div>
   )
 }
@@ -225,8 +231,9 @@ return (
     >
 
         {
-          days.map(day=>
+          days.map((day, index)=>
           <div className='day'
+               key={index}
           >
           </div>)
         }

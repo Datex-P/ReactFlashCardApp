@@ -10,13 +10,14 @@ export default function ContextProvider({ children }) {
   const [dataBase, setDataBase] = useState(null);
   const [styles, setStyles] = useState({
     backgroundColor: {
-      light: 'red',
-      dark: 'blue',
+      light: ' #86a873',
+      dark: '#5aaaff',
       default: 'rgb(90, 170, 149)'
     }
   });
 
   // 
+  let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
 
   useEffect(() => {
     let dB = {
@@ -27,6 +28,7 @@ export default function ContextProvider({ children }) {
       checkboxClicked: false,
       showDeleteFrame: true,
       openedToday: false,
+      deckCompleted: 2,
       timeValues: {
         left: 2,
         middle: 5,
@@ -67,14 +69,16 @@ export default function ContextProvider({ children }) {
       daysOfStudy: {
         day: 4
       },
-      studied: [new Date()]
+      studied: [new Date()],
+
+      // let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
 
     };
 
-    for (let i = 100; i < 100; i++) {
+    for (let i = 100; i < 103; i++) {
       let arr = [];
 
-      for (let i = 1; i < 10; i++) {
+      for (let i = 1; i < 5; i++) {
         
         if(i===3 || i ===2) {
           arr.push({
@@ -91,13 +95,15 @@ export default function ContextProvider({ children }) {
         }
       };
 
-      let colors = ['#ffcdb2', '#ffb4a2', '#e5989b', '#b5838d', '#6d6875'];
+    
 
       dB.DeckNames.push(
         {
           name:`Literature${i}`,
           backgroundColor: colors[-100+i],
           data: arr,
+          thisDeckCompleted: false, //shows whether the study goal of the particular deck is reached
+          color: colors[i%colors.length],
           toStudyValue:0,
           cardsToday: 0,
           paused:false,
@@ -110,13 +116,14 @@ export default function ContextProvider({ children }) {
       );
       dB.active++
     }
+    console.log(colors, 'here colors und so')
     console.log(dB.active)
     setDataBase(dB)
   }, []);
   
   return (
 
-    <Context.Provider value={{ dataBase, setDataBase, styles, setStyles,showProgressDiagram, setShowProgressDiagram
+    <Context.Provider value={{ dataBase, setDataBase, styles, setStyles,showProgressDiagram, setShowProgressDiagram, colors
     ,scrollbarVisible, setScrollbarVisible }} >{/*step 2 declearing some value and creating provider*/}
 
       {children}

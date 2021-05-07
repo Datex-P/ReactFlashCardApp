@@ -14,7 +14,7 @@ export default function DeckContainer() {
   } = useContext(Context);
   const [trigger, setTrigger] = useState(null);
   const scroller = useRef();
-  const [arrowDown, setArrowDown]=useState(true)
+  const [arrowDown, setArrowDown]= useState(true)
 
   let colors = ["#ffcdb2", "#ffb4a2", "#e5989b", "#b5838d", "#6d6875"];
 
@@ -50,6 +50,9 @@ export default function DeckContainer() {
     setDataBase(newDataBase);
   }
 
+  // console.log(dataBase.DeckNames.length, 'decknames length')
+  // console.log(colors[0], 'colors zero')
+
   useEffect(() => {
     //scroller.current.scroll(0,800)
     setTimeout(() => {
@@ -67,7 +70,7 @@ export default function DeckContainer() {
             styles.backgroundColor[dataBase.userPreferences.backgroundColor],
         }}
       >
-        {
+        {/* {
           showProgressDiagram ? (
           <div className="pieDiagramContainer">
             <PieDiagramm />
@@ -75,32 +78,59 @@ export default function DeckContainer() {
         ) 
         : 
         null
-        }
+        } */}
 
-        <Row>
+        <Row
+          className='posRel'
+        >
           {decksAreVisible ? (
             <div className="firstRowStyling">
               <div style={{ position: "absolute", left: "10px" }}>
-                {dataBase.DeckNames.filter((i, k) => active !== k).map(
-                  (deck, index) => (
-                    <Deck
+                {dataBase.DeckNames.reduce((accum,deck,index) => {
+                  if(active == index){
+                    accum.arr.push(<Deck
                       key={index}
                       index={index}
+                      editButtonClicked={editButtonClicked}
+                      setEditButtonClicked={setEditButtonClicked}
+                      arrowDown={arrowDown}
+                      setArrowDown={setArrowDown}
+                      deck={deck}
+                      decksAreVisible={decksAreVisible}
+                      setDecksAreVisible={setDecksAreVisible}
+                      name={deck.name}
+                      active={index}
+                      trigger={trigger}
+                      pauseIsActive={pauseIsActive}
+                      setPauseIsActive={setPauseIsActive}
+                      setActive={setActive}
+                      transform={`rotate(0deg)`}
+                      setChangeDeckNameOpen={setChangeDeckNameOpen}
+                      zIndex={2}
+                      background={
+                        colors[active % colors.length]
+                      }
+                    />)
+                  }else{
+                    accum.index++
+                    
+                    accum.arr.push(<Deck
+                      key={index}
+                      index={index}
+                      active={index}
                       changeDeckNameOpen={changeDeckNameOpen}
                       setChangeDeckNameOpen={setChangeDeckNameOpen}
                       editButtonClicked={editButtonClicked}
                       setEditButtonClicked={setEditButtonClicked}
+                      arrowDown={arrowDown}
+                      setArrowDown={setArrowDown}
                       setDeck
                       deck={deck}
                       decksAreVisible={decksAreVisible}
                       setDecksAreVisible={setDecksAreVisible}
                       name={deck.name}
-                      active={false}
                       trigger={trigger}
-                      transform={`rotate(${(dataBase.DeckNames.length -
-                        1 -
-                        index) *
-                        -2}deg)`}
+                      transform={`rotate(${-accum.index * 2}deg)`}
                       setActive={setActive}
                       zIndex={0}
                       bg={colors.map((i, k, ar) => {
@@ -119,35 +149,13 @@ export default function DeckContainer() {
                           }
                         })[index % colors.length]
                       }
-                    />
-                  )
-                )}
-
-                {dataBase.DeckNames.filter((i, k) => k === active).map(
-                  (deck, index) => (
-                    <Deck
-                      key={index}
-                      index={index}
-                      editButtonClicked={editButtonClicked}
-                      setEditButtonClicked={setEditButtonClicked}
-                      deck={deck}
-                      decksAreVisible={decksAreVisible}
-                      setDecksAreVisible={setDecksAreVisible}
-                      name={deck.name}
-                      active={true}
-                      trigger={trigger}
-                      pauseIsActive={pauseIsActive}
-                      setPauseIsActive={setPauseIsActive}
-                      setActive={setActive}
-                      transform={`rotate(0deg)`}
-                      setChangeDeckNameOpen={setChangeDeckNameOpen}
-                      zIndex={2}
-                      background={
-                        colors[active % colors.length]
-                      }
-                    />
-                  )
-                )}
+                    />)
+                  }
+                  return accum;
+                },
+                {index:0, arr:[]}
+                ).arr.reverse()
+}
               </div>
                  {/* dataBase.DeckNames.length > 1 ?  */}
               {
@@ -197,11 +205,20 @@ export default function DeckContainer() {
             :
             null
           )}
+
+          {
+          showProgressDiagram ? (
+          <div className="pieDiagramContainer">
+            <PieDiagramm />
+          </div>
+        ) 
+        : 
+        null
+        }
+
         </Row>
 
-        {console.log(dataBase.DeckNames.length, "db decknames length")}
-
-        {console.log(dataBase, 'this is database')}
+       
 
         <Row className="justify-content-center">
           <button

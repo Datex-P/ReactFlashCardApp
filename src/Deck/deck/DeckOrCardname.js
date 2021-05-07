@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 import CutWord from './CutWord'
 
 
-export default function DeckOrCardName({ name, paused, index, data,bg
+export default function DeckOrCardName({ name, paused, index,bg
                                       }) {
 
   const [hovered, setHovered] = useState(false)

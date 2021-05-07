@@ -17,7 +17,7 @@ export default function QuestAnswerTrainOverv({
   paused,
   createDeckButtonIsVisible,
 
-  setCreateDeckButtonIsVisible = () => { },
+  setCreateDeckButtonIsVisible = () => {},
   editButtonClicked, //activated when change deckname field is open
 }) {
   // const [threeDotsOpen, setThreeDotsOpen] = useState(showFromParent);
@@ -27,9 +27,7 @@ export default function QuestAnswerTrainOverv({
   const [randomQuestion, setRandomQuestion] = useState(null);
   const [cardModified, setCardModified] = useState(false);
 
-  const [pauseOrDeleteText, setPauseOrDeleteText] = useState(true)
-  
-
+  const [pauseOrDeleteText, setPauseOrDeleteText] = useState(true);
 
   const [show, setShow] = useState(false);
   const [showAnswerBtn, setShowAnswerBtn] = useState(true);
@@ -55,8 +53,6 @@ export default function QuestAnswerTrainOverv({
   }, [editBtnClicked]);
 
   function handlePause() {
-    //console.log("hello how is it geoing");
-
     // let newDataBase = {...dataBase}
     // let savePausedState = !pauseIsActive
     // setPauseIsActive(savePausedState)
@@ -70,12 +66,15 @@ export default function QuestAnswerTrainOverv({
     }, 500);
   }, [cardModified]);
 
-  console.log(dataBase.DeckNames, 'database decknames')
+  // console.log(dataBase.DeckNames, 'database decknames')
 
   function generateRandom() {
-    let randomQuestion = null;
-    if (dataBase.DeckNames[index].pauseMode) { //pause mode is activated when the switch is pressed and cards are paused
-      data = data.filter(item=>item.paused === true)
+    let newRandomQuestion = null;
+    if (dataBase.DeckNames[index].pauseMode) {
+      //pause mode is activated when the switch is pressed and cards are paused
+      if (data.filter((item) => item.paused === true).length > 0) {
+        data = data.filter((item) => item.paused === true);
+      }
     }
 
     if (data.length === 0) {
@@ -86,37 +85,32 @@ export default function QuestAnswerTrainOverv({
       if (dataBase.queue[0] && dataBase.queue[0].timeLeft === 0) {
         //need to have algorithm to filter s in queue related onlz for this deck
         //also not tot forget add decremental time algorith for all crads no matter waht deck
-        randomQuestion = dataBase.queue.shift().index;
+        newRandomQuestion = dataBase.queue.shift().index;
       } else {
-        randomQuestion = Math.floor(Math.random() * data.length);
-
-        console.log(randomQuestion, "randomQuestion");
-
+        newRandomQuestion = Math.floor(Math.random() * data.length);
+        // console.log(randomQuestion, "randomQuestion");
         let newDataBase = { ...dataBase };
 
-        if (!newDataBase.DeckNames[index].data[randomQuestion]?.openHistory) {
+        if (!newDataBase.DeckNames[index].data[newRandomQuestion]?.openHistory) {
           //if card was not opend before  a new array is made
-          newDataBase.DeckNames[index].data[randomQuestion].openHistory = [];
+          newDataBase.DeckNames[index].data[newRandomQuestion].openHistory = [];
         }
 
-        newDataBase.DeckNames[index].data[randomQuestion].openHistory.push(
+        newDataBase.DeckNames[index].data[newRandomQuestion].openHistory.push(
           new Date()
         );
         setDataBase(newDataBase);
       }
-
-      setRandomQuestion(randomQuestion);
-      setCard(data[randomQuestion]);
-      setShow(true);
+      if(newRandomQuestion === randomQuestion){
+        generateRandom()
+      }else{
+        setRandomQuestion(newRandomQuestion);
+        setCard(data[newRandomQuestion]);
+        setShow(true);
+      }
+      
     }
   }
-
-
-  console.log(dataBase.DeckNames, "db");
-  console.log(
-    dataBase.DeckNames[index].data[randomQuestion]?.paused,
-    "pausedStat"
-  );
 
   function discardHandler() {
     setCard(data[randomQuestion]);
@@ -167,9 +161,9 @@ export default function QuestAnswerTrainOverv({
   }
 
   function editModeActive() {
-    let newDataBase={...dataBase}
-    newDataBase.DeckNames[index].editModeActive = false
-    setDataBase(newDataBase)
+    let newDataBase = { ...dataBase };
+    newDataBase.DeckNames[index].editModeActive = false;
+    setDataBase(newDataBase);
   }
 
   function saveHandler() {
@@ -204,14 +198,12 @@ export default function QuestAnswerTrainOverv({
           paused || !editButtonClicked //when edit button is clicked or deck is paused, the question/answer view does not open, by default this button is true
             ? null
             : () => {
-              generateRandom();
-
-              // let newDataBase = {...dataBase}
-              dataBase.openedToday = true;
-              setShowProgressDiagram(false); //progress diagram gets why not at this place??
-              //setDataBase(newDataBase)
-              console.log(dataBase.openedToday, "database opened tod");
-            }
+                generateRandom();
+                let newDataBase = { ...dataBase };
+                newDataBase.openedToday = true;
+                setShowProgressDiagram(false); //progress diagram gets why not at this place??
+                setDataBase(newDataBase);
+              }
         }
       >
         Open Deck
@@ -236,8 +228,7 @@ export default function QuestAnswerTrainOverv({
           title={`Deck: ${name}`}
           showFromParent={threeDotsMenuOpen}
           menu={
-            dataBase.DeckNames[index].pauseMode ? null
-              :
+            dataBase.DeckNames[index].pauseMode ? null : (
               <ThreeDotsBtn
                 text={"card"}
                 editButtonClicked={true}
@@ -255,10 +246,9 @@ export default function QuestAnswerTrainOverv({
                   setShowAnswerBtn(false);
                   setEditBtnClicked(true);
                   setShowRepeatBtn(false);
-                  let newDataBase={...dataBase}
-                  newDataBase.DeckNames[index].editModeActive = true
-                  setDataBase(newDataBase)
-
+                  let newDataBase = { ...dataBase };
+                  newDataBase.DeckNames[index].editModeActive = true;
+                  setDataBase(newDataBase);
                 }}
                 pauseEvent={() => {
                   handlePause();
@@ -266,8 +256,8 @@ export default function QuestAnswerTrainOverv({
                   setShowDeleteWindow(true);
                 }}
                 trashEvent={() => {
-                  setTrash(true); 
-                  setPauseOrDeleteText(false)
+                  setTrash(true);
+                  setPauseOrDeleteText(false);
 
                   // dataBase.checkboxClicked ?
 
@@ -281,6 +271,7 @@ export default function QuestAnswerTrainOverv({
                   //                    }
                 }}
               />
+            )
           }
         >
           {editBtnClicked ? (
@@ -315,64 +306,57 @@ export default function QuestAnswerTrainOverv({
                 />
               </div>
 
-              {
-                showAnswerBtn &&
-                (
-                  <Button
-                    variant="secondary"
-                    className="p-1 showAnswer my-5 d-flex justify-content-center align-items-center"
-                    onClick={() => {
-                      setShowAnswerBtn(false);
-                      setShowRepeatBtn(true);
-                    }}
+              {showAnswerBtn && (
+                <Button
+                  variant="secondary"
+                  className="p-1 showAnswer my-5 d-flex justify-content-center align-items-center"
+                  onClick={() => {
+                    setShowAnswerBtn(false);
+                    setShowRepeatBtn(true);
+                  }}
+                >
+                  Show answer
+                </Button>
+              )}
+              {dataBase.DeckNames[index].pauseMode ? (
+                <>
+                  <div
+                    style={{ position: "absolute", left: "37px", top: "-15px" }}
                   >
-                    Show answer
-                  </Button>
-                )
-              }
-              {
-                dataBase.DeckNames[index].pauseMode ?
-                  (
-                    <>
-                      <div
-                        style={{ position: "absolute", left: "37px", top: "-15px" }}
-                      >
-                        <img src={pauseimg} alt={"pause"} />
-                        <span style={{ marginLeft: "7px" }}>mode</span>
-                      </div>
+                    <img src={pauseimg} alt={"pause"} />
+                    <span style={{ marginLeft: "7px" }}>mode</span>
+                  </div>
 
-                      <div className='d-flex justify-content-center'
+                  <div className="d-flex justify-content-center">
+                    <div
+                      className="d-flex justify-content-around"
+                      style={{ width: "300px" }}
+                    >
+                      <div
+                        className="unpauseAndKeepPausedButton showAnswerButton"
+                        onClick={() => {
+                          let newDataBase = { ...dataBase };
+                          newDataBase.DeckNames[index].data.filter(
+                            (item) => item.paused
+                          )[randomQuestion].paused = false;
+                          setDataBase(newDataBase);
+                          generateRandom();
+                        }}
                       >
-                        <div
-                          className='d-flex justify-content-around'
-                          style={{width:'300px'}}
-                        >
-                          <div 
-                              className='unpauseAndKeepPausedButton showAnswerButton'
-                              onClick={()=>{
-                                let newDataBase = { ...dataBase };
-                                //console.log(newDataBase.DeckNames[index].data[randomQuestion], 'random queston number')
-                                newDataBase.DeckNames[index].data.filter(item=>item.paused)[randomQuestion].paused = false
-                                setDataBase(newDataBase);
-                                generateRandom()
-                                }}
-                          >
-                              Unpause card
-                          </div>
-                          <div 
-                              className='unpauseAndKeepPausedButton showAnswerButton'
-                              onClick={()=>{generateRandom()}}
-                          >
-                            
-                            Keep paused
-                          </div>
-                        </div>
+                        Unpause card
                       </div>
-                    </>
-                  )
-                  :
-                  null
-              }
+                      <div
+                        className="unpauseAndKeepPausedButton showAnswerButton"
+                        onClick={() => {
+                          generateRandom();
+                        }}
+                      >
+                        Keep paused
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : null}
 
               {showRepeatBtn && (
                 <div className="d-flex justify-content-center">
@@ -385,9 +369,10 @@ export default function QuestAnswerTrainOverv({
                       width: "88%",
                     }}
                   >
-                    {dataBase.userTimePreferences.map((col) => (
+                    {dataBase.userTimePreferences.map((col, index) => (
                       <RepeatBtn
                         btn={col.name}
+                        key={index}
                         label={"< " + col.amount + col.unit}
                         onClick={() => {
                           setShowAnswerBtn(!showAnswerBtn);
@@ -454,7 +439,7 @@ export default function QuestAnswerTrainOverv({
               {trash && showDeleteWindow && (
                 <DeleteCardQuestionBox
                   card="card"
-                  pauseOrDelete= {`${pauseOrDeleteText? 'Pause': 'Delete'}`}
+                  pauseOrDelete={`${pauseOrDeleteText ? "Pause" : "Delete"}`}
                   checked={checked}
                   setChecked={setChecked}
                   randomQuestion={randomQuestion}

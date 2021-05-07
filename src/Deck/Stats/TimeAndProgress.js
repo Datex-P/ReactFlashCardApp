@@ -25,6 +25,7 @@ export default function TimeAndProgress() {
           
           arr.push(
           <Row 
+              key='1'
               previousWidthVar={previousWidthVar} 
               widthVar={widthVar} 
               time={
@@ -41,6 +42,7 @@ export default function TimeAndProgress() {
 
           arr.push(
             <Row 
+                key='2'
                 previousWidthVar={previousWidthVar} 
                 widthVar={widthVar} 
                 time={
@@ -58,6 +60,7 @@ export default function TimeAndProgress() {
             
             arr.push(
             <Row 
+                key='3'
                 previousWidthVar={previousWidthVar} 
                 widthVar={widthVar} 
                 time={
@@ -71,6 +74,7 @@ export default function TimeAndProgress() {
           } else {
             arr.push(
             <Row 
+                key='4'
                 previousWidthVar={previousWidthVar} 
                 widthVar={widthVar} 
                 time={

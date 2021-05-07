@@ -9,8 +9,6 @@ export default function BasicOrangeWindow({
   show,
   setShow,
   title,
-  // cardsPausedAndClicked,
-  // setCardsPausedAndClicked,
   menu,
   mainBox,
   setShowAnswerBtn = () => {},
@@ -24,6 +22,7 @@ export default function BasicOrangeWindow({
 
   return (
     <Modal
+      key={index}
       show={show}
       onHide={() => setShow(false)}
       contentClassName={"mod"}
@@ -99,9 +98,13 @@ export default function BasicOrangeWindow({
               setShowRepeatBtn(false);
               setShowAnswerBtn(true);
               setEditBtnClicked(false);
+              if (index) {
               let newDataBase = {...dataBase}
+
+
               newDataBase.DeckNames[index].pauseMode = false //needed to be set to false so that switch diagram closes in case its opened
               setDataBase(newDataBase)
+              }
             }}
           >
             <img className="nonDraggableIcon" src={redCross} alt="redCross" />

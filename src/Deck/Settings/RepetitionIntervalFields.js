@@ -66,8 +66,10 @@ export default function RepetitionIntervalFields(
               <input 
                    className={style.input}
                   type='number'
-                  style={{ backgroundColor: 'transparent', outline: 'none', width: '40px', 
-                  height: '24px', textAlign: 'center', cursor: saveOrEdit? 'pointer': 'default'
+                  style={{ backgroundColor: saveOrEdit? '#545863':'transparent', outline: 'none', width: '32px', 
+                  height: '21px', textAlign: 'center', cursor: saveOrEdit? 'pointer': 'default',
+                  color: saveOrEdit? 'white':'black',
+                  borderRadius:'5px'
                         }} 
                   disabled={!editIsPossible}
                   value={inputNumb}
@@ -96,7 +98,8 @@ export default function RepetitionIntervalFields(
             minLength = '3'
             style={{
                     textAlign: 'center', 
-                    cursor: editIsPossible ? 'pointer' : 'default'
+                    cursor: editIsPossible ? 'pointer' : 'default',
+                    backgroundColor: saveOrEdit? '#545863': 'grey'
                   }}
           />
       </form>

@@ -51,10 +51,14 @@ export default function AddQuestionsToDeck({ index, name, editButtonClicked, sho
    
     if (show) {
      setShowProgressDiagram(false)
-    setScrollbarVisible(false)
+
     } else {
-       setShowProgressDiagram(true)
-      setScrollbarVisible(true)
+      setShowProgressDiagram(true)
+      if (dataBase.DeckNames.length === 1 || dataBase.DeckNames.length === 0) {
+        setScrollbarVisible(false)
+      } else {
+        setScrollbarVisible(true)
+      }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);

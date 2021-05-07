@@ -24,10 +24,9 @@ export default function HourlyBreakdown() {
       </div>
 
       <div  className='monthContainerBox'
-      >
-        {
-          ['1 month', '3 month', '12 month'].map(comp =>
-            <>
+      >{
+          ['1 month', '3 month', '12 month'].map((comp,index) =>
+            <React.Fragment key={index}>
               <input 
                   style={{ cursor: 'pointer', marginTop: '10px', marginBottom: '20px' }}
                   name='breakdownIntervals'
@@ -36,14 +35,16 @@ export default function HourlyBreakdown() {
                   value={comp}
                   checked ={dataBase.hourlyBreakdown === comp}  //how to combine checked and handleColor accurately?
                   onChange={handleMonths}
+                  
               />
 
               <label style={{ margin: '5px' }}
+                      
               >
 
                   {comp}
               </label>
-            </>
+            </React.Fragment>
           )
         }
       </div>
