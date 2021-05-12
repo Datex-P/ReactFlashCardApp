@@ -10,9 +10,6 @@ export default function ChartComp() {
 
 
 
-
-
-
  var config = {
   type: 'doughnut',
   data: {
@@ -47,21 +44,22 @@ export default function ChartComp() {
   },
   options: {
     elements: {
-    center:{
-      // text: `Daily Goal \n ${(dataBase.deckCompleted * 100) /
-      //   Object.keys(dataBase.DeckNames).length} %`,
+    // center:{
+    //       text:null,
+    //   // text: `Daily Goal \n ${(dataBase.deckCompleted * 100) /
+    //   //   Object.keys(dataBase.DeckNames).length} %`,
 
-      // text: `Daily Goal \n ${(dataBase.deckCompleted * 100) /
-      //   Object.keys(dataBase.DeckNames).length} %`,
+    //   // text: `Daily Goal \n ${(dataBase.deckCompleted * 100) /
+    //   //   Object.keys(dataBase.DeckNames).length} %`,
 
-      fontStyle: "Times", // Default is Arial
-      // sidePadding: 2, // Default is 20 (as a percentage)
-      minFontSize: 11, // Default is 20 (in px), set to false and text will not wrap.
+    //   fontStyle: "Times", // Default is Arial
+    //   // sidePadding: 2, // Default is 20 (as a percentage)
+    //   minFontSize: 11, // Default is 20 (in px), set to false and text will not wrap.
 
-      // lineHeight: 19,
-      // Default is 25 (in px), used for when text wraps
+    //   // lineHeight: 19,
+    //   // Default is 25 (in px), used for when text wraps
      
-    },
+    // },
   },
     tooltips: false, //removes the tooltips from the diagram that are present in the diagram in stats
     hover: {mode: null}, //when hovered over the diagram sections, nothing flashes or highlights
@@ -78,8 +76,8 @@ export default function ChartComp() {
     }
   }
 };
-config.options.elements.center.text= `Goal ${parseInt((dataBase.deckCompleted * 100) /
-  Object.keys(dataBase.DeckNames).length)} %`
+// config.options.elements.center.text= `Goal ${parseInt((dataBase.deckCompleted * 100) /
+//   Object.keys(dataBase.DeckNames).length)} %`
 
 // `Goal ${parseInt((dataBase.deckCompleted * 100) /
 //   Object.keys(dataBase.DeckNames).length)} %`
@@ -87,9 +85,10 @@ config.options.elements.center.text= `Goal ${parseInt((dataBase.deckCompleted * 
 
 
   useEffect(() => {
-      console.log(config)
+  
     new Chart(ctx.current, config);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
@@ -200,18 +199,6 @@ config.options.elements.center.text= `Goal ${parseInt((dataBase.deckCompleted * 
            config.data.datasets[0].backgroundColor.push("#FF6384")
    
          }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

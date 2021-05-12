@@ -19,7 +19,7 @@ export default function MenuContainer({
 
   const [show, setShow] = useState(false); //opens the Menu when set to true
 
-  const { dataBase, setDataBase, styles,showProgressDiagram, setShowProgressDiagram } = useContext(Context)
+  const { dataBase, styles,showProgressDiagram, setShowProgressDiagram } = useContext(Context)
   const handleClose = () => setShow(false); // closes the Menu when handleclos is triggered
 
   function triggerDiagramAndState () {

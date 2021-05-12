@@ -6,11 +6,8 @@ export default function ChartComp() {
 
   const { dataBase} = useContext(Context);
   let ctx = useRef(null)
-  // let todayDate = new Date();
 
- // console.log(dataBase.openedToday, 'openedToday')
 
- let todayDate = new Date();
 
 
  var config = {
@@ -45,25 +42,27 @@ export default function ChartComp() {
   },
   options: {
     elements: {
-    center:{
-     // display: true,
-      text: 
-      !dataBase.openedToday ? 'No cards studied today'
-            //<div style='font-size:12px'>No data</div> 
-            :
-            `Data from ${todayDate.toLocaleString('de-DE', {
-              day: 'numeric',
-              month: 'numeric',
-              year: 'numeric',
-            })}`,
-      color: 'black',
-      fontStyle: 'Arial', // Default is Arial
-      sidePadding: 2, // Default is 20 (as a percentage)
-      minFontSize: 16, // Default is 20 (in px), set to false and text will not wrap.
-      lineHeight: 19,
+
+    // center:{
+    //  display: true,
+    //   text: null,
+    //   // !dataBase.openedToday ? 'No cards studied today'
+    //   //       //<div style='font-size:12px'>No data</div> 
+    //   //       :
+    //   //       `Data from ${todayDate.toLocaleString('de-DE', {
+    //   //         day: 'numeric',
+    //   //         month: 'numeric',
+    //   //         year: 'numeric',
+    //   //       })}`
+            
+    //   color: 'black',
+    //   fontStyle: 'Arial', // Default is Arial
+    //   sidePadding: 2, // Default is 20 (as a percentage)
+    //   minFontSize: 16, // Default is 20 (in px), set to false and text will not wrap.
+    //   lineHeight: 19,
     
      
-    }
+    // }
   },
     legend: {
       position: 'bottom',
@@ -85,21 +84,16 @@ export default function ChartComp() {
 
 
 
-
-
-
-
-
-
   useEffect(() => {
 
 
 
     new Chart(ctx.current, config);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  //newStuff just added
+
   let date = new Date().toDateString()
 
   for (let deck in dataBase.DeckNames) {
@@ -118,9 +112,7 @@ export default function ChartComp() {
 
     console.log(deckItem.data.filter((item) => item?.openHistory?.some(item => new Date(item).toDateString())).length, 'opened cards today')
 
-    console.log(date, 'date und so')
-    // console.log(date.getDay, 'tag und so')
-    // console.log(date.toDateString(), 'date datesting und so')
+
     // config.data.labels.push(deckItem.name)
       //arr.push(deckItem.name)
       
@@ -133,7 +125,7 @@ export default function ChartComp() {
     }
   }
 
-  //newStufff just added
+ 
 
 
   Chart.pluginService.register({
@@ -200,7 +192,7 @@ export default function ChartComp() {
         var lines = [];
 
         // Break words up into multiple lines if necessary
-        for (var n = 0; n < words.length; n++) {
+        for (let n = 0; n < words.length; n++) {
           var testLine = line + words[n] + " ";
           var metrics = ctx.measureText(testLine);
           var testWidth = metrics.width;
@@ -215,7 +207,7 @@ export default function ChartComp() {
         // Move the center up depending on line height and number of lines
         centerY -= (lines.length / 2) * lineHeight;
 
-        for (var n = 0; n < lines.length; n++) {
+        for (let n = 0; n < lines.length; n++) {
           ctx.fillText(lines[n], centerX, centerY);
           centerY += lineHeight;
         }

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Context } from '../../Context'
 
 export default function InputCheckbox({ index, setShowAnswerBtn, generateRandom }) {
@@ -59,7 +59,7 @@ export default function InputCheckbox({ index, setShowAnswerBtn, generateRandom 
           }
          
         }
-           // console.log(dataBase.DeckNames[index].pauseMode, 'pasuemode')
+     
       }
        }
        }

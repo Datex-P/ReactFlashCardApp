@@ -30,6 +30,7 @@ export default function CreateNewDeck({
     //  setShowProgressDiagram(true);
     }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addNewDeckWindow]);
 
 
@@ -79,7 +80,6 @@ export default function CreateNewDeck({
       setActive(index - 1);
       setInputField("");
       setDataBase(newDataBase);
-      // console.log(scrollbarVisible, "scrollbar visible");
       close();
     }
   }

@@ -20,6 +20,7 @@ export default function Deck({
   decksAreVisible, //needed to hide all the decks in deckhandler
   setDecksAreVisible,
   active,
+  index,
   setActive,
   title,
   bg,
@@ -47,14 +48,14 @@ export default function Deck({
   const [showDeleteWindow, setShowDeleteWindow] = useState(true); //if true and triggered the delete window with yes and no button is shown
   const [trash, setTrash] = useState(false);
   const { dataBase, setDataBase } = useContext(Context);
-  const [index, setIndex] = useState(0);
+  //const [index, setIndex] = useState(0);
 
-  useEffect(() => {
+/*  useEffect(() => {
     let cIndex = dataBase.DeckNames.findIndex((item) => item.name === name);
     setIndex(cIndex);
     //console.log(cIndex)
     // eslint-disable-next-line
-  }, [trigger]);
+  }, [trigger]);*/
 
   useEffect(() => {
     setChangeDeckNameOpen(!editButtonClicked); //when input field of deck name is open it is set to false
@@ -108,17 +109,19 @@ export default function Deck({
       if (index === 0) {
         setActive(1);
       } else {
-        setActive(index-1);
+        setActive(active-1);
       }
     }
   }
 
-  function handleActive(i) {
-    setActive(i);
-    let newDataBase = { ...dataBase };
-    newDataBase.active = i;
-    setDataBase(newDataBase);
-  }
+  console.log(index, "that is the index");
+
+  // function handleActive(i) {
+  //   setActive(i);
+  //   let newDataBase = { ...dataBase };
+  //   newDataBase.active = i;
+  //   setDataBase(newDataBase);
+  // }
 
   return (
     deck && (
@@ -199,7 +202,7 @@ export default function Deck({
                 dataBase.checkboxClicked
                   ? () => {
                       deleteDeck();
-                      handleActive(index - 1);
+                      // handleActive(active - 1);
                     }
                   : () => {
                       setTrash(true);
@@ -214,11 +217,11 @@ export default function Deck({
                 card="deck"
                 threeDotsMenuOpen={threeDotsMenuOpen}
                 index={index}
-                setIndex={setIndex}
+                //setIndex={setIndex}
                 deleteWindow={() => setShowDeleteWindow(false)}
                 trashEvent={() => {
                   deleteDeck();
-                  handleActive(index - 1);
+                  //handleActive(index - 1);
                 }}
                 showDeleteWindow={showDeleteWindow}
               />
@@ -332,7 +335,7 @@ export default function Deck({
             setPauseIsActive={setPauseIsActive}
           />
 
-          {Number(active) === 1 && (
+          {active === index && (
             // active || active ??
 
             <AddQuestionsToDeck

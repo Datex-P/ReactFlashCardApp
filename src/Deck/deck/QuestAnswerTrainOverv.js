@@ -203,6 +203,7 @@ export default function QuestAnswerTrainOverv({
                 newDataBase.openedToday = true;
                 setShowProgressDiagram(false); //progress diagram gets why not at this place??
                 setDataBase(newDataBase);
+                console.log(dataBase, 'database')
               }
         }
       >
