@@ -18,7 +18,7 @@ export default function SaveAndDiscard({ saveEvent, generateRandom, setCardModif
           style={{width: '140px'}}
           >
       {
-        ['Discard', 'Save'].map(el =>
+        ['Discard', 'Save'].map((el, index) =>
           <div
             className={`saveAndDiscardButtonStyling d-flex justify-content-around align-items-center 
             isEnterMouse ? 'backgroundColor' : ''`}
@@ -38,6 +38,7 @@ export default function SaveAndDiscard({ saveEvent, generateRandom, setCardModif
                         : 
                       discardEvent
                   }
+              key={index}
             
                 
       // onMouseEnter={() => handleBackground(true)}

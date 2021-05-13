@@ -20,7 +20,6 @@ export default function QuestAnswerTrainOverv({
   setCreateDeckButtonIsVisible = () => {},
   editButtonClicked, //activated when change deckname field is open
 }) {
-  // const [threeDotsOpen, setThreeDotsOpen] = useState(showFromParent);
 
   const [checked, setChecked] = useState(false);
   const [editBtnClicked, setEditBtnClicked] = useState(false);

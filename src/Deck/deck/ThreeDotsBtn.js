@@ -19,11 +19,10 @@ function ThreeDotsBtn({
                         className, 
                         editButtonClicked,  //active when editButton next to DeckName is clicked
                         nameOfTopDeck, 
-                        index, input, threeDotsContainer, setEditButtonClicked, 
+                        index, input, threeDotsContainer,
                         edit=false,trash=false,pause=false,reset=false,
                         editBtnClicked, //is the editBtn in the main Question/Answer Overview
                         data,
-                        
                         editEvent = () => { }, 
                         trashEvent = () => { },
                         resetEvent = () => { },

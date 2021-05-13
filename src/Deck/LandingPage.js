@@ -26,11 +26,11 @@ export default function DeckContainer() {
   const [editButtonClicked, setEditButtonClicked] = useState(true); //active when editButton next to DeckName is clicked
   const [pauseIsActive, setPauseIsActive] = useState(true);
   const [active, setActive] = useState(0);
-  const [decksAreVisible, setDecksAreVisible] = useState(false);
+  const [decksAreVisible, setDecksAreVisible] = useState(true); //decks are shown on the deck stack if this is set to true
 
   //based on that the diagram on the main menu is shown or not
 
-  const [spinnerIsVisible, setSpinnerIsVisible] = useState(true);
+  const [spinnerIsVisible, setSpinnerIsVisible] = useState(true); //spinner that is shown when application loads
   const [addNewDeckWindow, setAddNewDeckWindow] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -54,9 +54,6 @@ export default function DeckContainer() {
     setDataBase(newDataBase);
   }
 
-  // console.log(dataBase.DeckNames.length, 'decknames length')
-  // console.log(colors[0], 'colors zero')
-
   useEffect(() => {
     //scroller.current.scroll(0,800)
     setTimeout(() => {
@@ -74,15 +71,7 @@ export default function DeckContainer() {
             styles.backgroundColor[dataBase.userPreferences.backgroundColor],
         }}
       >
-        {/* {
-          showProgressDiagram ? (
-          <div className="pieDiagramContainer">
-            <PieDiagramm />
-          </div>
-        ) 
-        : 
-        null
-        } */}
+       
 
         <Row className="posRel">
           {decksAreVisible ? (

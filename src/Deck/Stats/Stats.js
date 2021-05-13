@@ -61,11 +61,8 @@ function Stats({ history }) {
           <div className="dateDiagramPos">
             {!dataBase.openedToday
               ? "No cards studied today"
-              : `Data from: ${todayDate.toLocaleString("de-DE", {
-                  day: "numeric",
-                  month: "numeric",
-                  year: "numeric",
-                })}`}
+              :  `Data from: ${new Date().toLocaleDateString().replace(/\//g,'.')}`         
+                }
           </div>
           <div
             style={{ marginBottom: "10px", border: "1px solid black" }}
@@ -205,11 +202,14 @@ function RenderDays() {
   useLayoutEffect(() => {
     // console.log(window.getComputedStyle(divRef), 'divref here')
     
-          let inner = divRef.current.getBoundingClientRect();
+    console.log('hello how is it going')
     
-          console.log(217, inner, "inner");
-
     if (divRef.current) {
+
+      console.log('sers')
+    console.log('hello how is it going')
+      let inner = divRef.current.getBoundingClientRect();
+      console.log(217, inner, "inner");
       divRef.current.style.background = "green";
 
       let parentHeight = divRef.current.offsetHeight;

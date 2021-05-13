@@ -222,6 +222,12 @@ input[type="checkbox"] {
   width:99% !important;
 }
 
+.addCardsToDeck {
+    font-size: 13px;
+    position: absolute;
+    top: 110px;
+}
+
 .customDialog {
   left:100px;
 }
@@ -656,18 +662,26 @@ border-radius: 5px;
   border-radius: 3px;
 }
 
+.tooLongOrShort{
+position: absolute;
+z-index: 10;
+width: 100px;
+left: 235px;
+top: 22px;
+}
+
 .progressBar {
   background-color: black; 
   padding: 3px; 
   height: 16px; 
   width: 146px; 
-  margin-left: 37px; 
+  margin-left: 46px; 
   border-radius: 3px;
   margin-top: 5px;
 }
 
 .time { /*used in stats for the border of the individual times*/
-  margin-left: 18px;
+  margin-left: 11px;
   border: 1px solid black;
   width: 56px;
   padding: 1px;

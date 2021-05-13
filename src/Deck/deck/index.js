@@ -44,10 +44,12 @@ export default function Deck({
   const [show, setShow] = useState(false);
   const [nameOfTopDeck, setNameOfTopDeck] = useState(name);
   const [threeDotsMenuOpen, setThreeDotsMenuOpen] = useState(false);
-
+  const [deckNameLengthRight, setDeckNameLengthRight] = useState(true)
+  const [nameTooLongOrShort, setNameTooLongOrShort] = useState(false)
   const [showDeleteWindow, setShowDeleteWindow] = useState(true); //if true and triggered the delete window with yes and no button is shown
   const [trash, setTrash] = useState(false);
   const { dataBase, setDataBase } = useContext(Context);
+
   //const [index, setIndex] = useState(0);
 
 /*  useEffect(() => {
@@ -114,6 +116,23 @@ export default function Deck({
     }
   }
 
+
+  function handleChangeName(e){
+
+    if (e.target.value.length >3 && e.target.value.length <12) {
+     
+     setDeckNameLengthRight(true)
+     setThreeDotsMenuOpen(true)
+     setNameTooLongOrShort(false)
+     
+    } else {
+      setNameTooLongOrShort(true)
+      setDeckNameLengthRight(false)
+
+    }
+      setNameOfTopDeck(e.target.value);
+  }
+
   console.log(index, "that is the index");
 
   // function handleActive(i) {
@@ -123,13 +142,28 @@ export default function Deck({
   //   setDataBase(newDataBase);
   // }
 
+  console.log(nameOfTopDeck.length, 'nameoftopd')
+
   return (
     deck && (
+      
       <Card
         style={style}
         className="newDeckContainer flexColumn position-absolute "
       >
-        <Card.Body className="justify-content-center align-items-center flex-column d-flex">
+        <Card.Body className="justify-content-center align-items-center flex-column d-flex"
+        >
+          {
+        nameTooLongOrShort? 
+          <div className='tooLongOrShort'
+          >
+          {`${nameOfTopDeck.length>11? 'Too long' : nameOfTopDeck.length<4? 'Too short': ''}`}
+          </div>
+          :
+          null
+
+       }  
+
           <Card.Title
             className="d-flex align-items-center justify-content-between position-relative"
             style={{ width: "151px", left: "3px", height: "0px" }}
@@ -153,20 +187,13 @@ export default function Deck({
                 //style={{top: data && data.length === 0? '-69px': 'default'}}
                 //defaultValue=''
                 value={nameOfTopDeck}
-                onChange={(e) => {
-                  if (e.target.value.length > 25) {
-                    alert("Deckname can not be longer than 25 characters");
-                  } else {
-                    // if (!dataBase.DeckNames[index].paused) {
-
-                    setNameOfTopDeck(e.target.value);
-                  }
-                }}
+                onChange={handleChangeName}
               />
+        
             )}
-            {console.log(dataBase.DeckNames[index].data.length, "value length")}
-            {console.log(dataBase.DeckNames[index], "inid")}
-
+            
+            {
+              deckNameLengthRight &&
             <ThreeDotsBtn
               name={name}
               text={"deck"}
@@ -195,8 +222,11 @@ export default function Deck({
                 backgroundColor: paused ? "black" : "white",
               }}
               editEvent={() => {
+                console.log(threeDotsMenuOpen, 'threedotsmenuopn')
                 setThreeDotsMenuOpen(false);
                 setEditButtonClicked(!editButtonClicked);
+                console.log(threeDotsMenuOpen, 'threedotsmenuopn')
+
               }}
               trashEvent={
                 dataBase.checkboxClicked
@@ -210,6 +240,7 @@ export default function Deck({
                     }
               }
             />
+                }
 
             {trash && showDeleteWindow && !paused && (
               <DeleteCardQuestionBox
@@ -241,11 +272,13 @@ export default function Deck({
                   className="d-flex flex-column justify-content-around"
                   style={{ height: "90px", width: "122px" }}
                 >
-                  <div>Deck is empty.</div>
+                  <div>
+                  Deck is empty.
+                  </div>
                   <div>
                     Press:
                     <span
-                      style={{ marginLeft: "10px", cursor: "pointer" }}
+                      className='spanPlusStyling'
                       onClick={() => setShow(true)}
                     >
                       <img src={plusimg} alt="plus" />
@@ -253,11 +286,7 @@ export default function Deck({
                   </div>
                 </div>
                 <div
-                  style={{
-                    fontSize: "13px",
-                    position: "absolute",
-                    top: " 110px",
-                  }}
+                  className = 'addCardsToDeck'
                 >
                   to add cards to the deck.
                 </div>
@@ -352,3 +381,6 @@ export default function Deck({
     )
   );
 }
+
+
+
