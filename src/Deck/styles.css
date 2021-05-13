@@ -132,6 +132,12 @@ input[type="checkbox"] {
   font-size: 14px;
 }
 
+.timesStyling {
+  padding-left: 3px;
+  height: 21px;
+  font-size:14px;
+}
+
 .dateDiagramPos {
   width: 90px;
    height: 50px;
@@ -661,9 +667,9 @@ border-radius: 5px;
 }
 
 .time { /*used in stats for the border of the individual times*/
-  margin-left: 10px ;
+  margin-left: 18px;
   border: 1px solid black;
-  width: 65px;
+  width: 56px;
   padding: 1px;
   border-radius: 2px;
 }

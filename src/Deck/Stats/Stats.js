@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useLayoutEffect, useContext, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useContext,
+  useRef,
+} from "react";
 import { Context } from "../../Context";
 import BasicOrangeWindow from "../deck/BasicOrangeWindow";
 import ThreeDotsBtn from "../deck/ThreeDotsBtn";
@@ -9,7 +15,7 @@ import HourlyBreakdown from "./HourlyBreakdown.js";
 import DeleteCardQuestionBox from "../deck/DeleteCardQuestionBox";
 
 function Stats({ history }) {
-  const {dataBase, setShowProgressDiagram } = useContext(Context);
+  const { dataBase, setShowProgressDiagram, setDataBase } = useContext(Context);
   const [showDeleteFrame, setShowDeleteFrame] = useState(false);
   const [checked, setChecked] = useState(false);
   const [show, setShow] = useState(false);
@@ -51,24 +57,15 @@ function Stats({ history }) {
         }
       >
         <div>
-          <div className='studyBreakdownHeader'
-          >
-                  Today's study breakdown
-          </div>
-          <div className='dateDiagramPos'
-          >
-            {
-              !dataBase.openedToday ? 
-             
-              'No cards studied today'
-             
-              :
-              `Data from: ${todayDate.toLocaleString('de-DE', {
-                day: 'numeric',
-                month: 'numeric',
-                year: 'numeric',
-              })}`
-              }
+          <div className="studyBreakdownHeader">Today's study breakdown</div>
+          <div className="dateDiagramPos">
+            {!dataBase.openedToday
+              ? "No cards studied today"
+              : `Data from: ${todayDate.toLocaleString("de-DE", {
+                  day: "numeric",
+                  month: "numeric",
+                  year: "numeric",
+                })}`}
           </div>
           <div
             style={{ marginBottom: "10px", border: "1px solid black" }}
@@ -83,32 +80,19 @@ function Stats({ history }) {
                 setChecked={setChecked}
                 showDeleteWindow={showDeleteFrame}
                 deleteWindow={() => setShowDeleteFrame(false)}
-                 trashEvent={()=>{
-
-
-
-      for (let deck of dataBase.DeckNames) {
-      //newDataBase.DeckNames[index].data[newRandomQuestion].openHistory
-      let deckItem = dataBase.DeckNames[deck]
-      // if (deckItem.data.find((item) => new Date(item?.openHistory?.[0]).toDateString() == new Date().toDateString())) {
-      //   todayCardsStudiedCounter++
-      //console.log(deckItem)
-
-deckItem.data.filter(val)
-  
-  function val (item) {
-    if (item.openHistory) {
-      delete item.openHistory
-    }
-  }
-
-                 }
-                 }
-                   }
+                trashEvent={() => {
+                  let DeckNames = [...dataBase.DeckNames]
+                  DeckNames.forEach(deckItem=>
+                    deckItem.data.forEach(item=> item.openHistory&&delete item.openHistory)
+               
+                  )
+                  setDataBase({...dataBase,DeckNames})
+                }
+                }
                 onHide={() => {}}
               />
             )}
-          
+
             <PieDiagramm />
           </div>
 
@@ -191,12 +175,12 @@ function RenderDays() {
       thisYear.getDate() !== 1 ||
       thisYear.getFullYear() === +year
     ) {
-      date.push({ day: thisYear.toDateString() ,cardsStudied:0});
+      date.push({ day: thisYear.toDateString(), cardsStudied: 0 });
       thisYear.setDate(thisYear.getDate() + 1);
     }
     //setDays(date);
     let today = new Date().toDateString();
-    if (dataBase?.DeckNames ) {
+    if (dataBase?.DeckNames) {
       for (let deck in dataBase.DeckNames) {
         //console.log(deckItem.data.filter((item) => item?.openHistory?.some(item => new Date(item).toDateString())).length, 'opened cards today')
 
@@ -210,100 +194,94 @@ function RenderDays() {
         ).length;
         let index = date.findIndex((day) => day.day === today);
         //let newDays = [...days];
-        console.log(index)
+        console.log(index);
         date[index].cardsStudied += todaysAmount;
         setDays(date);
       }
     }
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [year]);
 
-useLayoutEffect ( () => {
-  
-   // console.log(window.getComputedStyle(divRef), 'divref here')
+  useLayoutEffect(() => {
+    // console.log(window.getComputedStyle(divRef), 'divref here')
     
-    if(divRef.current){
-      divRef.current.style.background = 'green'
-        
-        let parentHeight = divRef.current.offsetHeight;
-        let parentWidth  = divRef.current.offsetWidth;
+          let inner = divRef.current.getBoundingClientRect();
+    
+          console.log(217, inner, "inner");
+
+    if (divRef.current) {
+      divRef.current.style.background = "green";
+
+      let parentHeight = divRef.current.offsetHeight;
+      let parentWidth = divRef.current.offsetWidth;
 
       if (parentHeight === 86) {
       }
+      console.log(divRef.current, "this is divref");
 
-
-      let inner = divRef.current.getBoundingClientRect()
-
-        console.log(217,inner, 'inner')
-        console.log(divRef.current, 'this is divref')
-
-        console.log(parentHeight, 'parentheight')
-        console.log(parentWidth, 'parentwidth')
+      console.log(parentHeight, "parentheight");
+      console.log(parentWidth, "parentwidth");
     }
-
 
     //let inner = divRef.current.getBoundingClientRect()
     //console.log(217,inner, 'inner')
-    console.log('divref fired')
-   
-    
-}, [divRef]);
-
-  
-
+    console.log("divref fired");
+  }, [divRef]);
 
   return (
-    <div className='yearBoxContainer'
-    >
-      {
-        days.map((day, index) => (
+    <div className="yearBoxContainer">
+      {days.map((day, index) => (
         <div
-          className={`day ${day.cardsStudied ? 'pointer' : ''}`}
+          className={`day ${day.cardsStudied ? "pointer" : ""}`}
           key={index}
-          style={{ backgroundColor: day.cardsStudied ? 'red' : '' }}
+          style={{ backgroundColor: day.cardsStudied ? "red" : "" }}
           onClick={() => {
             if (day.cardsStudied) {
               setShowTodaysProg(true);
 
-
               //console.log(divRef.current.clientWidth, 'divref here')
-
-
             }
           }}
         >
-          {
-              showTodaysProg && day.cardsStudied ? (
-              <div style={{ width: '126px', height: '86px', position: 'absolute', top: '20px' }}
-                ref={divRef}
+          {showTodaysProg && day.cardsStudied ? (
+            <div
+              style={{
+                width: "126px",
+                height: "86px",
+                position: "absolute",
+                top: "20px",
+              }}
+              ref={divRef}
+            >
+              {day.day}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "30px",
+                  //  border:'1px solid black'
+                }}
               >
-                {day.day} 
-                <div style={{position: 'absolute', top: '30px',
-              //  border:'1px solid black'
+                Time:
+              </div>
+              <div
+                style={{
+                  position: "absolute",
+                  top: "56px",
+                  //, border: '1px solid black'
                 }}
-                >
-                  Time: 
-                </div>
-                <div style={{position: 'absolute', top: '56px'
-                //, border: '1px solid black'
-                }}
-               
-                >
-                  {/* {
+              >
+                {/* {
                     `${Reviews: ${day.cardsStudied}  ${day.cardsStudied > 1? 'cards' : 'card'} }`
                     
                     } */}
-                    Review:`${day.cardsStudied !== 1 ? 's' : ''}: ${day.cardsStudied} card${day.cardsStudied !== 1 ? 's' : ''}`
-                    {/* Reviews: `${day.cardsStudied}` */}
-                </div>
+                Review:`${day.cardsStudied !== 1 ? "s" : ""}: $
+                {day.cardsStudied} card${day.cardsStudied !== 1 ? "s" : ""}`
+                {/* Reviews: `${day.cardsStudied}` */}
               </div>
-            ) 
-            : 
-            null
-          }
+            </div>
+          ) : null}
         </div>
-      ))
-      }
+      ))}
     </div>
   );
 }

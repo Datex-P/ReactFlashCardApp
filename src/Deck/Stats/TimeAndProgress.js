@@ -94,7 +94,8 @@ export default function TimeAndProgress() {
               previousWidthVar={previousWidthVar}
               widthVar={widthVar}
               time={
-                <div style={{ paddingLeft: "3px", height: "21px" }}>
+                <div className='timesStyling' 
+                >
                   {"18 - 24"}
                 </div>
               }
@@ -107,7 +108,8 @@ export default function TimeAndProgress() {
               previousWidthVar={previousWidthVar}
               widthVar={widthVar}
               time={
-                <div style={{ paddingLeft: "3px", height: "21px" }}>
+                <div className='timesStyling' 
+                >
                   {"24 - 06"}
                 </div>
               }
@@ -136,7 +138,11 @@ export default function TimeAndProgress() {
                 previousWidthVar={previousWidthVar}
                 widthVar={widthVar}
                 time={
-                  <div style={{ paddingLeft: "3px", height: "21px" }}>
+                  <div
+                      className='timesStyling' 
+                      // style={{ paddingLeft: "3px", height: "21px", fontSize:'14px' }}
+                      // 
+                      >
                     {"12"} - {"18"}
                   </div>
                 }
@@ -144,17 +150,20 @@ export default function TimeAndProgress() {
             );
           }
         } else {
-          arr.push(
-            <Row
-              previousWidthVar={previousWidthVar}
-              widthVar={widthVar}
-              time={
-                <div style={{ paddingLeft: "3px" }}>
-                  {i} - {i + 4}
-                </div>
-              }
-            />
-          );
+          // arr.push(
+          //   <Row
+          //     previousWidthVar={previousWidthVar}
+          //     widthVar={widthVar}
+          //     time={
+          //       <div  className='timesStyling' 
+          //             style={{backgroundColor:'blue'}}
+          //       // style={{ paddingLeft: "3px", height:'21px', fontSize:'14px' }}
+          //       >
+          //         {i} - {i + 4}
+          //       </div>
+          //     }
+          //   />
+          // );
         }
       }
     }
