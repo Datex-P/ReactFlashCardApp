@@ -228,6 +228,31 @@ input[type="checkbox"] {
     top: 110px;
 }
 
+.SaveBtn {
+  background-color: #d4edda;
+  color:#155724
+}
+
+.DiscardBtn {
+  background-color: #f8d7da;
+  color: #721c24
+}
+.SaveBtn:hover {
+  background-color: #155724;
+  color: white;
+}
+
+.DiscardBtn:hover {
+  background-color: #721c24;
+  color: white;
+}
+
+
+.spanPlusStyling{
+  margin-left:10px;
+  cursor: pointer;
+} 
+
 .customDialog {
   left:100px;
 }
@@ -859,8 +884,8 @@ height: 33px;
 
 #createDeck .modal-title {
   height: 30px;
-  background-color: rgba(200, 168, 115, 0.95) !important;
-  font-size: 17px;
+  background-color: rgba(200, 168, 115) !important;
+  font-size: 16px;
   font-weight: bold; 
   background-color: transparent !important;
   padding-left: 23px;
@@ -875,8 +900,8 @@ height: 33px;
 }
 
 #createDeck .modal-content {
-  width: 258px;
-  height: 178px;
+  width: 247px;
+  height: 160px;
   background-color: rgba(200, 168, 115) !important; 
   align-items: center;
   margin: auto;
@@ -885,19 +910,18 @@ height: 33px;
 }
 
 .selectStyling {
-  width: 86%; 
-  height: 26px; 
+  width: 79%;
+  height: 24px;
   border-radius: 5px;
-  padding-left: 3px; 
-  outline: none; 
+  padding-left: 3px;
+  outline: none;
   cursor: pointer;
 }
 
 .cancelOkContainer {
   width: 57%; 
-  top: -15px; 
+  top: -13px; 
   position: relative;
-  
 }
 
 
@@ -999,13 +1023,13 @@ border-bottom-left-radius: calc(.3rem - 1px);
 }
 
 .createNewDeckInputField {
-  width: 92%;
-  margin-top: 10px;  
-  border-radius: 5px; 
+  width: 78%;
+  margin-top: 3px;
+  border-radius: 5px;
   border: 1px solid black;
-  margin-bottom: 10px; 
-  height: 27px; 
-  outline: none; 
+  margin-bottom: 14px;
+  height: 22px;
+  outline: none;
   padding-left: 5px;
 }
 

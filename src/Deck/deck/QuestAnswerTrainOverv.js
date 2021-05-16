@@ -96,7 +96,8 @@ export default function QuestAnswerTrainOverv({
         }
 
         newDataBase.DeckNames[index].data[newRandomQuestion].openHistory.push(
-          new Date()
+       //   new Date()
+       new Date('May 26, 2021')
         );
         setDataBase(newDataBase);
       }

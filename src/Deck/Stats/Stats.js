@@ -1,9 +1,8 @@
 import React, {
   useState,
   useEffect,
-  useLayoutEffect,
   useContext,
-  useRef,
+  useRef
 } from "react";
 import { Context } from "../../Context";
 import BasicOrangeWindow from "../deck/BasicOrangeWindow";
@@ -19,6 +18,8 @@ function Stats({ history }) {
   const [showDeleteFrame, setShowDeleteFrame] = useState(false);
   const [checked, setChecked] = useState(false);
   const [show, setShow] = useState(false);
+ 
+  
 
   function setShowFunc() {
     history.push("/");
@@ -77,7 +78,8 @@ function Stats({ history }) {
                 setChecked={setChecked}
                 showDeleteWindow={showDeleteFrame}
                 deleteWindow={() => setShowDeleteFrame(false)}
-                trashEvent={() => {
+                trashEvent={() => 
+                {
                   let DeckNames = [...dataBase.DeckNames]
                   DeckNames.forEach(deckItem=>
                     deckItem.data.forEach(item=> item.openHistory&&delete item.openHistory)
@@ -161,7 +163,7 @@ function RenderDays() {
   const [days, setDays] = useState([]);
   const { dataBase } = useContext(Context);
   const [showTodaysProg, setShowTodaysProg] = useState(false);
-  const divRef = useRef();
+  const innerStat = useRef(null)
 
   useEffect(() => {
     let date = [];
@@ -176,7 +178,7 @@ function RenderDays() {
       thisYear.setDate(thisYear.getDate() + 1);
     }
     //setDays(date);
-    let today = new Date().toDateString();
+    let today = new Date('May 26, 2021').toDateString();
     if (dataBase?.DeckNames) {
       for (let deck in dataBase.DeckNames) {
         //console.log(deckItem.data.filter((item) => item?.openHistory?.some(item => new Date(item).toDateString())).length, 'opened cards today')
@@ -197,49 +199,63 @@ function RenderDays() {
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [year]);
+  }, [year,dataBase.DeckNames]);
 
-  useLayoutEffect(() => {
-    // console.log(window.getComputedStyle(divRef), 'divref here')
+  let outer;
+  let inner;
+
+//  let bla = null;
+
+//   useEffect(() => {
+
+//     setTimeout(() => {
+//      // bla = textInput.current.getBoundingClientRect()
+
+//       console.log(bla, 'textcurrent size')
+
+//     }, 300);
     
-    console.log('hello how is it going')
-    
-    if (divRef.current) {
+//       }, [ ]);
 
-      console.log('sers')
-    console.log('hello how is it going')
-      let inner = divRef.current.getBoundingClientRect();
-      console.log(217, inner, "inner");
-      divRef.current.style.background = "green";
+  
 
-      let parentHeight = divRef.current.offsetHeight;
-      let parentWidth = divRef.current.offsetWidth;
+  // function checkOuterAndInner () {
 
-      if (parentHeight === 86) {
-      }
-      console.log(divRef.current, "this is divref");
+  //   if (inner.right> outer.right) {
+  //     console.log('bigger')
+  //   } else {
+  //     console.log('not bigger')
+  //   }
+  // }
 
-      console.log(parentHeight, "parentheight");
-      console.log(parentWidth, "parentwidth");
-    }
+  //  if (outer > inner) {
+  //    console.log('yeah that is right')
+  //  } else {
+  //    console.log('that is false')
+  //  }
 
-    //let inner = divRef.current.getBoundingClientRect()
-    //console.log(217,inner, 'inner')
-    console.log("divref fired");
-  }, [divRef]);
+  //let outer = 
+
 
   return (
-    <div className="yearBoxContainer">
+    <div className="yearBoxContainer"
+     onClick={(e)=>{    
+      //  outer = e.target.getBoundingClientRect()
+       
+      // //  let inner = this.current.getBoundingClientRect();
+      //  console.log(217, outer, "inner from year box")
+       }}
+     >
       {days.map((day, index) => (
         <div
           className={`day ${day.cardsStudied ? "pointer" : ""}`}
           key={index}
           style={{ backgroundColor: day.cardsStudied ? "red" : "" }}
-          onClick={() => {
+          onClick={(e) => {
             if (day.cardsStudied) {
               setShowTodaysProg(true);
 
-              //console.log(divRef.current.clientWidth, 'divref here')
+            //  console.log(innerStat.current.getBoundingClientRect(), 'inner from inner stat')
             }
           }}
         >
@@ -251,14 +267,19 @@ function RenderDays() {
                 position: "absolute",
                 top: "20px",
               }}
-              ref={divRef}
+              onClick={(e)=>{
+              //   inner= e.target.getBoundingClientRect();
+              // console.log(217, inner, "inner from inner box");
+ 
+
+              }}
+              ref={innerStat}
             >
               {day.day}
               <div
                 style={{
                   position: "absolute",
                   top: "30px",
-                  //  border:'1px solid black'
                 }}
               >
                 Time:

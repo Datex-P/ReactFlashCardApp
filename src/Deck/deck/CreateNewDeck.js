@@ -2,8 +2,6 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { Context } from "../../Context"; //step 4.1 import context instance
 
-import redCross from "../../icons/redCross.svg";
-
 export default function CreateNewDeck({
   addNewDeckWindow,
   setDecksAreVisible,
@@ -95,34 +93,6 @@ export default function CreateNewDeck({
       <Modal.Header>
         <Modal.Title>Name for new deck</Modal.Title>
 
-        <button
-          className="redCross"
-          onClick={() => {
-            if (dataBase.DeckNames.length === 0) {
-              //when no deck in list, show arrow Down again
-              setArrowDown(true);
-              setDecksAreVisible(false);
-              setScrollbarVisible(false);
-            } else {
-
-              addNewDeckWindow(false);
-              setDecksAreVisible(true);
-            }
-            close();
-          }}
-        >
-          <img
-            className="nonDraggableIcon"
-            src={redCross}
-            alt="redCross"
-            style={{
-              position: "relative",
-              top: "0px",
-              right: "-9px",
-              width: "15px",
-            }}
-          />
-        </button>
       </Modal.Header>
 
       <Modal.Body className="d-flex flex-column align-items-center">
@@ -160,7 +130,7 @@ export default function CreateNewDeck({
                       //when no deck in list, show arrow Down again
                       setArrowDown(true);
                       setDecksAreVisible(false);
-                      console.log("yippi yeah yeah yeah");
+                    
                     }
                   })()
                 : addNewDeckName();
