@@ -113,7 +113,7 @@ export default function ChartComp() {
     console.log(deckItem.data.filter((item) => item?.openHistory?.some(item => new Date(item).toDateString())).length, 'opened cards today')
 
 
-    // config.data.labels.push(deckItem.name)
+     config.data.labels.push(deckItem.name)
       //arr.push(deckItem.name)
       
       //config.data.datasets[0].data.push(10)

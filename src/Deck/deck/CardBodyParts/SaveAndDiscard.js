@@ -27,7 +27,7 @@ export default function SaveAndDiscard({ saveEvent, generateRandom, setCardModif
                         setCardModified(true)
                       } 
                         : 
-                      discardEvent
+                      ()=>{discardEvent()}
                   }
               key={index}
             

@@ -76,7 +76,7 @@ function Settings({ history }) {
       >
           <div 
               className='d-flex border border-dark justify-content-center align-items-center'
-              style={{ padding: '1px', borderRadius: '5px', position: 'relative', width: '284px', height:'88px' }}
+              style={{ padding: '1px', borderRadius: '5px', position: 'relative', width: '300px', height:'88px' }}
           >
               <div 
                   className='d-flex justify-content-around align-items-center' 

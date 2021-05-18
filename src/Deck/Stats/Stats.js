@@ -137,6 +137,7 @@ function ButtonLeftAndRight() {
               width: "33px",
               cursor: el === year ? "default" : "pointer",
               margin: el === year ? "5px" : "",
+              marginTop: el === year? '1px': ''
             }}
             className={
               el !== year
@@ -164,6 +165,8 @@ function RenderDays() {
   const { dataBase } = useContext(Context);
   const [showTodaysProg, setShowTodaysProg] = useState(false);
   const innerStat = useRef(null)
+  const [right,setRight]=useState(0)
+  const [outer,setOuter]=useState(0)
 
   useEffect(() => {
     let date = [];
@@ -201,8 +204,7 @@ function RenderDays() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [year,dataBase.DeckNames]);
 
-  let outer;
-  let inner;
+
 
 //  let bla = null;
 
@@ -240,10 +242,11 @@ function RenderDays() {
   return (
     <div className="yearBoxContainer"
      onClick={(e)=>{    
-      //  outer = e.target.getBoundingClientRect()
+       let outer = e.currentTarget.getBoundingClientRect()
        
-      // //  let inner = this.current.getBoundingClientRect();
-      //  console.log(217, outer, "inner from year box")
+      //  let inner = this.current.getBoundingClientRect();
+      console.log(247, outer, "inner from year box")
+       setOuter(outer)
        }}
      >
       {days.map((day, index) => (
@@ -252,6 +255,14 @@ function RenderDays() {
           key={index}
           style={{ backgroundColor: day.cardsStudied ? "red" : "" }}
           onClick={(e) => {
+            let inner= e.target.getBoundingClientRect();
+              console.log(273, inner, "inner from inner box");
+              setTimeout(()=>{
+                if((outer.right - inner.right) < 126){
+                  setRight(outer.right - inner.right - 126)
+                  console.log('ggre')
+                }
+              },10)
             if (day.cardsStudied) {
               setShowTodaysProg(true);
 
@@ -266,10 +277,10 @@ function RenderDays() {
                 height: "86px",
                 position: "absolute",
                 top: "20px",
+                left: right+'px'
               }}
               onClick={(e)=>{
-              //   inner= e.target.getBoundingClientRect();
-              // console.log(217, inner, "inner from inner box");
+                
  
 
               }}
