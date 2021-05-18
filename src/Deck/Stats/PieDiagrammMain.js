@@ -7,9 +7,6 @@ export default function ChartComp() {
   const { dataBase} = useContext(Context);
   let ctx = useRef(null)
 
-
-
-
  var config = {
   type: 'doughnut',
   data: {
@@ -76,11 +73,6 @@ export default function ChartComp() {
     }
   }
 };
-// config.options.elements.center.text= `Goal ${parseInt((dataBase.deckCompleted * 100) /
-//   Object.keys(dataBase.DeckNames).length)} %`
-
-// `Goal ${parseInt((dataBase.deckCompleted * 100) /
-//   Object.keys(dataBase.DeckNames).length)} %`
 
 
 
@@ -176,8 +168,8 @@ export default function ChartComp() {
           // Move the center up depending on line height and number of lines
           centerY -= (lines.length / 2) * lineHeight;
 
-          for (var n = 0; n < lines.length; n++) {
-            ctx.fillText(lines[n], centerX, centerY);
+          for (var j = 0; j < lines.length; j++) {
+            ctx.fillText(lines[j], centerX, centerY);
             centerY += lineHeight;
           }
           //Draw text in center

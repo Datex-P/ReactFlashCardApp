@@ -35,10 +35,11 @@ export default function Deck({
   setShowProgressDiagram,
   arrowDown,
   setArrowDown = () => {},
+  paused,
   ...style
 }) {
   if (deck) {
-    var { data, paused, name } = deck;
+    var { data, name } = deck;
   }
 
   const [show, setShow] = useState(false);
@@ -68,11 +69,11 @@ export default function Deck({
 
   let input = useRef(null);
 
-  function handlePause() {
+  function handlePause(index) {
     console.log(index);
     let newDataBase = { ...dataBase };
 
-    newDataBase.DeckNames[index].paused = !paused;
+    newDataBase.DeckNames[index].paused = true;
     console.log(newDataBase.DeckNames);
     setDataBase(newDataBase);
     // setShow(false) why does  three button window not close with this?
@@ -227,6 +228,9 @@ export default function Deck({
                 setEditButtonClicked(!editButtonClicked);
                 console.log(threeDotsMenuOpen, 'threedotsmenuopn')
 
+              }}
+              pauseEvent={(index)=>{
+                handlePause(index)
               }}
               trashEvent={
                 dataBase.checkboxClicked

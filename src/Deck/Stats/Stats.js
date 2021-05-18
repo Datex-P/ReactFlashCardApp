@@ -31,7 +31,7 @@ function Stats({ history }) {
     // eslint-disable-next-line
   }, []);
 
-  let todayDate = new Date();
+
 
   return (
     <div style={{ width: "70%", height: "50%" }}>
@@ -206,45 +206,12 @@ function RenderDays() {
 
 
 
-//  let bla = null;
-
-//   useEffect(() => {
-
-//     setTimeout(() => {
-//      // bla = textInput.current.getBoundingClientRect()
-
-//       console.log(bla, 'textcurrent size')
-
-//     }, 300);
-    
-//       }, [ ]);
-
-  
-
-  // function checkOuterAndInner () {
-
-  //   if (inner.right> outer.right) {
-  //     console.log('bigger')
-  //   } else {
-  //     console.log('not bigger')
-  //   }
-  // }
-
-  //  if (outer > inner) {
-  //    console.log('yeah that is right')
-  //  } else {
-  //    console.log('that is false')
-  //  }
-
-  //let outer = 
-
 
   return (
     <div className="yearBoxContainer"
      onClick={(e)=>{    
        let outer = e.currentTarget.getBoundingClientRect()
-       
-      //  let inner = this.current.getBoundingClientRect();
+   
       console.log(247, outer, "inner from year box")
        setOuter(outer)
        }}
@@ -257,12 +224,12 @@ function RenderDays() {
           onClick={(e) => {
             let inner= e.target.getBoundingClientRect();
               console.log(273, inner, "inner from inner box");
-              setTimeout(()=>{
+             // setTimeout(()=>{
                 if((outer.right - inner.right) < 126){
                   setRight(outer.right - inner.right - 126)
                   console.log('ggre')
                 }
-              },10)
+              //},10)
             if (day.cardsStudied) {
               setShowTodaysProg(true);
 

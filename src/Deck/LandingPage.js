@@ -101,6 +101,7 @@ export default function DeckContainer() {
                           setChangeDeckNameOpen={setChangeDeckNameOpen}
                           zIndex={2}
                           background={colors[active % colors.length]}
+                          paused={deck.paused}
                         />
                       );
                     } else {
@@ -118,6 +119,7 @@ export default function DeckContainer() {
                           arrowDown={arrowDown}
                           setArrowDown={setArrowDown}
                           setDeck
+                          paused={deck.paused}
                           deck={deck}
                           decksAreVisible={decksAreVisible}
                           setDecksAreVisible={setDecksAreVisible}

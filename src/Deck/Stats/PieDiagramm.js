@@ -219,7 +219,6 @@ export default function ChartComp() {
 
 
 
-
   return (
     <canvas 
         ref={ctx} 

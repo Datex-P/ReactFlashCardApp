@@ -155,7 +155,7 @@ input[type="checkbox"] {
 .menuIcon {
   font-weight: bold;
   border: 2px black solid;
-  width: 48%;
+  width: 54%;
   margin-bottom: 3px;
   border-radius: 12px;
   position: absolute;
@@ -922,6 +922,10 @@ height: 33px;
   width: 57%; 
   top: -13px; 
   position: relative;
+}
+
+.bar {
+  background: red !important;
 }
 
 

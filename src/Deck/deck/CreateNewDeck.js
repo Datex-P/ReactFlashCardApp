@@ -19,16 +19,18 @@ export default function CreateNewDeck({
   const [inputField, setInputField] = useState("");
 
   const inputRef = useRef(null);
+  const Ok = useRef(null);
+  const Cancel = useRef(null);
 
   useEffect(() => {
     if (addNewDeckWindow) {
       inputRef.current.focus();
       setShowProgressDiagram(false);
     } else {
-    //  setShowProgressDiagram(true);
+      //  setShowProgressDiagram(true);
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addNewDeckWindow]);
 
 
@@ -40,12 +42,15 @@ export default function CreateNewDeck({
 
     let newDataBase = { ...dataBase };
 
+
+    console.log(inputRef, 'input ref console log')
+
     if (newDataBase.DeckNames.find((deck) => deck.name === inputField)) {
       alert("Name of Deck already exists");
       setInputField("");
     } else if (!inputField) {
       alert("Input needed");
-    } else if (document.getElementById("inputField").value.length > 25) {
+    } else if (document.getElementById("inputField").value.length > 12) {
       alert("Deckname is too lo");
       setInputField("");
       document.getElementById("inputField").focus();
@@ -100,10 +105,24 @@ export default function CreateNewDeck({
           id="inputField"
           className="createNewDeckInputField"
           minLength="3"
-          maxLength="25"
+          maxLength="12"
           ref={inputRef}
           value={inputField}
-          onChange={(event) => setInputField(event.target.value)}
+          onChange={(event) => {
+            setInputField(event.target.value)
+
+
+            if (event.target.value.length  <= 2) {
+               
+              Ok.current.disabled = true
+              //Adding class to node element
+              //Ok.current.classList.add('bar');
+            }else{
+              Ok.current.disabled = false
+            }
+
+            //console.log(inputRef.current.value , 'value of current input ref')
+          }}
         />
 
         <select className="selectStyling">
@@ -120,19 +139,20 @@ export default function CreateNewDeck({
           <button
             className="generalButtonStyling okCancelButtonStyling"
             key={el}
+            ref={el==='Ok'? Ok:Cancel}
             onClick={() => {
               el === "Cancel"
                 ? (() => {
-                    close();
-                    setInputField("");
+                  close();
+                  setInputField("");
 
-                    if (dataBase.DeckNames.length === 0) {
-                      //when no deck in list, show arrow Down again
-                      setArrowDown(true);
-                      setDecksAreVisible(false);
-                    
-                    }
-                  })()
+                  if (dataBase.DeckNames.length === 0) {
+                    //when no deck in list, show arrow Down again
+                    setArrowDown(true);
+                    setDecksAreVisible(false);
+
+                  }
+                })()
                 : addNewDeckName();
             }}
           >

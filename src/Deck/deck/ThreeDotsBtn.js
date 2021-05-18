@@ -26,14 +26,14 @@ function ThreeDotsBtn({
                         editEvent = () => { }, 
                         trashEvent = () => { },
                         resetEvent = () => { },
-                        pauseEvent = () => {},
+                       // pauseEvent = () => {},
                         type
                       }) 
 
 {
 
   const [blinkingSaveIcon, setBlinkingSaveIcon] = useState(false)
-  // const [pauseIsActive, setPauseIsActive] = useState(true)
+   const [pauseIsActive, setPauseIsActive] = useState(true)
   const [threeDotsOpen, setThreeDotsOpen] = useState(showFromParent);
   const {dataBase, setDataBase} = useContext(Context);
 
@@ -90,20 +90,20 @@ function ThreeDotsBtn({
 
   function handlePause () {
   
-    pauseEvent()
+    //pauseEvent(index)
 
-    // let newDataBase = {...dataBase}
-    // let savePausedState = !pauseIsActive
-    // setPauseIsActive(savePausedState)
+    let newDataBase = {...dataBase}
+    let savePausedState = !pauseIsActive
+    setPauseIsActive(savePausedState)
 
-    // dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
+    dataBase.DeckNames[index].paused = !dataBase.DeckNames[index].paused
 
-    // let key = newDataBase.DeckNames.findIndex(deck=>deck.name === name)
-    // newDataBase.DeckNames[key].paused = true //does not work for some reason
-    // setDataBase(newDataBase)
-    // setEditButtonClicked(true)
-    // setThreeDotsOpen(false)
-    // setNameOfTopDeck(name)
+    //let key = newDataBase.DeckNames.findIndex(deck=>deck.name === name)
+   // newDataBase.DeckNames[key].paused = true //does not work for some reason
+    setDataBase(newDataBase)
+   // setEditButtonClicked(true)
+    setThreeDotsOpen(false)
+    //setNameOfTopDeck(name)
     
   }
 
@@ -169,7 +169,7 @@ function ThreeDotsBtn({
 
               <button 
                   className='buttonStyling flexAlignCenter outline-none p-1 '
-                  onClick={handlePause}
+                  onClick={()=>handlePause(index)}
                   style={{
                           borderTop: '1px solid black', borderBottom: '1px solid black' ,
                           borderLeft: dataBase.DeckNames[index]?.paused? '1px solid black': null,

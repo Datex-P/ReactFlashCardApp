@@ -61,10 +61,10 @@ export default function TimeAndProgress() {
       //     (item) => new Date(item).toDateString()
     }
 
-    console.log(firstVal, "firstVal");
-    console.log(secVal, "secVal");
-    console.log(thirdVal, "thirdval");
-    console.log(fourthVal, "fourthval");
+    // console.log(firstVal, "firstVal");
+    // console.log(secVal, "secVal");
+    // console.log(thirdVal, "thirdval");
+    // console.log(fourthVal, "fourthval");
 
     setTimeObj({
       6: firstVal,
@@ -140,8 +140,6 @@ export default function TimeAndProgress() {
                 time={
                   <div
                       className='timesStyling' 
-                      // style={{ paddingLeft: "3px", height: "21px", fontSize:'14px' }}
-                      // 
                       >
                     {"12"} - {"18"}
                   </div>
