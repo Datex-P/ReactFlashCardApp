@@ -486,17 +486,39 @@ top:-24px;
   font-size: 14px;
 }
 
-
-
 .generalButtonStyling {
-  /* width: 63px;
-  height: 24px; */
-  background-color: grey /*important;*/;
+ width: 63px;
+  height: 24px; 
+  background-color: grey;
   color: white !important;
   cursor: pointer !important;
   border-radius: 5px !important;
   outline: none !important;
   border: none !important;
+} 
+
+
+.okCancelButton {
+  width: 63px;
+  height: 26px; 
+  color: white !important;
+  cursor: pointer !important;
+  border-radius: 5px !important;
+  outline: none !important;
+  border: none !important;
+}
+
+.okCancelButtonColor {
+  background-color: grey /*important;*/;
+  cursor: pointer !important;
+}
+
+.tooShortOrLong {
+  position: absolute;
+  left: 172px;
+  top: 14px;
+  width: 85px;
+  font-size: 13px;
 }
 
 .deleteContainerFr {

@@ -9,14 +9,11 @@ export default function CreateNewDeck({
   setActive,
   setArrowDown,
 }) {
-  const {
-    dataBase,
-    setDataBase,
-    setShowProgressDiagram,
-    setScrollbarVisible,
-    colors
-  } = useContext(Context);
-  const [inputField, setInputField] = useState("");
+
+
+  const {dataBase,setDataBase,setShowProgressDiagram,setScrollbarVisible,colors} = useContext(Context);
+  const [inputField, setInputField] = useState('');
+  const [nameTooShortOrLong, setNameTooShortOrLong] = useState(false);
 
   const inputRef = useRef(null);
   const Ok = useRef(null);
@@ -36,30 +33,26 @@ export default function CreateNewDeck({
 
 
   function addNewDeckName() {
-    // if(dataBase.DeckNames.length ===0) {
-    //   setScrollbarVisible(false)
-    // }
 
     let newDataBase = { ...dataBase };
 
+    // console.log(inputRef, 'input ref console log')
 
-    console.log(inputRef, 'input ref console log')
-
-    if (newDataBase.DeckNames.find((deck) => deck.name === inputField)) {
-      alert("Name of Deck already exists");
-      setInputField("");
-    } else if (!inputField) {
-      alert("Input needed");
-    } else if (document.getElementById("inputField").value.length > 12) {
-      alert("Deckname is too lo");
-      setInputField("");
-      document.getElementById("inputField").focus();
-    } else if (document.getElementById("inputField").value.length < 3) {
-      alert("Deckname is too short");
-      setInputField("");
-      document.getElementById("inputField").focus();
-    } else {
-      console.log("it works");
+    // if (newDataBase.DeckNames.find((deck) => deck.name === inputField)) {
+    //   alert("Name of Deck already exists");
+    //   setInputField("");
+    // } else if (!inputField) {
+    //   alert("Input needed");
+    // } else if (document.getElementById("inputField").value.length > 12) {
+    //   alert("Deckname is too lo");
+    //   setInputField("");
+    //   document.getElementById("inputField").focus();
+    // } else if (document.getElementById("inputField").value.length < 3) {
+    //   alert("Deckname is too short");
+    //   setInputField("");
+    //   document.getElementById("inputField").focus();
+    // } else {
+    //   console.log("it works");
       let index = newDataBase.DeckNames.push({
         name: inputField,
         data: [],
@@ -85,7 +78,8 @@ export default function CreateNewDeck({
       setDataBase(newDataBase);
       close();
     }
-  }
+  
+
 
   return (
     <Modal
@@ -104,26 +98,42 @@ export default function CreateNewDeck({
         <input
           id="inputField"
           className="createNewDeckInputField"
-          minLength="3"
-          maxLength="12"
           ref={inputRef}
           value={inputField}
           onChange={(event) => {
             setInputField(event.target.value)
 
-
-            if (event.target.value.length  <= 2) {
+      setTimeout(()=>{
+            if (event.target.value.length  > 3 && event.target.value.length < 11) {
                
+              Ok.current.disabled = false;
+              Ok.current.classList.add('okCancelButtonColor');           
+              setNameTooShortOrLong(false)
+            }else{ 
+              setNameTooShortOrLong(true)
               Ok.current.disabled = true
-              //Adding class to node element
-              //Ok.current.classList.add('bar');
-            }else{
-              Ok.current.disabled = false
+              Ok.current.classList.remove('okCancelButtonColor');
             }
 
-            //console.log(inputRef.current.value , 'value of current input ref')
+          }, 800)
+
           }}
         />
+         
+        {
+          <div className='tooShortOrLong'
+          >
+            {
+            `${
+              dataBase.DeckNames.map(a=>a.name).includes(inputField)?
+              'name exists':
+              nameTooShortOrLong && inputField.length<4? 'too short':
+              nameTooShortOrLong &&  inputField.length>11? 'too long':
+              ''
+              }`
+            }
+          </div>
+        }
 
         <select className="selectStyling">
           <option>option 1</option>
@@ -137,7 +147,7 @@ export default function CreateNewDeck({
       <div className="d-flex justify-content-between cancelOkContainer">
         {["Cancel", "Ok"].map((el) => (
           <button
-            className="generalButtonStyling okCancelButtonStyling"
+            className="okCancelButtonColor okCancelButton"
             key={el}
             ref={el==='Ok'? Ok:Cancel}
             onClick={() => {

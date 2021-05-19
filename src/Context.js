@@ -99,7 +99,7 @@ export default function ContextProvider({ children }) {
 
       dB.DeckNames.push(
         {
-          name:`Literature${i}`,
+          name:`Litera${i}`,
           backgroundColor: colors[-100+i],
           data: arr,
           thisDeckCompleted: false, //shows whether the study goal of the particular deck is reached
