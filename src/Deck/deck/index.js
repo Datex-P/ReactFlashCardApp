@@ -9,6 +9,8 @@ import QuestAnswerTrainOverv from "./QuestAnswerTrainOverv";
 import DeckOrCardName from "./DeckOrCardName";
 import DeleteCardQuestionBox from "./DeleteCardQuestionBox";
 
+// import ParticleBackground from '../ParticlesBackground.js'
+
 import playimg from "../../icons/play.svg";
 
 import plusimg from "../../icons/plus.svg";
@@ -147,11 +149,14 @@ export default function Deck({
 
   return (
     deck && (
+
+     
       
       <Card
         style={style}
         className="newDeckContainer flexColumn position-absolute "
       >
+       {/* <ParticleBackground/> */}
         <Card.Body className="justify-content-center align-items-center flex-column d-flex"
         >
           {
