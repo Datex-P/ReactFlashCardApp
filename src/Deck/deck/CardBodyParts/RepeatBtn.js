@@ -9,7 +9,6 @@ export default function RepeatBtn({ label, btn, onClick }) {
 
       <div className='font-weight-bold'
       >
-
           {label}
       </div>
 
