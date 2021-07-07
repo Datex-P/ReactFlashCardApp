@@ -374,8 +374,7 @@ export default function Deck({
           />
 
           {active === index && (
-            // active || active ??
-
+       
             <AddQuestionsToDeck
               editButtonClicked={editButtonClicked}
               background={style.background}

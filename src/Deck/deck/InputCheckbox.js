@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Context } from '../../Context'
 
 export default function InputCheckbox({ index, setShowAnswerBtn, generateRandom }) {
-  // let [clicked, setClicked] = useState(false)
+
   const { dataBase, setDataBase } = useContext(Context)
   let newDataBase = {...dataBase}
 
