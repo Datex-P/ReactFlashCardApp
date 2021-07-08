@@ -16,29 +16,11 @@ export default function App() {
 
    
     <div 
-    //  className='background'
      >
       {
         user ? user.name : <div></div>
       }
-      {/* <Particles 
-              params={{
-            		particles: {
-            			line_linked: {
-            				shadow: {
-            					enable: true,
-            					color: "#3CA9D1",
-            					blur: 5
-            				}
-            			}
-            		}
-            	}}
-              style={{
-                width: '100%',
-               // backgroundImage: `url(${logo})` 
-              }}
-            /> */}
-     {/* <ParticleBackground/> */}
+      
       <Router>
 
         {user?<LandingPage /> : <Redirect to='./login'/>}{/*the main part of the application*/}
@@ -49,8 +31,6 @@ export default function App() {
           </Route>
 
           <Route path='/settings'>
-
-          {/* <ParticleBackground/> */}
 
             <Settings
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-export const Context = React.createContext(null)//step 1 createing context instance
+export const Context = React.createContext(null)
 
 export default function ContextProvider({ children }) {
   const [showProgressDiagram, setShowProgressDiagram] = useState(true);

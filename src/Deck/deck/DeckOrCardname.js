@@ -34,8 +34,7 @@ export default function DeckOrCardName({ name, paused, index,bg
           //  left: 'auto'
           top: '-21px',
           left: '5px'
-           //top: data.length === 0? '-66px': '-19px', needed for when deckname is longer than 17 letters
-           //left: data.length === 0? '0px': 'auto'
+       
         }}
     >
       {
